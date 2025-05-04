@@ -13,7 +13,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -23,6 +23,10 @@
       {
         "command": "satdHelper.viewTechnicalDebt",
         "title": "SATD Helper: View Technical Debt Items"
+      },
+      {
+        "command": "satdHelper.checkLatestCommit",
+        "title": "SATD Helper: Check Latest Commit for Debt Fixes"
       }
     ],
     "configuration": {
@@ -51,10 +55,9 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "webpack",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },
