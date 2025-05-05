@@ -110,14 +110,22 @@ When you make a new commit, the extension:
 ```
 satd-helper/
 │
-├── src/
-│   └── extension.ts       # Main extension logic
+├── src/                      # Source code directory
+│   ├── extension.ts          # Main extension logic (updated)
+│   ├── satdDetector.ts       # Technical debt detection logic (new)
+│   └── models.ts             # Data models and interfaces (new)
 │
-├── dist/                  # Compiled extension (generated)
-├── package.json           # Extension metadata and configuration
-├── tsconfig.json          # TypeScript configuration
-├── webpack.config.js      # Webpack configuration
-└── README.md              # This file
+├── .vscode/                  # VS Code configuration
+│   ├── launch.json           # Debug configuration (updated)
+│   └── tasks.json            # Build tasks (updated)
+│
+├── examples/                 # Example files
+│   └── sample-satdrc.json    # Sample configuration
+│
+├── package.json              # Extension metadata (updated)
+├── tsconfig.json             # TypeScript configuration (updated)
+├── .gitignore                # Git ignore file
+└── README.md                 # Documentation (updated)
 ```
 
 ## 🔄 Development Workflow

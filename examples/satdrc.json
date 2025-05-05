@@ -1,0 +1,88 @@
+{
+    "customPatterns": [
+      "needs review",
+      "placeholder",
+      "refine later",
+      "not ideal",
+      "incomplete implementation",
+      "revisit this",
+      "simplistic approach",
+      "needs optimization"
+    ],
+    "excludePatterns": [
+      "test/",
+      "spec/",
+      "vendor/",
+      "node_modules/",
+      "dist/",
+      "build/"
+    ],
+    "languages": {
+      "javascript": {
+        "explicit": [
+          "REVIEW",
+          "REVISIT",
+          "PERF",
+          "OPTIMIZE"
+        ],
+        "implicit": [
+          "callback hell",
+          "spaghetti code",
+          "nested callbacks",
+          "ugly solution",
+          "not ideal",
+          "disable eslint",
+          "console.log",
+          "hard coded"
+        ]
+      },
+      "typescript": {
+        "explicit": [
+          "REVIEW",
+          "REVISIT",
+          "PERF",
+          "OPTIMIZE"
+        ],
+        "implicit": [
+          "as any",
+          "disable type check",
+          "ts-ignore",
+          "ts-nocheck",
+          "type assertion",
+          "needs better typing"
+        ]
+      },
+      "python": {
+        "explicit": [
+          "OPTIMIZE",
+          "REVIEW",
+          "SLOW"
+        ],
+        "implicit": [
+          "monkey patch",
+          "duck typing issue",
+          "type: ignore",
+          "noqa",
+          "pylint: disable",
+          "magic number",
+          "hard coded value"
+        ]
+      },
+      "java": {
+        "explicit": [
+          "REVIEW",
+          "REVISIT",
+          "PERF"
+        ],
+        "implicit": [
+          "suppress warnings",
+          "unchecked",
+          "raw type",
+          "instanceOf",
+          "needs refactoring",
+          "technical debt",
+          "not ideal"
+        ]
+      }
+    }
+  }

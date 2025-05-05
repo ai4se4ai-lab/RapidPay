@@ -255,9 +255,9 @@ export function activate(context: vscode.ExtensionContext) {
                     <style>
                         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
                         h1 { color: #333; }
-                        .debt-item { background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+                        .debt-item { background-color:rgb(6, 6, 6); padding: 15px; border-radius: 5px; margin-bottom: 20px; }
                         .suggestions { background-color: #e6f7ff; padding: 15px; border-radius: 5px; }
-                        pre { background-color: #f9f9f9; padding: 10px; border-radius: 3px; overflow: auto; }
+                        pre { background-color: rgb(40, 78, 39); padding: 10px; border-radius: 3px; overflow: auto; }
                     </style>
                 </head>
                 <body>
@@ -347,9 +347,9 @@ export function activate(context: vscode.ExtensionContext) {
         <style>
             body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
             h1 { color: #333; }
-            .debt-item { background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+            .debt-item { background-color:rgb(9, 9, 9); padding: 15px; border-radius: 5px; margin-bottom: 20px; }
             .file-link { color: #0078d7; cursor: pointer; }
-            pre { background-color: #f9f9f9; padding: 10px; border-radius: 3px; overflow: auto; }
+            pre { background-color:rgb(40, 78, 39); padding: 10px; border-radius: 3px; overflow: auto; }
         </style>
     </head>
     <body>
