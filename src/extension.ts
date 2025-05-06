@@ -58,29 +58,48 @@ export function activate(context: vscode.ExtensionContext) {
   };
 
   // Get Git repository information
-  const getRepositoryInfo = async () => {
-    try {
-      if (!vscode.workspace.workspaceFolders) {
-        vscode.window.showInformationMessage('No workspace folder open');
-        return null;
-      }
-      
-      const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-      
-      const { stdout: remoteUrl } = await execPromise('git config --get remote.origin.url', { cwd: workspaceRoot });
-      const { stdout: branch } = await execPromise('git branch --show-current', { cwd: workspaceRoot });
-      const { stdout: commits } = await execPromise('git rev-list --count HEAD', { cwd: workspaceRoot });
-      
-      return {
-        remoteUrl: remoteUrl.trim(),
-        branch: branch.trim(),
-        commitCount: parseInt(commits.trim(), 10)
-      };
-    } catch (error) {
-      vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);
+const getRepositoryInfo = async () => {
+  try {
+    if (!vscode.workspace.workspaceFolders) {
+      vscode.window.showInformationMessage('No workspace folder open');
       return null;
     }
-  };
+    
+    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
+    
+    // Check if git is available and this is a git repository
+    try {
+      await execPromise('git rev-parse --is-inside-work-tree', { cwd: workspaceRoot });
+    } catch (error) {
+      vscode.window.showInformationMessage('The current workspace is not a Git repository or Git is not installed.');
+      return null;
+    }
+    
+    // Get remote URL if available (but don't error if not)
+    let remoteUrl = '';
+    try {
+      const { stdout } = await execPromise('git config --get remote.origin.url', { cwd: workspaceRoot });
+      remoteUrl = stdout.trim();
+    } catch (error) {
+      // Remote origin might not be configured, but that's okay
+      vscode.window.showInformationMessage('No remote origin configured for this repository.');
+      remoteUrl = 'No remote origin';
+    }
+    
+    // These commands should work even without a remote
+    const { stdout: branch } = await execPromise('git branch --show-current', { cwd: workspaceRoot });
+    const { stdout: commits } = await execPromise('git rev-list --count HEAD', { cwd: workspaceRoot });
+    
+    return {
+      remoteUrl: remoteUrl,
+      branch: branch.trim(),
+      commitCount: parseInt(commits.trim(), 10)
+    };
+  } catch (error) {
+    vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);
+    return null;
+  }
+};
 
   // Scan repository for technical debt comments
   const scanRepositoryForTechnicalDebt = async () => {
@@ -180,22 +199,34 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Check if commit addresses technical debt
   const checkCommitForTechnicalDebtFixes = async () => {
+    vscode.window.showInformationMessage('Checking the latest commit for technical debt fixes...');
     if (!openai || technicalDebtItems.length === 0) {
       return;
     }
     
     try {
       if (!vscode.workspace.workspaceFolders) {
+        vscode.window.showWarningMessage('No workspace folder open. Cannot check commits.');
         return;
       }
       
+      if (!openai) {
+        vscode.window.showWarningMessage('OpenAI client not initialized. Run "Initialize and Scan Repository" first.');
+        return;
+      }
+      
+      if (technicalDebtItems.length === 0) {
+        vscode.window.showInformationMessage('No technical debt items tracked. Run "Initialize and Scan Repository" first.');
+        return;
+      }
       const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
       
       // Get the latest commit information
       const { stdout: commitHash } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
       const { stdout: commitMessage } = await execPromise('git log -1 --pretty=%B', { cwd: workspaceRoot });
       const { stdout: diff } = await execPromise('git show --name-status', { cwd: workspaceRoot });
-      
+      vscode.window.showInformationMessage(`Diff: ${diff.trim()}`);
+
       // For each technical debt item, check if this commit might address it
       for (const debtItem of technicalDebtItems) {
         try {
@@ -231,7 +262,8 @@ export function activate(context: vscode.ExtensionContext) {
           });
           
           const analysis = response.choices[0]?.message.content?.trim();
-          
+          vscode.window.showInformationMessage(`Analysis for ${debtItem.file}:${debtItem.line}: `, analysis || 'No analysis provided');
+                 
           if (analysis && !analysis.includes("UNRELATED")) {
             vscode.window.showInformationMessage(
               `Potential fix for technical debt in ${debtItem.file}:${debtItem.line}`,
@@ -412,22 +444,148 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Event: Listen for Git post-commit hook
   const gitEventListener = vscode.workspace.onDidSaveTextDocument(async (document) => {
-    // This is a simplified approach; in a real extension we would use Git extension API
-    // or custom hooks to detect actual commits
+    // Look for changes to git related files more reliably
     const fileName = document.fileName.toLowerCase();
     
-    // Check if this is a git commit file
-    if (fileName.includes('.git') && fileName.includes('commit')) {
-      // Wait a bit for the commit to be completed
-      setTimeout(async () => {
-        await checkCommitForTechnicalDebtFixes();
-      }, 2000);
+    // Check if this might be related to a git commit
+    if (fileName.includes('.git')) {
+      // Improved detection logic
+      try {
+        if (!vscode.workspace.workspaceFolders) {
+          return;
+        }
+        
+        const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        
+        // Check if a commit just happened by comparing HEAD~ with HEAD
+        const { stdout: lastCommitTime } = await execPromise(
+          'git log -1 --format=%ct HEAD',
+          { cwd: workspaceRoot }
+        );
+        
+        const lastCommitTimestamp = parseInt(lastCommitTime.trim(), 10);
+        const currentTime = Math.floor(Date.now() / 1000);
+        
+        // If commit was made in the last 10 seconds, check for debt fixes
+        if (currentTime - lastCommitTimestamp < 10) {
+          await checkCommitForTechnicalDebtFixes();
+        }
+      } catch (error) {
+        console.error('Error checking for recent commits:', error);
+      }
     }
   });
 
+  // Command: Check the latest commit for technical debt fixes
+const checkLatestCommitCommand = vscode.commands.registerCommand('satdHelper.checkLatestCommit', async () => {
+  // Make sure we have an OpenAI instance
+  if (!openai) {
+    if (!initializeOpenAI()) {
+      vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
+      return;
+    }
+  }
+  
+  // Check if we have technical debt items loaded
+  if (technicalDebtItems.length === 0) {
+    const shouldScan = await vscode.window.showInformationMessage(
+      'No technical debt items found. Would you like to scan the repository first?',
+      'Yes', 'No'
+    );
+    
+    if (shouldScan === 'Yes') {
+      // Run the init command first
+      await vscode.commands.executeCommand('satdHelper.init');
+      
+      if (technicalDebtItems.length === 0) {
+        // If still no items, exit
+        vscode.window.showInformationMessage('No technical debt items were found during scanning.');
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+  
+  // Show progress notification
+  vscode.window.withProgress({
+    location: vscode.ProgressLocation.Notification,
+    title: "SATD Helper",
+    cancellable: false
+  }, async (progress) => {
+    progress.report({ message: "Checking the latest commit for technical debt fixes..." });
+    await checkCommitForTechnicalDebtFixes();
+    progress.report({ message: "Finished checking the latest commit." });
+  });
+});
+
+
+// Auto-detection for commits
+let lastKnownCommitHash = '';
+
+// Initialize with the current HEAD hash (if available)
+const initializeCommitTracking = async () => {
+  try {
+    if (!vscode.workspace.workspaceFolders) {
+      return;
+    }
+    
+    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
+    
+    try {
+      const { stdout } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
+      lastKnownCommitHash = stdout.trim();
+    } catch (error) {
+      // Not a git repo or no commits yet, that's okay
+      console.log('Could not initialize commit tracking:', error);
+    }
+  } catch (error) {
+    console.error('Error in initializeCommitTracking:', error);
+  }
+};
+
+
+// Periodically check for new commits
+const commitCheckInterval = setInterval(async () => {
+  try {
+    if (!vscode.workspace.workspaceFolders) {
+      return;
+    }
+    
+    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
+    
+    try {
+      const { stdout } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
+      const currentHash = stdout.trim();
+      
+      if (lastKnownCommitHash && currentHash !== lastKnownCommitHash) {
+        // New commit detected
+        console.log(`New commit detected: ${currentHash}`);
+        lastKnownCommitHash = currentHash;
+        
+        // Only check for debt fixes if we have debt items
+        if (openai && technicalDebtItems.length > 0) {
+          await checkCommitForTechnicalDebtFixes();
+        }
+      }
+      
+      // Update the hash even if we didn't check for fixes
+      lastKnownCommitHash = currentHash;
+    } catch (error) {
+      // Not a git repo or git command failed, that's okay
+    }
+  } catch (error) {
+    console.error('Error checking for new commits:', error);
+  }
+}, 10000); // Check every 10 seconds
+  
+  initializeCommitTracking();
   context.subscriptions.push(initCommand);
   context.subscriptions.push(viewTechnicalDebtCommand);
+  context.subscriptions.push(checkLatestCommitCommand);
   context.subscriptions.push(gitEventListener);
+  context.subscriptions.push({ dispose: () => clearInterval(commitCheckInterval) });
+
 }
 
 export function deactivate() {
