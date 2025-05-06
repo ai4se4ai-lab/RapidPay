@@ -1,324 +1,23 @@
+// src/extension.ts
 import * as vscode from 'vscode';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import { OpenAI } from 'openai';
+import { TechnicalDebt } from './models';
+import { initializeOpenAI, resetOpenAIClient } from './utils/openaiClient';
+import { getRepositoryInfo, wasCommitMadeRecently } from './utils/gitUtils';
+import { scanRepositoryForTechnicalDebt, enhanceTechnicalDebtWithAI } from './utils/debtScanner';
+import { showTechnicalDebtPanel, withProgressNotification } from './utils/uiUtils';
+import { 
+  initializeCommitMonitor, 
+  checkCommitForTechnicalDebtFixes, 
+  setTechnicalDebtItems,
+  disposeCommitMonitor,
+  getTechnicalDebtItems
+} from './utils/commitMonitor';
 
-const execPromise = promisify(exec);
-
-interface TechnicalDebt {
-  id: string;
-  file: string;
-  line: number;
-  content: string;
-  description: string;
-  createdCommit: string;
-  createdDate: string;
-}
-
-let openai: OpenAI | null = null;
+// Keep track of technical debt items globally
 let technicalDebtItems: TechnicalDebt[] = [];
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('SATD Helper Extension is now active');
-
-  // Initialize OpenAI client with API key from VS Code settings
-  const initializeOpenAI = () => {
-    // Get the API key from VS Code settings
-    const config = vscode.workspace.getConfiguration('satdHelper');
-    let apiKey = config.get<string>('openaiApiKey');
-    
-    // If no API key in settings, check for environment variable through VS Code
-    if (!apiKey) {
-      // Try to get from VS Code's environment
-      const processEnv = process.env;
-      apiKey = processEnv.OPENAI_API_KEY;
-    }
-    
-    if (!apiKey) {
-      vscode.window.showErrorMessage(
-        'OpenAI API key not found. Please set it in the extension settings or as OPENAI_API_KEY environment variable.',
-        'Open Settings'
-      ).then(selection => {
-        if (selection === 'Open Settings') {
-          vscode.commands.executeCommand('workbench.action.openSettings', 'satdHelper.openaiApiKey');
-        }
-      });
-      return false;
-    }
-
-    try {
-      openai = new OpenAI({
-        apiKey: apiKey
-      });
-      return true;
-    } catch (error) {
-      vscode.window.showErrorMessage(`Failed to initialize OpenAI client: ${error}`);
-      return false;
-    }
-  };
-
-  // Get Git repository information
-const getRepositoryInfo = async () => {
-  try {
-    if (!vscode.workspace.workspaceFolders) {
-      vscode.window.showInformationMessage('No workspace folder open');
-      return null;
-    }
-    
-    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-    
-    // Check if git is available and this is a git repository
-    try {
-      await execPromise('git rev-parse --is-inside-work-tree', { cwd: workspaceRoot });
-    } catch (error) {
-      vscode.window.showInformationMessage('The current workspace is not a Git repository or Git is not installed.');
-      return null;
-    }
-    
-    // Get remote URL if available (but don't error if not)
-    let remoteUrl = '';
-    try {
-      const { stdout } = await execPromise('git config --get remote.origin.url', { cwd: workspaceRoot });
-      remoteUrl = stdout.trim();
-    } catch (error) {
-      // Remote origin might not be configured, but that's okay
-      vscode.window.showInformationMessage('No remote origin configured for this repository.');
-      remoteUrl = 'No remote origin';
-    }
-    
-    // These commands should work even without a remote
-    const { stdout: branch } = await execPromise('git branch --show-current', { cwd: workspaceRoot });
-    const { stdout: commits } = await execPromise('git rev-list --count HEAD', { cwd: workspaceRoot });
-    
-    return {
-      remoteUrl: remoteUrl,
-      branch: branch.trim(),
-      commitCount: parseInt(commits.trim(), 10)
-    };
-  } catch (error) {
-    vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);
-    return null;
-  }
-};
-
-  // Scan repository for technical debt comments
-  const scanRepositoryForTechnicalDebt = async () => {
-    try {
-      if (!vscode.workspace.workspaceFolders) {
-        return [];
-      }
-      
-      const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-      
-      // Get all files with technical debt comments using git grep
-      const { stdout } = await execPromise(
-        'git grep -n -E "TODO:|FIXME:|HACK:|XXX:|BUG:|ISSUE:|DEBT:" --', 
-        { cwd: workspaceRoot }
-      );
-      
-      const lines = stdout.split('\n').filter(line => line.trim() !== '');
-      const debtItems: TechnicalDebt[] = [];
-      
-      for (const line of lines) {
-        const [file, lineNumber, content] = line.split(':', 3);
-        const lineNum = parseInt(lineNumber, 10);
-        
-        if (file && lineNum && content) {
-          // Get commit information for this line
-          const { stdout: blame } = await execPromise(
-            `git blame -L ${lineNum},${lineNum} --porcelain "${file}"`,
-            { cwd: workspaceRoot }
-          );
-          
-          const commitHash = blame.split('\n')[0].split(' ')[0];
-          const { stdout: commitDate } = await execPromise(
-            `git show -s --format=%ci ${commitHash}`,
-            { cwd: workspaceRoot }
-          );
-          
-          // Create a unique ID for this debt item
-          const id = `${file}-${lineNum}-${commitHash.substring(0, 7)}`;
-          
-          debtItems.push({
-            id,
-            file,
-            line: lineNum,
-            content: content.trim(),
-            description: content.trim(),
-            createdCommit: commitHash,
-            createdDate: commitDate.trim()
-          });
-        }
-      }
-      
-      return debtItems;
-    } catch (error) {
-      vscode.window.showErrorMessage(`Failed to scan repository: ${error}`);
-      return [];
-    }
-  };
-
-  // Analyze technical debt with OpenAI
-  const analyzeTechnicalDebt = async (debtItems: TechnicalDebt[]) => {
-    if (!openai) {
-      return debtItems;
-    }
-    
-    const enhancedDebtItems: TechnicalDebt[] = [];
-    
-    for (const item of debtItems) {
-      try {
-        const response = await openai.chat.completions.create({
-          model: "gpt-4",
-          messages: [
-            {
-              role: "system",
-              content: "You are a code analysis assistant that helps understand technical debt."
-            },
-            {
-              role: "user",
-              content: `Analyze this technical debt comment and provide a clear description of the issue: "${item.content}"`
-            }
-          ],
-          max_tokens: 150
-        });
-        
-        const description = response.choices[0]?.message.content?.trim() || item.description;
-        enhancedDebtItems.push({
-          ...item,
-          description
-        });
-      } catch (error) {
-        console.error(`Failed to analyze technical debt: ${error}`);
-        enhancedDebtItems.push(item);
-      }
-    }
-    
-    return enhancedDebtItems;
-  };
-
-  // Check if commit addresses technical debt
-  const checkCommitForTechnicalDebtFixes = async () => {
-    vscode.window.showInformationMessage('Checking the latest commit for technical debt fixes...');
-    if (!openai || technicalDebtItems.length === 0) {
-      return;
-    }
-    
-    try {
-      if (!vscode.workspace.workspaceFolders) {
-        vscode.window.showWarningMessage('No workspace folder open. Cannot check commits.');
-        return;
-      }
-      
-      if (!openai) {
-        vscode.window.showWarningMessage('OpenAI client not initialized. Run "Initialize and Scan Repository" first.');
-        return;
-      }
-      
-      if (technicalDebtItems.length === 0) {
-        vscode.window.showInformationMessage('No technical debt items tracked. Run "Initialize and Scan Repository" first.');
-        return;
-      }
-      const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-      
-      // Get the latest commit information
-      const { stdout: commitHash } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
-      const { stdout: commitMessage } = await execPromise('git log -1 --pretty=%B', { cwd: workspaceRoot });
-      const { stdout: diff } = await execPromise('git show --name-status', { cwd: workspaceRoot });
-      vscode.window.showInformationMessage(`Diff: ${diff.trim()}`);
-
-      // For each technical debt item, check if this commit might address it
-      for (const debtItem of technicalDebtItems) {
-        try {
-          const response = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [
-              {
-                role: "system",
-                content: "You are a code analysis assistant that helps developers address technical debt."
-              },
-              {
-                role: "user",
-                content: `
-                Technical Debt Item:
-                File: ${debtItem.file}
-                Line: ${debtItem.line}
-                Content: ${debtItem.content}
-                Description: ${debtItem.description}
-                
-                Recent Commit:
-                Hash: ${commitHash.trim()}
-                Message: ${commitMessage.trim()}
-                Changes:
-                ${diff.trim()}
-                
-                Question: Does this commit address or partially address the technical debt item? 
-                If yes, provide specific suggestions on how to completely resolve the technical debt based on the recent changes.
-                If no, simply respond with "UNRELATED".
-                `
-              }
-            ],
-            max_tokens: 500
-          });
-          
-          const analysis = response.choices[0]?.message.content?.trim();
-          vscode.window.showInformationMessage(`Analysis for ${debtItem.file}:${debtItem.line}: `, analysis || 'No analysis provided');
-                 
-          if (analysis && !analysis.includes("UNRELATED")) {
-            vscode.window.showInformationMessage(
-              `Potential fix for technical debt in ${debtItem.file}:${debtItem.line}`,
-              'View Suggestions'
-            ).then(selection => {
-              if (selection === 'View Suggestions') {
-                const panel = vscode.window.createWebviewPanel(
-                  'satdSuggestions',
-                  'Technical Debt Fix Suggestions',
-                  vscode.ViewColumn.Beside,
-                  {}
-                );
-                
-                panel.webview.html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Technical Debt Fix Suggestions</title>
-                    <style>
-                        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
-                        h1 { color: #333; }
-                        .debt-item { background-color:rgb(6, 6, 6); padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-                        .suggestions { background-color: #e6f7ff; padding: 15px; border-radius: 5px; }
-                        pre { background-color: rgb(40, 78, 39); padding: 10px; border-radius: 3px; overflow: auto; }
-                    </style>
-                </head>
-                <body>
-                    <h1>Technical Debt Fix Suggestions</h1>
-                    <div class="debt-item">
-                        <h2>Technical Debt</h2>
-                        <p><strong>File:</strong> ${debtItem.file}</p>
-                        <p><strong>Line:</strong> ${debtItem.line}</p>
-                        <pre>${debtItem.content}</pre>
-                        <p><strong>Description:</strong> ${debtItem.description}</p>
-                    </div>
-                    <div class="suggestions">
-                        <h2>AI Suggestions</h2>
-                        <div>${analysis.replace(/\n/g, '<br>')}</div>
-                    </div>
-                </body>
-                </html>
-                `;
-              }
-            });
-          }
-        } catch (error) {
-          console.error(`Failed to analyze commit for technical debt fixes: ${error}`);
-        }
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage(`Failed to check commit: ${error}`);
-    }
-  };
 
   // Command: Initialize and scan repository
   const initCommand = vscode.commands.registerCommand('satdHelper.init', async () => {
@@ -326,11 +25,7 @@ const getRepositoryInfo = async () => {
       return;
     }
     
-    vscode.window.withProgress({
-      location: vscode.ProgressLocation.Notification,
-      title: "SATD Helper",
-      cancellable: false
-    }, async (progress) => {
+    await withProgressNotification('SATD Helper', async (progress) => {
       progress.report({ message: "Getting repository information..." });
       const repoInfo = await getRepositoryInfo();
       
@@ -342,7 +37,11 @@ const getRepositoryInfo = async () => {
       const debtItems = await scanRepositoryForTechnicalDebt();
       
       progress.report({ message: "Analyzing technical debt items..." });
-      technicalDebtItems = await analyzeTechnicalDebt(debtItems);
+      technicalDebtItems = await enhanceTechnicalDebtWithAI(debtItems);
+      
+      // Initialize the commit monitor with the debt items
+      setTechnicalDebtItems(technicalDebtItems);
+      await initializeCommitMonitor(context, technicalDebtItems);
       
       vscode.window.showInformationMessage(
         `Found ${technicalDebtItems.length} technical debt items in the repository.`,
@@ -357,117 +56,64 @@ const getRepositoryInfo = async () => {
 
   // Command: View technical debt items
   const viewTechnicalDebtCommand = vscode.commands.registerCommand('satdHelper.viewTechnicalDebt', async () => {
-    if (technicalDebtItems.length === 0) {
+    // Get the current technical debt items (they might have been updated)
+    const debtItems = getTechnicalDebtItems();
+    
+    if (debtItems.length === 0) {
       vscode.window.showInformationMessage('No technical debt items found. Run the initialization command first.');
       return;
     }
     
-    const panel = vscode.window.createWebviewPanel(
-      'satdList',
-      'Technical Debt Items',
-      vscode.ViewColumn.One,
-      {}
-    );
-    
-    let html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Technical Debt Items</title>
-        <style>
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
-            h1 { color: #333; }
-            .debt-item { background-color:rgb(9, 9, 9); padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-            .file-link { color: #0078d7; cursor: pointer; }
-            pre { background-color:rgb(40, 78, 39); padding: 10px; border-radius: 3px; overflow: auto; }
-        </style>
-    </head>
-    <body>
-        <h1>Technical Debt Items</h1>
-    `;
-    
-    for (const item of technicalDebtItems) {
-      html += `
-      <div class="debt-item">
-          <p><strong>File:</strong> <span class="file-link" data-file="${item.file}" data-line="${item.line}">${item.file}:${item.line}</span></p>
-          <pre>${item.content}</pre>
-          <p><strong>Description:</strong> ${item.description}</p>
-          <p><strong>Created:</strong> ${item.createdDate} (${item.createdCommit.substring(0, 7)})</p>
-      </div>
-      `;
-    }
-    
-    html += `
-        <script>
-            const vscode = acquireVsCodeApi();
-            document.querySelectorAll('.file-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    vscode.postMessage({
-                        command: 'openFile',
-                        file: link.getAttribute('data-file'),
-                        line: parseInt(link.getAttribute('data-line'), 10)
-                    });
-                });
-            });
-        </script>
-    </body>
-    </html>
-    `;
-    
-    panel.webview.html = html;
-    
-    panel.webview.onDidReceiveMessage(
-      message => {
-        if (message.command === 'openFile') {
-          const filePath = vscode.Uri.file(
-            `${vscode.workspace.workspaceFolders?.[0].uri.fsPath}/${message.file}`
-          );
-          
-          vscode.workspace.openTextDocument(filePath).then(doc => {
-            vscode.window.showTextDocument(doc).then(editor => {
-              const position = new vscode.Position(message.line - 1, 0);
-              editor.selection = new vscode.Selection(position, position);
-              editor.revealRange(
-                new vscode.Range(position, position),
-                vscode.TextEditorRevealType.InCenter
-              );
-            });
-          });
-        }
-      },
-      undefined,
-      context.subscriptions
-    );
+    showTechnicalDebtPanel(debtItems, context);
   });
 
-  // Event: Listen for Git post-commit hook
+  // Command: Check the latest commit for technical debt fixes
+  const checkLatestCommitCommand = vscode.commands.registerCommand('satdHelper.checkLatestCommit', async () => {
+    // Make sure we have an OpenAI instance
+    if (!initializeOpenAI()) {
+      vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
+      return;
+    }
+    
+    // Check if we have technical debt items loaded
+    if (getTechnicalDebtItems().length === 0) {
+      const shouldScan = await vscode.window.showInformationMessage(
+        'No technical debt items found. Would you like to scan the repository first?',
+        'Yes', 'No'
+      );
+      
+      if (shouldScan === 'Yes') {
+        // Run the init command first
+        await vscode.commands.executeCommand('satdHelper.init');
+        
+        if (getTechnicalDebtItems().length === 0) {
+          // If still no items, exit
+          vscode.window.showInformationMessage('No technical debt items were found during scanning.');
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+    
+    // Show progress notification
+    await withProgressNotification('SATD Helper', async (progress) => {
+      progress.report({ message: "Checking the latest commit for technical debt fixes..." });
+      await checkCommitForTechnicalDebtFixes();
+      progress.report({ message: "Finished checking the latest commit." });
+    });
+  });
+
+  // Event: Listen for Git post-commit events through file changes
   const gitEventListener = vscode.workspace.onDidSaveTextDocument(async (document) => {
-    // Look for changes to git related files more reliably
+    // Look for changes to git related files
     const fileName = document.fileName.toLowerCase();
     
     // Check if this might be related to a git commit
     if (fileName.includes('.git')) {
-      // Improved detection logic
+      // Check if a commit just happened
       try {
-        if (!vscode.workspace.workspaceFolders) {
-          return;
-        }
-        
-        const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-        
-        // Check if a commit just happened by comparing HEAD~ with HEAD
-        const { stdout: lastCommitTime } = await execPromise(
-          'git log -1 --format=%ct HEAD',
-          { cwd: workspaceRoot }
-        );
-        
-        const lastCommitTimestamp = parseInt(lastCommitTime.trim(), 10);
-        const currentTime = Math.floor(Date.now() / 1000);
-        
-        // If commit was made in the last 10 seconds, check for debt fixes
-        if (currentTime - lastCommitTimestamp < 10) {
+        if (await wasCommitMadeRecently()) {
           await checkCommitForTechnicalDebtFixes();
         }
       } catch (error) {
@@ -476,120 +122,17 @@ const getRepositoryInfo = async () => {
     }
   });
 
-  // Command: Check the latest commit for technical debt fixes
-const checkLatestCommitCommand = vscode.commands.registerCommand('satdHelper.checkLatestCommit', async () => {
-  // Make sure we have an OpenAI instance
-  if (!openai) {
-    if (!initializeOpenAI()) {
-      vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
-      return;
-    }
-  }
-  
-  // Check if we have technical debt items loaded
-  if (technicalDebtItems.length === 0) {
-    const shouldScan = await vscode.window.showInformationMessage(
-      'No technical debt items found. Would you like to scan the repository first?',
-      'Yes', 'No'
-    );
-    
-    if (shouldScan === 'Yes') {
-      // Run the init command first
-      await vscode.commands.executeCommand('satdHelper.init');
-      
-      if (technicalDebtItems.length === 0) {
-        // If still no items, exit
-        vscode.window.showInformationMessage('No technical debt items were found during scanning.');
-        return;
-      }
-    } else {
-      return;
-    }
-  }
-  
-  // Show progress notification
-  vscode.window.withProgress({
-    location: vscode.ProgressLocation.Notification,
-    title: "SATD Helper",
-    cancellable: false
-  }, async (progress) => {
-    progress.report({ message: "Checking the latest commit for technical debt fixes..." });
-    await checkCommitForTechnicalDebtFixes();
-    progress.report({ message: "Finished checking the latest commit." });
-  });
-});
-
-
-// Auto-detection for commits
-let lastKnownCommitHash = '';
-
-// Initialize with the current HEAD hash (if available)
-const initializeCommitTracking = async () => {
-  try {
-    if (!vscode.workspace.workspaceFolders) {
-      return;
-    }
-    
-    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-    
-    try {
-      const { stdout } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
-      lastKnownCommitHash = stdout.trim();
-    } catch (error) {
-      // Not a git repo or no commits yet, that's okay
-      console.log('Could not initialize commit tracking:', error);
-    }
-  } catch (error) {
-    console.error('Error in initializeCommitTracking:', error);
-  }
-};
-
-
-// Periodically check for new commits
-const commitCheckInterval = setInterval(async () => {
-  try {
-    if (!vscode.workspace.workspaceFolders) {
-      return;
-    }
-    
-    const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-    
-    try {
-      const { stdout } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
-      const currentHash = stdout.trim();
-      
-      if (lastKnownCommitHash && currentHash !== lastKnownCommitHash) {
-        // New commit detected
-        console.log(`New commit detected: ${currentHash}`);
-        lastKnownCommitHash = currentHash;
-        
-        // Only check for debt fixes if we have debt items
-        if (openai && technicalDebtItems.length > 0) {
-          await checkCommitForTechnicalDebtFixes();
-        }
-      }
-      
-      // Update the hash even if we didn't check for fixes
-      lastKnownCommitHash = currentHash;
-    } catch (error) {
-      // Not a git repo or git command failed, that's okay
-    }
-  } catch (error) {
-    console.error('Error checking for new commits:', error);
-  }
-}, 10000); // Check every 10 seconds
-  
-  initializeCommitTracking();
+  // Register commands
   context.subscriptions.push(initCommand);
   context.subscriptions.push(viewTechnicalDebtCommand);
   context.subscriptions.push(checkLatestCommitCommand);
   context.subscriptions.push(gitEventListener);
-  context.subscriptions.push({ dispose: () => clearInterval(commitCheckInterval) });
-
-}
-
-export function deactivate() {
-  // Clean up resources
-  technicalDebtItems = [];
-  openai = null;
+  
+  // Check auto-scan setting
+  const config = vscode.workspace.getConfiguration('satdHelper');
+  const autoScan = config.get<boolean>('autoScanOnStartup');
+  
+  if (autoScan) {
+    vscode.commands.executeCommand('satdHelper.init');
+  }
 }
