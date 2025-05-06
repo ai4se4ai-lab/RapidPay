@@ -132,11 +132,11 @@ export async function analyzeDebtFix(
           
           Question: Does this commit address or partially address the technical debt item? 
           If yes, provide specific suggestions on how to completely resolve the technical debt based on the recent changes.
-          If no, simply respond with "UNRELATED".
+          If no, explain the exact input you got and what is missing in the input data that you need to get a better understanding of the changes made in the code.
           `
         }
       ],
-      max_tokens: 500
+      max_tokens: 1000
     });
     
     return response.choices[0]?.message.content?.trim() || null;

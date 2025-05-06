@@ -135,7 +135,7 @@ export function showDebtFixSuggestionsPanel(
           body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
           h1 { color: #333; }
           .debt-item { background-color: rgb(6, 6, 6); padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-          .suggestions { background-color: #e6f7ff; padding: 15px; border-radius: 5px; }
+          .suggestions { background-color:rgb(15, 11, 231); padding: 15px; border-radius: 5px; }
           pre { background-color: rgb(40, 78, 39); padding: 10px; border-radius: 3px; overflow: auto; }
       </style>
   </head>
