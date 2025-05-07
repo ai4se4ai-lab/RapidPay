@@ -12,12 +12,17 @@ import {
   disposeCommitMonitor,
   getTechnicalDebtItems
 } from './utils/commitMonitor';
+import { registerVisualizationCommands } from './visualization/visualizationCommands';
+import { SatdRelationshipAnalyzer } from './satdRelationshipAnalyzer';
 
 // Keep track of technical debt items globally
 let technicalDebtItems: TechnicalDebt[] = [];
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('SATD Helper Extension is now active');
+
+  // Register visualization commands
+  registerVisualizationCommands(context);
 
   // Command: Initialize and scan repository
   const initCommand = vscode.commands.registerCommand('satdHelper.init', async () => {
@@ -43,12 +48,33 @@ export function activate(context: vscode.ExtensionContext) {
       setTechnicalDebtItems(technicalDebtItems);
       await initializeCommitMonitor(context, technicalDebtItems);
       
+      // Check if relationship analysis is enabled
+      const config = vscode.workspace.getConfiguration('satdHelper');
+      const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled');
+      
+      if (relationshipAnalysisEnabled) {
+        progress.report({ message: "Analyzing relationships between technical debt items..." });
+        
+        // Create and initialize relationship analyzer
+        const analyzer = new SatdRelationshipAnalyzer();
+        await analyzer.initialize(repoInfo.workspaceRoot || '');
+        
+        // This doesn't need to block the initialization, but we'll
+        // pre-compute relationships in the background
+        analyzer.analyzeRelationships(technicalDebtItems).catch(error => {
+          console.error('Error analyzing relationships:', error);
+        });
+      }
+      
       vscode.window.showInformationMessage(
         `Found ${technicalDebtItems.length} technical debt items in the repository.`,
-        'View Details'
+        'View Details',
+        'Visualize Relationships'
       ).then(selection => {
         if (selection === 'View Details') {
           vscode.commands.executeCommand('satdHelper.viewTechnicalDebt');
+        } else if (selection === 'Visualize Relationships') {
+          vscode.commands.executeCommand('satdHelper.visualizeRelationships');
         }
       });
     });

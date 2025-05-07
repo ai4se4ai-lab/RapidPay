@@ -66,3 +66,33 @@ export interface SatdConfig {
     /** Keep all potential debt (even if AI doesn't confirm it) */
     includeAllPotentialDebt: boolean;
 }
+
+/**
+ * Type of relationship between technical debt items
+ */
+export enum RelationshipType {
+    CALL_GRAPH = 'Call Graph',
+    DATA_DEPENDENCY = 'Data Dependency',
+    CONTROL_FLOW = 'Control Flow',
+    MODULE_DEPENDENCY = 'Module Dependency'
+}
+
+/**
+ * Relationship between two technical debt items
+ */
+export interface SatdRelationship {
+    /** ID of the source technical debt item */
+    sourceId: string;
+    
+    /** ID of the target technical debt item */
+    targetId: string;
+    
+    /** Types of relationships between the items */
+    types: RelationshipType[];
+    
+    /** Strength of the relationship (0-1) */
+    strength: number;
+    
+    /** Description of the relationship */
+    description: string;
+}
