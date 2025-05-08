@@ -48,7 +48,7 @@ export class DataDependencyAnalyzer {
             if (!fileContent) continue;
             
             // Skip files based on extension
-            if (!this.isJsOrTsFile(filePath)) {
+            if (!this.isParsableFile(filePath)) {
                 continue;
             }
             
@@ -92,7 +92,7 @@ export class DataDependencyAnalyzer {
      * @param filePath Path to the file
      * @returns True if the file is JavaScript or TypeScript
      */
-    private isJsOrTsFile(filePath: string): boolean {
+    private isParsableFile(filePath: string): boolean {
         const ext = path.extname(filePath).toLowerCase();
         return ['.js', '.jsx', '.ts', '.tsx'].includes(ext);
     }
@@ -165,28 +165,110 @@ export class DataDependencyAnalyzer {
      * @param fileContent Content of the file
      * @returns Parsed AST
      */
-    private parseCode(filePath: string, fileContent: string): any {
-        try {
-            const ext = path.extname(filePath).toLowerCase();
-            const plugins: any[] = [];
-            
-            // Add appropriate plugins based on file extension
-            if (['.ts', '.tsx'].includes(ext)) {
-                plugins.push('typescript');
+        private parseCode(filePath: string, fileContent: string): any {
+            try {
+                const ext = path.extname(filePath).toLowerCase();
+                const plugins: any[] = [];
+                
+                // Add appropriate plugins based on file extension
+                if (['.ts', '.tsx'].includes(ext)) {
+                    plugins.push('typescript');
+                }
+                if (['.jsx', '.tsx'].includes(ext)) {
+                    plugins.push('jsx');
+                }
+                
+                // For Python files, we need a different approach since Babel doesn't support Python
+                if (ext === '.py') {
+                    // Basic parsing for Python files
+                    return this.parsePythonCode(fileContent);
+                }
+                
+                return parser.parse(fileContent, {
+                    sourceType: 'module',
+                    plugins: plugins
+                });
+            } catch (error) {
+                console.error(`Error parsing ${filePath}:`, error);
+                return null;
             }
-            if (['.jsx', '.tsx'].includes(ext)) {
-                plugins.push('jsx');
-            }
-            
-            return parser.parse(fileContent, {
-                sourceType: 'module',
-                plugins: plugins
-            });
-        } catch (error) {
-            console.error(`Error parsing ${filePath}:`, error);
-            return null;
         }
-    }
+    
+        private parsePythonCode(fileContent: string): any {
+            // A very simple Python parser that just identifies function definitions and calls
+            const ast: { type: string; body: { type: string; id: { name: string }; loc: { start: { line: number }; end: { line: number } }; calls: string[] }[] } = {
+                type: 'Program',
+                body: []
+            };
+            
+            const lines = fileContent.split('\n');
+            const functions: {[name: string]: {start: number, end: number, calls: string[]}} = {};
+            let currentFunction: string | null = null;
+            let indentLevel = 0;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const lineNumber = i + 1;
+                
+                // Skip empty lines
+                if (line.trim() === '') continue;
+                
+                // Calculate indent level
+                const currentIndent = line.length - line.trimLeft().length;
+                
+                // Detect function definition
+                const funcDefMatch = line.match(/^\s*def\s+([a-zA-Z0-9_]+)\s*\(/);
+                if (funcDefMatch) {
+                    currentFunction = funcDefMatch[1];
+                    indentLevel = currentIndent;
+                    functions[currentFunction] = {
+                        start: lineNumber,
+                        end: lineNumber, // Will be updated when the function ends
+                        calls: []
+                    };
+                    continue;
+                }
+                
+                // Check if we're exiting a function based on indentation
+                if (currentFunction && currentIndent <= indentLevel && !line.trim().startsWith('#')) {
+                    functions[currentFunction].end = lineNumber - 1;
+                    currentFunction = null;
+                }
+                
+                // Detect function calls within a function
+                if (currentFunction) {
+                    const funcCallMatches = line.match(/([a-zA-Z0-9_]+)\s*\(/g);
+                    if (funcCallMatches) {
+                        for (const match of funcCallMatches) {
+                            const funcName = match.replace(/\s*\($/, '');
+                            if (funcName !== currentFunction) { // Avoid self-recursion detection
+                                functions[currentFunction].calls.push(funcName);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // If we ended the file inside a function, close it
+            if (currentFunction) {
+                functions[currentFunction].end = lines.length;
+            }
+            
+            // Build the AST representation
+            for (const [name, data] of Object.entries(functions)) {
+                ast.body.push({
+                    type: 'FunctionDeclaration',
+                    id: { name },
+                    loc: {
+                        start: { line: data.start },
+                        end: { line: data.end }
+                    },
+                    calls: data.calls
+                });
+            }
+            
+            return ast;
+        }
     
     /**
      * Process a variable declaration and check if it's in a debt context

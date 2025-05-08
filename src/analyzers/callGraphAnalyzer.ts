@@ -48,7 +48,7 @@ export class CallGraphAnalyzer {
             if (!fileContent) continue;
             
             // Skip files based on extension
-            if (!this.isJsOrTsFile(filePath)) {
+            if (!this.isParsableFile(filePath)) {
                 continue;
             }
             
@@ -93,10 +93,11 @@ export class CallGraphAnalyzer {
      * @param filePath Path to the file
      * @returns True if the file is JavaScript or TypeScript
      */
-    private isJsOrTsFile(filePath: string): boolean {
+    private isParsableFile(filePath: string): boolean {
         const ext = path.extname(filePath).toLowerCase();
-        return ['.js', '.jsx', '.ts', '.tsx'].includes(ext);
+        return ['.js', '.jsx', '.ts', '.tsx', '.py'].includes(ext);
     }
+    
     
     /**
      * Identify methods/functions in a file and which debt items are in them
@@ -162,6 +163,12 @@ export class CallGraphAnalyzer {
                 plugins.push('jsx');
             }
             
+            // For Python files, we need a different approach since Babel doesn't support Python
+            if (ext === '.py') {
+                // Basic parsing for Python files
+                return this.parsePythonCode(fileContent);
+            }
+            
             return parser.parse(fileContent, {
                 sourceType: 'module',
                 plugins: plugins
@@ -170,6 +177,82 @@ export class CallGraphAnalyzer {
             console.error(`Error parsing ${filePath}:`, error);
             return null;
         }
+    }
+
+    private parsePythonCode(fileContent: string): any {
+        // A very simple Python parser that just identifies function definitions and calls
+        const ast: { type: string; body: { type: string; id: { name: string }; loc: { start: { line: number }; end: { line: number } }; calls: string[] }[] } = {
+            type: 'Program',
+            body: []
+        };
+        
+        const lines = fileContent.split('\n');
+        const functions: {[name: string]: {start: number, end: number, calls: string[]}} = {};
+        let currentFunction: string | null = null;
+        let indentLevel = 0;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const lineNumber = i + 1;
+            
+            // Skip empty lines
+            if (line.trim() === '') continue;
+            
+            // Calculate indent level
+            const currentIndent = line.length - line.trimLeft().length;
+            
+            // Detect function definition
+            const funcDefMatch = line.match(/^\s*def\s+([a-zA-Z0-9_]+)\s*\(/);
+            if (funcDefMatch) {
+                currentFunction = funcDefMatch[1];
+                indentLevel = currentIndent;
+                functions[currentFunction] = {
+                    start: lineNumber,
+                    end: lineNumber, // Will be updated when the function ends
+                    calls: []
+                };
+                continue;
+            }
+            
+            // Check if we're exiting a function based on indentation
+            if (currentFunction && currentIndent <= indentLevel && !line.trim().startsWith('#')) {
+                functions[currentFunction].end = lineNumber - 1;
+                currentFunction = null;
+            }
+            
+            // Detect function calls within a function
+            if (currentFunction) {
+                const funcCallMatches = line.match(/([a-zA-Z0-9_]+)\s*\(/g);
+                if (funcCallMatches) {
+                    for (const match of funcCallMatches) {
+                        const funcName = match.replace(/\s*\($/, '');
+                        if (funcName !== currentFunction) { // Avoid self-recursion detection
+                            functions[currentFunction].calls.push(funcName);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // If we ended the file inside a function, close it
+        if (currentFunction) {
+            functions[currentFunction].end = lines.length;
+        }
+        
+        // Build the AST representation
+        for (const [name, data] of Object.entries(functions)) {
+            ast.body.push({
+                type: 'FunctionDeclaration',
+                id: { name },
+                loc: {
+                    start: { line: data.start },
+                    end: { line: data.end }
+                },
+                calls: data.calls
+            });
+        }
+        
+        return ast;
     }
     
     /**
@@ -313,7 +396,43 @@ export class CallGraphAnalyzer {
             
             // Track which method we're currently in
             let currentMethod: string | null = null;
-            
+            const ext = path.extname(filePath).toLowerCase();
+            if (ast && ext === '.py') {
+                for (const node of ast.body) {
+                    if (node.type === 'FunctionDeclaration') {
+                        const funcName = node.id.name;
+                        
+                        // Check if this function has debt
+                        if (methodsWithDebt.has(funcName)) {
+                            const callerDebt = methodsWithDebt.get(funcName)!;
+                            
+                            // Check each call from this function
+                            for (const calledFunc of node.calls || []) {
+                                // Check if the called function has debt
+                                if (methodsWithDebt.has(calledFunc)) {
+                                    const calleeDebt = methodsWithDebt.get(calledFunc)!;
+                                    
+                                    // Create relationships
+                                    for (const sourceDebt of callerDebt) {
+                                        for (const targetDebt of calleeDebt) {
+                                            // Skip self-relationships
+                                            if (sourceDebt.id === targetDebt.id) continue;
+                                            
+                                            relationships.push({
+                                                sourceId: sourceDebt.id,
+                                                targetId: targetDebt.id,
+                                                types: [RelationshipType.CALL_GRAPH],
+                                                strength: 0.8, // Call graph relationships are strong
+                                                description: `SATD in function ${funcName} calls function ${calledFunc} which contains another SATD.`
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (ast && ['.js', '.jsx', '.ts', '.tsx'].includes(ext)) {
             // Traverse the AST to find method calls
             traverse(ast, {
                 FunctionDeclaration: {
@@ -415,7 +534,9 @@ export class CallGraphAnalyzer {
                         }
                     }
                 }
+                
             });
+        }
             
         } catch (error) {
             console.error(`Error analyzing method calls in ${filePath}:`, error);
