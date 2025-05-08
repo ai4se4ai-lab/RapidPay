@@ -1,9 +1,8 @@
 // src/utils/visualizationUtils.ts
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { TechnicalDebt, SatdRelationship, RelationshipType, DebtType } from '../models';
+import { TechnicalDebt, SatdRelationship, RelationshipType, DebtType, Chain } from '../models';
 import * as fs from 'fs';
-
 /**
  * Open a file at a specific position in VS Code
  * @param filePath Path to the file
@@ -50,17 +49,22 @@ export function loadHtmlTemplate(context: vscode.ExtensionContext, templatePath:
     }
 }
 
+// src/utils/visualizationUtils.ts
+// Update the function signature to include the chains parameter
+
 /**
  * Generate HTML content for the webview visualization
  * @param context Extension context
  * @param debtItems Technical debt items
  * @param relationships Relationships between debt items
+ * @param chains Chains of debt items (optional)
  * @returns HTML string
  */
 export function generateGraphVisualizationHTML(
     context: vscode.ExtensionContext,
     debtItems: TechnicalDebt[], 
-    relationships: SatdRelationship[]
+    relationships: SatdRelationship[],
+    chains: Chain[] = []
 ): string {
     // Prepare data for visualization
     const nodes = debtItems.map(debt => ({
@@ -70,7 +74,14 @@ export function generateGraphVisualizationHTML(
         line: debt.line,
         content: debt.content,
         debtType: debt.debtType || 'Other',
-        createdDate: debt.createdDate
+        createdDate: debt.createdDate,
+        sirScore: debt.sirScore || 0,
+        sirComponents: debt.sirComponents || {
+            severity: 0,
+            outDependencies: 0,
+            inDependencies: 0,
+            chainLengthFactor: 0
+        }
     }));
     
     const edges = relationships.map(rel => ({
@@ -80,7 +91,9 @@ export function generateGraphVisualizationHTML(
         label: rel.types.join(', '),
         types: rel.types,
         strength: rel.strength,
-        description: rel.description
+        description: rel.description,
+        chainIds: rel.chainIds || [],
+        inChain: rel.inChain || false
     }));
     
     // Load the HTML template
@@ -94,8 +107,10 @@ export function generateGraphVisualizationHTML(
         .replace(/RELATIONSHIP_TYPE_MODULE_DEPENDENCY/g, RelationshipType.MODULE_DEPENDENCY)
         .replace(/DEBT_ITEMS_COUNT/g, debtItems.length.toString())
         .replace(/RELATIONSHIPS_COUNT/g, relationships.length.toString())
+        .replace(/CHAINS_COUNT/g, chains.length.toString())
         .replace('NODES_DATA_PLACEHOLDER', JSON.stringify(nodes))
-        .replace('EDGES_DATA_PLACEHOLDER', JSON.stringify(edges));
+        .replace('EDGES_DATA_PLACEHOLDER', JSON.stringify(edges))
+        .replace('CHAINS_DATA_PLACEHOLDER', JSON.stringify(chains));
     
     return template;
 }

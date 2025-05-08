@@ -1,3 +1,4 @@
+<!-- Updated HTML template for resources/templates/graphVisualization.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,13 +97,64 @@
             padding: 5px 10px;
             color: var(--vscode-descriptionForeground);
         }
+        .sir-score-section {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--vscode-panel-border);
+        }
+        .sir-score-value {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .sir-components {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 12px;
+        }
+        .chain-highlight {
+            line-color: #ff0 !important;
+            line-style: solid;
+            width: 4px !important;
+            z-index: 999;
+        }
+        .node-highlight {
+            border-width: 3px !important;
+            border-color: #ff0 !important;
+            border-style: double !important;
+        }
+        .high-impact {
+            border-width: 4px;
+            border-color: #f00;
+            border-style: solid;
+        }
+        .medium-impact {
+            border-width: 3px;
+            border-color: #ff7f00;
+            border-style: solid;
+        }
+        .low-impact {
+            border-width: 2px;
+            border-color: #0f0;
+            border-style: solid;
+        }
+        .chain-list {
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 12px;
+            padding: 5px;
+            background-color: var(--vscode-editor-background);
+            border: 1px solid var(--vscode-panel-border);
+        }
     </style>
 </head>
 <body>
     <div id="loading">Loading visualization...</div>
     <div id="error"></div>
     <div id="stats">
-        DEBT_ITEMS_COUNT technical debt items, RELATIONSHIPS_COUNT relationships
+        DEBT_ITEMS_COUNT technical debt items, RELATIONSHIPS_COUNT relationships, CHAINS_COUNT chains
     </div>
     
     <div class="controls">
@@ -128,6 +180,22 @@
                 <option value="Requirement">Requirement</option>
                 <option value="Architecture">Architecture</option>
                 <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <label for="chainFilter">Chain View:</label>
+            <select id="chainFilter">
+                <option value="all">All Relationships</option>
+                <option value="chains-only">Only Chain Relationships</option>
+                <option value="highlight-chains">Highlight Chains</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <label for="sirScoreSort">Sort By SIR Score:</label>
+            <select id="sirScoreSort">
+                <option value="none">No Sorting</option>
+                <option value="high-to-low">High to Low</option>
+                <option value="low-to-high">Low to High</option>
             </select>
         </div>
         <div class="filter-section">
@@ -172,6 +240,18 @@
             <div class="legend-color" style="background-color: #999999;"></div>
             <span>Other</span>
         </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 4px solid #f00;"></div>
+            <span>High SIR Impact</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 3px solid #ff7f00;"></div>
+            <span>Medium SIR Impact</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 2px solid #0f0;"></div>
+            <span>Low SIR Impact</span>
+        </div>
     </div>
     
     <div id="debtDetails" class="debt-details"></div>
@@ -193,6 +273,7 @@
         // Data for visualization
         const nodes = NODES_DATA_PLACEHOLDER;
         const edges = EDGES_DATA_PLACEHOLDER;
+        const chains = CHAINS_DATA_PLACEHOLDER || [];
         
         // Node color mapping based on debt type
         const typeColors = {
@@ -241,8 +322,16 @@
                                 'background-color': function(ele) {
                                     return typeColors[ele.data('debtType')] || typeColors['Other'];
                                 },
-                                'width': 25,
-                                'height': 25,
+                                'width': function(ele) {
+                                    // Scale node size based on SIR score if available
+                                    const sirScore = ele.data('sirScore');
+                                    return sirScore ? 25 + (sirScore * 10) : 25;
+                                },
+                                'height': function(ele) {
+                                    // Scale node size based on SIR score if available
+                                    const sirScore = ele.data('sirScore');
+                                    return sirScore ? 25 + (sirScore * 10) : 25;
+                                },
                                 'font-size': 10,
                                 'text-valign': 'center',
                                 'text-halign': 'right',
@@ -257,9 +346,53 @@
                                 'target-arrow-shape': 'triangle',
                                 'arrow-scale': 0.8,
                                 'width': function(ele) {
-                                    return ele.data('strength') * 5 || 1;
+                                    // Thicker lines for edges in chains
+                                    return ele.data('inChain') ? 3 : (ele.data('strength') * 5 || 1);
                                 },
-                                'line-color': '#fff'
+                                'line-color': function(ele) {
+                                    // Different color for edges in chains
+                                    return ele.data('inChain') ? '#fff' : '#888';
+                                }
+                            }
+                        },
+                        {
+                            selector: 'edge.chain-highlight',
+                            style: {
+                                'line-color': '#ff0',
+                                'width': 4,
+                                'z-index': 999
+                            }
+                        },
+                        {
+                            selector: 'node.node-highlight',
+                            style: {
+                                'border-width': 3,
+                                'border-color': '#ff0',
+                                'border-style': 'double'
+                            }
+                        },
+                        {
+                            selector: 'node.high-impact',
+                            style: {
+                                'border-width': 4,
+                                'border-color': '#f00',
+                                'border-style': 'solid'
+                            }
+                        },
+                        {
+                            selector: 'node.medium-impact',
+                            style: {
+                                'border-width': 3,
+                                'border-color': '#ff7f00',
+                                'border-style': 'solid'
+                            }
+                        },
+                        {
+                            selector: 'node.low-impact',
+                            style: {
+                                'border-width': 2,
+                                'border-color': '#0f0',
+                                'border-style': 'solid'
                             }
                         },
                         {
@@ -292,12 +425,44 @@
                         
                         const fileLink = `<span class="file-link" data-file="${data.file}" data-line="${data.line}">${data.file}:${data.line}</span>`;
                         
+                        // Generate SIR score HTML if available
+                        const sirScoreHtml = data.sirScore !== undefined ? `
+                            <div class="sir-score-section">
+                                <h4>SATD Impact Ripple (SIR) Score</h4>
+                                <div class="sir-score-value">Score: ${data.sirScore.toFixed(2)}</div>
+                                <div class="sir-components">
+                                    <div>Intrinsic Severity: ${data.sirComponents.severity.toFixed(1)}</div>
+                                    <div>Outgoing Chain Influence: ${data.sirComponents.outDependencies}</div>
+                                    <div>Incoming Chain Dependency: ${data.sirComponents.inDependencies}</div>
+                                    <div>Chain Length Factor: ${data.sirComponents.chainLengthFactor.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        ` : '';
+                        
+                        // Find chains that include this node
+                        const nodeChains = chains.filter(chain => chain.nodes.includes(data.id));
+                        
+                        // Generate chains HTML if the node is part of any chains
+                        const chainsHtml = nodeChains.length > 0 ? `
+                            <div class="sir-score-section">
+                                <h4>Part of ${nodeChains.length} Chain${nodeChains.length > 1 ? 's' : ''}</h4>
+                                <div class="chain-list">
+                                    ${nodeChains.map((chain, index) => `
+                                        <div>Chain ${index + 1}: ${chain.length} nodes 
+                                        <button class="highlight-chain-btn" data-chain-id="${chain.id}">Highlight</button></div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+                        
                         debtDetailsEl.innerHTML = `
                             <h4>Technical Debt Details</h4>
                             <p><strong>File:</strong> ${fileLink}</p>
                             <p><strong>Type:</strong> ${data.debtType}</p>
                             <p><strong>Content:</strong> ${data.content}</p>
                             <p><strong>Created:</strong> ${data.createdDate}</p>
+                            ${sirScoreHtml}
+                            ${chainsHtml}
                         `;
                         
                         // Add event listener for file link
@@ -311,6 +476,15 @@
                                 });
                             });
                         }
+                        
+                        // Add event listeners for highlight chain buttons
+                        const highlightBtns = debtDetailsEl.querySelectorAll('.highlight-chain-btn');
+                        highlightBtns.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const chainId = this.getAttribute('data-chain-id');
+                                highlightChain(chainId);
+                            });
+                        });
                     }
                 });
                 
@@ -323,14 +497,63 @@
                     if (debtDetailsEl) {
                         debtDetailsEl.style.display = 'block';
                         
+                        // Generate chains HTML if the edge is part of any chains
+                        const chainsHtml = data.chainIds && data.chainIds.length > 0 ? `
+                            <div class="sir-score-section">
+                                <h4>Part of ${data.chainIds.length} Chain${data.chainIds.length > 1 ? 's' : ''}</h4>
+                                <div class="chain-list">
+                                    ${data.chainIds.map((chainId, index) => {
+                                        const chain = chains.find(c => c.id === chainId);
+                                        return `
+                                            <div>Chain ${index + 1}: ${chain ? chain.length : 'unknown'} nodes 
+                                            <button class="highlight-chain-btn" data-chain-id="${chainId}">Highlight</button></div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+                        
                         debtDetailsEl.innerHTML = `
                             <h4>Relationship Details</h4>
                             <p><strong>Type:</strong> ${data.label}</p>
                             <p><strong>Strength:</strong> ${Math.round(data.strength * 100)}%</p>
                             <p><strong>Description:</strong> ${data.description}</p>
+                            ${chainsHtml}
                         `;
+                        
+                        // Add event listeners for highlight chain buttons
+                        const highlightBtns = debtDetailsEl.querySelectorAll('.highlight-chain-btn');
+                        highlightBtns.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const chainId = this.getAttribute('data-chain-id');
+                                highlightChain(chainId);
+                            });
+                        });
                     }
                 });
+                
+                // Function to highlight a specific chain
+                function highlightChain(chainId) {
+                    // Reset all highlights
+                    cy.elements().removeClass('chain-highlight').removeClass('node-highlight');
+                    
+                    // Find the chain
+                    const chain = chains.find(c => c.id === chainId);
+                    if (!chain) return;
+                    
+                    // Highlight nodes in the chain
+                    for (const nodeId of chain.nodes) {
+                        cy.getElementById(nodeId).addClass('node-highlight');
+                    }
+                    
+                    // Highlight edges in the chain
+                    for (let i = 0; i < chain.nodes.length - 1; i++) {
+                        const edge = cy.edges(`[source = "${chain.nodes[i]}"][target = "${chain.nodes[i + 1]}"]`);
+                        if (edge) {
+                            edge.addClass('chain-highlight');
+                        }
+                    }
+                }
                 
                 // Click on background to clear selection
                 cy.on('tap', function(evt) {
@@ -354,6 +577,13 @@
                                 return types && types.includes(type);
                             }).show();
                         }
+                        
+                        // Show nodes connected to visible edges
+                        cy.nodes().hide();
+                        cy.nodes().filter(node => {
+                            const connectedEdges = node.connectedEdges(':visible');
+                            return connectedEdges.length > 0;
+                        }).show();
                         
                         runDagreLayout();
                     });
@@ -381,6 +611,96 @@
                             }).show();
                         }
                         
+                        runDagreLayout();
+                    });
+                }
+                
+                // Handle chain filter
+                const chainFilterSelect = document.getElementById('chainFilter');
+                if (chainFilterSelect) {
+                    chainFilterSelect.addEventListener('change', function() {
+                        const value = this.value;
+                        
+                        // Remove existing highlights
+                        cy.edges().removeClass('chain-highlight');
+                        cy.nodes().removeClass('node-highlight');
+                        
+                        if (value === 'all') {
+                            // Show all relationships
+                            cy.edges().show();
+                            cy.nodes().show();
+                        } else if (value === 'chains-only') {
+                            // Show only relationships that are part of chains
+                            cy.edges().hide();
+                            cy.edges().filter(edge => edge.data('inChain')).show();
+                            
+                            // Show nodes connected to visible edges
+                            cy.nodes().hide();
+                            cy.nodes().filter(node => {
+                                const connectedEdges = node.connectedEdges(':visible');
+                                return connectedEdges.length > 0;
+                            }).show();
+                        } else if (value === 'highlight-chains') {
+                            // Show all but highlight chains
+                            cy.edges().show();
+                            cy.nodes().show();
+                            cy.edges().filter(edge => edge.data('inChain')).addClass('chain-highlight');
+                            
+                            // Highlight nodes in chains
+                            const nodesInChains = new Set();
+                            cy.edges('.chain-highlight').forEach(edge => {
+                                nodesInChains.add(edge.source().id());
+                                nodesInChains.add(edge.target().id());
+                            });
+                            
+                            cy.nodes().forEach(node => {
+                                if (nodesInChains.has(node.id())) {
+                                    node.addClass('node-highlight');
+                                }
+                            });
+                        }
+                        
+                        // Re-run layout to accommodate visibility changes
+                        runDagreLayout();
+                    });
+                }
+                
+                // Handle SIR score sorting
+                const sirScoreSortSelect = document.getElementById('sirScoreSort');
+                if (sirScoreSortSelect) {
+                    sirScoreSortSelect.addEventListener('change', function() {
+                        const value = this.value;
+                        
+                        if (value === 'none') {
+                            // Reset node styling
+                            cy.nodes().removeClass('high-impact medium-impact low-impact');
+                        } else {
+                            // Get all SIR scores
+                            const scores = cy.nodes().map(node => node.data('sirScore') || 0);
+                            
+                            // Calculate thresholds based on distribution
+                            scores.sort((a, b) => a - b);
+                            const lowThreshold = scores[Math.floor(scores.length * 0.33)] || 0;
+                            const highThreshold = scores[Math.floor(scores.length * 0.66)] || 0;
+                            
+                            // Apply impact styling based on SIR score
+                            cy.nodes().forEach(node => {
+                                const score = node.data('sirScore') || 0;
+                                
+                                // Remove existing classes
+                                node.removeClass('high-impact medium-impact low-impact');
+                                
+                                if (score >= highThreshold) {
+                                    node.addClass('high-impact');
+                                } else if (score >= lowThreshold) {
+                                    node.addClass('medium-impact');
+                                } else {
+                                    node.addClass('low-impact');
+                                }
+                            });
+                        }
+                        
+                        // Re-run layout
                         runDagreLayout();
                     });
                 }
@@ -434,7 +754,8 @@
                             // Prepare the data
                             const data = JSON.stringify({
                                 nodes: cy.nodes().map(n => n.data()),
-                                edges: cy.edges().map(e => e.data())
+                                edges: cy.edges().map(e => e.data()),
+                                chains: chains
                             }, null, 2);
                             
                             // Create a blob with the data
@@ -467,7 +788,12 @@
                             name: 'dagre',
                             rankDir: 'TB',
                             padding: 50,
-                            fit: true
+                            fit: true,
+                            animate: true,
+                            nodeDimensionsIncludeLabels: true,
+                            rankSep: 100,
+                            edgeSep: 20,
+                            animationDuration: 500
                         });
                         layout.run();
                     } catch (e) {

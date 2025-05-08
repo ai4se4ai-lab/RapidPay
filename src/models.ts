@@ -31,6 +31,24 @@ export interface TechnicalDebt {
     
     /** Flag indicating if this is confirmed to be technical debt (vs false positive) */
     isActualDebt?: boolean;
+    
+    /** SATD Impact Ripple Score */
+    sirScore?: number;
+    
+    /** Components of the SIR score */
+    sirComponents?: {
+        /** Intrinsic severity (1-10) */
+        severity: number;
+        
+        /** Number of other SATD instances dependent on this */
+        outDependencies: number;
+        
+        /** Number of other SATD instances this depends on */
+        inDependencies: number;
+        
+        /** Chain length factor (normalized) */
+        chainLengthFactor: number;
+    };
 }
 
 /**
@@ -95,4 +113,24 @@ export interface SatdRelationship {
     
     /** Description of the relationship */
     description: string;
+    
+    /** IDs of chains this relationship belongs to */
+    chainIds?: string[];
+    
+    /** Flag indicating if this relationship is part of any chain */
+    inChain?: boolean;
+}
+
+/**
+ * Represents a chain of technical debt items
+ */
+export interface Chain {
+    /** Unique identifier for the chain */
+    id: string;
+    
+    /** Ordered list of node IDs in the chain */
+    nodes: string[];
+    
+    /** Length of the chain (number of nodes) */
+    length: number;
 }

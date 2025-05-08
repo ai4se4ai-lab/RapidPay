@@ -5,6 +5,8 @@ import { initializeOpenAI, resetOpenAIClient } from './utils/openaiClient';
 import { getRepositoryInfo, wasCommitMadeRecently } from './utils/gitUtils';
 import { scanRepositoryForTechnicalDebt, enhanceTechnicalDebtWithAI } from './utils/debtScanner';
 import { showTechnicalDebtPanel, withProgressNotification } from './utils/uiUtils';
+import { SatdChainAnalyzer } from './satdChainAnalyzer';
+
 import { 
   initializeCommitMonitor, 
   checkCommitForTechnicalDebtFixes, 
@@ -51,7 +53,9 @@ export function activate(context: vscode.ExtensionContext) {
       // Check if relationship analysis is enabled
       const config = vscode.workspace.getConfiguration('satdHelper');
       const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled');
-      
+      const chainAnalysisEnabled = config.get<boolean>('chainAnalysisEnabled');
+      const sirScoreEnabled = config.get<boolean>('sirScoreEnabled');
+
       if (relationshipAnalysisEnabled) {
         progress.report({ message: "Analyzing relationships between technical debt items..." });
         
@@ -61,8 +65,60 @@ export function activate(context: vscode.ExtensionContext) {
         
         // This doesn't need to block the initialization, but we'll
         // pre-compute relationships in the background
-        analyzer.analyzeRelationships(technicalDebtItems).catch(error => {
-          console.error('Error analyzing relationships:', error);
+        analyzer.analyzeRelationships(technicalDebtItems).then(relationships => {
+          if (chainAnalysisEnabled) {
+            progress.report({ message: "Discovering technical debt chains..." });
+            
+            // Create the chain analyzer
+            const chainAnalyzer = new SatdChainAnalyzer();
+            
+            // Find chains in the relationships
+            const { relationships: enhancedRelationships, chains } = 
+              chainAnalyzer.findChains(technicalDebtItems, relationships);
+            
+            if (sirScoreEnabled) {
+              // Get SIR score weights from config
+              const sirWeights = config.get<{
+                severity: number;
+                outgoingInfluence: number;
+                incomingDependency: number;
+                chainLength: number;
+              }>('sirScoreWeights');
+              
+              // Apply the weights if configured
+              if (sirWeights) {
+                chainAnalyzer.setSirWeights(
+                  sirWeights.severity,
+                  sirWeights.outgoingInfluence,
+                  sirWeights.incomingDependency,
+                  sirWeights.chainLength
+                );
+              }
+              
+              // Calculate SIR scores
+              const debtItemsWithScores = chainAnalyzer.calculateSIRScores(
+                technicalDebtItems,
+                enhancedRelationships
+              );
+              
+              // Update the technical debt items with scores
+              technicalDebtItems = debtItemsWithScores;
+            }
+            
+            // Update the commit monitor with the updated debt items
+            setTechnicalDebtItems(technicalDebtItems);
+            
+            console.log(`Found ${chains.length} chains among ${relationships.length} relationships.`);
+            
+            // If chains were found, notify the user
+            if (chains.length > 0) {
+              vscode.window.showInformationMessage(
+                `Found ${chains.length} technical debt chains. Use "Visualize Relationships" to explore them.`
+              );
+            }
+          }
+        }).catch(error => {
+          console.error('Error analyzing relationships and chains:', error);
         });
       }
       

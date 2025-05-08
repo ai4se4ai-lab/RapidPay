@@ -1,6 +1,6 @@
-// src/visualization/satdGraphVisualizer.ts
+// src/visualization/satdGraphVisualizer.ts (updated)
 import * as vscode from 'vscode';
-import { TechnicalDebt, SatdRelationship } from '../models';
+import { TechnicalDebt, SatdRelationship, Chain } from '../models';
 import { openFileAtPosition, generateGraphVisualizationHTML } from '../utils/visualizationUtils';
 
 /**
@@ -23,8 +23,13 @@ export class SatdGraphVisualizer {
      * Display a visualization of technical debt relationships
      * @param debtItems Technical debt items
      * @param relationships Relationships between debt items
+     * @param chains Detected chains between debt items
      */
-    public displaySatdGraph(debtItems: TechnicalDebt[], relationships: SatdRelationship[]): void {
+    public displaySatdGraph(
+        debtItems: TechnicalDebt[], 
+        relationships: SatdRelationship[],
+        chains: Chain[] = []
+    ): void {
         // Create or reveal panel
         if (this.panel) {
             this.panel.reveal(vscode.ViewColumn.Beside);
@@ -46,7 +51,12 @@ export class SatdGraphVisualizer {
         }
         
         // Set webview content using the utility function
-        this.panel.webview.html = generateGraphVisualizationHTML(this.context, debtItems, relationships);
+        this.panel.webview.html = generateGraphVisualizationHTML(
+            this.context, 
+            debtItems, 
+            relationships,
+            chains
+        );
         
         // Handle messages from the webview
         this.panel.webview.onDidReceiveMessage(

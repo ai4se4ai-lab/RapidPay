@@ -1,6 +1,7 @@
 // src/commands/visualizationCommands.ts
 import * as vscode from 'vscode';
 import { SatdRelationshipAnalyzer } from '../satdRelationshipAnalyzer';
+import { SatdChainAnalyzer } from '../satdChainAnalyzer';
 import { SatdGraphVisualizer } from '../visualization/satdGraphVisualizer';
 import { getTechnicalDebtItems } from '../utils/commitMonitor';
 import { getWorkspaceRoot } from '../utils/gitUtils';
@@ -46,15 +47,33 @@ export function registerVisualizationCommands(context: vscode.ExtensionContext):
                     // Find relationships between technical debt items
                     const relationships = await analyzer.analyzeRelationships(debtItems);
                     
+                    progress.report({ message: "Discovering technical debt chains..." });
+                    
+                    // Create the chain analyzer
+                    const chainAnalyzer = new SatdChainAnalyzer();
+                    
+                    // Find chains in the relationships
+                    const { relationships: enhancedRelationships, chains } = 
+                        chainAnalyzer.findChains(debtItems, relationships);
+                    
+                    progress.report({ message: "Calculating SIR scores..." });
+                    
+                    // Calculate SIR scores for debt items
+                    const debtItemsWithScores = chainAnalyzer.calculateSIRScores(
+                        debtItems, 
+                        enhancedRelationships
+                    );
+                    
                     progress.report({ message: "Generating visualization..." });
                     
                     // Create and display visualization
                     const visualizer = new SatdGraphVisualizer(context);
-                    visualizer.displaySatdGraph(debtItems, relationships);
+                    visualizer.displaySatdGraph(debtItemsWithScores, enhancedRelationships, chains);
                     
                     // Show summary
                     vscode.window.showInformationMessage(
-                        `Found ${relationships.length} relationships between ${debtItems.length} technical debt items.`
+                        `Found ${enhancedRelationships.length} relationships and ${chains.length} chains ` +
+                        `between ${debtItems.length} technical debt items.`
                     );
                 }
             );
