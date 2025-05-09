@@ -42,7 +42,7 @@ export class CallGraphAnalyzer {
         // Map debt items by file for easier access
         const debtByFile = this.groupDebtItemsByFile(debtItems);
         
-        // For each file with debt, analyze its call graph
+        // First analyze intra-file relationships
         for (const [filePath, debtsInFile] of debtByFile.entries()) {
             const fileContent = fileContentMap.get(filePath);
             if (!fileContent) continue;
@@ -67,8 +67,16 @@ export class CallGraphAnalyzer {
             relationships.push(...callRelationships);
         }
         
+        // Add this new section to analyze inter-file Python relationships
+        const pythonInterFileRelationships = await this.findPythonInterFileRelationships(
+            debtByFile,
+            fileContentMap
+        );
+        relationships.push(...pythonInterFileRelationships);
+        
         return relationships;
     }
+    
     
     /**
      * Group technical debt items by file
@@ -561,109 +569,85 @@ export class CallGraphAnalyzer {
     ): Promise<SatdRelationship[]> {
         const relationships: SatdRelationship[] = [];
         
-        // Python file analysis (need to handle imports and function calls between files)
+        const functionsByModule = new Map<string, {
+            name: string;
+            startLine: number;
+            endLine: number;
+            calls: string[];
+            debtItems: TechnicalDebt[];
+        }[]>();
+        
         for (const [filePath, debtsInFile] of debtByFile.entries()) {
-            // Only process Python files
             if (!filePath.endsWith('.py')) continue;
-            
             const fileContent = fileContentMap.get(filePath);
             if (!fileContent) continue;
             
-            try {
-                // Parse the Python file
-                const ast = this.parsePythonCode(fileContent);
-                if (!ast) continue;
+            const functions = this.extractPythonFunctions(fileContent, filePath, debtsInFile);
+            // Ensure filePath used as key is consistent (e.g., relative to workspaceRoot)
+            // For simplicity, assuming filePaths from debtByFile are already in a consistent format.
+            functionsByModule.set(filePath, functions);
+        }
+        
+        for (const [filePath, functions] of functionsByModule.entries()) {
+            const fileContent = fileContentMap.get(filePath);
+            if (!fileContent) continue;
+            
+            const imports = this.extractPythonImports(fileContent);
+            
+            for (const func of functions) {
+                if (func.debtItems.length === 0) continue;
                 
-                // Extract module imports
-                const imports = this.extractPythonImports(fileContent);
+                // Process intra-file calls (assuming this part is working as per problem description)
+                this.processPythonIntraFileCalls(func, functions, relationships);
                 
-                // For each function in the file
-                for (const node of ast.body) {
-                    if (node.type === 'FunctionDeclaration') {
-                        const funcName = node.id.name;
-                        
-                        // Find debt items in or near this function - same expanded range as in identifyMethodsWithDebt
-                        const debtsInFunction = debtsInFile.filter(debt => {
-                            // Include debt if it's within 5 lines before or inside the function
-                            return (debt.line >= node.loc.start.line - 5 && debt.line <= node.loc.end.line);
-                        });
-                        
-                        if (debtsInFunction.length === 0) continue;
-                        
-                        // Check function calls
-                        for (const calledFunc of node.calls || []) {
-                            // Skip built-in function calls and common library functions
-                            if (['print', 'len', 'str', 'int', 'float', 'list', 'dict', 'set', 'tuple'].includes(calledFunc)) {
-                                continue;
+                // Process inter-file calls
+                // This replaces the old processPythonInterFileCalls and its problematic special case
+                for (const calledFuncName of func.calls) {
+                    for (const importInfo of imports) {
+                        let targetModulePath: string | null = null;
+                        let resolvedFunctionName = calledFuncName; // By default, the function name is as called
+
+                        if (importInfo.imported && importInfo.imported.includes(calledFuncName)) {
+                            // Case: from module import funcName
+                            // calledFuncName is 'funcName', importInfo.module is 'module'
+                            targetModulePath = this.resolvePythonImport(filePath, importInfo.module, functionsByModule.keys());
+                        } else if (!importInfo.imported) {
+                            // Case: import module (then called as module.funcName)
+                            // Here, calledFuncName might be "module.funcName" if AST captured it that way,
+                            // or just "funcName" if it's a simple call and `module` is the prefix.
+                            // For simplicity, if calledFuncName is prefixed like "module.function", split it.
+                            const parts = calledFuncName.split('.');
+                            if (parts.length > 1 && parts[0] === importInfo.module) {
+                                resolvedFunctionName = parts.slice(1).join('.'); // Actual function name
+                                targetModulePath = this.resolvePythonImport(filePath, importInfo.module, functionsByModule.keys());
+                            } else if (parts.length === 1 && importInfo.module === calledFuncName && functionsByModule.has(calledFuncName + '.py')) {
+                                // This could be an import of a module that is then called, but less common for direct function calls.
+                                // This case needs more robust parsing of call sites (e.g. `module_name()`)
+                                // For now, we focus on explicit function calls from resolved modules.
                             }
-                            
-                            // Check if this is a local call or an imported function call
-                            let isLocalCall = false;
-                            
-                            // Check if the called function is defined in this file
-                            for (const otherNode of ast.body) {
-                                if (otherNode.type === 'FunctionDeclaration' && otherNode.id.name === calledFunc) {
-                                    isLocalCall = true;
-                                    break;
-                                }
-                            }
-                            
-                            if (!isLocalCall) {
-                                // This might be an imported function, check each import
-                                for (const importInfo of imports) {
-                                    // Check if this import could contain the called function
-                                    if (importInfo.imported && importInfo.imported.includes(calledFunc)) {
-                                        const importedModulePath = this.resolvePythonImport(filePath, importInfo.module);
-                                        if (!importedModulePath) continue;
-                                        
-                                        // Check if the imported module has debt items
-                                        if (debtByFile.has(importedModulePath)) {
-                                            const importedContent = fileContentMap.get(importedModulePath);
-                                            if (!importedContent) continue;
-                                            
-                                            const importedAst = this.parsePythonCode(importedContent);
-                                            if (!importedAst) continue;
-                                            
-                                            // Find the called function in the imported module
-                                            for (const importedNode of importedAst.body) {
-                                                if (importedNode.type === 'FunctionDeclaration' && 
-                                                    importedNode.id.name === calledFunc) {
-                                                    
-                                                    // Find debt items in or near the called function
-                                                    const importedDebts = debtByFile.get(importedModulePath)!;
-                                                    const debtsInCalledFunction = importedDebts.filter(debt => {
-                                                        return (debt.line >= importedNode.loc.start.line - 5 && 
-                                                                debt.line <= importedNode.loc.end.line);
-                                                    });
-                                                    
-                                                    if (debtsInCalledFunction.length > 0) {
-                                                        // Create relationships between functions
-                                                        for (const sourceDebt of debtsInFunction) {
-                                                            for (const targetDebt of debtsInCalledFunction) {
-                                                                // Skip self-relationships
-                                                                if (sourceDebt.id === targetDebt.id) continue;
-                                                                
-                                                                relationships.push({
-                                                                    sourceId: sourceDebt.id,
-                                                                    targetId: targetDebt.id,
-                                                                    types: [RelationshipType.CALL_GRAPH],
-                                                                    strength: 0.9, // Inter-file relationships are very strong
-                                                                    description: `SATD in function ${funcName} (${filePath}) calls function ${importedNode.id.name} in ${importedModulePath} which contains another SATD.`
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                        }
+
+                        if (targetModulePath && functionsByModule.has(targetModulePath)) {
+                            const targetFunctions = functionsByModule.get(targetModulePath)!;
+                            const calledFunc = targetFunctions.find(f => f.name === resolvedFunctionName);
+
+                            if (calledFunc && calledFunc.debtItems.length > 0) {
+                                for (const sourceDebt of func.debtItems) {
+                                    for (const targetDebt of calledFunc.debtItems) {
+                                        if (sourceDebt.id === targetDebt.id) continue;
+                                        relationships.push({
+                                            sourceId: sourceDebt.id,
+                                            targetId: targetDebt.id,
+                                            types: [RelationshipType.CALL_GRAPH],
+                                            strength: 0.9,
+                                            description: `SATD in function ${func.name} (${this.getRelativePath(filePath)}) calls function ${calledFunc.name} in ${this.getRelativePath(targetModulePath)} which contains another SATD.`
+                                        });
                                     }
                                 }
                             }
                         }
                     }
                 }
-            } catch (error) {
-                console.error(`Error analyzing inter-file relationships for ${filePath}:`, error);
             }
         }
         
@@ -671,6 +655,174 @@ export class CallGraphAnalyzer {
     }
 
     /**
+ * Process relationships between functions in the same Python file
+ */
+private processPythonIntraFileCalls(
+    func: {
+        name: string;
+        startLine: number;
+        endLine: number;
+        calls: string[];
+        debtItems: TechnicalDebt[];
+    },
+    allFunctionsInFile: {
+        name: string;
+        startLine: number;
+        endLine: number;
+        calls: string[];
+        debtItems: TechnicalDebt[];
+    }[],
+    relationships: SatdRelationship[]
+): void {
+    // For each function call made by this function
+    for (const calledFuncName of func.calls) {
+        // Find the called function in the same file
+        const calledFunc = allFunctionsInFile.find(f => f.name === calledFuncName);
+        if (!calledFunc || calledFunc.debtItems.length === 0) continue;
+        
+        // Create relationships between SATD in caller and callee
+        for (const sourceDebt of func.debtItems) {
+            for (const targetDebt of calledFunc.debtItems) {
+                // Skip self-relationships
+                if (sourceDebt.id === targetDebt.id) continue;
+                
+                relationships.push({
+                    sourceId: sourceDebt.id,
+                    targetId: targetDebt.id,
+                    types: [RelationshipType.CALL_GRAPH],
+                    strength: 0.8, // Call graph relationships are strong
+                    description: `SATD in function ${func.name} calls function ${calledFunc.name} which contains another SATD.`
+                });
+            }
+        }
+    }
+}
+
+/**
+ * Extract functions, their locations, and function calls from Python code
+ */
+private extractPythonFunctions(
+    fileContent: string,
+    filePath: string,
+    debtsInFile: TechnicalDebt[]
+): {
+    name: string;
+    startLine: number;
+    endLine: number;
+    calls: string[];
+    debtItems: TechnicalDebt[];
+}[] {
+    // Temporary array to hold functions without debtItems
+    const tempFunctions: {
+        name: string;
+        startLine: number;
+        endLine: number;
+        calls: string[];
+    }[] = [];
+    
+    const lines = fileContent.split('\n');
+    let currentFunction: {
+        name: string;
+        startLine: number;
+        endLine: number;
+        calls: string[];
+    } | null = null;
+    let indentLevel = 0;
+    
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const lineNumber = i + 1;
+        
+        // Skip empty lines
+        if (line.trim() === '') continue;
+        
+        // Calculate indent level
+        const currentIndent = line.length - line.trimLeft().length;
+        
+        // Detect function definition
+        const funcDefMatch = line.match(/^\s*def\s+([a-zA-Z0-9_]+)\s*\(/);
+        if (funcDefMatch) {
+            if (currentFunction) {
+                // Close the previous function
+                currentFunction.endLine = lineNumber - 1;
+                tempFunctions.push(currentFunction);
+            }
+            
+            currentFunction = {
+                name: funcDefMatch[1],
+                startLine: lineNumber,
+                endLine: lineNumber, // Will be updated later
+                calls: []
+            };
+            indentLevel = currentIndent;
+            continue;
+        }
+        
+        // Check if we're exiting a function based on indentation
+        if (currentFunction && currentIndent <= indentLevel && !line.trim().startsWith('#')) {
+            currentFunction.endLine = lineNumber - 1;
+            tempFunctions.push(currentFunction);
+            currentFunction = null;
+        }
+        
+        // Detect function calls within a function
+        if (currentFunction) {
+            const funcCallMatches = line.match(/([a-zA-Z0-9_]+)\s*\(/g);
+            if (funcCallMatches) {
+                for (const match of funcCallMatches) {
+                    const funcName = match.replace(/\s*\($/, '');
+                    if (funcName !== currentFunction.name) { // Avoid self-recursion detection
+                        if (!currentFunction.calls.includes(funcName)) {
+                            currentFunction.calls.push(funcName);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // If we ended the file inside a function, close it
+    if (currentFunction) {
+        currentFunction.endLine = lines.length;
+        tempFunctions.push(currentFunction);
+    }
+    
+    // Create the functions array with debtItems
+    const functions: {
+        name: string;
+        startLine: number;
+        endLine: number;
+        calls: string[];
+        debtItems: TechnicalDebt[];
+    }[] = [];
+    
+    // Associate debt items with functions
+    for (const func of tempFunctions) {
+        const debtItems = debtsInFile.filter(debt => {
+            // Include debt in the function body
+            if (debt.line >= func.startLine && debt.line <= func.endLine) {
+                return true;
+            }
+            
+            // Include debt comments just above the function (within 2 lines)
+            if (debt.line >= func.startLine - 2 && debt.line < func.startLine) {
+                return true;
+            }
+            
+            return false;
+        });
+        
+        functions.push({
+            ...func,
+            debtItems
+        });
+    }
+    
+    return functions;
+}
+
+
+    /**currentFunction
      * Extract Python import statements from file content
      * @param fileContent Content of the Python file
      * @returns List of import information
@@ -710,31 +862,142 @@ export class CallGraphAnalyzer {
     }
     
     /**
-     * Resolve a Python import to an actual file path
-     * @param currentFilePath Path of the current file
-     * @param importedModule Name of the imported module
-     * @returns Resolved file path or null
+     * Resolve a Python import to an actual file path.
+     * This version emphasizes consistent normalization and clear lookup strategies.
+     * @param currentFilePath Path of the current file (absolute).
+     * @param importedModule Name of the imported module (e.g., "myModule" or "myPackage.myModule").
+     * @param existingModuleKeys Iterable of absolute file paths for all known Python modules.
+     * @returns Resolved absolute file path or null.
      */
-    private resolvePythonImport(currentFilePath: string, importedModule: string): string | null {
+    private resolvePythonImport(currentFilePath: string, importedModule: string, existingModuleKeys: Iterable<string>): string | null {
         if (!this.workspaceRoot) {
+            console.warn("Workspace root is not set. Python import resolution might be unreliable.");
             return null;
         }
-        
-        const currentDir = path.dirname(currentFilePath);
-        
-        // Check if it's a relative import (.module)
-        if (importedModule.startsWith('.')) {
-            // Resolve relative to current directory
-            const relativePath = importedModule.substring(1); // Remove the leading dot
-            const resolvedPath = path.join(currentDir, `${relativePath}.py`);
-            return resolvedPath;
+
+        // Create a normalized set of known relative module paths from the absolute paths.
+        // These paths are relative to the workspace root and used as the ground truth.
+        const knownRelativeFilePaths = new Set<string>();
+        const originalKeysByRelativePath = new Map<string, string>();
+
+        for (const key of existingModuleKeys) {
+            const relativePath = this.getRelativePath(key); // Should be canonical relative to workspace root
+            if (relativePath) { // Ensure getRelativePath didn't return the original absolute path due to error
+                const normalizedRelativePath = path.normalize(relativePath); // Extra normalization for safety
+                knownRelativeFilePaths.add(normalizedRelativePath);
+                if (!originalKeysByRelativePath.has(normalizedRelativePath)) {
+                    originalKeysByRelativePath.set(normalizedRelativePath, key);
+                }
+            }
         }
         
-        // For simplicity in this fix, just look for the module name + .py in the same directory
-        // In a full implementation, this would search through PYTHONPATH and handle packages
-        const directMatch = path.join(currentDir, `${importedModule}.py`);
+        const currentFileRelativePath = this.getRelativePath(currentFilePath);
+        if (!currentFileRelativePath) {
+            console.warn(`Could not get relative path for current file: ${currentFilePath}`);
+            return null; // Cannot proceed without a relative context for the current file
+        }
+        const currentDirRelative = path.dirname(currentFileRelativePath);
+
+        // Strategy 1: Handle relative imports (e.g., "from . import my_sibling" or "from ..parent_module import something")
+        if (importedModule.startsWith('.')) {
+            let dots = 0;
+            let moduleNamePart = importedModule;
+            while(moduleNamePart.startsWith('.')) {
+                dots++;
+                moduleNamePart = moduleNamePart.substring(1);
+            }
+
+            let baseDir = currentDirRelative;
+            // For "from . import X", currentDirRelative is the base.
+            // For "from .. import X", we need to go up one level from currentDirRelative.
+            for (let i = 1; i < dots; i++) { // Start at 1 because one dot means current package
+                baseDir = path.dirname(baseDir);
+            }
+            
+            const potentialModulePaths: string[] = [];
+            if (moduleNamePart) { // from .module import ...
+                potentialModulePaths.push(path.join(baseDir, moduleNamePart + '.py'));
+                potentialModulePaths.push(path.join(baseDir, moduleNamePart, '__init__.py'));
+            } else { // from . import specific_function (module is the __init__.py of currentDir)
+                potentialModulePaths.push(path.join(baseDir, '__init__.py'));
+            }
+            
+            for (const attempt of potentialModulePaths) {
+                const normalizedAttempt = path.normalize(attempt);
+                if (knownRelativeFilePaths.has(normalizedAttempt)) {
+                    return originalKeysByRelativePath.get(normalizedAttempt) || null;
+                }
+            }
+        } else {
+            // Strategy 2: Handle absolute imports (e.g., "import myModule" or "from myPackage import myModule")
+            // These are resolved relative to the workspace root or Python's search path (approximated here by workspace root).
+
+            const modulePathParts = importedModule.split('.');
+            
+            // Attempt 2a: Resolve as a file (myModule.py) or package (myModule/__init__.py)
+            // This covers "import printData" -> "printData.py"
+            // And "import package" -> "package/__init__.py"
+            // And "import package.module" -> "package/module.py"
+            const directFilePath = path.join(...modulePathParts) + '.py';
+            const packageInitPath = path.join(...modulePathParts, '__init__.py');
+
+            const potentialAbsolutePaths = [directFilePath, packageInitPath];
+
+            for (const attempt of potentialAbsolutePaths) {
+                const normalizedAttempt = path.normalize(attempt);
+                if (knownRelativeFilePaths.has(normalizedAttempt)) {
+                    return originalKeysByRelativePath.get(normalizedAttempt) || null;
+                }
+            }
+
+            // Attempt 2b: If current file is in a subdirectory, try resolving relative to that dir first,
+            // then bubble up to workspace root. This handles cases where a module might be resolved
+            // as a sibling before a top-level module of the same name.
+            // Example: project/src/utils.py, project/utils.py. Inside src/main.py, "import utils" might mean src/utils.py
+            if (currentDirRelative && currentDirRelative !== '.') {
+                 const relativeToCurrentDirFilePath = path.join(currentDirRelative, ...modulePathParts) + '.py';
+                 const relativeToCurrentDirPackagePath = path.join(currentDirRelative, ...modulePathParts, '__init__.py');
+                 const potentialRelativePaths = [relativeToCurrentDirFilePath, relativeToCurrentDirPackagePath];
+                 for (const attempt of potentialRelativePaths) {
+                    const normalizedAttempt = path.normalize(attempt);
+                    if (knownRelativeFilePaths.has(normalizedAttempt)) {
+                        return originalKeysByRelativePath.get(normalizedAttempt) || null;
+                    }
+                }
+            }
+        }
+
+        // Fallback for the original problematic case: "from printData import print_data"
+        // where importedModule is "printData". We expect "printData.py" at the top level or sibling.
+        // This is largely covered by Strategy 2a if paths are simple.
+        // The previous logic had a specific section:
+        // const directModuleFile = `${importedModule}.py`;
+        // This is essentially path.normalize(importedModule + ".py") if importedModule has no dots.
+        // Let's ensure this very direct case is checked if importedModule is simple.
+        if (!importedModule.includes('.')) {
+            const simpleModuleFile = path.normalize(importedModule + ".py");
+            if (knownRelativeFilePaths.has(simpleModuleFile)) {
+                 return originalKeysByRelativePath.get(simpleModuleFile) || null;
+            }
+        }
         
-        // Try direct match first, which is most common for the networking_legacy.py -> printData.py case
-        return directMatch;
+        // If still not found, log for debugging if necessary
+        // console.debug(`Python module ${importedModule} not found in known paths for file ${currentFilePath}. Known paths: ${Array.from(knownRelativeFilePaths)}`);
+        return null; // Module could not be resolved
+    }
+
+    // Ensure getRelativePath is robust:
+    private getRelativePath(filePath: string): string {
+        if (this.workspaceRoot && filePath.startsWith(this.workspaceRoot)) {
+            const relPath = path.relative(this.workspaceRoot, filePath);
+            // path.relative might return an empty string if filePath IS workspaceRoot, handle this if it's a file.
+            // It typically doesn't produce leading './' but normalize just in case.
+            return path.normalize(relPath);
+        }
+        // If not under workspaceRoot, or workspaceRoot is null, it's harder to get a consistent relative path.
+        // Returning the filePath as is might lead to inconsistencies if some are absolute and others are not.
+        // For this analyzer, we expect files to be within the workspace.
+        console.warn(`File path ${filePath} is not within the workspace root ${this.workspaceRoot} or workspace root is not set.`);
+        return filePath; // Or consider returning null/empty to signal an issue earlier.
     }
 }
