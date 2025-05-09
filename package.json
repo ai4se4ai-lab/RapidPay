@@ -1,9 +1,9 @@
 {
-  "name": "satd-helper",
-  "displayName": "SATD Helper",
+  "name": "RapidPay",
+  "displayName": "RapidPay",
   "description": "Self-Admitted Technical Debt Helper for VS Code",
   "version": "0.1.0",
-  "publisher": "satd-helper",
+  "publisher": "RapidPay",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -21,23 +21,23 @@
     "commands": [
       {
         "command": "RapidPay.init",
-        "title": "SATD Helper: Initialize and Scan Repository"
+        "title": "RapidPay: Initialize and Scan Repository"
       },
       {
         "command": "RapidPay.viewTechnicalDebt",
-        "title": "SATD Helper: View Technical Debt Items"
+        "title": "RapidPay: View Technical Debt Items"
       },
       {
         "command": "RapidPay.checkLatestCommit",
-        "title": "SATD Helper: Check Latest Commit for Debt Fixes"
+        "title": "RapidPay: Check Latest Commit for Debt Fixes"
       },
       {
         "command": "RapidPay.visualizeRelationships",
-        "title": "SATD Helper: Visualize Technical Debt Relationships"
+        "title": "RapidPay: Visualize Technical Debt Relationships"
       }
     ],
     "configuration": {
-      "title": "SATD Helper",
+      "title": "RapidPay",
       "properties": {
         "RapidPay.openaiApiKey": {
           "type": "string",

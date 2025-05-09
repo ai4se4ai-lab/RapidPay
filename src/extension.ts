@@ -21,7 +21,7 @@ import { SatdRelationshipAnalyzer } from './satdRelationshipAnalyzer';
 let technicalDebtItems: TechnicalDebt[] = [];
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('SATD Helper Extension is now active');
+  console.log('RapidPay Extension is now active');
 
   // Register visualization commands
   registerVisualizationCommands(context);
@@ -32,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
     
-    await withProgressNotification('SATD Helper', async (progress) => {
+    await withProgressNotification('RapidPay', async (progress) => {
       progress.report({ message: "Getting repository information..." });
       const repoInfo = await getRepositoryInfo();
       
@@ -179,7 +179,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
     
     // Show progress notification
-    await withProgressNotification('SATD Helper', async (progress) => {
+    await withProgressNotification('RapidPay', async (progress) => {
       progress.report({ message: "Checking the latest commit for technical debt fixes..." });
       await checkCommitForTechnicalDebtFixes();
       progress.report({ message: "Finished checking the latest commit." });

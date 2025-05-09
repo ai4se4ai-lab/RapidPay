@@ -1,4 +1,4 @@
-# 🧠 SATD Helper Extension for VS Code
+# 🧠 RapidPay Extension for VS Code
 
 This VS Code extension helps developers track and manage **Self-Admitted Technical Debt (SATD)** during software development. It leverages OpenAI's GPT models to detect technical debt comments in your code, visualize the relationships between them, and suggests potential fixes when your commits might address the debt.
 
@@ -39,7 +39,7 @@ You have two options for providing your OpenAI API key:
 
 #### Option 1: VS Code Settings (Recommended)
 1. Open VS Code settings (File > Preferences > Settings)
-2. Search for "SATD Helper"
+2. Search for "RapidPay"
 3. Enter your OpenAI API key in the "OpenAI API Key" field
 
 #### Option 2: Environment Variable
@@ -63,27 +63,27 @@ OPENAI_API_KEY=your-api-key-here
 
 1. Press F5 to start debugging
 2. A new VS Code window will open with the extension activated
-3. Run the command "SATD Helper: Initialize and Scan Repository" from the Command Palette (Ctrl+Shift+P / Cmd+Shift+P)
+3. Run the command "RapidPay: Initialize and Scan Repository" from the Command Palette (Ctrl+Shift+P / Cmd+Shift+P)
 
 ## 📋 Usage
 
 ### Initializing the Extension
 
 1. Open the Command Palette (Ctrl+Shift+P / Cmd+Shift+P)
-2. Run "SATD Helper: Initialize and Scan Repository"
+2. Run "RapidPay: Initialize and Scan Repository"
 3. The extension will scan your repository and identify all technical debt items
 
 ### Viewing Technical Debt
 
 1. Open the Command Palette
-2. Run "SATD Helper: View Technical Debt Items"
+2. Run "RapidPay: View Technical Debt Items"
 3. A panel will open showing all identified technical debt items
 4. Click on a file link to navigate directly to the debt location
 
 ### Visualizing Technical Debt Relationships
 
 1. Open the Command Palette
-2. Run "SATD Helper: Visualize Technical Debt Relationships"
+2. Run "RapidPay: Visualize Technical Debt Relationships"
 3. A panel will open showing an interactive graph of debt relationships
 4. Click on nodes or edges to see detailed information about debt items and their connections
 
@@ -96,11 +96,11 @@ The extension automatically monitors your git commits and will:
 
 You can also manually trigger this process:
 1. Open the Command Palette
-2. Run "SATD Helper: Check Latest Commit for Debt Fixes"
+2. Run "RapidPay: Check Latest Commit for Debt Fixes"
 
 ## 🧩 How It Works
 
-The SATD Helper extension follows a comprehensive 4-phase approach to manage technical debt:
+The RapidPay extension follows a comprehensive 4-phase approach to manage technical debt:
 
 ### Phase 1: Candidate SATD Instance Identification (CII)
 
@@ -178,7 +178,7 @@ You can define custom patterns to detect technical debt by creating a `.satdrc.j
 ## 🏗️ Project Structure
 
 ```
-satd-helper/
+RapidPay/
 │
 ├── src/                      # Source code directory
 │   ├── extension.ts          # Main extension logic
