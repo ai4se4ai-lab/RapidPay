@@ -1,13 +1,20 @@
 # 🧠 SATD Helper Extension for VS Code
 
-This VS Code extension helps developers track and manage **Self-Admitted Technical Debt (SATD)** during software development. It leverages OpenAI's GPT models to detect technical debt comments in your code, tracks them over time, and suggests potential fixes when your recent commits might address the debt.
+This VS Code extension helps developers track and manage **Self-Admitted Technical Debt (SATD)** during software development. It leverages OpenAI's GPT models to detect technical debt comments in your code, visualize the relationships between them, and suggests potential fixes when your commits might address the debt.
+
+## 🔍 What is Self-Admitted Technical Debt?
+
+Self-Admitted Technical Debt (SATD) refers to instances where developers explicitly acknowledge shortcuts, workarounds, or incomplete implementations in their code through comments. These might include TODOs, FIXMEs, or more subtle indicators like "this needs refactoring later" or "not an ideal solution."
 
 ## 🚀 Features
 
 - 🔍 **Repository Analysis**: Scans your git repository to identify technical debt markers (TODO, FIXME, HACK, etc.)
-- 🤖 **AI-Powered Description**: Uses OpenAI to provide clear descriptions of technical debt items
+- 🧠 **AI-Powered Description**: Uses OpenAI to provide clear descriptions of technical debt items
 - 📊 **Technical Debt Tracking**: Maintains a list of all technical debt items with their location and creation information
-- 🧠 **Commit Analysis**: Automatically analyzes new commits to check if they address existing technical debt
+- 🔄 **Relationship Discovery**: Analyzes dependencies between debt items to discover chains and impacts
+- 📈 **SIR Score Calculation**: Quantifies the impact of debt through SATD Impact Ripple scores
+- 📊 **Interactive Visualization**: Displays debt relationships and chains in a dynamic, interactive graph
+- 🤖 **Commit Analysis**: Automatically analyzes new commits to check if they address existing technical debt
 - 💡 **Fix Suggestions**: Provides AI-generated suggestions for completely resolving technical debt based on your recent changes
 
 ## 🛠️ Setup Instructions
@@ -73,6 +80,13 @@ OPENAI_API_KEY=your-api-key-here
 3. A panel will open showing all identified technical debt items
 4. Click on a file link to navigate directly to the debt location
 
+### Visualizing Technical Debt Relationships
+
+1. Open the Command Palette
+2. Run "SATD Helper: Visualize Technical Debt Relationships"
+3. A panel will open showing an interactive graph of debt relationships
+4. Click on nodes or edges to see detailed information about debt items and their connections
+
 ### Checking for Technical Debt Fixes
 
 The extension automatically monitors your git commits and will:
@@ -80,30 +94,86 @@ The extension automatically monitors your git commits and will:
 2. Show a notification when a potential fix is detected
 3. Provide AI-generated suggestions for completely resolving the technical debt
 
+You can also manually trigger this process:
+1. Open the Command Palette
+2. Run "SATD Helper: Check Latest Commit for Debt Fixes"
+
 ## 🧩 How It Works
 
-### Technical Debt Identification
+The SATD Helper extension follows a comprehensive 4-phase approach to manage technical debt:
 
-The extension scans your repository for comments containing markers such as:
-- TODO
-- FIXME
-- HACK
-- XXX
-- BUG
-- ISSUE
-- DEBT
+### Phase 1: Candidate SATD Instance Identification (CII)
 
-For each marker, it:
-1. Extracts the comment and surrounding context
-2. Uses Git blame to determine when the debt was introduced
-3. Uses OpenAI to generate a clear description of the technical debt
+The extension scans your repository for comments containing technical debt markers through:
+- **Lexical Analysis**: Detects explicit markers like TODO, FIXME, HACK, etc.
+- **NLP-based Classification**: Uses OpenAI to interpret and classify debt comments 
+- **Location Mapping**: Maps each debt to its corresponding code entity
 
-### Commit Analysis
+### Phase 2: Inter-SATD Relationship Discovery (IRD)
 
-When you make a new commit, the extension:
-1. Retrieves the commit diff and message
-2. For each technical debt item, it uses OpenAI to analyze if the commit addresses the debt
-3. If a potential fix is detected, it provides suggestions for completely resolving the debt
+Discovers relationships between different SATD instances through:
+- **Call Graph Analysis**: Identifies method/function call relationships
+- **Data Dependency Analysis**: Tracks data flow between debt-affected code
+- **Control Flow Analysis**: Examines execution paths influenced by debt
+- **Module/File Dependency Analysis**: Determines high-level dependencies
+
+### Phase 3: Chain Construction and Visualization
+
+Formalizes and visualizes the technical debt landscape:
+- **Graph Representation**: Models SATD instances as nodes in a graph
+- **Chain Definition**: Identifies sequences or connected components in the graph
+- **Interactive Visualization**: Provides a dynamic visualization allowing exploration of the debt network
+
+### Phase 4: SATD Impact Ripple (SIR) Score
+
+Quantifies the impact of technical debt to help prioritize fixes:
+- **Intrinsic Severity (IS)**: Assesses the inherent severity of a debt item
+- **Outgoing Chain Influence (OCI)**: Measures how many other debt items are affected by this item
+- **Incoming Chain Dependency (ICD)**: Counts how many other debt items this depends on
+- **Chain Length Factor (CLF)**: Considers the length of the longest chain this item participates in
+
+## ⚙️ Configuration
+
+You can customize the extension's behavior through VS Code settings:
+
+```json
+{
+  "RapidPay.openaiApiKey": "your-api-key",
+  "RapidPay.modelName": "gpt-4",
+  "RapidPay.autoScanOnStartup": false,
+  "RapidPay.relationshipAnalysisEnabled": true
+}
+```
+
+## 📝 SATD Custom Patterns
+
+You can define custom patterns to detect technical debt by creating a `.satdrc.json` file in your repository. Example:
+
+```json
+{
+  "customPatterns": [
+    "needs review",
+    "refine later",
+    "not ideal",
+    "revisit this"
+  ],
+  "excludePatterns": [
+    "test/",
+    "node_modules/",
+    "dist/"
+  ],
+  "languages": {
+    "javascript": {
+      "explicit": ["REVIEW", "REVISIT"],
+      "implicit": ["callback hell", "ugly solution"]
+    },
+    "typescript": {
+      "explicit": ["REVIEW", "OPTIMIZE"],
+      "implicit": ["as any", "ts-ignore"]
+    }
+  }
+}
+```
 
 ## 🏗️ Project Structure
 
@@ -111,21 +181,38 @@ When you make a new commit, the extension:
 satd-helper/
 │
 ├── src/                      # Source code directory
-│   ├── extension.ts          # Main extension logic (updated)
-│   ├── satdDetector.ts       # Technical debt detection logic (new)
-│   └── models.ts             # Data models and interfaces (new)
+│   ├── extension.ts          # Main extension logic
+│   ├── models.ts             # Data models and interfaces
+│   ├── satdDetector.ts       # Technical debt detection logic
+│   ├── satdRelationshipAnalyzer.ts # Relationship analyzer
+│   ├── satdChainAnalyzer.ts  # Chain detection and SIR score calculator
+│   ├── analyzers/            # Specialized analyzers
+│   │   ├── callGraphAnalyzer.ts # Method call relationship analyzer
+│   │   ├── dataDependencyAnalyzer.ts # Data dependency analyzer
+│   │   ├── controlFlowAnalyzer.ts # Control flow analyzer
+│   │   └── moduleDependencyAnalyzer.ts # Module dependency analyzer
+│   ├── utils/                # Utility functions
+│   │   ├── commitMonitor.ts  # Git commit monitoring
+│   │   ├── debtScanner.ts    # Technical debt scanning
+│   │   ├── gitUtils.ts       # Git utilities
+│   │   ├── openaiClient.ts   # OpenAI API client
+│   │   ├── uiUtils.ts        # UI utilities
+│   │   └── visualizationUtils.ts # Visualization utilities
+│   └── visualization/        # Visualization components
+│       ├── satdGraphVisualizer.ts # Graph visualization
+│       └── visualizationCommands.ts # Commands for visualization
 │
-├── .vscode/                  # VS Code configuration
-│   ├── launch.json           # Debug configuration (updated)
-│   └── tasks.json            # Build tasks (updated)
+├── resources/                # Resources directory
+│   ├── overview/             # Overview documentation
+│   └── templates/            # HTML templates for visualization
 │
 ├── examples/                 # Example files
-│   └── sample-satdrc.json    # Sample configuration
+│   └── satdrc.json           # Sample configuration
 │
-├── package.json              # Extension metadata (updated)
-├── tsconfig.json             # TypeScript configuration (updated)
-├── .gitignore                # Git ignore file
-└── README.md                 # Documentation (updated)
+├── package.json              # Extension metadata
+├── tsconfig.json             # TypeScript configuration
+├── webpack.config.js         # Webpack configuration
+└── README.md                 # Documentation
 ```
 
 ## 🔄 Development Workflow
@@ -161,9 +248,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgements
-
-- VS Code Extension API
-- OpenAI API
-- All contributors to this project

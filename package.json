@@ -20,32 +20,32 @@
   "contributes": {
     "commands": [
       {
-        "command": "satdHelper.init",
+        "command": "RapidPay.init",
         "title": "SATD Helper: Initialize and Scan Repository"
       },
       {
-        "command": "satdHelper.viewTechnicalDebt",
+        "command": "RapidPay.viewTechnicalDebt",
         "title": "SATD Helper: View Technical Debt Items"
       },
       {
-        "command": "satdHelper.checkLatestCommit",
+        "command": "RapidPay.checkLatestCommit",
         "title": "SATD Helper: Check Latest Commit for Debt Fixes"
       },
       {
-        "command": "satdHelper.visualizeRelationships",
+        "command": "RapidPay.visualizeRelationships",
         "title": "SATD Helper: Visualize Technical Debt Relationships"
       }
     ],
     "configuration": {
       "title": "SATD Helper",
       "properties": {
-        "satdHelper.openaiApiKey": {
+        "RapidPay.openaiApiKey": {
           "type": "string",
           "default": "",
           "description": "OpenAI API Key for analyzing technical debt (can also be set using OPENAI_API_KEY environment variable)",
           "scope": "application"
         },
-        "satdHelper.modelName": {
+        "RapidPay.modelName": {
           "type": "string",
           "default": "gpt-4",
           "enum": [
@@ -56,13 +56,13 @@
           "description": "OpenAI model to use for technical debt analysis",
           "scope": "application"
         },
-        "satdHelper.autoScanOnStartup": {
+        "RapidPay.autoScanOnStartup": {
           "type": "boolean",
           "default": false,
           "description": "Automatically scan the repository for technical debt when the extension activates",
           "scope": "window"
         },
-        "satdHelper.relationshipAnalysisEnabled": {
+        "RapidPay.relationshipAnalysisEnabled": {
           "type": "boolean",
           "default": true,
           "description": "Enable analysis of relationships between technical debt items",

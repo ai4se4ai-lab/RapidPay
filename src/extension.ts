@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerVisualizationCommands(context);
 
   // Command: Initialize and scan repository
-  const initCommand = vscode.commands.registerCommand('satdHelper.init', async () => {
+  const initCommand = vscode.commands.registerCommand('RapidPay.init', async () => {
     if (!initializeOpenAI()) {
       return;
     }
@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
       await initializeCommitMonitor(context, technicalDebtItems);
       
       // Check if relationship analysis is enabled
-      const config = vscode.workspace.getConfiguration('satdHelper');
+      const config = vscode.workspace.getConfiguration('RapidPay');
       const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled');
       const chainAnalysisEnabled = config.get<boolean>('chainAnalysisEnabled');
       const sirScoreEnabled = config.get<boolean>('sirScoreEnabled');
@@ -128,16 +128,16 @@ export function activate(context: vscode.ExtensionContext) {
         'Visualize Relationships'
       ).then(selection => {
         if (selection === 'View Details') {
-          vscode.commands.executeCommand('satdHelper.viewTechnicalDebt');
+          vscode.commands.executeCommand('RapidPay.viewTechnicalDebt');
         } else if (selection === 'Visualize Relationships') {
-          vscode.commands.executeCommand('satdHelper.visualizeRelationships');
+          vscode.commands.executeCommand('RapidPay.visualizeRelationships');
         }
       });
     });
   });
 
   // Command: View technical debt items
-  const viewTechnicalDebtCommand = vscode.commands.registerCommand('satdHelper.viewTechnicalDebt', async () => {
+  const viewTechnicalDebtCommand = vscode.commands.registerCommand('RapidPay.viewTechnicalDebt', async () => {
     // Get the current technical debt items (they might have been updated)
     const debtItems = getTechnicalDebtItems();
     
@@ -150,7 +150,7 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   // Command: Check the latest commit for technical debt fixes
-  const checkLatestCommitCommand = vscode.commands.registerCommand('satdHelper.checkLatestCommit', async () => {
+  const checkLatestCommitCommand = vscode.commands.registerCommand('RapidPay.checkLatestCommit', async () => {
     // Make sure we have an OpenAI instance
     if (!initializeOpenAI()) {
       vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
@@ -166,7 +166,7 @@ export function activate(context: vscode.ExtensionContext) {
       
       if (shouldScan === 'Yes') {
         // Run the init command first
-        await vscode.commands.executeCommand('satdHelper.init');
+        await vscode.commands.executeCommand('RapidPay.init');
         
         if (getTechnicalDebtItems().length === 0) {
           // If still no items, exit
@@ -211,10 +211,10 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(gitEventListener);
   
   // Check auto-scan setting
-  const config = vscode.workspace.getConfiguration('satdHelper');
+  const config = vscode.workspace.getConfiguration('RapidPay');
   const autoScan = config.get<boolean>('autoScanOnStartup');
   
   if (autoScan) {
-    vscode.commands.executeCommand('satdHelper.init');
+    vscode.commands.executeCommand('RapidPay.init');
   }
 }

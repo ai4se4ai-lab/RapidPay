@@ -14,7 +14,7 @@ import { withProgressNotification } from '../utils/uiUtils';
 export function registerVisualizationCommands(context: vscode.ExtensionContext): void {
     // Command to analyze and visualize SATD relationships
     const visualizeCommand = vscode.commands.registerCommand(
-        'satdHelper.visualizeRelationships',
+        'RapidPay.visualizeRelationships',
         async () => {
             // Get technical debt items
             const debtItems = getTechnicalDebtItems();
