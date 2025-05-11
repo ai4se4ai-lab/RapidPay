@@ -12,6 +12,7 @@ export interface RepositoryInfo {
   remoteUrl: string;
   branch: string;
   commitCount: number;
+  workspaceRoot: string;
 }
 
 /**
@@ -53,7 +54,8 @@ export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
     return {
       remoteUrl: remoteUrl,
       branch: branch.trim(),
-      commitCount: parseInt(commits.trim(), 10)
+      commitCount: parseInt(commits.trim(), 10),
+      workspaceRoot: workspaceRoot
     };
   } catch (error) {
     vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);

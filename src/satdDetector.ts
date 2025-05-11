@@ -290,6 +290,40 @@ export class SatdDetector {
      * Focuses on JavaScript, Python, and Java
      */
     private initLanguagePatterns(): void {
+
+        // Python patterns - ensure they are properly initialized
+            this.languagePatterns.set('python', {
+                commentStyles: ['#', '"""', "'''"],
+                fileExtensions: ['py', 'pyw', 'pyi', 'pyc', 'pyd', 'pyo'],
+                debtPatterns: {
+                    explicit: ['TODO', 'FIXME', 'HACK', 'XXX', 'BUG', 'ISSUE', 'DEBT', 'NOTE', 'OPTIMIZE', 'REVIEW', 'REVISIT'],
+                    implicit: [
+                        'temporary solution', 'quick fix', 'will be refactored', 
+                        'needs refactoring', 'could be better', 
+                        'not elegant', 'workaround for',
+                        'technical debt', 'to be improved', 'refactor this',
+                        // Python specific
+                        'type: ignore', 'noqa', 'pylint: disable', 'dynamically typed', 
+                        'type: Any', 'ignore mypy', 'type hint', 'type check',
+                        'ignore flake8', 'ignore pep8', 'ignore pycodestyle',
+                        'ignore bandit', 'skip coverage', 'skip test',
+                        'monkey patch', 'monkey patching', 'monkeypatching',
+                        'magic method', 'magic attribute', 'global variable', 
+                        'globals', 'eval(', 'exec(', 'globals()', 'locals()',
+                        'getattr(', 'setattr(', 'hasattr(', 'delattr(',
+                        'list comprehension', 'nested loop', 'nested list comprehension',
+                        'bare except', 'except:', 'except Exception:',
+                        'circular import', 'from __future__',
+                        'print(', 'logging.debug', 'pdb', 'pass',
+                        'hardcoded', 'hard-coded', 'magic number',
+                        'mutable default argument', '[])', '{})', 'dict()',
+                        'isinstance', 'issubclass', 'type(',
+                        'wildcard import', 'from module import *'
+                    ],
+                    custom: []
+                }
+        });
+
         // JavaScript patterns
         this.languagePatterns.set('javascript', {
             commentStyles: ['//', '/*', '/**'],

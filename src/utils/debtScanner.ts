@@ -23,7 +23,7 @@ export async function scanRepositoryForTechnicalDebt(): Promise<TechnicalDebt[]>
     
     // Get all files with technical debt comments using git grep
     const { stdout } = await execPromise(
-      'git grep -n -E "TODO:|FIXME:|HACK:|XXX:|BUG:|ISSUE:|DEBT:" --', 
+      'git grep -n -E "\\b(TODO|FIXME|HACK|XXX|BUG|ISSUE|DEBT)[:_\\s-]?" --',
       { cwd: workspaceRoot }
     );
     

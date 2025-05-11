@@ -11,7 +11,7 @@ let openaiClient: OpenAI | null = null;
 export function initializeOpenAI(): boolean {
   try {
     // Get the API key from VS Code settings
-    const config = vscode.workspace.getConfiguration('satdHelper');
+    const config = vscode.workspace.getConfiguration('RapidPay');
     let apiKey = config.get<string>('openaiApiKey');
     
     // If no API key in settings, check for environment variable
@@ -27,7 +27,7 @@ export function initializeOpenAI(): boolean {
         'Open Settings'
       ).then(selection => {
         if (selection === 'Open Settings') {
-          vscode.commands.executeCommand('workbench.action.openSettings', 'satdHelper.openaiApiKey');
+          vscode.commands.executeCommand('workbench.action.openSettings', 'RapidPay.openaiApiKey');
         }
       });
       return false;
