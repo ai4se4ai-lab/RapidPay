@@ -7,3 +7,14 @@ dist/
 .env
 npm-debug.log
 package-lock.json
+
+# Result files in Test directory
+Test/**/*.csv
+Test/**/*.png
+Test/**/*.jpg
+Test/**/*.jpeg
+Test/**/*.gif
+Test/**/*.svg
+Test/**/*.pdf
+Test/*/results/
+Test/*/visualizations/
