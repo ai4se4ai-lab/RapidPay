@@ -1,0 +1,814 @@
+<!-- Updated HTML template for resources/templates/graphVisualization.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Debt Relationships</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--vscode-editor-background);
+            color: var(--vscode-editor-foreground);
+        }
+        #cy {
+            width: 100%;
+            height: 85vh;
+            display: block;
+        }
+        .controls {
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-section {
+            margin-right: 20px;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px;
+            border-top: 1px solid var(--vscode-panel-border);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+        .debt-details {
+            padding: 10px;
+            border-top: 1px solid var(--vscode-panel-border);
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        button {
+            background-color: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        button:hover {
+            background-color: var(--vscode-button-hoverBackground);
+        }
+        select {
+            background-color: var(--vscode-dropdown-background);
+            color: var(--vscode-dropdown-foreground);
+            border: 1px solid var(--vscode-dropdown-border);
+            padding: 3px 6px;
+        }
+        .file-link {
+            color: var(--vscode-textLink-foreground);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            padding: 20px;
+            background-color: var(--vscode-editorWidget-background);
+            border: 1px solid var(--vscode-editorWidget-border);
+            border-radius: 5px;
+        }
+        #error {
+            color: var(--vscode-errorForeground);
+            padding: 10px;
+            margin: 10px 0;
+            display: none;
+        }
+        #stats {
+            font-size: 12px;
+            padding: 5px 10px;
+            color: var(--vscode-descriptionForeground);
+        }
+        .sir-score-section {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--vscode-panel-border);
+        }
+        .sir-score-value {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .sir-components {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 12px;
+        }
+        .chain-highlight {
+            line-color: #ff0 !important;
+            line-style: solid;
+            width: 4px !important;
+            z-index: 999;
+        }
+        .node-highlight {
+            border-width: 3px !important;
+            border-color: #ff0 !important;
+            border-style: double !important;
+        }
+        .high-impact {
+            border-width: 4px;
+            border-color: #f00;
+            border-style: solid;
+        }
+        .medium-impact {
+            border-width: 3px;
+            border-color: #ff7f00;
+            border-style: solid;
+        }
+        .low-impact {
+            border-width: 2px;
+            border-color: #0f0;
+            border-style: solid;
+        }
+        .chain-list {
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 12px;
+            padding: 5px;
+            background-color: var(--vscode-editor-background);
+            border: 1px solid var(--vscode-panel-border);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading visualization...</div>
+    <div id="error"></div>
+    <div id="stats">
+        DEBT_ITEMS_COUNT technical debt items, RELATIONSHIPS_COUNT relationships, CHAINS_COUNT chains
+    </div>
+    
+    <div class="controls">
+        <div class="filter-section">
+            <label for="relationshipType">Relationship Type:</label>
+            <select id="relationshipType">
+                <option value="all">All Types</option>
+                <option value="RELATIONSHIP_TYPE_CALL_GRAPH">RELATIONSHIP_TYPE_CALL_GRAPH</option>
+                <option value="RELATIONSHIP_TYPE_DATA_DEPENDENCY">RELATIONSHIP_TYPE_DATA_DEPENDENCY</option>
+                <option value="RELATIONSHIP_TYPE_CONTROL_FLOW">RELATIONSHIP_TYPE_CONTROL_FLOW</option>
+                <option value="RELATIONSHIP_TYPE_MODULE_DEPENDENCY">RELATIONSHIP_TYPE_MODULE_DEPENDENCY</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <label for="debtType">Debt Type:</label>
+            <select id="debtType">
+                <option value="all">All Types</option>
+                <option value="Design">Design</option>
+                <option value="Implementation">Implementation</option>
+                <option value="Documentation">Documentation</option>
+                <option value="Defect">Defect</option>
+                <option value="Test">Test</option>
+                <option value="Requirement">Requirement</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <label for="chainFilter">Chain View:</label>
+            <select id="chainFilter">
+                <option value="all">All Relationships</option>
+                <option value="chains-only">Only Chain Relationships</option>
+                <option value="highlight-chains">Highlight Chains</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <label for="sirScoreSort">Sort By SIR Score:</label>
+            <select id="sirScoreSort">
+                <option value="none">No Sorting</option>
+                <option value="high-to-low">High to Low</option>
+                <option value="low-to-high">Low to High</option>
+            </select>
+        </div>
+        <div class="filter-section">
+            <button id="resetLayout">Reset Layout</button>
+            <button id="exportPng">Export PNG</button>
+            <button id="exportJson">Export JSON</button>
+        </div>
+    </div>
+    
+    <div id="cy"></div>
+    
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #e41a1c;"></div>
+            <span>Design</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #377eb8;"></div>
+            <span>Implementation</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #4daf4a;"></div>
+            <span>Documentation</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #984ea3;"></div>
+            <span>Defect</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #ff7f00;"></div>
+            <span>Test</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #ffff33;"></div>
+            <span>Requirement</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #a65628;"></div>
+            <span>Architecture</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #999999;"></div>
+            <span>Other</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 4px solid #f00;"></div>
+            <span>High SIR Impact</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 3px solid #ff7f00;"></div>
+            <span>Medium SIR Impact</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #fff; border: 2px solid #0f0;"></div>
+            <span>Low SIR Impact</span>
+        </div>
+    </div>
+    
+    <div id="debtDetails" class="debt-details"></div>
+
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+
+    <script>
+        // Get DOM elements
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const cyEl = document.getElementById('cy');
+        const debtDetailsEl = document.getElementById('debtDetails');
+        
+        // Initialize VS Code API
+        const vscode = acquireVsCodeApi();
+        
+        // Data for visualization
+        const nodes = NODES_DATA_PLACEHOLDER;
+        const edges = EDGES_DATA_PLACEHOLDER;
+        const chains = CHAINS_DATA_PLACEHOLDER || [];
+        
+        // Node color mapping based on debt type
+        const typeColors = {
+            'Design': '#e41a1c',
+            'Implementation': '#377eb8',
+            'Documentation': '#4daf4a',
+            'Defect': '#984ea3',
+            'Test': '#ff7f00',
+            'Requirement': '#ffff33',
+            'Architecture': '#a65628',
+            'Other': '#999999'
+        };
+        
+        // Show error function
+        function showError(message) {
+            errorEl.style.display = 'block';
+            errorEl.textContent = message;
+            if (loadingEl) loadingEl.style.display = 'none';
+        }
+        
+        // Check if libraries are loaded
+        if (typeof cytoscape === 'undefined') {
+            showError('Cytoscape library failed to load');
+        } else {
+            // Initialize graph when page is loaded
+            window.addEventListener('DOMContentLoaded', initGraph);
+        }
+        
+        function initGraph() {
+            try {
+                // Register the layout extension
+                cytoscape.use(cytoscapeDagre);
+                
+                // Initialize Cytoscape
+                const cy = cytoscape({
+                    container: cyEl,
+                    elements: {
+                        nodes: nodes.map(node => ({ data: node })),
+                        edges: edges.map(edge => ({ data: edge }))
+                    },
+                    style: [
+                        {
+                            selector: 'node',
+                            style: {
+                                'label': 'data(label)',
+                                'background-color': function(ele) {
+                                    return typeColors[ele.data('debtType')] || typeColors['Other'];
+                                },
+                                'width': function(ele) {
+                                    // Scale node size based on SIR score if available
+                                    const sirScore = ele.data('sirScore');
+                                    return sirScore ? 25 + (sirScore * 10) : 25;
+                                },
+                                'height': function(ele) {
+                                    // Scale node size based on SIR score if available
+                                    const sirScore = ele.data('sirScore');
+                                    return sirScore ? 25 + (sirScore * 10) : 25;
+                                },
+                                'font-size': 10,
+                                'text-valign': 'center',
+                                'text-halign': 'right',
+                                'text-margin-x': 5,
+                                'color': '#fff'
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                            style: {
+                                'curve-style': 'bezier',
+                                'target-arrow-shape': 'triangle',
+                                'arrow-scale': 0.8,
+                                'width': function(ele) {
+                                    // Thicker lines for edges in chains
+                                    return ele.data('inChain') ? 3 : (ele.data('strength') * 5 || 1);
+                                },
+                                'line-color': function(ele) {
+                                    // Different color for edges in chains
+                                    return ele.data('inChain') ? '#fff' : '#888';
+                                }
+                            }
+                        },
+                        {
+                            selector: 'edge.chain-highlight',
+                            style: {
+                                'line-color': '#ff0',
+                                'width': 4,
+                                'z-index': 999
+                            }
+                        },
+                        {
+                            selector: 'node.node-highlight',
+                            style: {
+                                'border-width': 3,
+                                'border-color': '#ff0',
+                                'border-style': 'double'
+                            }
+                        },
+                        {
+                            selector: 'node.high-impact',
+                            style: {
+                                'border-width': 4,
+                                'border-color': '#f00',
+                                'border-style': 'solid'
+                            }
+                        },
+                        {
+                            selector: 'node.medium-impact',
+                            style: {
+                                'border-width': 3,
+                                'border-color': '#ff7f00',
+                                'border-style': 'solid'
+                            }
+                        },
+                        {
+                            selector: 'node.low-impact',
+                            style: {
+                                'border-width': 2,
+                                'border-color': '#0f0',
+                                'border-style': 'solid'
+                            }
+                        },
+                        {
+                            selector: ':selected',
+                            style: {
+                                'border-width': 2,
+                                'border-color': '#fff'
+                            }
+                        }
+                    ],
+                    layout: {
+                        name: 'grid' // Start with a simple layout
+                    }
+                });
+                
+                // Hide loading indicator
+                if (loadingEl) loadingEl.style.display = 'none';
+                
+                // Run layout after initialization
+                runDagreLayout();
+                
+                // Handle node click
+                cy.on('tap', 'node', function(evt) {
+                    const node = evt.target;
+                    const data = node.data();
+                    
+                    // Show debt details
+                    if (debtDetailsEl) {
+                        debtDetailsEl.style.display = 'block';
+                        
+                        const fileLink = `<span class="file-link" data-file="${data.file}" data-line="${data.line}">${data.file}:${data.line}</span>`;
+                        
+                        // Generate SIR score HTML if available
+                        const sirScoreHtml = data.sirScore !== undefined ? `
+                            <div class="sir-score-section">
+                                <h4>SATD Impact Ripple (SIR) Score</h4>
+                                <div class="sir-score-value">Score: ${data.sirScore.toFixed(2)}</div>
+                                <div class="sir-components">
+                                    <div>Intrinsic Severity: ${data.sirComponents.severity.toFixed(1)}</div>
+                                    <div>Outgoing Chain Influence: ${data.sirComponents.outDependencies}</div>
+                                    <div>Incoming Chain Dependency: ${data.sirComponents.inDependencies}</div>
+                                    <div>Chain Length Factor: ${data.sirComponents.chainLengthFactor.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        ` : '';
+                        
+                        // Find chains that include this node
+                        const nodeChains = chains.filter(chain => chain.nodes.includes(data.id));
+                        
+                        // Generate chains HTML if the node is part of any chains
+                        const chainsHtml = nodeChains.length > 0 ? `
+                            <div class="sir-score-section">
+                                <h4>Part of ${nodeChains.length} Chain${nodeChains.length > 1 ? 's' : ''}</h4>
+                                <div class="chain-list">
+                                    ${nodeChains.map((chain, index) => `
+                                        <div>Chain ${index + 1}: ${chain.length} nodes 
+                                        <button class="highlight-chain-btn" data-chain-id="${chain.id}">Highlight</button></div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+                        
+                        debtDetailsEl.innerHTML = `
+                            <h4>Technical Debt Details</h4>
+                            <p><strong>File:</strong> ${fileLink}</p>
+                            <p><strong>Type:</strong> ${data.debtType}</p>
+                            <p><strong>Content:</strong> ${data.content}</p>
+                            <p><strong>Created:</strong> ${data.createdDate}</p>
+                            ${sirScoreHtml}
+                            ${chainsHtml}
+                        `;
+                        
+                        // Add event listener for file link
+                        const fileLinkElement = debtDetailsEl.querySelector('.file-link');
+                        if (fileLinkElement) {
+                            fileLinkElement.addEventListener('click', function() {
+                                vscode.postMessage({
+                                    command: 'openFile',
+                                    file: this.getAttribute('data-file'),
+                                    line: parseInt(this.getAttribute('data-line'))
+                                });
+                            });
+                        }
+                        
+                        // Add event listeners for highlight chain buttons
+                        const highlightBtns = debtDetailsEl.querySelectorAll('.highlight-chain-btn');
+                        highlightBtns.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const chainId = this.getAttribute('data-chain-id');
+                                highlightChain(chainId);
+                            });
+                        });
+                    }
+                });
+                
+                // Handle edge click
+                cy.on('tap', 'edge', function(evt) {
+                    const edge = evt.target;
+                    const data = edge.data();
+                    
+                    // Show relationship details
+                    if (debtDetailsEl) {
+                        debtDetailsEl.style.display = 'block';
+                        
+                        // Generate chains HTML if the edge is part of any chains
+                        const chainsHtml = data.chainIds && data.chainIds.length > 0 ? `
+                            <div class="sir-score-section">
+                                <h4>Part of ${data.chainIds.length} Chain${data.chainIds.length > 1 ? 's' : ''}</h4>
+                                <div class="chain-list">
+                                    ${data.chainIds.map((chainId, index) => {
+                                        const chain = chains.find(c => c.id === chainId);
+                                        return `
+                                            <div>Chain ${index + 1}: ${chain ? chain.length : 'unknown'} nodes 
+                                            <button class="highlight-chain-btn" data-chain-id="${chainId}">Highlight</button></div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+                        
+                        debtDetailsEl.innerHTML = `
+                            <h4>Relationship Details</h4>
+                            <p><strong>Type:</strong> ${data.label}</p>
+                            <p><strong>Strength:</strong> ${Math.round(data.strength * 100)}%</p>
+                            <p><strong>Description:</strong> ${data.description}</p>
+                            ${chainsHtml}
+                        `;
+                        
+                        // Add event listeners for highlight chain buttons
+                        const highlightBtns = debtDetailsEl.querySelectorAll('.highlight-chain-btn');
+                        highlightBtns.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const chainId = this.getAttribute('data-chain-id');
+                                highlightChain(chainId);
+                            });
+                        });
+                    }
+                });
+                
+                // Function to highlight a specific chain
+                function highlightChain(chainId) {
+                    // Reset all highlights
+                    cy.elements().removeClass('chain-highlight').removeClass('node-highlight');
+                    
+                    // Find the chain
+                    const chain = chains.find(c => c.id === chainId);
+                    if (!chain) return;
+                    
+                    // Highlight nodes in the chain
+                    for (const nodeId of chain.nodes) {
+                        cy.getElementById(nodeId).addClass('node-highlight');
+                    }
+                    
+                    // Highlight edges in the chain
+                    for (let i = 0; i < chain.nodes.length - 1; i++) {
+                        const edge = cy.edges(`[source = "${chain.nodes[i]}"][target = "${chain.nodes[i + 1]}"]`);
+                        if (edge) {
+                            edge.addClass('chain-highlight');
+                        }
+                    }
+                }
+                
+                // Click on background to clear selection
+                cy.on('tap', function(evt) {
+                    if (evt.target === cy && debtDetailsEl) {
+                        debtDetailsEl.style.display = 'none';
+                    }
+                });
+                
+                // Filter by relationship type
+                const relTypeSelect = document.getElementById('relationshipType');
+                if (relTypeSelect) {
+                    relTypeSelect.addEventListener('change', function() {
+                        const type = this.value;
+                        
+                        if (type === 'all') {
+                            cy.edges().show();
+                        } else {
+                            cy.edges().hide();
+                            cy.edges().filter(edge => {
+                                const types = edge.data('types');
+                                return types && types.includes(type);
+                            }).show();
+                        }
+                        
+                        // Show nodes connected to visible edges
+                        cy.nodes().hide();
+                        cy.nodes().filter(node => {
+                            const connectedEdges = node.connectedEdges(':visible');
+                            return connectedEdges.length > 0;
+                        }).show();
+                        
+                        runDagreLayout();
+                    });
+                }
+                
+                // Filter by debt type
+                const debtTypeSelect = document.getElementById('debtType');
+                if (debtTypeSelect) {
+                    debtTypeSelect.addEventListener('change', function() {
+                        const type = this.value;
+                        
+                        if (type === 'all') {
+                            cy.nodes().show();
+                            cy.edges().show();
+                        } else {
+                            cy.nodes().hide();
+                            cy.nodes().filter(node => node.data('debtType') === type).show();
+                            
+                            // Hide edges not connected to visible nodes
+                            cy.edges().hide();
+                            cy.edges().filter(edge => {
+                                const source = cy.getElementById(edge.data('source'));
+                                const target = cy.getElementById(edge.data('target'));
+                                return source.visible() && target.visible();
+                            }).show();
+                        }
+                        
+                        runDagreLayout();
+                    });
+                }
+                
+                // Handle chain filter
+                const chainFilterSelect = document.getElementById('chainFilter');
+                if (chainFilterSelect) {
+                    chainFilterSelect.addEventListener('change', function() {
+                        const value = this.value;
+                        
+                        // Remove existing highlights
+                        cy.edges().removeClass('chain-highlight');
+                        cy.nodes().removeClass('node-highlight');
+                        
+                        if (value === 'all') {
+                            // Show all relationships
+                            cy.edges().show();
+                            cy.nodes().show();
+                        } else if (value === 'chains-only') {
+                            // Show only relationships that are part of chains
+                            cy.edges().hide();
+                            cy.edges().filter(edge => edge.data('inChain')).show();
+                            
+                            // Show nodes connected to visible edges
+                            cy.nodes().hide();
+                            cy.nodes().filter(node => {
+                                const connectedEdges = node.connectedEdges(':visible');
+                                return connectedEdges.length > 0;
+                            }).show();
+                        } else if (value === 'highlight-chains') {
+                            // Show all but highlight chains
+                            cy.edges().show();
+                            cy.nodes().show();
+                            cy.edges().filter(edge => edge.data('inChain')).addClass('chain-highlight');
+                            
+                            // Highlight nodes in chains
+                            const nodesInChains = new Set();
+                            cy.edges('.chain-highlight').forEach(edge => {
+                                nodesInChains.add(edge.source().id());
+                                nodesInChains.add(edge.target().id());
+                            });
+                            
+                            cy.nodes().forEach(node => {
+                                if (nodesInChains.has(node.id())) {
+                                    node.addClass('node-highlight');
+                                }
+                            });
+                        }
+                        
+                        // Re-run layout to accommodate visibility changes
+                        runDagreLayout();
+                    });
+                }
+                
+                // Handle SIR score sorting
+                const sirScoreSortSelect = document.getElementById('sirScoreSort');
+                if (sirScoreSortSelect) {
+                    sirScoreSortSelect.addEventListener('change', function() {
+                        const value = this.value;
+                        
+                        if (value === 'none') {
+                            // Reset node styling
+                            cy.nodes().removeClass('high-impact medium-impact low-impact');
+                        } else {
+                            // Get all SIR scores
+                            const scores = cy.nodes().map(node => node.data('sirScore') || 0);
+                            
+                            // Calculate thresholds based on distribution
+                            scores.sort((a, b) => a - b);
+                            const lowThreshold = scores[Math.floor(scores.length * 0.33)] || 0;
+                            const highThreshold = scores[Math.floor(scores.length * 0.66)] || 0;
+                            
+                            // Apply impact styling based on SIR score
+                            cy.nodes().forEach(node => {
+                                const score = node.data('sirScore') || 0;
+                                
+                                // Remove existing classes
+                                node.removeClass('high-impact medium-impact low-impact');
+                                
+                                if (score >= highThreshold) {
+                                    node.addClass('high-impact');
+                                } else if (score >= lowThreshold) {
+                                    node.addClass('medium-impact');
+                                } else {
+                                    node.addClass('low-impact');
+                                }
+                            });
+                        }
+                        
+                        // Re-run layout
+                        runDagreLayout();
+                    });
+                }
+                
+                // Reset layout button
+                const resetBtn = document.getElementById('resetLayout');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', function() {
+                        runDagreLayout();
+                    });
+                }
+                
+                // Export PNG button
+                const pngBtn = document.getElementById('exportPng');
+                if (pngBtn) {
+                    pngBtn.addEventListener('click', function() {
+                        try {
+                            // Create a PNG representation of the graph
+                            const png = cy.png({
+                                full: true,
+                                scale: 2,
+                                bg: '#fff',
+                                output: 'blob'
+                            });
+                            
+                            // Convert to downloadable URL
+                            const url = URL.createObjectURL(png);
+                            
+                            // Create download link
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = 'satd-graph.png';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            // Clean up
+                            setTimeout(() => URL.revokeObjectURL(url), 100);
+                        } catch (e) {
+                            showError('Failed to export PNG: ' + e.message);
+                            console.error(e);
+                        }
+                    });
+                }
+                
+                // Export JSON button
+                const jsonBtn = document.getElementById('exportJson');
+                if (jsonBtn) {
+                    jsonBtn.addEventListener('click', function() {
+                        try {
+                            // Prepare the data
+                            const data = JSON.stringify({
+                                nodes: cy.nodes().map(n => n.data()),
+                                edges: cy.edges().map(e => e.data()),
+                                chains: chains
+                            }, null, 2);
+                            
+                            // Create a blob with the data
+                            const blob = new Blob([data], {type: 'application/json'});
+                            
+                            // Convert to downloadable URL
+                            const url = URL.createObjectURL(blob);
+                            
+                            // Create download link
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = 'satd-graph.json';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            // Clean up
+                            setTimeout(() => URL.revokeObjectURL(url), 100);
+                        } catch (e) {
+                            showError('Failed to export JSON: ' + e.message);
+                            console.error(e);
+                        }
+                    });
+                }
+                
+                // Helper function to run the Dagre layout
+                function runDagreLayout() {
+                    try {
+                        const layout = cy.layout({
+                            name: 'dagre',
+                            rankDir: 'TB',
+                            padding: 50,
+                            fit: true,
+                            animate: true,
+                            nodeDimensionsIncludeLabels: true,
+                            rankSep: 100,
+                            edgeSep: 20,
+                            animationDuration: 500
+                        });
+                        layout.run();
+                    } catch (e) {
+                        showError('Layout error: ' + e.message);
+                        
+                        // Fallback to grid layout
+                        cy.layout({
+                            name: 'grid'
+                        }).run();
+                    }
+                }
+            } catch (e) {
+                showError('Initialization error: ' + e.message);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 {
-  "name": "satd-helper",
-  "displayName": "SATD Helper",
+  "name": "RapidPay",
+  "displayName": "RapidPay",
   "description": "Self-Admitted Technical Debt Helper for VS Code",
   "version": "0.1.0",
-  "publisher": "satd-helper",
+  "publisher": "RapidPay",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -13,42 +13,59 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "extensionDependencies": [
+    "vscode.git"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "satdHelper.init",
-        "title": "SATD Helper: Initialize and Scan Repository"
+        "command": "RapidPay.init",
+        "title": "RapidPay: Initialize and Scan Repository"
       },
       {
-        "command": "satdHelper.viewTechnicalDebt",
-        "title": "SATD Helper: View Technical Debt Items"
+        "command": "RapidPay.viewTechnicalDebt",
+        "title": "RapidPay: View Technical Debt Items"
       },
       {
-        "command": "satdHelper.checkLatestCommit",
-        "title": "SATD Helper: Check Latest Commit for Debt Fixes"
+        "command": "RapidPay.checkLatestCommit",
+        "title": "RapidPay: Check Latest Commit for Debt Fixes"
+      },
+      {
+        "command": "RapidPay.visualizeRelationships",
+        "title": "RapidPay: Visualize Technical Debt Relationships"
       }
     ],
     "configuration": {
-      "title": "SATD Helper",
+      "title": "RapidPay",
       "properties": {
-        "satdHelper.openaiApiKey": {
+        "RapidPay.openaiApiKey": {
           "type": "string",
           "default": "",
           "description": "OpenAI API Key for analyzing technical debt (can also be set using OPENAI_API_KEY environment variable)",
           "scope": "application"
         },
-        "satdHelper.modelName": {
+        "RapidPay.modelName": {
           "type": "string",
           "default": "gpt-4",
-          "enum": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo"],
+          "enum": [
+            "gpt-4",
+            "gpt-4-turbo",
+            "gpt-3.5-turbo"
+          ],
           "description": "OpenAI model to use for technical debt analysis",
           "scope": "application"
         },
-        "satdHelper.autoScanOnStartup": {
+        "RapidPay.autoScanOnStartup": {
           "type": "boolean",
           "default": false,
           "description": "Automatically scan the repository for technical debt when the extension activates",
+          "scope": "window"
+        },
+        "RapidPay.relationshipAnalysisEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable analysis of relationships between technical debt items",
           "scope": "window"
         }
       }
@@ -62,6 +79,7 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@types/babel__traverse": "^7.20.7",
     "@types/node": "^18.x",
     "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
@@ -73,6 +91,12 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@babel/parser": "^7.22.5",
+    "@babel/traverse": "^7.22.5",
+    "@babel/types": "^7.22.5",
+    "cytoscape": "^3.23.0",
+    "cytoscape-dagre": "^2.5.0",
+    "dagre": "^0.8.5",
     "openai": "^4.0.0"
   }
 }

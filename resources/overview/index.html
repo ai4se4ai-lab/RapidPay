@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive SATD-Chain Approach Overview (Detailed)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #334155;
+            --card-bg-color: #ffffff;
+            --card-border-color: #e5e7eb;
+            --info-panel-bg: #ffffff;
+            --info-panel-text: #475569;
+            --info-panel-header: #1e3a8a;
+            --info-panel-header-border: #3b82f6;
+            --info-panel-subheader: #1d4ed8; /* For subheadings like "Algorithm", "Subcomponents" */
+            --info-panel-list-item: #334155;
+            --title-header-bg: #3b82f6;
+            --title-header-text: white;
+            --comp-default-bg: '#e0f2fe';
+            --comp-default-border: '#7dd3fc';
+            --comp-default-text: '#0c4a6e';
+            --comp-default-icon: '#3b82f6';
+            --comp-hover-bg: '#bae6fd';
+            --comp-hover-border: '#38bdf8';
+            --comp-selected-bg: '#7dd3fc';
+            --comp-selected-border: '#0ea5e9';
+            --comp-selected-text: '#0369a1';
+            --arrow-color-data: '#60a5fa';
+            --arrow-color-report: '#f59e0b';
+            --arrow-color-graph: '#10b981';
+            --arrow-dash-data: '#93c5fd';
+            --arrow-dash-report: '#fcd34d';
+            --arrow-dash-graph: '#34d399';
+            --shadow-color: 'rgba(0, 0, 0, 0.07)';
+        }
+
+        .dark {
+            --bg-color: #1f2937;
+            --text-color: #d1d5db;
+            --card-bg-color: #374151;
+            --card-border-color: #4b5563;
+            --info-panel-bg: #374151;
+            --info-panel-text: #d1d5db;
+            --info-panel-header: #93c5fd;
+            --info-panel-header-border: #60a5fa;
+            --info-panel-subheader: #93c5fd;
+            --info-panel-list-item: #e5e7eb;
+            --title-header-bg: #1e3a8a;
+            --title-header-text: #e0f2fe;
+            --comp-default-bg: '#374151';
+            --comp-default-border: '#4b5563';
+            --comp-default-text: '#d1d5db';
+            --comp-default-icon: '#93c5fd';
+            --comp-hover-bg: '#4b5563';
+            --comp-hover-border: '#60a5fa';
+            --comp-selected-bg: '#60a5fa';
+            --comp-selected-border: '#93c5fd';
+            --comp-selected-text: '#1f2937';
+            --arrow-color-data: '#93c5fd';
+            --arrow-color-report: '#fcd34d';
+            --arrow-color-graph: '#34d399';
+            --arrow-dash-data: '#60a5fa';
+            --arrow-dash-report: '#fde68a';
+            --arrow-dash-graph: '#6ee7b7';
+            --shadow-color: 'rgba(255, 255, 255, 0.05)';
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1800px;
+            margin: 1rem auto;
+            padding: 1rem;
+            gap: 1rem;
+        }
+        #canvas-container {
+            flex-grow: 1;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1rem;
+            position: relative;
+            width: 100%;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 750px;
+        }
+        #info-panel {
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--info-panel-bg);
+            border: 1px solid var(--card-border-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+            transition: all 0.3s ease-in-out;
+            color: var(--info-panel-text);
+        }
+        #info-panel h3 { /* Main title of the panel */
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--info-panel-header);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--info-panel-header-border);
+            padding-bottom: 0.5rem;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        #info-panel h4 { /* Subheadings like "Inputs", "Algorithm" */
+            font-size: 1.1rem; /* Slightly smaller than h3 */
+            font-weight: 600;
+            color: var(--info-panel-subheader);
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        #info-panel ul {
+            list-style-type: disc;
+            margin-left: 1.5rem; /* Indent list */
+            padding-left: 0.5rem;
+        }
+        #info-panel li {
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+            color: var(--info-panel-list-item); /* Themed list item text */
+        }
+         #info-panel li strong { /* For subcomponent names */
+            font-weight: 600;
+            color: var(--info-panel-subheader); /* Match subheader color for emphasis */
+         }
+        #info-panel p, #info-panel .algorithm-details { /* Paragraphs for algorithm description */
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+             color: var(--info-panel-list-item);
+        }
+        #info-panel .placeholder {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        @media (min-width: 1280px) { /* xl breakpoint */
+            #main-container {
+                flex-direction: row;
+            }
+            #info-panel {
+                width: 400px;
+                min-width: 380px;
+                max-height: calc(100vh - 4rem); /* Adjust based on header/padding */
+            }
+        }
+        .title-header {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            background-color: var(--title-header-bg);
+            color: var(--title-header-text);
+            font-size: 1.75rem;
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        #theme-toggle {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: 1px solid var(--title-header-text);
+            color: var(--title-header-text);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        #theme-toggle:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .dark #theme-toggle {
+            border-color: var(--title-header-text);
+        }
+        .dark #theme-toggle:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header class="title-header">
+        SATD-Chain Approach: Interactive Overview
+        <button id="theme-toggle">
+            <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon" style="display:none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+    </header>
+    <div id="main-container">
+        <div id="canvas-container">
+            <canvas id="overviewCanvas"></canvas>
+        </div>
+        <aside id="info-panel">
+            <h3>Component Details</h3>
+            <div id="info-content">
+                <p class="placeholder">Click on a component in the diagram to see its details. Drag components to rearrange.</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('overviewCanvas');
+        const ctx = canvas.getContext('2d');
+        const infoContent = document.getElementById('info-content');
+        const infoPanel = document.getElementById('info-panel'); 
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIconLight = document.getElementById('theme-icon-light');
+        const themeIconDark = document.getElementById('theme-icon-dark');
+
+        let animationFrameId;
+        let components = [];
+        let hoveredComponent = null;
+        let selectedComponent = null;
+        let draggedComponent = null;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let arrowAnimationOffset = 0;
+        let hasDraggedSinceMouseDown = false;
+
+        function getCssVar(varName) {
+            return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+        }
+        
+        function getComponentStyles() {
+            return {
+                width: 180, height: 120, padding: 10,
+                bgColor: getCssVar('--comp-default-bg').replace(/'/g, ''),
+                borderColor: getCssVar('--comp-default-border').replace(/'/g, ''),
+                textColor: getCssVar('--comp-default-text').replace(/'/g, ''),
+                font: '12px Inter', labelOffsetY: 38, iconSize: 40, 
+                hoverBgColor: getCssVar('--comp-hover-bg').replace(/'/g, ''),
+                hoverBorderColor: getCssVar('--comp-hover-border').replace(/'/g, ''),
+                selectedBgColor: getCssVar('--comp-selected-bg').replace(/'/g, ''),
+                selectedBorderColor: getCssVar('--comp-selected-border').replace(/'/g, ''),
+                selectedTextColor: getCssVar('--comp-selected-text').replace(/'/g, ''),
+                cornerRadius: 12,
+                shadowColor: getCssVar('--shadow-color').replace(/'/g, ''),
+                shadowBlur: 6, shadowOffsetX: 1, shadowOffsetY: 1,
+                iconColor: getCssVar('--comp-default-icon').replace(/'/g, ''),
+            };
+        }
+
+        function defineComponents() {
+            const canvasWidth = canvas.width;
+            const canvasHeight = canvas.height;
+            const compStyle = getComponentStyles();
+
+            const initialPositions = [
+                // Connections are based on the PDF diagram
+                { id: 'github', label: 'GitHub', iconType: 'github', type: 'source', connections: [
+                    { to: 'cii', type: 'data', label: 'Git-history' },
+                    { to: 'sirScore', type: 'data', label: 'git-commit' }
+                ]},
+                { id: 'cii', label: 'Candidate Instance Identification (CII)', iconType: 'cii', connections: [
+                    { to: 'ird', type: 'data', label: '<key,value> pairs' },
+                    { to: 'sirScore', type: 'data', label: '<key,value> pairs (dashed)' } 
+                ]},
+                { id: 'ird', label: 'Inter-SATD Relationship Discovery (IRD)', iconType: 'ird', connections: [
+                    { to: 'chainConstruction', type: 'data', label: 'dependencies' }
+                ]},
+                { id: 'chainConstruction', label: 'Chain Construction & Visualization', iconType: 'chain_viz', connections: [
+                    { to: 'sirScore', type: 'graph', label: 'graph representation' }
+                ]},
+                { id: 'sirScore', label: 'SATD Impact Ripple (SIR) Score', iconType: 'sir', connections: [
+                    { to: 'developer', type: 'report', label: 'report: SIR scores' }
+                ]},
+                { id: 'developer', label: 'Developer', iconType: 'developer', type: 'output', connections: [] }
+            ];
+
+            const colUnit = canvasWidth / 4;
+            const rowUnit = canvasHeight / 4;
+            const layoutMap = {
+                'github':  { col: 0.8, row: 0.8 }, 'cii': { col: 2, row: 0.8 }, 'ird': { col: 3.2, row: 0.8 },
+                'chainConstruction':{ col: 3.2, row: 2 }, 'sirScore': { col: 2, row: 2.8 }, 'developer': { col: 0.8, row: 2.8 }  
+            };
+
+            components = initialPositions.map(compDef => ({
+                ...compDef,
+                x: layoutMap[compDef.id].col * colUnit - (compStyle.width / 2),
+                y: layoutMap[compDef.id].row * rowUnit - (compStyle.height / 2),
+                width: compStyle.width, height: compStyle.height,
+                cornerRadius: compStyle.cornerRadius, style: { ...compStyle },
+            }));
+            
+            // Detailed information for each component
+            const componentDetails = {
+                github: { 
+                    inputs: [], 
+                    algorithm: "Not applicable. This component represents the source code repository.",
+                    subcomponents: [],
+                    process_details: "Provides access to the codebase, including version control history (Git logs and commit data) which are crucial for analyzing the evolution of Self-Admitted Technical Debt (SATD) and its context.",
+                    outputs: ['Git-history data (logs, commit history, branches)', 'Specific git-commit data (details of individual commits)'] 
+                },
+                cii: { 
+                    inputs: ['Git-history data from GitHub'], 
+                    algorithm: "Utilizes a combination of Lexical Analysis and NLP-based Analysis.",
+                    subcomponents: [
+                        { name: "Lexical Analysis", details: "Scans source code comments and potentially code constructs for predefined keywords, patterns, and regular expressions (e.g., 'TODO', 'FIXME', 'HACK') that explicitly indicate the presence of SATD." },
+                        { name: "NLP-based Analysis", details: "Applies Natural Language Processing techniques to understand the semantic meaning of comments. This allows for the identification of more implicit or nuanced SATD instances that lexical analysis might miss, by interpreting intent and context." }
+                    ],
+                    process_details: "This component is responsible for identifying potential SATD instances within the codebase by analyzing comments and code.",
+                    outputs: ['A collection of <key,value> pairs, where each pair represents an identified SATD instance. The key could be an identifier, and the value could contain the SATD comment, location, type, etc.'] 
+                },
+                ird: { 
+                    inputs: ['<key,value> pairs (identified SATD instances) from CII'], 
+                    algorithm: "Employs various static analysis techniques to model code relationships as graphs and discover dependencies between SATD instances.",
+                    subcomponents: [
+                        { name: "Call Graphs Analysis", details: "Analyzes function/method call relationships to determine if one piece of SATD-laden code directly or indirectly calls another." },
+                        { name: "Control Flow Dependencies", details: "Examines the execution paths in the code to find dependencies where the execution of one SATD-affected part influences another." },
+                        { name: "Module/File Dependencies", details: "Identifies dependencies at a higher level, such as when different SATD instances reside in modules or files that depend on each other." },
+                        { name: "Data Dependencies", details: "Tracks how data is produced and consumed across the codebase to find SATD instances that share or influence common data structures or variables." }
+                    ],
+                    process_details: "Focuses on discovering relationships and dependencies *between* the SATD instances identified by CII.",
+                    outputs: ['A set of identified inter-SATD dependencies, detailing which SATD instances are related and the nature of their relationship.'] 
+                },
+                chainConstruction: { 
+                    inputs: ['Inter-SATD dependencies from IRD'], 
+                    algorithm: "Uses graph construction algorithms to build a formal representation of SATD relationships, followed by graph traversal and analysis algorithms to identify SATD chains.",
+                    subcomponents: [
+                        { name: "Graph Representation", details: "Constructs a formal graph where SATD instances are nodes and the discovered dependencies (from IRD) are edges. This graph visually and structurally represents the SATD landscape." },
+                        { name: "Dependency Analysis", details: "Analyzes the constructed graph to identify sequences or 'chains' of interconnected SATD. This might involve algorithms for pathfinding, identifying strongly connected components, or other graph-based analytical techniques to understand ripple effects." }
+                    ],
+                    process_details: "This component takes the discovered dependencies and formally models them to identify larger structures of related technical debt, known as SATD chains.",
+                    outputs: ['A comprehensive SATD Graph Representation.', 'Data representing the identified SATD chains, suitable for visualization and further analysis.'] 
+                },
+                sirScore: { 
+                    inputs: [
+                        '<key,value> pairs (SATD instances with their details) from CII', 
+                        'Graph representation (SATD chains and relationships) from Chain Construction', 
+                        'git-commit data from GitHub (e.g., for age, churn)'
+                    ], 
+                    algorithm: "A composite scoring algorithm that quantifies the impact of SATD instances by considering multiple factors.",
+                    subcomponents: [
+                        { name: "Intrinsic Severity (IS)", details: "Assesses the inherent severity or risk of an individual SATD item based on its type, content, or predefined rules (e.g., a security-related TODO might be more severe than a comment about minor code smell)." },
+                        { name: "Outgoing Chain Influence (OCI)", details: "Measures the impact an SATD item has on other items that are downstream in a dependency chain. A high OCI means this debt potentially affects many other areas." },
+                        { name: "Incoming Chain Dependency (ICD)", details: "Quantifies the extent to which an SATD item is affected by upstream items in a dependency chain. High ICD might indicate that resolving this item is complex due to its dependencies." },
+                        { name: "Chain Length Factor (CLF)", details: "A factor that considers the length and complexity of the SATD chain(s) an item belongs to. Longer chains might indicate more widespread or entangled debt." }
+                    ],
+                    process_details: "Calculates a 'SATD Impact Ripple (SIR) Score' for each identified SATD instance to help prioritize refactoring efforts. This score reflects the potential ripple effect and overall impact of the debt.",
+                    outputs: ['A report detailing the SIR scores for all analyzed SATD instances, enabling developers to prioritize the most impactful technical debt.'] 
+                },
+                developer: { 
+                    inputs: ['Report: SIR scores from the SIR Score component'], 
+                    algorithm: "Not applicable. This represents the human developer or development team.",
+                    subcomponents: [],
+                    process_details: "The developer utilizes the SIR scores and the visualized SATD chains to make informed decisions regarding technical debt management. This includes prioritizing which SATD items to address, planning refactoring activities, and understanding the potential consequences of leaving certain debt unresolved.",
+                    outputs: ['Actionable insights and decisions for managing and refactoring technical debt.', 'Commits to the GitHub repository to address identified SATD.'] 
+                }
+            };
+
+            components.forEach(c => {
+                if (componentDetails[c.id]) {
+                    c.details = componentDetails[c.id]; // Store the whole details object
+                }
+            });
+        }
+        
+        function drawIcon(type, x, y, size, style) {
+            ctx.save();
+            ctx.translate(x, y); 
+            ctx.strokeStyle = style.iconColor;
+            ctx.fillStyle = style.iconColor;
+            ctx.lineWidth = 2;
+            const s = size * 0.8; 
+
+            switch (type) {
+                case 'github': 
+                    ctx.beginPath(); ctx.arc(0, -s/4, s/3, Math.PI * 1.2, Math.PI * 2.8); ctx.fill();
+                    ctx.fillRect(-s/2.5, -s/6, s/1.25, s/2);
+                    ctx.beginPath(); ctx.moveTo(-s/2.5, s/3); ctx.lineTo(-s/1.5, s/1.5); ctx.stroke(); 
+                    ctx.moveTo(s/2.5, s/3); ctx.lineTo(s/1.5, s/1.5); ctx.stroke();
+                    break;
+                case 'cii': 
+                    ctx.beginPath(); const hR = s / 2; for (let i=0;i<6;i++) ctx.lineTo(hR*Math.cos(Math.PI/3*i+Math.PI/6), hR*Math.sin(Math.PI/3*i+Math.PI/6)); ctx.closePath(); ctx.stroke();
+                    ctx.font = `${s/3}px Inter`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText("L", -s/5, 0); ctx.fillText("N", s/5, 0);
+                    break;
+                case 'ird': 
+                    const cR = s/6; ctx.beginPath(); ctx.arc(-s/3,-s/6,cR,0,2*Math.PI); ctx.stroke(); ctx.beginPath(); ctx.arc(s/3,-s/6,cR,0,2*Math.PI); ctx.stroke();  
+                    ctx.beginPath(); ctx.arc(-s/3,s/3,cR,0,2*Math.PI); ctx.stroke(); ctx.beginPath(); ctx.arc(s/3,s/3,cR,0,2*Math.PI); ctx.stroke();   
+                    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-s/3,-s/6); ctx.moveTo(0,0); ctx.lineTo(s/3,-s/6); ctx.moveTo(0,0); ctx.lineTo(-s/3,s/3); ctx.moveTo(0,0); ctx.lineTo(s/3,s/3); ctx.stroke();
+                    break;
+                case 'chain_viz': 
+                    ctx.beginPath(); ctx.arc(-s/4,0,s/5,0,2*Math.PI); ctx.stroke(); ctx.beginPath(); ctx.arc(s/4,s/5,s/5,0,2*Math.PI); ctx.stroke(); 
+                    ctx.beginPath(); ctx.arc(s/4,-s/5,s/5,0,2*Math.PI); ctx.stroke(); ctx.moveTo(-s/4,0); ctx.lineTo(s/4,s/5); ctx.moveTo(-s/4,0); ctx.lineTo(s/4,-s/5); ctx.stroke();
+                    break;
+                case 'sir': 
+                    ctx.strokeRect(-s/2,-s/2.5,s,s/1.25); const bH=s/10; ctx.fillRect(-s/2.2+s/20,-s/3+bH,s/2.5,bH); ctx.fillRect(-s/2.2+s/20,-s/3+bH*3,s/1.8,bH); ctx.fillRect(-s/2.2+s/20,-s/3+bH*5,s/2.2,bH);
+                    break;
+                case 'developer': 
+                    ctx.beginPath(); ctx.arc(0,-s/4,s/5,0,2*Math.PI); ctx.fill(); ctx.beginPath(); ctx.moveTo(0,-s/4+s/5); ctx.lineTo(0,s/6); 
+                    ctx.moveTo(-s/3,s/10); ctx.lineTo(s/3,s/10); ctx.moveTo(0,s/6); ctx.lineTo(-s/5,s/2); ctx.moveTo(0,s/6); ctx.lineTo(s/5,s/2); ctx.stroke();
+                    break;
+                default: ctx.font = `${s*0.8}px Inter`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText("?",0,0);
+            }
+            ctx.restore();
+        }
+
+        function drawRoundedRect(x, y, width, height, radius, style) {
+            ctx.beginPath(); ctx.moveTo(x+radius,y); ctx.lineTo(x+width-radius,y); ctx.quadraticCurveTo(x+width,y,x+width,y+radius);
+            ctx.lineTo(x+width,y+height-radius); ctx.quadraticCurveTo(x+width,y+height,x+width-radius,y+height);
+            ctx.lineTo(x+radius,y+height); ctx.quadraticCurveTo(x,y+height,x,y+height-radius);
+            ctx.lineTo(x,y+radius); ctx.quadraticCurveTo(x,y,x+radius,y); ctx.closePath();
+            ctx.fillStyle=style.bgColor; ctx.shadowColor=style.shadowColor; ctx.shadowBlur=style.shadowBlur; 
+            ctx.shadowOffsetX=style.shadowOffsetX; ctx.shadowOffsetY=style.shadowOffsetY; ctx.fill();
+            ctx.shadowColor='transparent'; 
+            if(style.borderColor){ctx.strokeStyle=style.borderColor; ctx.lineWidth=(selectedComponent&&style.id&&selectedComponent.id===style.id)?3:2; ctx.stroke();}
+        }
+
+        function drawText(text, x, y, maxWidth, style) {
+            ctx.fillStyle=style.textColor; ctx.font=style.font; ctx.textAlign='center'; ctx.textBaseline='middle';
+            const words=text.split(' '); let line=''; let lines=[]; const lineHeight=14; 
+            for(let n=0;n<words.length;n++){ const testLine=line+words[n]+' '; const metrics=ctx.measureText(testLine); const testWidth=metrics.width;
+                if(testWidth > maxWidth && n > 0){lines.push(line.trim()); line=words[n]+' ';}else{line=testLine;} }
+            lines.push(line.trim()); const totalTextHeight=lines.length*lineHeight; let currentY=y-(totalTextHeight/2)+(lineHeight/2); 
+            lines.forEach(l=>{ctx.fillText(l,x,currentY,maxWidth); currentY+=lineHeight;});
+        }
+
+        function drawComponent(comp) {
+            let currentStyle={...comp.style}; 
+            if(comp===hoveredComponent)currentStyle={...comp.style,bgColor:comp.style.hoverBgColor,borderColor:comp.style.hoverBorderColor};
+            if(comp===selectedComponent)currentStyle={...comp.style,bgColor:comp.style.selectedBgColor,borderColor:comp.style.selectedBorderColor,textColor:comp.style.selectedTextColor};
+            currentStyle.id=comp.id; 
+            drawRoundedRect(comp.x,comp.y,comp.width,comp.height,comp.cornerRadius,currentStyle);
+            drawIcon(comp.iconType,comp.x+comp.width/2,comp.y+comp.height/2-comp.style.iconSize/2,comp.style.iconSize,currentStyle);
+            drawText(comp.label,comp.x+comp.width/2,comp.y+comp.height-comp.style.labelOffsetY+15,comp.width-comp.style.padding*2,currentStyle);
+        }
+        
+        function getRectIntersection(rect,targetX,targetY){
+            const cx=rect.x+rect.width/2; const cy=rect.y+rect.height/2; const dx=targetX-cx; const dy=targetY-cy; let t=Infinity;
+            if(dy<0)t=Math.min(t,-rect.height/2/dy); if(dy>0)t=Math.min(t,rect.height/2/dy);
+            if(dx<0)t=Math.min(t,-rect.width/2/dx); if(dx>0)t=Math.min(t,rect.width/2/dx);
+            t=(t>0&&isFinite(t))?t:0; return{x:cx+dx*t,y:cy+dy*t};
+        }
+
+        function drawArrow(fromComp, toComp, type, label) {
+            const headLength=12; const arrowPullback=headLength/1.5;
+            const fromCenterX=fromComp.x+fromComp.width/2; const fromCenterY=fromComp.y+fromComp.height/2;
+            const toCenterX=toComp.x+toComp.width/2; const toCenterY=toComp.y+toComp.height/2;
+            const fromPoint=getRectIntersection(fromComp,toCenterX,toCenterY);
+            const toPointInitial=getRectIntersection(toComp,fromCenterX,fromCenterY);
+            const angle=Math.atan2(toCenterY-fromCenterY,toCenterX-fromCenterX);
+            const toX=toPointInitial.x-arrowPullback*Math.cos(angle); const toY=toPointInitial.y-arrowPullback*Math.sin(angle);
+            let strokeColor=getCssVar('--arrow-color-data').replace(/'/g,''); let dashColor=getCssVar('--arrow-dash-data').replace(/'/g,'');
+            if(type==='report'){strokeColor=getCssVar('--arrow-color-report').replace(/'/g,''); dashColor=getCssVar('--arrow-dash-report').replace(/'/g,'');}
+            else if(type==='graph'){strokeColor=getCssVar('--arrow-color-graph').replace(/'/g,''); dashColor=getCssVar('--arrow-dash-graph').replace(/'/g,'');}
+            ctx.beginPath(); ctx.moveTo(fromPoint.x,fromPoint.y); ctx.lineTo(toX,toY); ctx.strokeStyle=strokeColor; ctx.lineWidth=2.5; ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(toX,toY); ctx.lineTo(toX-headLength*Math.cos(angle-Math.PI/6),toY-headLength*Math.sin(angle-Math.PI/6));
+            ctx.lineTo(toX-headLength*Math.cos(angle+Math.PI/6),toY-headLength*Math.sin(angle+Math.PI/6)); ctx.closePath(); ctx.fillStyle=strokeColor; ctx.fill();
+            ctx.save(); const lineDash=label&&label.includes('(dashed)')?[8,8]:[6,8]; ctx.setLineDash(lineDash); ctx.lineDashOffset=-arrowAnimationOffset;
+            ctx.beginPath(); ctx.moveTo(fromPoint.x,fromPoint.y); ctx.lineTo(toX,toY); ctx.strokeStyle=dashColor; ctx.lineWidth=2.5; ctx.stroke(); ctx.restore();
+            if(label&&!label.includes('(dashed)')){ ctx.save(); const midX=(fromPoint.x+toX)/2; const midY=(fromPoint.y+toY)/2;
+                ctx.translate(midX,midY); ctx.rotate(angle); ctx.fillStyle=getCssVar('--text-color'); ctx.font='10px Inter'; 
+                ctx.textAlign='center'; ctx.textBaseline='bottom'; ctx.fillText(label,0,-5); ctx.restore(); }
+        }
+
+        function drawAll() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            components.forEach(comp=>{ if(comp.connections){comp.connections.forEach(conn=>{
+                const toComp=components.find(c=>c.id===conn.to); if(toComp){drawArrow(comp,toComp,conn.type,conn.label);}});}});
+            components.forEach(comp=>drawComponent(comp)); 
+            arrowAnimationOffset=(arrowAnimationOffset+0.6)%28; 
+        }
+
+        function gameLoop(){drawAll(); animationFrameId=requestAnimationFrame(gameLoop);}
+        function getMousePos(event){const rect=canvas.getBoundingClientRect(); return{x:event.clientX-rect.left,y:event.clientY-rect.top};}
+        function isMouseOverComponent(mousePos,comp){return mousePos.x>=comp.x&&mousePos.x<=comp.x+comp.width&&mousePos.y>=comp.y&&mousePos.y<=comp.y+comp.height;}
+
+        canvas.addEventListener('mousedown',(event)=>{ const mousePos=getMousePos(event); hasDraggedSinceMouseDown=false;
+            for(let i=components.length-1;i>=0;i--){ if(isMouseOverComponent(mousePos,components[i])){
+                draggedComponent=components[i]; dragOffsetX=mousePos.x-draggedComponent.x; dragOffsetY=mousePos.y-draggedComponent.y;
+                canvas.style.cursor='grabbing'; const item=components.splice(i,1)[0]; components.push(item); break;}}});
+        canvas.addEventListener('mousemove',(event)=>{ const mousePos=getMousePos(event);
+            if(draggedComponent){ hasDraggedSinceMouseDown=true; draggedComponent.x=mousePos.x-dragOffsetX; draggedComponent.y=mousePos.y-dragOffsetY;
+                draggedComponent.x=Math.max(0,Math.min(canvas.width-draggedComponent.width,draggedComponent.x));
+                draggedComponent.y=Math.max(0,Math.min(canvas.height-draggedComponent.height,draggedComponent.y));
+            }else{ let newHoveredComponent=null; components.forEach(comp=>{if(isMouseOverComponent(mousePos,comp)){newHoveredComponent=comp;}});
+                if(hoveredComponent!==newHoveredComponent){hoveredComponent=newHoveredComponent; canvas.style.cursor=hoveredComponent?'grab':'default';}}});
+        canvas.addEventListener('mouseup',()=>{if(draggedComponent){canvas.style.cursor=hoveredComponent?'grab':'default';draggedComponent=null;}});
+        
+        canvas.addEventListener('click', (event) => {
+            if (hasDraggedSinceMouseDown) { hasDraggedSinceMouseDown = false; return; }
+            const mousePos = getMousePos(event);
+            let clickedOnComponent = false;
+            for (let i = components.length - 1; i >= 0; i--) { // Iterate from top
+                if (isMouseOverComponent(mousePos, components[i])) {
+                    selectedComponent = components[i];
+                    updateInfoPanel(selectedComponent);
+                    clickedOnComponent = true;
+                    break; 
+                }
+            }
+            if (!clickedOnComponent) { selectedComponent = null; updateInfoPanel(null); }
+            hasDraggedSinceMouseDown = false;
+        });
+
+        function updateInfoPanel(comp) {
+            const panelTitle = infoPanel.querySelector('h3');
+            if (comp && comp.details) {
+                const details = comp.details;
+                let html = '';
+
+                // Inputs
+                if (details.inputs && details.inputs.length > 0) {
+                    html += `<h4>Inputs:</h4><ul>${details.inputs.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                } else {
+                     html += `<h4>Inputs:</h4><p><em>N/A</em></p>`;
+                }
+
+                // Algorithm
+                if (details.algorithm) {
+                    html += `<h4>Algorithm:</h4><p class="algorithm-details">${details.algorithm}</p>`;
+                }
+                
+                // Process Details (if any, as a general description)
+                if (details.process_details) {
+                    html += `<h4>Process Overview:</h4><p class="algorithm-details">${details.process_details}</p>`;
+                }
+
+                // Subcomponents
+                if (details.subcomponents && details.subcomponents.length > 0) {
+                    html += `<h4>Subcomponents & How They Work:</h4><ul>`;
+                    details.subcomponents.forEach(sub => {
+                        html += `<li><strong>${sub.name}:</strong> ${sub.details}</li>`;
+                    });
+                    html += `</ul>`;
+                }
+
+                // Outputs
+                if (details.outputs && details.outputs.length > 0) {
+                    html += `<h4>Outputs:</h4><ul>${details.outputs.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                } else {
+                     html += `<h4>Outputs:</h4><p><em>N/A</em></p>`;
+                }
+
+                infoContent.innerHTML = html;
+                panelTitle.textContent = comp.label;
+            } else {
+                panelTitle.textContent = 'Component Details';
+                infoContent.innerHTML = '<p class="placeholder">Click on a component in the diagram to see its details. Drag components to rearrange.</p>';
+            }
+        }
+        
+        let initialComponentLayouts = null; 
+        function storeInitialLayout(){if(canvas.width>0&&canvas.height>0&&components.length>0&&!initialComponentLayouts){initialComponentLayouts=components.map(c=>({id:c.id,relX:c.x/canvas.width,relY:c.y/canvas.height,}));}}
+        function applyStoredLayout(){if(initialComponentLayouts&&canvas.width>0&&canvas.height>0){components.forEach(comp=>{const initial=initialComponentLayouts.find(p=>p.id===comp.id); if(initial){comp.x=initial.relX*canvas.width; comp.y=initial.relY*canvas.height; comp.x=Math.max(0,Math.min(canvas.width-comp.width,comp.x)); comp.y=Math.max(0,Math.min(canvas.height-comp.height,comp.y));}});}}
+
+        function resizeCanvas() {
+            const container = document.getElementById('canvas-container');
+            const newWidth = container.offsetWidth - 2 * parseFloat(getComputedStyle(container).paddingLeft);
+            const newHeight = Math.max(750, window.innerHeight * 0.70); 
+            canvas.width = newWidth; canvas.height = newHeight;
+            if (!initialComponentLayouts) { defineComponents(); storeInitialLayout(); } 
+            else {
+                const currentSelectedId=selectedComponent?selectedComponent.id:null; const currentHoveredId=hoveredComponent?hoveredComponent.id:null;
+                defineComponents(); 
+                if(currentSelectedId)selectedComponent=components.find(c=>c.id===currentSelectedId)||null;
+                if(currentHoveredId)hoveredComponent=components.find(c=>c.id===currentHoveredId)||null;
+                applyStoredLayout(); 
+            }
+        }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDarkMode=document.body.classList.contains('dark');
+            themeIconLight.style.display=isDarkMode?'none':'block'; themeIconDark.style.display=isDarkMode?'block':'none';
+            localStorage.setItem('theme',isDarkMode?'dark':'light');
+            const currentSelectedId=selectedComponent?selectedComponent.id:null; const currentHoveredId=hoveredComponent?hoveredComponent.id:null;
+            defineComponents(); applyStoredLayout(); 
+            if(currentSelectedId)selectedComponent=components.find(c=>c.id===currentSelectedId)||null;
+            if(currentHoveredId)hoveredComponent=components.find(c=>c.id===currentHoveredId)||null;
+            updateInfoPanel(selectedComponent); 
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        function init() {
+            const savedTheme=localStorage.getItem('theme');
+            if(savedTheme==='dark'){document.body.classList.add('dark');themeIconLight.style.display='none';themeIconDark.style.display='block';}
+            else{themeIconLight.style.display='block';themeIconDark.style.display='none';}
+            resizeCanvas(); 
+            if(animationFrameId){cancelAnimationFrame(animationFrameId);} gameLoop();
+            updateInfoPanel(null); 
+        }
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
