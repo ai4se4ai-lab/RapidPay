@@ -104,13 +104,50 @@ export class SatdDetector {
     public classifyDebtType(content: string, context: string = ''): DebtType {
         const fullContent = (content + ' ' + context).toLowerCase();
         
+        // Check for test debt FIRST (before defect) - look for test-specific keywords
+        if (this.containsAny(fullContent, [
+            'unit test', 'integration test', 'needs test', 'add test', 'write test',
+            'test coverage', 'test case', 'test suite', 'test function',
+            'lack of test', 'insufficient test', 'untested', 'more test',
+            'regression test', 'automated test', 'manual test', 'test this',
+            'mock', 'stub', 'testing framework'
+        ])) {
+            return DebtType.TEST;
+        }
+        
+        // Check for implementation debt EARLY (before defect) - captures HACK, workarounds
+        if (this.containsAny(fullContent, [
+            'hack', 'workaround', 'temporary', 'temporary solution',
+            'quick fix', 'optimize', 'optimization', 'slow',
+            'efficient', 'inefficient', 'magic number',
+            'duplicated', 'duplication', 'duplicate code', 'copy paste',
+            'ugly', 'messy', 'needs refactoring', 'needs work',
+            'could be better', 'quick and dirty', 'fix later', 'refactor later',
+            'not ideal', 'not optimal', 'suboptimal', 'revisit', 'rework',
+            'rewrite', 'simplify', 'complex', 'complicated',
+            'simplistic', 'naive', 'brute force'
+        ])) {
+            return DebtType.IMPLEMENTATION;
+        }
+        
+        // Check for architecture debt (before design - more specific)
+        if (this.containsAny(fullContent, [
+            'architecture', 'component coupling', 'cohesion', 'module dependency',
+            'layer', 'microservice', 'monolith', 'separation of concerns', 
+            'single responsibility', 'service layer', 'infrastructure',
+            'scaling', 'scalability', 'throughput', 'latency', 'response time', 
+            'bottleneck', 'distributed', 'reliability', 'availability', 'resilience'
+        ])) {
+            return DebtType.ARCHITECTURE;
+        }
+        
         // Check for design debt
         if (this.containsAny(fullContent, [
             'bad design', 'poor design', 'could be designed better', 'design debt', 'refactor',
             'abstraction', 'flexibility', 'maintainability', 'extensibility', 'poorly designed',
-            'clean up', 'cleanup', 'clean this up', 'redesign', 'better design', 'architecture',
+            'clean up', 'cleanup', 'clean this up', 'redesign', 'better design',
             'code smell', 'technical debt', 'tech debt', 'antipattern', 'anti-pattern',
-            'decoupling', 'coupling', 'cohesion', 'encapsulation', 'design pattern',
+            'decoupling', 'coupling', 'encapsulation', 'design pattern',
             'inheritance', 'hardcoded', 'hard-coded', 'hard coded', 'hard-coding'
         ])) {
             return DebtType.DESIGN;
@@ -130,26 +167,15 @@ export class SatdDetector {
         
         // Check for defect debt
         if (this.containsAny(fullContent, [
-            'bug', 'defect', 'issue', 'problem', 'fix', 'error', 'incorrect',
+            'bug', 'defect', 'issue', 'problem', 'error', 'incorrect',
             'wrong', 'broken', 'doesn\'t work', 'not working', 'fails', 'failure',
             'exception', 'crash', 'corrupted', 'corruption', 'overflow', 'underflow',
             'memory leak', 'resource leak', 'null pointer', 'segfault', 'infinite loop',
-            'race condition', 'deadlock', 'concurrency', 'out of bounds', 'boundary check',
-            'edge case', 'corner case', 'vulnerability', 'security hole', 'security issue'
+            'race condition', 'deadlock', 'concurrency issue', 'out of bounds', 
+            'boundary check', 'edge case', 'corner case', 'vulnerability', 
+            'security hole', 'security issue'
         ])) {
             return DebtType.DEFECT;
-        }
-        
-        // Check for test debt
-        if (this.containsAny(fullContent, [
-            'test', 'unit test', 'integration test', 'testing', 'needs test',
-            'cover', 'coverage', 'assert', 'validation', 'verify', 'mock',
-            'stub', 'testing', 'test case', 'regression test', 'automated test',
-            'manual test', 'test suite', 'test function', 'lack of test',
-            'insufficient test', 'test this', 'untested', 'test coverage',
-            'write test', 'add test', 'improve test', 'more test'
-        ])) {
-            return DebtType.TEST;
         }
         
         // Check for requirement debt
@@ -161,33 +187,6 @@ export class SatdDetector {
             'planned feature', 'roadmap', 'milestone', 'not implemented yet'
         ])) {
             return DebtType.REQUIREMENT;
-        }
-        
-        // Check for architecture debt
-        if (this.containsAny(fullContent, [
-            'architecture', 'component', 'coupling', 'cohesion', 'dependency',
-            'structure', 'layer', 'system', 'module', 'interface', 'api',
-            'microservice', 'monolith', 'separation of concerns', 'single responsibility',
-            'service', 'infrastructure', 'scaling', 'scale', 'performance',
-            'throughput', 'latency', 'response time', 'bottleneck', 'scalability',
-            'distributed', 'reliability', 'availability', 'resilience'
-        ])) {
-            return DebtType.ARCHITECTURE;
-        }
-        
-        // Check for implementation debt (most common)
-        if (this.containsAny(fullContent, [
-            'implementation', 'hack', 'workaround', 'temporary', 'temporary solution',
-            'quick fix', 'optimize', 'optimization', 'performance', 'slow',
-            'efficient', 'inefficient', 'hardcode', 'hard code', 'magic number',
-            'constant', 'duplicated', 'duplication', 'duplicate code', 'copy paste',
-            'ugly', 'messy', 'clean', 'needs refactoring', 'needs work',
-            'could be better', 'quick and dirty', 'fix later', 'refactor later',
-            'not ideal', 'not optimal', 'suboptimal', 'revisit', 'rework',
-            'rewrite', 'improve', 'simplify', 'complex', 'complicated',
-            'simplistic', 'naive', 'brute force', 'elegant'
-        ])) {
-            return DebtType.IMPLEMENTATION;
         }
         
         // Default
@@ -322,6 +321,32 @@ export class SatdDetector {
                     ],
                     custom: []
                 }
+        });
+
+        // TypeScript patterns
+        this.languagePatterns.set('typescript', {
+            commentStyles: ['//', '/*', '/**'],
+            fileExtensions: ['ts', 'tsx', 'mts', 'cts'],
+            debtPatterns: {
+                explicit: ['TODO', 'FIXME', 'HACK', 'XXX', 'BUG', 'ISSUE', 'DEBT', 'NOTE', 'OPTIMIZE', 'PERF', 'REVIEW', 'REVISIT'],
+                implicit: [
+                    'temporary solution', 'quick fix', 'will be refactored', 
+                    'needs refactoring', 'could be better', 
+                    'not very elegant', 'workaround for', 'hack for',
+                    'technical debt', 'to be improved', 'refactor this',
+                    // TypeScript specific
+                    'any type', 'as any', '// @ts-ignore', '// @ts-nocheck',
+                    '@ts-expect-error', 'type assertion', 'non-null assertion',
+                    'eslint-disable', 'tslint:disable', 'typescript-eslint',
+                    'unknown type', 'never type', 'void type',
+                    'interface vs type', 'generic constraint', 'type guard',
+                    'discriminated union', 'exhaustive check', 'readonly',
+                    'magic string', 'magic number', 'hardcoded',
+                    'callback hell', 'spaghetti code', 'nested callbacks',
+                    'console.log', 'debugger', 'tight coupling'
+                ],
+                custom: []
+            }
         });
 
         // JavaScript patterns
