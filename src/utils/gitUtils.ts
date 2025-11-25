@@ -1,5 +1,13 @@
 // src/utils/gitUtils.ts
-import * as vscode from 'vscode';
+// Conditional import for vscode (only available in VS Code extension context)
+let vscode: typeof import('vscode') | undefined;
+try {
+  vscode = require('vscode');
+} catch {
+  // vscode module not available (CLI mode)
+  vscode = undefined;
+}
+
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
@@ -21,8 +29,10 @@ export interface RepositoryInfo {
  */
 export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
   try {
-    if (!vscode.workspace.workspaceFolders) {
-      vscode.window.showInformationMessage('No workspace folder open');
+    if (!vscode || !vscode.workspace.workspaceFolders) {
+      if (vscode) {
+        vscode.window.showInformationMessage('No workspace folder open');
+      }
       return null;
     }
     
@@ -32,7 +42,9 @@ export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
     try {
       await execPromise('git rev-parse --is-inside-work-tree', { cwd: workspaceRoot });
     } catch (error) {
-      vscode.window.showInformationMessage('The current workspace is not a Git repository or Git is not installed.');
+      if (vscode) {
+        vscode.window.showInformationMessage('The current workspace is not a Git repository or Git is not installed.');
+      }
       return null;
     }
     
@@ -43,7 +55,9 @@ export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
       remoteUrl = stdout.trim();
     } catch (error) {
       // Remote origin might not be configured, but that's okay
-      vscode.window.showInformationMessage('No remote origin configured for this repository.');
+      if (vscode) {
+        vscode.window.showInformationMessage('No remote origin configured for this repository.');
+      }
       remoteUrl = 'No remote origin';
     }
     
@@ -58,7 +72,9 @@ export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
       workspaceRoot: workspaceRoot
     };
   } catch (error) {
-    vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);
+    if (vscode) {
+      vscode.window.showErrorMessage(`Failed to get repository info: ${error}`);
+    }
     return null;
   }
 }
@@ -68,7 +84,7 @@ export async function getRepositoryInfo(): Promise<RepositoryInfo | null> {
  * @returns Workspace root path or null if not available
  */
 export function getWorkspaceRoot(): string | null {
-  if (!vscode.workspace.workspaceFolders) {
+  if (!vscode || !vscode.workspace.workspaceFolders) {
     return null;
   }
   

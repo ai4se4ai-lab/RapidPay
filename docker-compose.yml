@@ -57,6 +57,7 @@ services:
       - rapidpay-network
     working_dir: /workspace
     command: ["node", "/app/out/cli/index.js", "analyze", "--repo", "/workspace", "-o", "/output/results.json", "--neo4j", "bolt://neo4j:7687"]
+    restart: "no"
 
   # RapidPay Web Dashboard (optional)
   rapidpay-dashboard:

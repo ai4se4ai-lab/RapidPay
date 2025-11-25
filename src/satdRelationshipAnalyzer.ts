@@ -1,5 +1,15 @@
 // src/satdRelationshipAnalyzer.ts
-import * as vscode from 'vscode';
+// Conditional import for vscode (only available in VS Code extension context)
+let vscode: typeof import('vscode') | undefined;
+try {
+  vscode = require('vscode');
+} catch {
+  // vscode module not available (CLI mode)
+  vscode = undefined;
+}
+
+import * as fs from 'fs';
+import * as path from 'path';
 import { 
     TechnicalDebt, 
     SatdRelationship, 
@@ -302,9 +312,17 @@ export class SatdRelationshipAnalyzer {
                     continue;
                 }
                 
-                const uri = vscode.Uri.file(`${this.workspaceRoot}/${filePath}`);
-                const document = await vscode.workspace.openTextDocument(uri);
-                fileContentMap.set(filePath, document.getText());
+                // Use vscode API if available, otherwise use fs
+                if (vscode) {
+                    const uri = vscode.Uri.file(`${this.workspaceRoot}/${filePath}`);
+                    const document = await vscode.workspace.openTextDocument(uri);
+                    fileContentMap.set(filePath, document.getText());
+                } else {
+                    // CLI mode: use fs directly
+                    const fullPath = path.join(this.workspaceRoot, filePath);
+                    const content = fs.readFileSync(fullPath, 'utf-8');
+                    fileContentMap.set(filePath, content);
+                }
             } catch (error) {
                 console.error(`Failed to read file: ${filePath}`, error);
             }

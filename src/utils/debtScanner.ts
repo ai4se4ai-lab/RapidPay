@@ -1,5 +1,13 @@
 // src/utils/debtScanner.ts
-import * as vscode from 'vscode';
+// Conditional import for vscode (only available in VS Code extension context)
+let vscode: typeof import('vscode') | undefined;
+try {
+  vscode = require('vscode');
+} catch {
+  // vscode module not available (CLI mode)
+  vscode = undefined;
+}
+
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import * as fs from 'fs';

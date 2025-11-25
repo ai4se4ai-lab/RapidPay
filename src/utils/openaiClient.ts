@@ -1,5 +1,13 @@
 // src/utils/openaiClient.ts
-import * as vscode from 'vscode';
+// Conditional import for vscode (only available in VS Code extension context)
+let vscode: typeof import('vscode') | undefined;
+try {
+  vscode = require('vscode');
+} catch {
+  // vscode module not available (CLI mode)
+  vscode = undefined;
+}
+
 import { OpenAI } from 'openai';
 import {
   SATDClassificationResult,
@@ -19,10 +27,14 @@ let modelName: string = 'gpt-4o';
  */
 export function initializeOpenAI(): boolean {
   try {
-    // Get the API key from VS Code settings
-    const config = vscode.workspace.getConfiguration('RapidPay');
-    let apiKey = config.get<string>('openaiApiKey');
-    modelName = config.get<string>('modelName') || 'gpt-4o';
+    let apiKey: string | undefined;
+    
+    // Get the API key from VS Code settings if available
+    if (vscode) {
+      const config = vscode.workspace.getConfiguration('RapidPay');
+      apiKey = config.get<string>('openaiApiKey');
+      modelName = config.get<string>('modelName') || 'gpt-4o';
+    }
     
     // If no API key in settings, check for environment variable
     if (!apiKey) {
@@ -32,14 +44,18 @@ export function initializeOpenAI(): boolean {
     }
     
     if (!apiKey) {
-      vscode.window.showErrorMessage(
-        'OpenAI API key not found. Please set it in the extension settings or as OPENAI_API_KEY environment variable.',
-        'Open Settings'
-      ).then(selection => {
-        if (selection === 'Open Settings') {
-          vscode.commands.executeCommand('workbench.action.openSettings', 'RapidPay.openaiApiKey');
-        }
-      });
+      if (vscode) {
+        vscode.window.showErrorMessage(
+          'OpenAI API key not found. Please set it in the extension settings or as OPENAI_API_KEY environment variable.',
+          'Open Settings'
+        ).then(selection => {
+          if (selection === 'Open Settings') {
+            vscode!.commands.executeCommand('workbench.action.openSettings', 'RapidPay.openaiApiKey');
+          }
+        });
+      } else {
+        console.error('OpenAI API key not found. Please set OPENAI_API_KEY environment variable.');
+      }
       return false;
     }
 
@@ -48,7 +64,11 @@ export function initializeOpenAI(): boolean {
     });
     return true;
   } catch (error) {
-    vscode.window.showErrorMessage(`Failed to initialize OpenAI client: ${error}`);
+    if (vscode) {
+      vscode.window.showErrorMessage(`Failed to initialize OpenAI client: ${error}`);
+    } else {
+      console.error(`Failed to initialize OpenAI client: ${error}`);
+    }
     return false;
   }
 }
