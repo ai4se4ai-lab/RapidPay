@@ -1,383 +1,601 @@
 // src/utils/commitMonitor.ts
 import * as vscode from 'vscode';
-import { getCurrentCommitHash, getLatestCommitInfo } from './gitUtils';
-import { analyzeDebtFix } from './openaiClient';
-import { showDebtFixSuggestionsPanel } from './uiUtils';
-import { TechnicalDebt } from '../models';
-import * as childProcess from 'child_process';
+import { exec } from 'child_process';
 import { promisify } from 'util';
-import * as path from 'path';
+import { 
+    TechnicalDebt, 
+    CommitInfo, 
+    DeveloperInterest,
+    FixPotential,
+    CAIGWeights,
+    DEFAULT_CAIG_WEIGHTS,
+    COMMIT_WINDOW_SIZE,
+    FIX_POTENTIAL_VALUES,
+    SATDGraph
+} from '../models';
+import { 
+    assessFixPotential, 
+    generateRemediationPlan, 
+    summarizeChanges,
+    analyzeDebtFix 
+} from './openaiClient';
+import { getLatestCommit, getWorkspaceRoot } from './gitUtils';
+import { EffortScorer } from './effortScorer';
 
-// Type-safe version of exec
-const execPromise = promisify(childProcess.exec);
-
-let lastKnownCommitHash: string = '';
-let commitCheckInterval: NodeJS.Timeout | undefined;
-let technicalDebtItems: TechnicalDebt[] = [];
-
-// Files to ignore when checking for technical debt fixes
-const IGNORED_FILES: string[] = [
-  'README.md',
-  'readme.md',
-  'LICENSE',
-  'license',
-  '.gitignore',
-  'CHANGELOG.md',
-  'changelog.md',
-  'CONTRIBUTING.md',
-  'contributing.md',
-  'AUTHORS',
-  'authors',
-  'CODEOWNERS',
-  'codeowners',
-  'CODE_OF_CONDUCT.md',
-  'code_of_conduct.md'
-];
+const execPromise = promisify(exec);
 
 /**
- * Check if a file should be ignored in the technical debt analysis
- * @param filePath Path to the file
- * @returns True if the file should be ignored
+ * CommitMonitor implements Algorithm 4: Commit-Aware Insight Generation (CAIG)
+ * 
+ * It monitors commits, detects relevant SATD instances, calculates developer interest,
+ * and generates ranked recommendations with remediation plans.
+ * 
+ * Ranking formula: Rank(t_i) = η1·SIR(t_i) + η2·CommitRel(t_i) + η3·(1-S^t) + η4·f_i
+ * Where (η1,η2,η3,η4) = (0.4, 0.3, 0.15, 0.15)
  */
-function shouldIgnoreFile(filePath: string): boolean {
-  const fileName = path.basename(filePath).toLowerCase();
-  return IGNORED_FILES.some(ignored => ignored.toLowerCase() === fileName);
-}
-
-/**
- * Initialize the commit monitor
- * @param context Extension context
- * @param debtItems Technical debt items to monitor
- */
-export async function initializeCommitMonitor(
-  context: vscode.ExtensionContext,
-  debtItems: TechnicalDebt[]
-): Promise<void> {
-  // Store the debt items for monitoring
-  technicalDebtItems = debtItems;
-  
-  // Get current commit hash
-  lastKnownCommitHash = await getCurrentCommitHash();
-  
-  // Set up interval to check for new commits
-  if (commitCheckInterval) {
-    clearInterval(commitCheckInterval);
-  }
-  
-  commitCheckInterval = setInterval(async () => {
-    await checkForNewCommits();
-  }, 10000); // Check every 10 seconds
-  
-  // Add cleanup to context
-  context.subscriptions.push({
-    dispose: () => {
-      if (commitCheckInterval) {
-        clearInterval(commitCheckInterval);
-        commitCheckInterval = undefined;
-      }
-    }
-  });
-}
-
-/**
- * Check for new commits and analyze if they address technical debt
- */
-async function checkForNewCommits(): Promise<void> {
-  try {
-    const currentHash = await getCurrentCommitHash();
+export class CommitMonitor {
+    private workspaceRoot: string;
+    private lastKnownCommit: string | null = null;
+    private isRunning: boolean = false;
+    private intervalId: NodeJS.Timeout | null = null;
+    private weights: CAIGWeights = DEFAULT_CAIG_WEIGHTS;
     
-    if (lastKnownCommitHash && currentHash !== lastKnownCommitHash) {
-      // New commit detected
-      console.log(`New commit detected: ${currentHash}`);
-      lastKnownCommitHash = currentHash;
-      
-      // Only check for debt fixes if we have debt items
-      if (technicalDebtItems.length > 0) {
-        await checkCommitForTechnicalDebtFixes();
-      }
+    // Sliding window of recent commits (W=50)
+    private commitWindow: CommitInfo[] = [];
+    private windowSize: number = COMMIT_WINDOW_SIZE;
+    
+    // Developer interest tracking
+    private developerInterest: Map<string, DeveloperInterest> = new Map();
+    
+    // Effort scorer
+    private effortScorer: EffortScorer;
+    
+    constructor(workspaceRoot: string) {
+        this.workspaceRoot = workspaceRoot;
+        this.effortScorer = new EffortScorer(workspaceRoot);
     }
     
-    // Update the hash even if we didn't check for fixes
-    lastKnownCommitHash = currentHash;
-  } catch (error) {
-    console.error('Error checking for new commits:', error);
-  }
-}
-
-/**
- * Get file changes from the most recent commit
- * @returns Map of file paths to their changes
- */
-async function getChangedFilesFromGit(): Promise<Map<string, { added: string, context: string }>> {
-  const changedFiles = new Map<string, { added: string, context: string }>();
-  
-  try {
-    const workspacePath = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
-    if (!workspacePath) {
-      console.error('No workspace folder found');
-      return changedFiles;
+    /**
+     * Set CAIG ranking weights
+     */
+    public setWeights(weights: Partial<CAIGWeights>): void {
+        this.weights = { ...this.weights, ...weights };
     }
     
-    // Get list of files changed in the last commit
-    const { stdout: changedFilesList } = await execPromise(
-      'git show --name-only --pretty=format: HEAD',
-      { cwd: workspacePath }
-    );
+    /**
+     * Set sliding window size
+     */
+    public setWindowSize(size: number): void {
+        this.windowSize = size;
+    }
     
-    // Filter out ignored files
-    const fileNames = changedFilesList
-      .trim()
-      .split('\n')
-      .filter((name: string) => name.trim())
-      .filter((name: string) => !shouldIgnoreFile(name));
-    
-    console.log(`Found ${fileNames.length} relevant changed files in last commit (after filtering)`, fileNames);
-    
-    // For each file, get the diff and current content
-    for (const fileName of fileNames) {
-      try {
-        // Get the diff for this specific file
-        const { stdout: fileDiff } = await execPromise(
-          `git show HEAD -- "${fileName}"`,
-          { cwd: workspacePath }
-        );
+    /**
+     * Start monitoring for new commits
+     * @param debtItems Technical debt items to monitor
+     * @param onCommit Callback when a new commit is detected
+     * @param checkInterval Interval in milliseconds to check for new commits (default: 30s)
+     */
+    public async startMonitoring(
+        debtItems: TechnicalDebt[],
+        onCommit?: (results: TechnicalDebt[]) => void,
+        checkInterval: number = 30000
+    ): Promise<void> {
+        if (this.isRunning) {
+            console.log('Commit monitor is already running');
+            return;
+        }
         
-        // Try to read the current file content
-        let fileContent = "";
+        this.isRunning = true;
+        
+        // Get initial commit
+        const latestCommit = await getLatestCommit(this.workspaceRoot);
+        this.lastKnownCommit = latestCommit;
+        
+        // Load commit window history
+        await this.loadCommitWindow();
+        
+        // Build initial developer interest from commit history
+        await this.buildDeveloperInterest();
+        
+        console.log(`CAIG: Started monitoring with window of ${this.commitWindow.length} commits`);
+        
+        // Start periodic checking
+        this.intervalId = setInterval(async () => {
+            await this.checkForNewCommits(debtItems, onCommit);
+        }, checkInterval);
+    }
+    
+    /**
+     * Stop monitoring for commits
+     */
+    public stopMonitoring(): void {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+        this.isRunning = false;
+        console.log('CAIG: Stopped commit monitoring');
+    }
+    
+    /**
+     * Load sliding window of recent commits
+     */
+    private async loadCommitWindow(): Promise<void> {
         try {
-          const uri = vscode.Uri.file(`${workspacePath}/${fileName}`);
-          const document = await vscode.workspace.openTextDocument(uri);
-          fileContent = document.getText();
-        } catch (err) {
-          console.warn(`Could not read current content of ${fileName}: ${err}`);
-        }
-        
-        changedFiles.set(fileName, {
-          added: fileContent.substring(0, 1000), // First 1000 chars of current content
-          context: fileDiff // The full diff for this file
-        });
-      } catch (err) {
-        console.error(`Error getting diff for ${fileName}: ${err}`);
-      }
-    }
-    
-  } catch (error) {
-    console.error('Failed to get changed files:', error);
-  }
-  
-  console.log(`Successfully processed ${changedFiles.size} changed files`);
-  return changedFiles;
-}
-
-/**
- * Check if a commit addresses technical debt
- */
-export async function checkCommitForTechnicalDebtFixes(): Promise<void> {
-  if (technicalDebtItems.length === 0) {
-    vscode.window.showInformationMessage('No technical debt items to check against.');
-    return;
-  }
-  
-  try {
-    const commitInfo = await getLatestCommitInfo();
-    
-    if (!commitInfo) {
-      vscode.window.showWarningMessage('Could not get latest commit information.');
-      return;
-    }
-    
-    vscode.window.showInformationMessage('Checking the latest commit for technical debt fixes...');
-    
-    // Get changed files directly from git commands instead of parsing diff
-    const changedFiles = await getChangedFilesFromGit();
-    
-    if (changedFiles.size === 0) {
-      console.warn('No relevant changed files detected after filtering.');
-      vscode.window.showWarningMessage('No relevant code changes detected in the latest commit (documentation files are ignored).');
-      return;
-    }
-    
-    console.log(`Analyzing ${changedFiles.size} changed files for technical debt fixes...`);
-    
-    // For each technical debt item, check if any changes in this commit might address it
-    // First filter out technical debt items in ignored files
-    const relevantDebtItems = technicalDebtItems.filter(item => !shouldIgnoreFile(item.file));
-    
-    console.log(`Found ${relevantDebtItems.length} relevant technical debt items (ignored ${technicalDebtItems.length - relevantDebtItems.length} in documentation files)`);
-    
-    if (relevantDebtItems.length === 0) {
-      console.log('No technical debt items in code files to analyze');
-      vscode.window.showInformationMessage('All technical debt items are in documentation files, which are ignored.');
-      return;
-    }
-    
-    // Analyze each relevant technical debt item
-    for (const debtItem of relevantDebtItems) {
-      try {
-        // Get surrounding code context for the technical debt
-        let surroundingCode = "";
-        try {
-          // Use VS Code API to get file content
-          const uri = vscode.Uri.file(`${vscode.workspace.workspaceFolders?.[0].uri.fsPath}/${debtItem.file}`);
-          const document = await vscode.workspace.openTextDocument(uri);
-          
-          // Get 5 lines before and 5 lines after the technical debt comment
-          const startLine = Math.max(0, debtItem.line - 6);
-          const endLine = Math.min(document.lineCount - 1, debtItem.line + 4);
-          
-          // Extract the code
-          for (let i = startLine; i <= endLine; i++) {
-            const lineText = document.lineAt(i).text;
-            // Mark the actual debt line
-            surroundingCode += (i === debtItem.line - 1) ? 
-              `→ ${lineText}\n` : 
-              `  ${lineText}\n`;
-          }
-        } catch (error) {
-          console.error(`Failed to get surrounding code for ${debtItem.file}: ${error}`);
-          surroundingCode = "Could not retrieve surrounding code.";
-        }
-        
-        // Create a detailed analysis context with both the debt and the changes
-        let analysisContext = `Technical Debt Details:\n`;
-        analysisContext += `File: ${debtItem.file}, Line: ${debtItem.line}\n`;
-        analysisContext += `Debt Comment: ${debtItem.content}\n`;
-        
-        // Ensure we have a rich description for the technical debt
-        let enhancedDescription = debtItem.description || debtItem.content;
-        if (enhancedDescription === debtItem.content) {
-          // If description is same as content, enrich it with code context
-          enhancedDescription += `\n\nContext Analysis: The technical debt appears in the following code context:\n${surroundingCode}\n`;
-          enhancedDescription += `Based on the surrounding code, this technical debt likely involves issues that should be fixed.`;
-        }
-        
-        analysisContext += `Description: ${enhancedDescription}\n\n`;
-        analysisContext += `Surrounding Code Context:\n${surroundingCode}\n\n`;
-        
-        // Add changed files information
-        analysisContext += `Recent Code Changes:\n`;
-        
-        // Track if we have meaningful content
-        let hasMeaningfulChanges = false;
-        
-        for (const [filePath, fileInfo] of changedFiles.entries()) {
-          analysisContext += `\n\nFile: ${filePath}\n`;
-          
-          // If this is the file with the technical debt, highlight it
-          if (filePath === debtItem.file) {
-            analysisContext += `NOTE: This file contains the technical debt comment at line ${debtItem.line}.\n\n`;
-          }
-          
-          // Add the diff content (which includes both the changes and context)
-          if (fileInfo.context && fileInfo.context.trim()) {
-            analysisContext += `Diff:\n${fileInfo.context}\n`;
-            hasMeaningfulChanges = true;
-          }
-          
-          // Try to get the actual file content
-          try {
-            const uri = vscode.Uri.file(`${vscode.workspace.workspaceFolders?.[0].uri.fsPath}/${filePath}`);
-            const document = await vscode.workspace.openTextDocument(uri);
-            const fileContent = document.getText();
+            const { stdout } = await execPromise(
+                `git log -${this.windowSize} --format="%H|%an|%ae|%at|%s" --name-only`,
+                { cwd: this.workspaceRoot }
+            );
             
-            // Add first 1000 chars of content
-            analysisContext += `\nCurrent file content (truncated):\n${fileContent.substring(0, 1000)}`;
-            if (fileContent.length > 1000) {
-              analysisContext += `\n... (truncated, total size: ${fileContent.length} bytes)`;
+            const commits: CommitInfo[] = [];
+            const lines = stdout.split('\n');
+            let currentCommit: CommitInfo | null = null;
+            
+            for (const line of lines) {
+                if (line.includes('|')) {
+                    // Commit header line
+                    if (currentCommit) {
+                        commits.push(currentCommit);
+                    }
+                    
+                    const [hash, author, authorEmail, timestamp, message] = line.split('|');
+                    currentCommit = {
+                        hash,
+                        author,
+                        authorEmail,
+                        timestamp: new Date(parseInt(timestamp, 10) * 1000),
+                        message,
+                        modifiedFiles: []
+                    };
+                } else if (line.trim() && currentCommit) {
+                    // File path line
+                    currentCommit.modifiedFiles.push(line.trim());
+                }
             }
-            hasMeaningfulChanges = true;
-          } catch (error) {
-            console.error(`Failed to get content for ${filePath}: ${error}`);
-            analysisContext += `\nCould not retrieve current file content.\n`;
-          }
+            
+            if (currentCommit) {
+                commits.push(currentCommit);
+            }
+            
+            this.commitWindow = commits;
+        } catch (error) {
+            console.error('Failed to load commit window:', error);
+        }
+    }
+    
+    /**
+     * Build developer interest from commit history
+     */
+    private async buildDeveloperInterest(): Promise<void> {
+        for (const commit of this.commitWindow) {
+            const devId = commit.authorEmail;
+            
+            if (!this.developerInterest.has(devId)) {
+                this.developerInterest.set(devId, {
+                    developerId: devId,
+                    fileModifications: new Map(),
+                    totalScore: 0
+                });
+            }
+            
+            const interest = this.developerInterest.get(devId)!;
+            
+            for (const file of commit.modifiedFiles) {
+                const count = interest.fileModifications.get(file) || 0;
+                interest.fileModifications.set(file, count + 1);
+                interest.totalScore++;
+            }
+        }
+    }
+    
+    /**
+     * Check for new commits and analyze relevant SATD
+     */
+    private async checkForNewCommits(
+        debtItems: TechnicalDebt[],
+        onCommit?: (results: TechnicalDebt[]) => void
+    ): Promise<void> {
+        try {
+            const latestCommit = await getLatestCommit(this.workspaceRoot);
+            
+            if (latestCommit && latestCommit !== this.lastKnownCommit) {
+                console.log(`CAIG: New commit detected: ${latestCommit}`);
+                
+                // Get commit info
+                const commitInfo = await this.getCommitInfo(latestCommit);
+                
+                if (commitInfo) {
+                    // Update sliding window
+                    this.commitWindow.unshift(commitInfo);
+                    if (this.commitWindow.length > this.windowSize) {
+                        this.commitWindow.pop();
+                    }
+                    
+                    // Update developer interest
+                    this.updateDeveloperInterest(commitInfo);
+                    
+                    // Analyze and rank SATD
+                    const rankedDebts = await this.analyzeCommitRelevance(debtItems, commitInfo);
+                    
+                    if (onCommit && rankedDebts.length > 0) {
+                        onCommit(rankedDebts);
+                    }
+                }
+                
+                this.lastKnownCommit = latestCommit;
+            }
+        } catch (error) {
+            console.error('Error checking for new commits:', error);
+        }
+    }
+    
+    /**
+     * Get detailed commit information
+     */
+    private async getCommitInfo(commitHash: string): Promise<CommitInfo | null> {
+        try {
+            // Get commit metadata
+            const { stdout: metaOutput } = await execPromise(
+                `git show -s --format="%H|%an|%ae|%at|%s" ${commitHash}`,
+                { cwd: this.workspaceRoot }
+            );
+            
+            const [hash, author, authorEmail, timestamp, message] = metaOutput.trim().split('|');
+            
+            // Get modified files
+            const { stdout: filesOutput } = await execPromise(
+                `git diff-tree --no-commit-id --name-only -r ${commitHash}`,
+                { cwd: this.workspaceRoot }
+            );
+            
+            const modifiedFiles = filesOutput.trim().split('\n').filter(f => f);
+            
+            // Get diff
+            const { stdout: diff } = await execPromise(
+                `git show ${commitHash} --format=""`,
+                { cwd: this.workspaceRoot, maxBuffer: 5 * 1024 * 1024 }
+            ).catch(() => ({ stdout: '' }));
+            
+            return {
+                hash,
+                author,
+                authorEmail,
+                timestamp: new Date(parseInt(timestamp, 10) * 1000),
+                message,
+                modifiedFiles,
+                diff
+            };
+        } catch (error) {
+            console.error(`Failed to get commit info for ${commitHash}:`, error);
+            return null;
+        }
+    }
+    
+    /**
+     * Update developer interest with new commit
+     */
+    private updateDeveloperInterest(commit: CommitInfo): void {
+        const devId = commit.authorEmail;
+        
+        if (!this.developerInterest.has(devId)) {
+            this.developerInterest.set(devId, {
+                developerId: devId,
+                fileModifications: new Map(),
+                totalScore: 0
+            });
         }
         
-        // Add commit information
-        analysisContext += `\n\nCommit Information:\n`;
-        analysisContext += `Hash: ${commitInfo.hash}\n`;
-        analysisContext += `Message: ${commitInfo.message}\n`;
-        analysisContext += `Note: Changes to documentation files (README.md, etc.) are ignored in this analysis.\n`;
+        const interest = this.developerInterest.get(devId)!;
         
-        if (!hasMeaningfulChanges) {
-          console.warn(`No meaningful changes detected for analysis of ${debtItem.file}:${debtItem.line}`);
-          analysisContext += `\nWARNING: Limited change information available for analysis.\n`;
+        for (const file of commit.modifiedFiles) {
+            const count = interest.fileModifications.get(file) || 0;
+            interest.fileModifications.set(file, count + 1);
+            interest.totalScore++;
+        }
+    }
+    
+    /**
+     * Calculate developer interest score for a SATD instance
+     * DEV_id(t_i) = familiarity with file/region
+     */
+    private calculateDeveloperInterestScore(debt: TechnicalDebt, commit: CommitInfo): number {
+        const devId = commit.authorEmail;
+        const interest = this.developerInterest.get(devId);
+        
+        if (!interest) return 0;
+        
+        // Direct file familiarity
+        const fileModCount = interest.fileModifications.get(debt.file) || 0;
+        const totalMods = interest.totalScore || 1;
+        
+        // Normalize to [0, 1]
+        return Math.min(1, fileModCount / Math.max(10, totalMods * 0.1));
+    }
+    
+    /**
+     * Algorithm 4: Commit-Aware Insight Generation (CAIG)
+     * 
+     * Analyze commit relevance and rank SATD instances
+     * Rank(t_i) = η1·SIR(t_i) + η2·CommitRel(t_i) + η3·(1-S^t) + η4·f_i
+     */
+    public async analyzeCommitRelevance(
+        debtItems: TechnicalDebt[],
+        commit: CommitInfo
+    ): Promise<TechnicalDebt[]> {
+        console.log(`CAIG: Analyzing ${debtItems.length} SATD instances against commit ${commit.hash.substring(0, 7)}`);
+        
+        // Step 1: Calculate commit relevance for each debt item
+        const relevantDebts: TechnicalDebt[] = [];
+        
+        for (const debt of debtItems) {
+            const commitRel = this.calculateCommitRelevance(debt, commit);
+            
+            // Only consider if there's some relevance
+            if (commitRel > 0) {
+                relevantDebts.push({
+                    ...debt,
+                    commitRelevance: commitRel,
+                    developerInterestScore: this.calculateDeveloperInterestScore(debt, commit)
+                });
+            }
         }
         
-        console.log(`Analyzing debt item ${debtItem.id} against changes...`);
+        if (relevantDebts.length === 0) {
+            console.log('CAIG: No relevant SATD instances found for this commit');
+            return [];
+        }
         
-        // Analyze if the debt has been addressed by any of the changes
-        const analysis = await analyzeDebtFix(
-          {
-            ...debtItem,
-            // Include detailed context in the description
-            description: analysisContext
-          },
-          commitInfo.hash,
-          commitInfo.message,
-          `Please analyze if the recent code changes in this commit address or partially address the technical debt. 
-          Focus on understanding the semantic relationship between the changes and the technical debt comment.
-          
-          1. First, understand what the technical debt is about by examining the comment and surrounding code.
-          2. Then, analyze the changes in all files to see if they resolve the underlying issue.
-          3. Explain WHY the changes may or may not fix the technical debt issue.
-          4. Be specific about which code changes (if any) relate to the technical debt and how they address it.
-          
-          If the changes completely fix the issue, explain how.
-          If they partially fix it, explain what's still missing.
-          If they don't fix it at all, explain why not.`
+        console.log(`CAIG: Found ${relevantDebts.length} potentially relevant SATD instances`);
+        
+        // Step 2: Calculate effort scores
+        const debtsWithEffort = await this.effortScorer.calculateEffortScores(relevantDebts);
+        
+        // Step 3: Assess fix potential using LLM (Prompt 2)
+        const debtsWithFixPotential = await this.assessFixPotentials(debtsWithEffort, commit);
+        
+        // Step 4: Calculate final ranking score
+        const rankedDebts = this.calculateRankingScores(debtsWithFixPotential);
+        
+        // Step 5: Generate remediation plans for top items (Prompt 3)
+        const topDebts = rankedDebts.slice(0, 5);
+        const debtsWithPlans = await this.generateRemediationPlans(topDebts, commit);
+        
+        // Combine with remaining debts
+        const finalDebts = [...debtsWithPlans, ...rankedDebts.slice(5)];
+        
+        console.log(`CAIG: Ranked ${finalDebts.length} SATD instances, top item: ${finalDebts[0]?.id}`);
+        
+        return finalDebts;
+    }
+    
+    /**
+     * Calculate commit relevance score
+     * Based on: file modified, neighbor modified, author familiarity
+     */
+    private calculateCommitRelevance(debt: TechnicalDebt, commit: CommitInfo): number {
+        let relevance = 0;
+        
+        // Direct file modification (highest relevance)
+        if (commit.modifiedFiles.includes(debt.file)) {
+            relevance += 0.5;
+        }
+        
+        // Same directory modified (neighbor)
+        const debtDir = debt.file.substring(0, debt.file.lastIndexOf('/'));
+        const neighborModified = commit.modifiedFiles.some(f => {
+            const dir = f.substring(0, f.lastIndexOf('/'));
+            return dir === debtDir;
+        });
+        if (neighborModified) {
+            relevance += 0.3;
+        }
+        
+        // Author familiarity
+        const devInterest = this.calculateDeveloperInterestScore(debt, commit);
+        relevance += 0.2 * devInterest;
+        
+        return Math.min(1, relevance);
+    }
+    
+    /**
+     * Assess fix potential for relevant debt items using Prompt 2
+     */
+    private async assessFixPotentials(
+        debtItems: TechnicalDebt[],
+        commit: CommitInfo
+    ): Promise<TechnicalDebt[]> {
+        const results: TechnicalDebt[] = [];
+        
+        // Process in parallel with rate limiting
+        const batchSize = 3;
+        
+        for (let i = 0; i < debtItems.length; i += batchSize) {
+            const batch = debtItems.slice(i, i + batchSize);
+            
+            const promises = batch.map(async (debt) => {
+                try {
+                    const summarizedDiff = summarizeChanges(commit.diff || '', 500);
+                    
+                    const result = await assessFixPotential(
+                        debt.content,
+                        debt.file,
+                        debt.line,
+                        summarizedDiff,
+                        commit.modifiedFiles
+                    );
+                    
+                    return {
+                        ...debt,
+                        fixPotential: result.potential,
+                        fixPotentialValue: result.value
+                    };
+                } catch (error) {
+                    console.error(`Failed to assess fix potential for ${debt.id}:`, error);
+                    return {
+                        ...debt,
+                        fixPotential: FixPotential.LOW,
+                        fixPotentialValue: 0
+                    };
+                }
+            });
+            
+            const batchResults = await Promise.all(promises);
+            results.push(...batchResults);
+            
+            // Small delay between batches
+            if (i + batchSize < debtItems.length) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+        
+        return results;
+    }
+    
+    /**
+     * Calculate final ranking score using CAIG formula
+     * Rank(t_i) = η1·SIR(t_i) + η2·CommitRel(t_i) + η3·(1-S^t) + η4·f_i
+     */
+    private calculateRankingScores(debtItems: TechnicalDebt[]): TechnicalDebt[] {
+        const rankedDebts = debtItems.map(debt => {
+            const sir = debt.sirScore || 0;
+            const commitRel = debt.commitRelevance || 0;
+            const effort = debt.effortScore || 0;
+            const fixPotential = debt.fixPotentialValue || 0;
+            
+            // CAIG ranking formula
+            const rankScore = 
+                this.weights.eta1 * sir +
+                this.weights.eta2 * commitRel +
+                this.weights.eta3 * (1 - effort) + // Lower effort = higher priority
+                this.weights.eta4 * fixPotential;
+            
+            return {
+                ...debt,
+                rankScore
+            };
+        });
+        
+        // Sort by rank score (descending)
+        return rankedDebts.sort((a, b) => (b.rankScore || 0) - (a.rankScore || 0));
+    }
+    
+    /**
+     * Generate remediation plans for top-ranked items using Prompt 3
+     */
+    private async generateRemediationPlans(
+        debtItems: TechnicalDebt[],
+        commit: CommitInfo
+    ): Promise<TechnicalDebt[]> {
+        const results: TechnicalDebt[] = [];
+        
+        for (const debt of debtItems) {
+            try {
+                // Get connected SATD items (simplified - in full impl, use the graph)
+                const connectedItems: Array<{ id: string; content: string; file: string; line: number }> = 
+                    (debt.connectedSatdIds || []).map(id => ({
+                        id,
+                        content: 'Connected SATD',
+                        file: debt.file,
+                        line: debt.line
+                    }));
+                
+                const summarizedChanges = summarizeChanges(commit.diff || '', 300);
+                
+                const plan = await generateRemediationPlan(
+                    debt.content,
+                    debt.sirScore || 0,
+                    debt.fixPotential || FixPotential.LOW,
+                    summarizedChanges,
+                    connectedItems
+                );
+                
+                results.push({
+                    ...debt,
+                    remediationPlan: plan?.fullPlan
+                });
+            } catch (error) {
+                console.error(`Failed to generate remediation plan for ${debt.id}:`, error);
+                results.push(debt);
+            }
+        }
+        
+        return results;
+    }
+    
+    /**
+     * Check if a commit addresses technical debt (legacy function for compatibility)
+     */
+    public async checkCommitForTechnicalDebtFixes(
+        debtItems: TechnicalDebt[],
+        commitHash: string
+    ): Promise<void> {
+        const commitInfo = await this.getCommitInfo(commitHash);
+        
+        if (!commitInfo) {
+            console.error('Could not get commit info');
+            return;
+        }
+        
+        // Find relevant debt items
+        const relevantDebts = debtItems.filter(debt => 
+            commitInfo.modifiedFiles.includes(debt.file)
         );
         
-        if (!analysis) {
-          console.log(`No analysis result for debt item ${debtItem.id}`);
-          continue;
+        if (relevantDebts.length === 0) {
+            console.log('No relevant technical debt for this commit');
+            return;
         }
         
-        console.log(`Analysis for ${debtItem.file}:${debtItem.line} - ` + 
-          (analysis.includes("UNRELATED") ? "UNRELATED" : "POTENTIAL FIX"));
-        
-        if (!analysis.includes("UNRELATED")) {
-          vscode.window.showInformationMessage(
-            `Potential fix for technical debt in ${debtItem.file}:${debtItem.line}`,
-            'View Suggestions'
-          ).then(selection => {
-            if (selection === 'View Suggestions') {
-              showDebtFixSuggestionsPanel(debtItem, analysis);
+        // Analyze each relevant debt item
+        for (const debt of relevantDebts) {
+            const analysis = await analyzeDebtFix(
+                debt,
+                commitInfo.hash,
+                commitInfo.message,
+                commitInfo.diff || ''
+            );
+            
+            if (analysis) {
+                vscode.window.showInformationMessage(
+                    `Technical Debt Analysis for ${debt.file}:${debt.line}`,
+                    { modal: false }
+                );
+                
+                // Show in output channel
+                const outputChannel = vscode.window.createOutputChannel('RapidPay CAIG');
+                outputChannel.appendLine(`\n=== Technical Debt Analysis ===`);
+                outputChannel.appendLine(`File: ${debt.file}`);
+                outputChannel.appendLine(`Line: ${debt.line}`);
+                outputChannel.appendLine(`Debt: ${debt.content}`);
+                outputChannel.appendLine(`\nCommit: ${commitInfo.hash.substring(0, 7)} - ${commitInfo.message}`);
+                outputChannel.appendLine(`\nAnalysis:\n${analysis}`);
+                outputChannel.show();
             }
-          });
         }
-      } catch (error) {
-        console.error(`Failed to analyze commit for technical debt fixes: ${error}`);
-      }
     }
-  } catch (error) {
-    vscode.window.showErrorMessage(`Failed to check commit: ${error}`);
-  }
+    
+    /**
+     * Get the current developer interest map
+     */
+    public getDeveloperInterest(): Map<string, DeveloperInterest> {
+        return new Map(this.developerInterest);
+    }
+    
+    /**
+     * Get the current commit window
+     */
+    public getCommitWindow(): CommitInfo[] {
+        return [...this.commitWindow];
+    }
 }
 
 /**
- * Set technical debt items to monitor
- * @param debtItems Technical debt items
+ * Factory function to create a commit monitor
  */
-export function setTechnicalDebtItems(debtItems: TechnicalDebt[]): void {
-  technicalDebtItems = debtItems;
-}
-
-/**
- * Get technical debt items being monitored
- * @returns Technical debt items
- */
-export function getTechnicalDebtItems(): TechnicalDebt[] {
-  return technicalDebtItems;
-}
-
-/**
- * Dispose of the commit monitor
- */
-export function disposeCommitMonitor(): void {
-  if (commitCheckInterval) {
-    clearInterval(commitCheckInterval);
-    commitCheckInterval = undefined;
-  }
-  
-  technicalDebtItems = [];
+export function createCommitMonitor(): CommitMonitor | null {
+    const workspaceRoot = getWorkspaceRoot();
+    if (!workspaceRoot) {
+        return null;
+    }
+    return new CommitMonitor(workspaceRoot);
 }

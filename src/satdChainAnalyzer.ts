@@ -1,42 +1,61 @@
 // src/satdChainAnalyzer.ts
 import * as vscode from 'vscode';
-import { TechnicalDebt, SatdRelationship, RelationshipType } from './models';
+import { 
+    TechnicalDebt, 
+    SatdRelationship, 
+    RelationshipType,
+    WeightedEdge,
+    Chain,
+    SIRComponents,
+    SIRWeights,
+    DEFAULT_SIR_WEIGHTS,
+    SATDGraph
+} from './models';
 
 /**
  * SatdChainAnalyzer discovers chains of technical debt relationships
- * by analyzing direct and indirect connections between debt items.
+ * and calculates SATD Impact Ripple (SIR) scores.
+ * 
+ * Implements Algorithm 3: SATD Impact Ripple (SIR) Score Computation
+ * 
+ * SIR(t_i) = α·Fanout_w(t_i) + β·ChainLen_w(t_i) + γ·Reachability_w(t_i)
+ * Where (α,β,γ) = (0.4, 0.3, 0.3) by default
  */
 export class SatdChainAnalyzer {
-
-    // Add this method to the SatdChainAnalyzer class
-
-/**
- * Set weights for SIR score calculation
- * @param severityWeight Weight for intrinsic severity
- * @param outgoingWeight Weight for outgoing chain influence
- * @param incomingWeight Weight for incoming chain dependency
- * @param chainLengthWeight Weight for chain length factor
- */
-public setSirWeights(
-    severityWeight: number,
-    outgoingWeight: number,
-    incomingWeight: number,
-    chainLengthWeight: number
-): void {
-    this.severityWeight = severityWeight;
-    this.outgoingWeight = outgoingWeight;
-    this.incomingWeight = incomingWeight;
-    this.chainLengthWeight = chainLengthWeight;
-}
-
-// And add these properties at the class level
-private severityWeight: number = 0.4;
-private outgoingWeight: number = 0.3;
-private incomingWeight: number = -0.1;
-private chainLengthWeight: number = 0.4;
+    // SIR weight configuration
+    private weights: SIRWeights = { ...DEFAULT_SIR_WEIGHTS };
+    
+    // Memoization cache for ChainLen computation
+    private chainLenCache: Map<string, number> = new Map();
+    
+    // Memoization cache for Reachability computation
+    private reachabilityCache: Map<string, number> = new Map();
 
     /**
-     * Find all chains in the relationship graph
+     * Set weights for SIR score calculation
+     * @param alpha Weight for Fanout_w component (default: 0.4)
+     * @param beta Weight for ChainLen_w component (default: 0.3)
+     * @param gamma Weight for Reachability_w component (default: 0.3)
+     */
+    public setSirWeights(alpha: number, beta: number, gamma: number): void {
+        // Normalize weights to sum to 1
+        const sum = alpha + beta + gamma;
+        this.weights = {
+            alpha: alpha / sum,
+            beta: beta / sum,
+            gamma: gamma / sum
+        };
+    }
+    
+    /**
+     * Get current SIR weights
+     */
+    public getSirWeights(): SIRWeights {
+        return { ...this.weights };
+    }
+
+    /**
+     * Find all chains in the relationship graph as weakly connected subgraphs
      * @param debtItems Technical debt items
      * @param relationships Direct relationships between debt items
      * @returns Enhanced relationships with chain information
@@ -48,17 +67,76 @@ private chainLengthWeight: number = 0.4;
         relationships: SatdRelationship[], 
         chains: Chain[] 
     } {
-        // Build a dependency graph from the relationships
-        const graph = this.buildDependencyGraph(relationships);
+        // Collect all weighted edges
+        const edges: WeightedEdge[] = [];
+        for (const rel of relationships) {
+            edges.push(...rel.edges);
+        }
         
-        // Find all chains in the graph
+        // Build undirected adjacency list for weakly connected component analysis
+        const undirectedAdj = new Map<string, Set<string>>();
+        
+        for (const debt of debtItems) {
+            undirectedAdj.set(debt.id, new Set());
+        }
+        
+        for (const edge of edges) {
+            if (!undirectedAdj.has(edge.sourceId)) {
+                undirectedAdj.set(edge.sourceId, new Set());
+            }
+            if (!undirectedAdj.has(edge.targetId)) {
+                undirectedAdj.set(edge.targetId, new Set());
+            }
+            
+            // Add edges in both directions for undirected graph
+            undirectedAdj.get(edge.sourceId)!.add(edge.targetId);
+            undirectedAdj.get(edge.targetId)!.add(edge.sourceId);
+        }
+        
+        // Find weakly connected components using BFS
         const chains: Chain[] = [];
         const visited = new Set<string>();
+        let chainId = 0;
         
-        // Start from each node to find all possible chains
         for (const debt of debtItems) {
-            if (!visited.has(debt.id)) {
-                this.findChainsFromNode(debt.id, graph, [], chains, visited, new Set<string>());
+            if (visited.has(debt.id)) continue;
+            
+            // BFS to find all nodes in this component
+            const component: string[] = [];
+            const queue: string[] = [debt.id];
+            
+            while (queue.length > 0) {
+                const nodeId = queue.shift()!;
+                if (visited.has(nodeId)) continue;
+                
+                visited.add(nodeId);
+                component.push(nodeId);
+                
+                const neighbors = undirectedAdj.get(nodeId) || new Set();
+                for (const neighbor of neighbors) {
+                    if (!visited.has(neighbor)) {
+                        queue.push(neighbor);
+                    }
+                }
+            }
+            
+            // Only create a chain if there's more than one node connected
+            if (component.length > 1) {
+                // Calculate total weight of edges in this chain
+                let totalWeight = 0;
+                const componentSet = new Set(component);
+                for (const edge of edges) {
+                    if (componentSet.has(edge.sourceId) && componentSet.has(edge.targetId)) {
+                        totalWeight += edge.weight;
+                    }
+                }
+                
+                chains.push({
+                    id: `chain-${++chainId}`,
+                    nodes: component,
+                    length: component.length,
+                    totalWeight
+                });
             }
         }
         
@@ -72,96 +150,33 @@ private chainLengthWeight: number = 0.4;
     }
     
     /**
-     * Build a directed dependency graph from relationships
-     * @param relationships List of relationships
-     * @returns Adjacency list representation of the graph
-     */
-    private buildDependencyGraph(relationships: SatdRelationship[]): Map<string, string[]> {
-        const graph = new Map<string, string[]>();
-        
-        for (const rel of relationships) {
-            if (!graph.has(rel.sourceId)) {
-                graph.set(rel.sourceId, []);
-            }
-            
-            graph.get(rel.sourceId)!.push(rel.targetId);
-        }
-        
-        return graph;
-    }
-    
-    /**
-     * Find all chains starting from a specific node
-     * @param nodeId Current node ID
-     * @param graph Dependency graph
-     * @param currentPath Current path being explored
-     * @param chains Output list of found chains
-     * @param visited Set of visited nodes
-     * @param currentVisited Set of nodes visited in the current path (to detect cycles)
-     */
-    private findChainsFromNode(
-        nodeId: string, 
-        graph: Map<string, string[]>, 
-        currentPath: string[], 
-        chains: Chain[], 
-        visited: Set<string>,
-        currentVisited: Set<string>
-    ): void {
-        // Mark node as visited in the current path
-        currentVisited.add(nodeId);
-        
-        // Add node to current path
-        const newPath = [...currentPath, nodeId];
-        
-        // If path has at least 2 nodes, it's a chain
-        if (newPath.length >= 2) {
-            chains.push({
-                id: `chain-${chains.length + 1}`,
-                nodes: [...newPath],
-                length: newPath.length
-            });
-        }
-        
-        // Continue to neighbors
-        const neighbors = graph.get(nodeId) || [];
-        for (const neighbor of neighbors) {
-            // Avoid cycles in the current path
-            if (!currentVisited.has(neighbor)) {
-                this.findChainsFromNode(neighbor, graph, newPath, chains, visited, currentVisited);
-            }
-        }
-        
-        // Mark the overall node as visited
-        visited.add(nodeId);
-        
-        // Remove from current path visited set when backtracking
-        currentVisited.delete(nodeId);
-    }
-    
-    /**
      * Enhance relationships with chain information
-     * @param relationships Original relationships
-     * @param chains Discovered chains
-     * @returns Enhanced relationships
      */
     private enhanceRelationshipsWithChainInfo(
         relationships: SatdRelationship[],
         chains: Chain[]
     ): SatdRelationship[] {
-        // Build a map of edges to chains they belong to
         const edgeToChains = new Map<string, string[]>();
         
         for (const chain of chains) {
-            for (let i = 0; i < chain.nodes.length - 1; i++) {
-                const edge = `${chain.nodes[i]}-${chain.nodes[i + 1]}`;
-                if (!edgeToChains.has(edge)) {
-                    edgeToChains.set(edge, []);
+            for (let i = 0; i < chain.nodes.length; i++) {
+                for (let j = i + 1; j < chain.nodes.length; j++) {
+                    const edge1 = `${chain.nodes[i]}-${chain.nodes[j]}`;
+                    const edge2 = `${chain.nodes[j]}-${chain.nodes[i]}`;
+                    
+                    if (!edgeToChains.has(edge1)) {
+                        edgeToChains.set(edge1, []);
+                    }
+                    if (!edgeToChains.has(edge2)) {
+                        edgeToChains.set(edge2, []);
+                    }
+                    
+                    edgeToChains.get(edge1)!.push(chain.id);
+                    edgeToChains.get(edge2)!.push(chain.id);
                 }
-                edgeToChains.get(edge)!.push(chain.id);
             }
         }
         
-        // Enhance each relationship with chain information
         return relationships.map(rel => {
             const edge = `${rel.sourceId}-${rel.targetId}`;
             const chainIds = edgeToChains.get(edge) || [];
@@ -175,7 +190,10 @@ private chainLengthWeight: number = 0.4;
     }
     
     /**
-     * Calculate the SATD Impact Ripple (SIR) Score for each debt item
+     * Algorithm 3: SATD Impact Ripple (SIR) Score Computation
+     * 
+     * SIR(t_i) = α·Fanout_w(t_i) + β·ChainLen_w(t_i) + γ·Reachability_w(t_i)
+     * 
      * @param debtItems Technical debt items
      * @param relationships Relationships between debt items
      * @returns Debt items with SIR scores
@@ -184,170 +202,274 @@ private chainLengthWeight: number = 0.4;
         debtItems: TechnicalDebt[],
         relationships: SatdRelationship[]
     ): TechnicalDebt[] {
-        // Build forward and backward dependency graphs
-        const forwardGraph = this.buildDependencyGraph(relationships);
-        const backwardGraph = new Map<string, string[]>();
-
+        // Clear memoization caches
+        this.chainLenCache.clear();
+        this.reachabilityCache.clear();
+        
+        // Build directed adjacency list with weighted edges
+        const adjacencyList = new Map<string, WeightedEdge[]>();
+        
+        for (const debt of debtItems) {
+            adjacencyList.set(debt.id, []);
+        }
+        
         for (const rel of relationships) {
-            if (!backwardGraph.has(rel.targetId)) {
-                backwardGraph.set(rel.targetId, []);
-            }
-            
-            backwardGraph.get(rel.targetId)!.push(rel.sourceId);
-        }
-        
-        // Find all chains for chain length factor
-        const { chains } = this.findChains(debtItems, relationships);
-        
-        // Calculate maximum chain length for normalization
-        const maxChainLength = chains.reduce((max, chain) => Math.max(max, chain.length), 0);
-        
-        // Calculate node participation in chains
-        const nodeToChains = new Map<string, Set<string>>();
-        for (const chain of chains) {
-            for (const node of chain.nodes) {
-                if (!nodeToChains.has(node)) {
-                    nodeToChains.set(node, new Set<string>());
+            for (const edge of rel.edges) {
+                if (!adjacencyList.has(edge.sourceId)) {
+                    adjacencyList.set(edge.sourceId, []);
                 }
-                nodeToChains.get(node)!.add(chain.id);
+                adjacencyList.get(edge.sourceId)!.push(edge);
             }
         }
         
-        // Calculate SIR score components for each debt item
-        return debtItems.map(debt => {
-            // Intrinsic Severity (S) - based on debt type
-            const severity = this.calculateIntrinsicSeverity(debt);
+        // Calculate raw SIR components for each debt item
+        const rawComponents: Map<string, { fanout: number; chainLen: number; reachability: number }> = new Map();
+        
+        for (const debt of debtItems) {
+            // Fanout_w: Sum of weighted out-degrees
+            const fanout = this.calculateFanoutW(debt.id, adjacencyList);
             
-            // Outgoing Chain Influence (OCI) - number of other debt items dependent on this
-            const outDependencies = this.calculateDependencyCount(debt.id, forwardGraph);
+            // ChainLen_w: Max weighted path length via DFS with memoization
+            const chainLen = this.calculateChainLenW(debt.id, adjacencyList, new Set());
             
-            // Incoming Chain Dependency (ICD) - number of other debt items this depends on
-            const inDependencies = this.calculateDependencyCount(debt.id, backwardGraph);
+            // Reachability_w: Sum of max path strengths to reachable SATD nodes
+            const reachability = this.calculateReachabilityW(debt.id, adjacencyList);
             
-            // Chain Length Factor (CLF) - normalized length of longest chain this participates in
-            const chainLengthFactor = this.calculateChainLengthFactor(debt.id, chains, maxChainLength);
+            rawComponents.set(debt.id, { fanout, chainLen, reachability });
+        }
+        
+        // Min-max normalize each component to [0, 1]
+        const normalizedComponents = this.normalizeComponents(rawComponents);
+        
+        // Calculate final SIR scores
+        const debtWithScores = debtItems.map(debt => {
+            const components = normalizedComponents.get(debt.id)!;
+            const rawComps = rawComponents.get(debt.id)!;
             
-            // Calculate SIR score with weighted components
-            // We're using weights: severity (0.4), outDependencies (0.3), inDependencies (-0.1), chainLengthFactor (0.4)
-            //const sirScore = (0.4 * severity + 0.3 * outDependencies - 0.1 * inDependencies + 0.4 * chainLengthFactor);
-            const sirScore = (
-                this.severityWeight * severity + 
-                this.outgoingWeight * outDependencies - 
-                Math.abs(this.incomingWeight) * inDependencies + 
-                this.chainLengthWeight * chainLengthFactor
-            );
+            // SIR(t_i) = α·Fanout_w + β·ChainLen_w + γ·Reachability_w
+            const sirScore = 
+                this.weights.alpha * components.fanout +
+                this.weights.beta * components.chainLen +
+                this.weights.gamma * components.reachability;
+            
+            const sirComponents: SIRComponents = {
+                fanout_w: components.fanout,
+                chainLen_w: components.chainLen,
+                reachability_w: components.reachability,
+                rawFanout: rawComps.fanout,
+                rawChainLen: rawComps.chainLen,
+                rawReachability: rawComps.reachability
+            };
+            
             return {
                 ...debt,
                 sirScore,
-                sirComponents: {
-                    severity,
-                    outDependencies,
-                    inDependencies,
-                    chainLengthFactor
-                }
+                sirComponents
             };
         });
+        
+        // Normalize final SIR scores to [0, 1]
+        const maxSir = Math.max(...debtWithScores.map(d => d.sirScore || 0));
+        const minSir = Math.min(...debtWithScores.map(d => d.sirScore || 0));
+        const range = maxSir - minSir || 1;
+        
+        return debtWithScores.map(debt => ({
+            ...debt,
+            sirScore: (debt.sirScore! - minSir) / range
+        }));
     }
     
     /**
-     * Calculate intrinsic severity based on debt type and content
-     * @param debt Technical debt item
-     * @returns Severity score (1-10)
+     * Calculate Fanout_w(t_i): Sum of weighted out-degrees
+     * Captures how many and how strongly this node influences other SATD-bearing entities
      */
-    private calculateIntrinsicSeverity(debt: TechnicalDebt): number {
-        const debtTypeScores: { [key: string]: number } = {
-            'Design': 8,
-            'Architecture': 9,
-            'Defect': 7,
-            'Test': 6,
-            'Implementation': 5,
-            'Requirement': 7,
-            'Documentation': 4,
-            'Other': 5
-        };
-        
-        // Base score from debt type
-        let score = debtTypeScores[debt.debtType || 'Other'] || 5;
-        
-        // Check for critical keywords that increase severity
-        const content = (debt.content || '').toLowerCase();
-        if (content.includes('critical') || content.includes('blocker') || content.includes('urgent')) {
-            score += 2;
-        } else if (content.includes('major') || content.includes('important')) {
-            score += 1;
-        } else if (content.includes('minor') || content.includes('cosmetic') || content.includes('trivial')) {
-            score -= 2;
+    private calculateFanoutW(nodeId: string, adjacencyList: Map<string, WeightedEdge[]>): number {
+        const edges = adjacencyList.get(nodeId) || [];
+        return edges.reduce((sum, edge) => sum + edge.weight, 0);
+    }
+    
+    /**
+     * Calculate ChainLen_w(t_i): Maximum weighted path length via DFS with memoization
+     * Uses visited set to avoid infinite recursion in cycles
+     */
+    private calculateChainLenW(
+        nodeId: string, 
+        adjacencyList: Map<string, WeightedEdge[]>,
+        visited: Set<string>
+    ): number {
+        // Check memoization cache
+        const cacheKey = `${nodeId}-${Array.from(visited).sort().join(',')}`;
+        if (this.chainLenCache.has(cacheKey)) {
+            return this.chainLenCache.get(cacheKey)!;
         }
         
-        // Clamp to 1-10 range
-        return Math.max(1, Math.min(10, score));
-    }
-    
-    /**
-     * Calculate the number of dependencies in a graph
-     * @param nodeId Node ID
-     * @param graph Dependency graph
-     * @returns Number of dependencies
-     */
-    private calculateDependencyCount(nodeId: string, graph: Map<string, string[]>): number {
-        const visited = new Set<string>();
-        const queue: string[] = [nodeId];
-        
-        // Don't count the node itself
-        visited.add(nodeId);
-        
-        while (queue.length > 0) {
-            const current = queue.shift()!;
-            const neighbors = graph.get(current) || [];
-            
-            for (const neighbor of neighbors) {
-                if (!visited.has(neighbor)) {
-                    visited.add(neighbor);
-                    queue.push(neighbor);
-                }
-            }
-        }
-        
-        // Return the count of visited nodes, excluding the starting node
-        return visited.size - 1;
-    }
-    
-    /**
-     * Calculate chain length factor
-     * @param nodeId Node ID
-     * @param chains List of chains
-     * @param maxChainLength Maximum chain length for normalization
-     * @returns Normalized chain length factor (0-1)
-     */
-    private calculateChainLengthFactor(nodeId: string, chains: Chain[], maxChainLength: number): number {
-        if (maxChainLength <= 1) {
+        // Avoid cycles
+        if (visited.has(nodeId)) {
             return 0;
         }
         
-        // Find the longest chain this node participates in
-        let longestChainLength = 0;
+        visited.add(nodeId);
         
-        for (const chain of chains) {
-            if (chain.nodes.includes(nodeId) && chain.length > longestChainLength) {
-                longestChainLength = chain.length;
+        const edges = adjacencyList.get(nodeId) || [];
+        
+        if (edges.length === 0) {
+            visited.delete(nodeId);
+            this.chainLenCache.set(cacheKey, 0);
+            return 0;
+        }
+        
+        let maxPathLength = 0;
+        
+        for (const edge of edges) {
+            // Recursively compute path length to child
+            const childPathLength = this.calculateChainLenW(edge.targetId, adjacencyList, visited);
+            const pathLength = edge.weight + childPathLength;
+            
+            if (pathLength > maxPathLength) {
+                maxPathLength = pathLength;
             }
         }
         
-        // Normalize by maximum chain length
-        return longestChainLength / maxChainLength;
+        visited.delete(nodeId);
+        this.chainLenCache.set(cacheKey, maxPathLength);
+        
+        return maxPathLength;
     }
-}
-
-/**
- * Chain of technical debt items
- */
-export interface Chain {
-    /** Unique identifier for the chain */
-    id: string;
     
-    /** Ordered list of node IDs in the chain */
-    nodes: string[];
+    /**
+     * Calculate Reachability_w(t_i): Sum of max path strengths to all reachable SATD nodes
+     * Uses BFS/DFS with cycle detection
+     */
+    private calculateReachabilityW(
+        startNodeId: string, 
+        adjacencyList: Map<string, WeightedEdge[]>
+    ): number {
+        // Check cache
+        if (this.reachabilityCache.has(startNodeId)) {
+            return this.reachabilityCache.get(startNodeId)!;
+        }
+        
+        // Track max path strength to each reachable node
+        const maxPathStrength = new Map<string, number>();
+        
+        // BFS with path strength tracking
+        const queue: Array<{ nodeId: string; pathStrength: number }> = [
+            { nodeId: startNodeId, pathStrength: 0 }
+        ];
+        const visited = new Set<string>();
+        
+        while (queue.length > 0) {
+            const { nodeId, pathStrength } = queue.shift()!;
+            
+            const edges = adjacencyList.get(nodeId) || [];
+            
+            for (const edge of edges) {
+                const newPathStrength = Math.max(pathStrength, edge.weight);
+                const existingStrength = maxPathStrength.get(edge.targetId) || 0;
+                
+                if (newPathStrength > existingStrength) {
+                    maxPathStrength.set(edge.targetId, newPathStrength);
+                    
+                    // Only continue if we haven't processed this node with a stronger path
+                    if (!visited.has(edge.targetId) || existingStrength < newPathStrength) {
+                        visited.add(edge.targetId);
+                        queue.push({ nodeId: edge.targetId, pathStrength: newPathStrength });
+                    }
+                }
+            }
+        }
+        
+        // Remove self from reachability
+        maxPathStrength.delete(startNodeId);
+        
+        // Sum of max path strengths to all reachable nodes
+        const reachability = Array.from(maxPathStrength.values()).reduce((sum, strength) => sum + strength, 0);
+        
+        this.reachabilityCache.set(startNodeId, reachability);
+        
+        return reachability;
+    }
     
-    /** Length of the chain */
-    length: number;
+    /**
+     * Min-max normalize SIR components to [0, 1]
+     */
+    private normalizeComponents(
+        rawComponents: Map<string, { fanout: number; chainLen: number; reachability: number }>
+    ): Map<string, { fanout: number; chainLen: number; reachability: number }> {
+        const normalized = new Map<string, { fanout: number; chainLen: number; reachability: number }>();
+        
+        // Find min and max for each component
+        let minFanout = Infinity, maxFanout = -Infinity;
+        let minChainLen = Infinity, maxChainLen = -Infinity;
+        let minReachability = Infinity, maxReachability = -Infinity;
+        
+        for (const [, components] of rawComponents) {
+            minFanout = Math.min(minFanout, components.fanout);
+            maxFanout = Math.max(maxFanout, components.fanout);
+            minChainLen = Math.min(minChainLen, components.chainLen);
+            maxChainLen = Math.max(maxChainLen, components.chainLen);
+            minReachability = Math.min(minReachability, components.reachability);
+            maxReachability = Math.max(maxReachability, components.reachability);
+        }
+        
+        // Avoid division by zero
+        const fanoutRange = maxFanout - minFanout || 1;
+        const chainLenRange = maxChainLen - minChainLen || 1;
+        const reachabilityRange = maxReachability - minReachability || 1;
+        
+        // Normalize each component
+        for (const [nodeId, components] of rawComponents) {
+            normalized.set(nodeId, {
+                fanout: (components.fanout - minFanout) / fanoutRange,
+                chainLen: (components.chainLen - minChainLen) / chainLenRange,
+                reachability: (components.reachability - minReachability) / reachabilityRange
+            });
+        }
+        
+        return normalized;
+    }
+    
+    /**
+     * Rank SATD instances by SIR score
+     * @param debtItems Debt items with SIR scores
+     * @returns Sorted array (highest SIR first)
+     */
+    public rankBySIR(debtItems: TechnicalDebt[]): TechnicalDebt[] {
+        return [...debtItems].sort((a, b) => (b.sirScore || 0) - (a.sirScore || 0));
+    }
+    
+    /**
+     * Get chain-level SIR score (max SIR within chain)
+     * Used for chain-level analyses in RQ2
+     */
+    public getChainSIRScore(chain: Chain, debtItems: TechnicalDebt[]): number {
+        const chainNodeIds = new Set(chain.nodes);
+        const chainDebts = debtItems.filter(d => chainNodeIds.has(d.id));
+        
+        if (chainDebts.length === 0) return 0;
+        
+        return Math.max(...chainDebts.map(d => d.sirScore || 0));
+    }
+    
+    /**
+     * Enhance chains with SIR information
+     */
+    public enhanceChainsWithSIR(chains: Chain[], debtItems: TechnicalDebt[]): Chain[] {
+        return chains.map(chain => {
+            const chainNodeIds = new Set(chain.nodes);
+            const chainDebts = debtItems.filter(d => chainNodeIds.has(d.id));
+            
+            const maxSirScore = chainDebts.length > 0 
+                ? Math.max(...chainDebts.map(d => d.sirScore || 0))
+                : 0;
+            
+            const representativeNode = chainDebts.find(d => d.sirScore === maxSirScore);
+            
+            return {
+                ...chain,
+                maxSirScore,
+                representativeNodeId: representativeNode?.id
+            };
+        });
+    }
 }

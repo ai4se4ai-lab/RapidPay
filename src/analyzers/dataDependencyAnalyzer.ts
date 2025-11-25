@@ -1,6 +1,13 @@
 // src/analyzers/dataDependencyAnalyzer.ts
 import * as vscode from 'vscode';
-import { TechnicalDebt, SatdRelationship, RelationshipType } from '../models';
+import { 
+    TechnicalDebt, 
+    SatdRelationship, 
+    RelationshipType,
+    WeightedEdge,
+    DEFAULT_RELATIONSHIP_WEIGHTS,
+    MAX_DEPENDENCY_HOPS
+} from '../models';
 import * as path from 'path';
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
@@ -10,10 +17,12 @@ import * as t from '@babel/types';
 /**
  * Analyzes data dependencies between technical debt items.
  * If data produced or modified by code associated with SATD A 
- * is consumed or used by code associated with SATD B, this forms a potential link.
+ * is consumed or used by code associated with SATD B, this forms a potential link
+ * with data dependency weight (0.6-0.8).
  */
 export class DataDependencyAnalyzer {
     private workspaceRoot: string | null = null;
+    private maxHops: number = MAX_DEPENDENCY_HOPS;
     
     /**
      * Initialize the analyzer with workspace root
@@ -24,10 +33,18 @@ export class DataDependencyAnalyzer {
     }
     
     /**
+     * Set maximum hop count for dependency analysis
+     * @param hops Maximum number of hops (default: 5)
+     */
+    public setMaxHops(hops: number): void {
+        this.maxHops = Math.min(hops, MAX_DEPENDENCY_HOPS);
+    }
+    
+    /**
      * Find relationships between technical debt items based on data dependencies
      * @param debtItems List of technical debt items to analyze
      * @param fileContentMap Map of file paths to their content
-     * @returns List of data dependency relationships
+     * @returns List of data dependency relationships with weighted edges
      */
     public async findRelationships(
         debtItems: TechnicalDebt[], 
@@ -49,6 +66,15 @@ export class DataDependencyAnalyzer {
             
             // Skip files based on extension
             if (!this.isParsableFile(filePath)) {
+                // For Python files, use Python-specific analysis
+                if (filePath.endsWith('.py')) {
+                    const pythonRelationships = await this.findPythonDataDependencies(
+                        filePath, 
+                        fileContent, 
+                        debtsInFile
+                    );
+                    relationships.push(...pythonRelationships);
+                }
                 continue;
             }
             
@@ -60,10 +86,6 @@ export class DataDependencyAnalyzer {
             );
             
             relationships.push(...intraFileRelationships);
-            
-            // TODO: Find inter-file data dependencies (across modules)
-            // This would require more complex analysis and potentially
-            // tracking exports/imports between files
         }
         
         return relationships;
@@ -71,8 +93,6 @@ export class DataDependencyAnalyzer {
     
     /**
      * Group technical debt items by file
-     * @param debtItems List of technical debt items
-     * @returns Map of file paths to debt items in them
      */
     private groupDebtItemsByFile(debtItems: TechnicalDebt[]): Map<string, TechnicalDebt[]> {
         const debtByFile = new Map<string, TechnicalDebt[]>();
@@ -89,8 +109,6 @@ export class DataDependencyAnalyzer {
     
     /**
      * Check if a file is a JavaScript or TypeScript file
-     * @param filePath Path to the file
-     * @returns True if the file is JavaScript or TypeScript
      */
     private isParsableFile(filePath: string): boolean {
         const ext = path.extname(filePath).toLowerCase();
@@ -98,11 +116,125 @@ export class DataDependencyAnalyzer {
     }
     
     /**
-     * Find data dependencies within a single file
-     * @param filePath Path to the file
-     * @param fileContent Content of the file
-     * @param debtsInFile List of debt items in the file
-     * @returns List of data dependency relationships
+     * Calculate edge weight based on def-use distance
+     * Closer definitions and uses have higher weights
+     */
+    private calculateEdgeWeight(defLine: number, useLine: number): number {
+        const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.DATA];
+        const distance = Math.abs(useLine - defLine);
+        
+        // Weight decreases with distance
+        // Within 10 lines: max weight
+        // Within 50 lines: mid weight
+        // Beyond: min weight
+        if (distance <= 10) {
+            return weights.max;
+        } else if (distance <= 50) {
+            const ratio = (distance - 10) / 40;
+            return weights.max - (ratio * (weights.max - weights.default));
+        } else {
+            return weights.min;
+        }
+    }
+    
+    /**
+     * Find Python data dependencies using def-use analysis
+     */
+    private async findPythonDataDependencies(
+        filePath: string, 
+        fileContent: string,
+        debtsInFile: TechnicalDebt[]
+    ): Promise<SatdRelationship[]> {
+        const relationships: SatdRelationship[] = [];
+        const lines = fileContent.split('\n');
+        
+        // Track variable definitions and uses
+        const variableDefs = new Map<string, Array<{ line: number; debt?: TechnicalDebt }>>();
+        const variableUses = new Map<string, Array<{ line: number; debt?: TechnicalDebt }>>();
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const lineNumber = i + 1;
+            
+            // Find debt at this location
+            const debtAtLine = debtsInFile.find(debt => {
+                const start = Math.max(1, debt.line - 5);
+                const end = debt.line + 5;
+                return lineNumber >= start && lineNumber <= end;
+            });
+            
+            // Check for variable assignments (definitions)
+            const assignmentMatch = line.match(/^\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*=/);
+            if (assignmentMatch && debtAtLine) {
+                const varName = assignmentMatch[1];
+                if (!variableDefs.has(varName)) {
+                    variableDefs.set(varName, []);
+                }
+                variableDefs.get(varName)!.push({ line: lineNumber, debt: debtAtLine });
+            }
+            
+            // Check for variable uses (excluding assignment targets)
+            const identifiers = line.match(/[a-zA-Z_][a-zA-Z0-9_]*/g) || [];
+            for (const identifier of identifiers) {
+                // Skip if this is the assignment target
+                if (line.match(new RegExp(`^\\s*${identifier}\\s*=`))) continue;
+                // Skip common keywords
+                if (['def', 'class', 'if', 'else', 'elif', 'for', 'while', 'return', 'import', 'from', 'as', 'try', 'except', 'finally', 'with', 'True', 'False', 'None'].includes(identifier)) continue;
+                
+                if (debtAtLine) {
+                    if (!variableUses.has(identifier)) {
+                        variableUses.set(identifier, []);
+                    }
+                    variableUses.get(identifier)!.push({ line: lineNumber, debt: debtAtLine });
+                }
+            }
+        }
+        
+        // Create relationships between definitions and uses
+        for (const [varName, defs] of variableDefs.entries()) {
+            const uses = variableUses.get(varName) || [];
+            
+            for (const def of defs) {
+                for (const use of uses) {
+                    // Skip if same debt or use before definition
+                    if (!def.debt || !use.debt) continue;
+                    if (def.debt.id === use.debt.id) continue;
+                    if (use.line <= def.line) continue;
+                    
+                    // Check hop count (line distance as proxy)
+                    const distance = use.line - def.line;
+                    const hops = Math.ceil(distance / 10); // Approximate hops
+                    
+                    if (hops > this.maxHops) continue;
+                    
+                    const weight = this.calculateEdgeWeight(def.line, use.line);
+                    
+                    const edge: WeightedEdge = {
+                        sourceId: def.debt.id,
+                        targetId: use.debt.id,
+                        type: RelationshipType.DATA,
+                        weight,
+                        hops: Math.min(hops, this.maxHops)
+                    };
+                    
+                    relationships.push({
+                        sourceId: def.debt.id,
+                        targetId: use.debt.id,
+                        types: [RelationshipType.DATA],
+                        edges: [edge],
+                        strength: weight,
+                        description: `SATD at line ${def.debt.line} defines variable '${varName}' used by SATD at line ${use.debt.line}.`,
+                        hopCount: hops
+                    });
+                }
+            }
+        }
+        
+        return relationships;
+    }
+    
+    /**
+     * Find data dependencies within a single file (JS/TS)
      */
     private async findIntraFileDataDependencies(
         filePath: string, 
@@ -112,13 +244,12 @@ export class DataDependencyAnalyzer {
         const relationships: SatdRelationship[] = [];
         
         try {
-            // Parse the code into an AST
             const ast = this.parseCode(filePath, fileContent);
             if (!ast) return relationships;
             
             // Maps for tracking variable declarations and references
-            const variableDeclarations = new Map<string, { debt: TechnicalDebt, node: t.Node }>();
-            const variableReferences = new Map<string, { debt: TechnicalDebt, node: t.Node }[]>();
+            const variableDeclarations = new Map<string, { debt: TechnicalDebt, node: t.Node, line: number }>();
+            const variableReferences = new Map<string, { debt: TechnicalDebt, node: t.Node, line: number }[]>();
             
             // Find variable declarations and references in technical debt contexts
             traverse(ast, {
@@ -139,15 +270,31 @@ export class DataDependencyAnalyzer {
                 const references = variableReferences.get(varName) || [];
                 
                 for (const reference of references) {
-                    // Skip self-references (debt items referencing themselves)
+                    // Skip self-references
                     if (declaration.debt.id === reference.debt.id) continue;
+                    
+                    // Calculate weight based on distance
+                    const weight = this.calculateEdgeWeight(declaration.line, reference.line);
+                    const hops = Math.ceil(Math.abs(reference.line - declaration.line) / 10);
+                    
+                    if (hops > this.maxHops) continue;
+                    
+                    const edge: WeightedEdge = {
+                        sourceId: declaration.debt.id,
+                        targetId: reference.debt.id,
+                        type: RelationshipType.DATA,
+                        weight,
+                        hops: Math.min(hops, this.maxHops)
+                    };
                     
                     relationships.push({
                         sourceId: declaration.debt.id,
                         targetId: reference.debt.id,
-                        types: [RelationshipType.DATA_DEPENDENCY],
-                        strength: 0.7, // Data dependencies are moderately strong
-                        description: `SATD in line ${declaration.debt.line} defines or modifies variable '${varName}' which is used by SATD in line ${reference.debt.line}.`
+                        types: [RelationshipType.DATA],
+                        edges: [edge],
+                        strength: weight,
+                        description: `SATD at line ${declaration.debt.line} defines or modifies variable '${varName}' which is used by SATD at line ${reference.debt.line}.`,
+                        hopCount: hops
                     });
                 }
             }
@@ -161,125 +308,36 @@ export class DataDependencyAnalyzer {
     
     /**
      * Parse code into an AST
-     * @param filePath Path to the file
-     * @param fileContent Content of the file
-     * @returns Parsed AST
      */
-        private parseCode(filePath: string, fileContent: string): any {
-            try {
-                const ext = path.extname(filePath).toLowerCase();
-                const plugins: any[] = [];
-                
-                // Add appropriate plugins based on file extension
-                if (['.ts', '.tsx'].includes(ext)) {
-                    plugins.push('typescript');
-                }
-                if (['.jsx', '.tsx'].includes(ext)) {
-                    plugins.push('jsx');
-                }
-                
-                // For Python files, we need a different approach since Babel doesn't support Python
-                if (ext === '.py') {
-                    // Basic parsing for Python files
-                    return this.parsePythonCode(fileContent);
-                }
-                
-                return parser.parse(fileContent, {
-                    sourceType: 'module',
-                    plugins: plugins
-                });
-            } catch (error) {
-                console.error(`Error parsing ${filePath}:`, error);
-                return null;
+    private parseCode(filePath: string, fileContent: string): any {
+        try {
+            const ext = path.extname(filePath).toLowerCase();
+            const plugins: any[] = [];
+            
+            if (['.ts', '.tsx'].includes(ext)) {
+                plugins.push('typescript');
             }
+            if (['.jsx', '.tsx'].includes(ext)) {
+                plugins.push('jsx');
+            }
+            
+            return parser.parse(fileContent, {
+                sourceType: 'module',
+                plugins: plugins
+            });
+        } catch (error) {
+            console.error(`Error parsing ${filePath}:`, error);
+            return null;
         }
-    
-        private parsePythonCode(fileContent: string): any {
-            // A very simple Python parser that just identifies function definitions and calls
-            const ast: { type: string; body: { type: string; id: { name: string }; loc: { start: { line: number }; end: { line: number } }; calls: string[] }[] } = {
-                type: 'Program',
-                body: []
-            };
-            
-            const lines = fileContent.split('\n');
-            const functions: {[name: string]: {start: number, end: number, calls: string[]}} = {};
-            let currentFunction: string | null = null;
-            let indentLevel = 0;
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                const lineNumber = i + 1;
-                
-                // Skip empty lines
-                if (line.trim() === '') continue;
-                
-                // Calculate indent level
-                const currentIndent = line.length - line.trimLeft().length;
-                
-                // Detect function definition
-                const funcDefMatch = line.match(/^\s*def\s+([a-zA-Z0-9_]+)\s*\(/);
-                if (funcDefMatch) {
-                    currentFunction = funcDefMatch[1];
-                    indentLevel = currentIndent;
-                    functions[currentFunction] = {
-                        start: lineNumber,
-                        end: lineNumber, // Will be updated when the function ends
-                        calls: []
-                    };
-                    continue;
-                }
-                
-                // Check if we're exiting a function based on indentation
-                if (currentFunction && currentIndent <= indentLevel && !line.trim().startsWith('#')) {
-                    functions[currentFunction].end = lineNumber - 1;
-                    currentFunction = null;
-                }
-                
-                // Detect function calls within a function
-                if (currentFunction) {
-                    const funcCallMatches = line.match(/([a-zA-Z0-9_]+)\s*\(/g);
-                    if (funcCallMatches) {
-                        for (const match of funcCallMatches) {
-                            const funcName = match.replace(/\s*\($/, '');
-                            if (funcName !== currentFunction) { // Avoid self-recursion detection
-                                functions[currentFunction].calls.push(funcName);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // If we ended the file inside a function, close it
-            if (currentFunction) {
-                functions[currentFunction].end = lines.length;
-            }
-            
-            // Build the AST representation
-            for (const [name, data] of Object.entries(functions)) {
-                ast.body.push({
-                    type: 'FunctionDeclaration',
-                    id: { name },
-                    loc: {
-                        start: { line: data.start },
-                        end: { line: data.end }
-                    },
-                    calls: data.calls
-                });
-            }
-            
-            return ast;
-        }
+    }
     
     /**
      * Process a variable declaration and check if it's in a debt context
-     * @param path NodePath object for the variable declarator
-     * @param debtsInFile List of debt items in the file
-     * @param variableDeclarations Map to store variable declarations in debt contexts
      */
     private processVariableDeclaration(
         path: NodePath<t.VariableDeclarator>,
         debtsInFile: TechnicalDebt[],
-        variableDeclarations: Map<string, { debt: TechnicalDebt, node: t.Node }>
+        variableDeclarations: Map<string, { debt: TechnicalDebt, node: t.Node, line: number }>
     ): void {
         const node = path.node;
         const loc = node.loc;
@@ -289,21 +347,22 @@ export class DataDependencyAnalyzer {
             const debtContext = this.findDebtAtLocation(debtsInFile, loc.start.line);
             
             if (debtContext) {
-                variableDeclarations.set(varName, { debt: debtContext, node });
+                variableDeclarations.set(varName, { 
+                    debt: debtContext, 
+                    node,
+                    line: loc.start.line
+                });
             }
         }
     }
     
     /**
      * Process an assignment expression and check if it's in a debt context
-     * @param path NodePath object for the assignment expression
-     * @param debtsInFile List of debt items in the file
-     * @param variableDeclarations Map to store variable declarations in debt contexts
      */
     private processAssignment(
         path: NodePath<t.AssignmentExpression>,
         debtsInFile: TechnicalDebt[],
-        variableDeclarations: Map<string, { debt: TechnicalDebt, node: t.Node }>
+        variableDeclarations: Map<string, { debt: TechnicalDebt, node: t.Node, line: number }>
     ): void {
         const node = path.node;
         const loc = node.loc;
@@ -313,21 +372,22 @@ export class DataDependencyAnalyzer {
             const debtContext = this.findDebtAtLocation(debtsInFile, loc.start.line);
             
             if (debtContext) {
-                variableDeclarations.set(varName, { debt: debtContext, node });
+                variableDeclarations.set(varName, { 
+                    debt: debtContext, 
+                    node,
+                    line: loc.start.line
+                });
             }
         }
     }
     
     /**
      * Process an identifier and check if it's in a debt context
-     * @param path NodePath object for the identifier
-     * @param debtsInFile List of debt items in the file
-     * @param variableReferences Map to store variable references in debt contexts
      */
     private processIdentifier(
         path: NodePath<t.Identifier>,
         debtsInFile: TechnicalDebt[],
-        variableReferences: Map<string, { debt: TechnicalDebt, node: t.Node }[]>
+        variableReferences: Map<string, { debt: TechnicalDebt, node: t.Node, line: number }[]>
     ): void {
         // Skip identifiers in declarations
         if (path.parent.type === 'VariableDeclarator' && path.parent.id === path.node) {
@@ -350,16 +410,17 @@ export class DataDependencyAnalyzer {
                 if (!variableReferences.has(varName)) {
                     variableReferences.set(varName, []);
                 }
-                variableReferences.get(varName)!.push({ debt: debtContext, node });
+                variableReferences.get(varName)!.push({ 
+                    debt: debtContext, 
+                    node,
+                    line: loc.start.line
+                });
             }
         }
     }
     
     /**
      * Find a technical debt item at a specific line
-     * @param debtsInFile List of debt items in the file
-     * @param line Line number
-     * @returns Technical debt item at the line or undefined
      */
     private findDebtAtLocation(debtsInFile: TechnicalDebt[], line: number): TechnicalDebt | undefined {
         // Get the context of each debt (5 lines before and after)
