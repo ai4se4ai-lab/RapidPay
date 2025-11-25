@@ -1,9 +1,9 @@
-// src/commands/visualizationCommands.ts
+// src/visualization/visualizationCommands.ts
 import * as vscode from 'vscode';
 import { SatdRelationshipAnalyzer } from '../satdRelationshipAnalyzer';
 import { SatdChainAnalyzer } from '../satdChainAnalyzer';
-import { SatdGraphVisualizer } from '../visualization/satdGraphVisualizer';
-import { getTechnicalDebtItems } from '../utils/commitMonitor';
+import { SatdGraphVisualizer } from './satdGraphVisualizer';
+import { getTechnicalDebtItems } from '../extension';
 import { getWorkspaceRoot } from '../utils/gitUtils';
 import { withProgressNotification } from '../utils/uiUtils';
 

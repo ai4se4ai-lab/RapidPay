@@ -1,0 +1,285 @@
+# RapidPay Dashboard Dockerfile
+# Simple web dashboard for visualizing SATD analysis results
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies for the dashboard
+RUN npm init -y && \
+    npm install express neo4j-driver cors
+
+# Create dashboard server
+COPY <<EOF /app/server.js
+const express = require('express');
+const neo4j = require('neo4j-driver');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Neo4j connection
+const driver = neo4j.driver(
+    process.env.NEO4J_URI || 'bolt://localhost:7687',
+    neo4j.auth.basic(
+        process.env.NEO4J_USER || 'neo4j',
+        process.env.NEO4J_PASSWORD || 'rapidpay123'
+    )
+);
+
+// API: Get all SATD instances
+app.get('/api/satd', async (req, res) => {
+    const session = driver.session();
+    try {
+        const result = await session.run(
+            'MATCH (s:SATD) RETURN s ORDER BY s.sirScore DESC LIMIT 100'
+        );
+        const satd = result.records.map(r => r.get('s').properties);
+        res.json(satd);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    } finally {
+        await session.close();
+    }
+});
+
+// API: Get SATD relationships
+app.get('/api/relationships', async (req, res) => {
+    const session = driver.session();
+    try {
+        const result = await session.run(
+            'MATCH (a:SATD)-[r]->(b:SATD) RETURN a, type(r) as relType, r, b LIMIT 500'
+        );
+        const relationships = result.records.map(r => ({
+            source: r.get('a').properties,
+            target: r.get('b').properties,
+            type: r.get('relType'),
+            properties: r.get('r').properties
+        }));
+        res.json(relationships);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    } finally {
+        await session.close();
+    }
+});
+
+// API: Get statistics
+app.get('/api/stats', async (req, res) => {
+    const session = driver.session();
+    try {
+        const nodeResult = await session.run(
+            'MATCH (s:SATD) RETURN count(s) as count, avg(s.sirScore) as avgSir'
+        );
+        const relResult = await session.run(
+            'MATCH ()-[r]->() RETURN type(r) as type, count(r) as count'
+        );
+        
+        const stats = {
+            totalNodes: nodeResult.records[0].get('count').toNumber(),
+            avgSirScore: nodeResult.records[0].get('avgSir') || 0,
+            relationshipTypes: {}
+        };
+        
+        relResult.records.forEach(r => {
+            stats.relationshipTypes[r.get('type')] = r.get('count').toNumber();
+        });
+        
+        res.json(stats);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    } finally {
+        await session.close();
+    }
+});
+
+// Serve static dashboard
+app.get('/', (req, res) => {
+    res.send(\`
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RapidPay Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #eaeaea;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg-primary);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-bottom: 3px solid var(--highlight);
+        }
+        .header h1 { color: var(--highlight); }
+        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--accent);
+        }
+        .card h2 { color: var(--highlight); margin-bottom: 15px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .stat-item { 
+            background: var(--accent); 
+            padding: 15px; 
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: bold; color: var(--highlight); }
+        .stat-label { color: var(--text); opacity: 0.8; }
+        #graph { height: 400px; width: 100%; }
+        .satd-list { max-height: 400px; overflow-y: auto; }
+        .satd-item {
+            background: var(--accent);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 3px solid var(--highlight);
+        }
+        .satd-item .file { color: var(--highlight); }
+        .satd-item .score { float: right; }
+        .full-width { grid-column: 1 / -1; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 RapidPay - SATD Analysis Dashboard</h1>
+        <p>Self-Admitted Technical Debt Analysis with SIR Scoring</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h2>📊 Statistics</h2>
+            <div class="stats-grid" id="stats"></div>
+        </div>
+        
+        <div class="card">
+            <h2>🏆 Top SATD by SIR Score</h2>
+            <div class="satd-list" id="satd-list"></div>
+        </div>
+        
+        <div class="card full-width">
+            <h2>🕸️ Dependency Graph</h2>
+            <div id="graph"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function loadStats() {
+            const res = await fetch('/api/stats');
+            const stats = await res.json();
+            
+            document.getElementById('stats').innerHTML = \\\`
+                <div class="stat-item">
+                    <div class="stat-value">\\\${stats.totalNodes}</div>
+                    <div class="stat-label">Total SATD</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">\\\${(stats.avgSirScore * 100).toFixed(1)}%</div>
+                    <div class="stat-label">Avg SIR Score</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">\\\${Object.values(stats.relationshipTypes).reduce((a,b)=>a+b, 0)}</div>
+                    <div class="stat-label">Relationships</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">\\\${Object.keys(stats.relationshipTypes).length}</div>
+                    <div class="stat-label">Dependency Types</div>
+                </div>
+            \\\`;
+        }
+        
+        async function loadSatd() {
+            const res = await fetch('/api/satd');
+            const satd = await res.json();
+            
+            document.getElementById('satd-list').innerHTML = satd.slice(0, 20).map(s => \\\`
+                <div class="satd-item">
+                    <span class="file">\\\${s.file}:\\\${s.line}</span>
+                    <span class="score">\\\${((s.sirScore || 0) * 100).toFixed(0)}%</span>
+                    <div style="font-size: 0.9em; opacity: 0.8; margin-top: 5px;">
+                        \\\${(s.content || '').substring(0, 100)}...
+                    </div>
+                </div>
+            \\\`).join('');
+        }
+        
+        async function loadGraph() {
+            const res = await fetch('/api/relationships');
+            const rels = await res.json();
+            
+            const nodes = new Map();
+            const edges = [];
+            
+            rels.forEach(r => {
+                if (!nodes.has(r.source.id)) {
+                    nodes.set(r.source.id, {
+                        data: { id: r.source.id, label: r.source.file.split('/').pop() + ':' + r.source.line }
+                    });
+                }
+                if (!nodes.has(r.target.id)) {
+                    nodes.set(r.target.id, {
+                        data: { id: r.target.id, label: r.target.file.split('/').pop() + ':' + r.target.line }
+                    });
+                }
+                edges.push({
+                    data: { source: r.source.id, target: r.target.id, type: r.type }
+                });
+            });
+            
+            cytoscape({
+                container: document.getElementById('graph'),
+                elements: [...nodes.values(), ...edges],
+                style: [
+                    { selector: 'node', style: { 
+                        'label': 'data(label)', 
+                        'background-color': '#e94560',
+                        'color': '#fff',
+                        'text-valign': 'bottom',
+                        'font-size': '10px'
+                    }},
+                    { selector: 'edge', style: { 
+                        'width': 2, 
+                        'line-color': '#0f3460',
+                        'target-arrow-color': '#0f3460',
+                        'target-arrow-shape': 'triangle',
+                        'curve-style': 'bezier'
+                    }}
+                ],
+                layout: { name: 'cose', animate: false }
+            });
+        }
+        
+        loadStats();
+        loadSatd();
+        loadGraph();
+    </script>
+</body>
+</html>
+    \`);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(\`RapidPay Dashboard running on port \${PORT}\`);
+});
+EOF
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
+

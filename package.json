@@ -1,8 +1,8 @@
 {
   "name": "RapidPay",
   "displayName": "RapidPay",
-  "description": "Self-Admitted Technical Debt Helper for VS Code",
-  "version": "0.1.0",
+  "description": "Self-Admitted Technical Debt Helper for VS Code - Implements SID, IRD, SIR, and CAIG",
+  "version": "1.0.0",
   "publisher": "RapidPay",
   "engines": {
     "vscode": "^1.80.0"
@@ -17,6 +17,9 @@
     "vscode.git"
   ],
   "main": "./out/extension.js",
+  "bin": {
+    "rapidpay": "./out/cli/index.js"
+  },
   "contributes": {
     "commands": [
       {
@@ -34,6 +37,14 @@
       {
         "command": "RapidPay.visualizeRelationships",
         "title": "RapidPay: Visualize Technical Debt Relationships"
+      },
+      {
+        "command": "RapidPay.calculateSIR",
+        "title": "RapidPay: Calculate SATD Impact Ripple Scores"
+      },
+      {
+        "command": "RapidPay.analyzeCommit",
+        "title": "RapidPay: Analyze Commit for SATD Opportunities (CAIG)"
       }
     ],
     "configuration": {
@@ -47,8 +58,9 @@
         },
         "RapidPay.modelName": {
           "type": "string",
-          "default": "gpt-4",
+          "default": "gpt-4o",
           "enum": [
+            "gpt-4o",
             "gpt-4",
             "gpt-4-turbo",
             "gpt-3.5-turbo"
@@ -67,6 +79,49 @@
           "default": true,
           "description": "Enable analysis of relationships between technical debt items",
           "scope": "window"
+        },
+        "RapidPay.confidenceThreshold": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "LLM confidence threshold τ for SATD classification (0-1)",
+          "scope": "window"
+        },
+        "RapidPay.maxDependencyHops": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Maximum hop count k for dependency analysis",
+          "scope": "window"
+        },
+        "RapidPay.sirWeights": {
+          "type": "object",
+          "default": {
+            "alpha": 0.4,
+            "beta": 0.3,
+            "gamma": 0.3
+          },
+          "description": "SIR score weights (α,β,γ) for Fanout_w, ChainLen_w, Reachability_w",
+          "scope": "window"
+        },
+        "RapidPay.caigWeights": {
+          "type": "object",
+          "default": {
+            "eta1": 0.4,
+            "eta2": 0.3,
+            "eta3": 0.15,
+            "eta4": 0.15
+          },
+          "description": "CAIG ranking weights (η1,η2,η3,η4) for SIR, CommitRel, Effort, FixPotential",
+          "scope": "window"
+        },
+        "RapidPay.commitWindowSize": {
+          "type": "number",
+          "default": 50,
+          "description": "Sliding window size W for commit analysis",
+          "scope": "window"
         }
       }
     }
@@ -76,15 +131,21 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "jest --config jest.config.js",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "cli": "node ./out/cli/index.js"
   },
   "devDependencies": {
     "@types/babel__traverse": "^7.20.7",
+    "@types/jest": "^29.5.0",
     "@types/node": "^18.x",
     "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "eslint": "^8.26.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.2.2",
     "webpack": "^5.76.0",
@@ -94,9 +155,11 @@
     "@babel/parser": "^7.22.5",
     "@babel/traverse": "^7.22.5",
     "@babel/types": "^7.22.5",
+    "commander": "^11.0.0",
     "cytoscape": "^3.23.0",
     "cytoscape-dagre": "^2.5.0",
     "dagre": "^0.8.5",
+    "neo4j-driver": "^5.12.0",
     "openai": "^4.0.0"
   }
 }

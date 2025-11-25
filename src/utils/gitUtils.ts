@@ -149,3 +149,74 @@ export async function getCurrentCommitHash(): Promise<string> {
     return '';
   }
 }
+
+/**
+ * Get the latest commit hash (alias for getCurrentCommitHash)
+ * @param workspacePath Optional workspace path override
+ * @returns Latest commit hash or null
+ */
+export async function getLatestCommit(workspacePath?: string): Promise<string | null> {
+  const cwd = workspacePath || getWorkspaceRoot();
+  
+  if (!cwd) {
+    return null;
+  }
+  
+  try {
+    const { stdout } = await execPromise('git rev-parse HEAD', { cwd });
+    return stdout.trim();
+  } catch (error) {
+    console.error(`Failed to get latest commit: ${error}`);
+    return null;
+  }
+}
+
+/**
+ * Get the list of files modified in a commit
+ * @param commitHash Commit hash
+ * @param workspacePath Workspace path
+ * @returns Array of modified file paths
+ */
+export async function getCommitFiles(commitHash: string, workspacePath?: string): Promise<string[]> {
+  const cwd = workspacePath || getWorkspaceRoot();
+  
+  if (!cwd) {
+    return [];
+  }
+  
+  try {
+    const { stdout } = await execPromise(
+      `git diff-tree --no-commit-id --name-only -r ${commitHash}`,
+      { cwd }
+    );
+    return stdout.trim().split('\n').filter(f => f);
+  } catch (error) {
+    console.error(`Failed to get commit files: ${error}`);
+    return [];
+  }
+}
+
+/**
+ * Get the diff for a specific commit
+ * @param commitHash Commit hash
+ * @param workspacePath Workspace path
+ * @returns Diff content or empty string
+ */
+export async function getCommitDiff(commitHash: string, workspacePath?: string): Promise<string> {
+  const cwd = workspacePath || getWorkspaceRoot();
+  
+  if (!cwd) {
+    return '';
+  }
+  
+  try {
+    const { stdout } = await execPromise(
+      `git show ${commitHash} --format=""`,
+      { cwd, maxBuffer: 5 * 1024 * 1024 }
+    );
+    return stdout;
+  } catch (error) {
+    console.error(`Failed to get commit diff: ${error}`);
+    return '';
+  }
+}
