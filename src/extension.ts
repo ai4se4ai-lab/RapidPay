@@ -47,9 +47,13 @@ export function activate(context: vscode.ExtensionContext) {
     
     // Command: Initialize and scan repository (Full Pipeline)
     const initCommand = vscode.commands.registerCommand('RapidPay.init', async () => {
+        console.log('=== RapidPay.init STARTED ===');
+        
         if (!initializeOpenAI()) {
+            console.log('OpenAI initialization failed - aborting');
             return;
         }
+        console.log('OpenAI initialized successfully');
         
         await withProgressNotification('RapidPay', async (progress) => {
             const config = vscode.workspace.getConfiguration('RapidPay');
@@ -58,20 +62,41 @@ export function activate(context: vscode.ExtensionContext) {
             const repoInfo = await getRepositoryInfo();
             
             if (!repoInfo) {
+                console.log('getRepositoryInfo() returned null - aborting');
                 return;
             }
             
             const workspaceRoot = repoInfo.workspaceRoot || '';
+            console.log(`Workspace root: ${workspaceRoot}`);
+            console.log(`Branch: ${repoInfo.branch}, Commits: ${repoInfo.commitCount}`);
             
             // Step 1: SID - SATD Instance Detection
             progress.report({ message: "Stage 1: SATD Instance Detection (SID)..." });
             const confidenceThreshold = config.get<number>('confidenceThreshold') || 0.7;
+            console.log(`Confidence threshold: ${confidenceThreshold}`);
             
             // Use quick scan for initial detection
+            console.log('Starting scanRepositoryForTechnicalDebt()...');
             const debtItems = await scanRepositoryForTechnicalDebt();
+            console.log(`scanRepositoryForTechnicalDebt() returned ${debtItems.length} items`);
+            
+            // Log first few items for debugging
+            if (debtItems.length > 0) {
+                console.log('First few items found:');
+                debtItems.slice(0, 5).forEach((item, i) => {
+                    console.log(`  ${i+1}. ${item.file}:${item.line} - ${item.content.substring(0, 50)}...`);
+                });
+            } else {
+                console.warn('WARNING: No SATD items found! Check:');
+                console.warn('  1. Is this folder a Git repository?');
+                console.warn('  2. Are the files committed to Git?');
+                console.warn('  3. Do files contain TODO/FIXME/HACK/etc. comments?');
+            }
             
             progress.report({ message: `Found ${debtItems.length} potential SATD instances. Enhancing with LLM...` });
+            console.log('Starting enhanceTechnicalDebtWithAI()...');
             technicalDebtItems = await enhanceTechnicalDebtWithAI(debtItems, confidenceThreshold);
+            console.log(`enhanceTechnicalDebtWithAI() returned ${technicalDebtItems.length} items`);
             
             console.log(`SID: Detected ${technicalDebtItems.length} SATD instances`);
             
@@ -358,12 +383,62 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    // Command: Diagnostic quick scan (no LLM, just lexical detection)
+    const diagnosticCommand = vscode.commands.registerCommand('RapidPay.diagnostic', async () => {
+        console.log('=== RapidPay DIAGNOSTIC SCAN ===');
+        
+        const workspaceRoot = getWorkspaceRoot();
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder open');
+            return;
+        }
+        
+        console.log(`Scanning: ${workspaceRoot}`);
+        
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: "RapidPay Diagnostic",
+            cancellable: false
+        }, async (progress) => {
+            progress.report({ message: "Running diagnostic scan (no LLM)..." });
+            
+            const debtItems = await scanRepositoryForTechnicalDebt();
+            
+            console.log(`\n=== DIAGNOSTIC RESULTS ===`);
+            console.log(`Workspace: ${workspaceRoot}`);
+            console.log(`Items found: ${debtItems.length}`);
+            
+            if (debtItems.length > 0) {
+                console.log('\nAll items:');
+                debtItems.forEach((item, i) => {
+                    console.log(`${i+1}. ${item.file}:${item.line}`);
+                    console.log(`   Content: ${item.content}`);
+                    console.log(`   Type: ${item.debtType}`);
+                });
+                
+                vscode.window.showInformationMessage(
+                    `Diagnostic: Found ${debtItems.length} SATD items (without LLM). Check Developer Console (Ctrl+Shift+I) for details.`,
+                    'Show Details'
+                ).then(selection => {
+                    if (selection === 'Show Details') {
+                        showTechnicalDebtPanel(debtItems, context);
+                    }
+                });
+            } else {
+                vscode.window.showWarningMessage(
+                    `Diagnostic: Found 0 SATD items. Check Developer Console (Ctrl+Shift+I) for debug logs.`
+                );
+            }
+        });
+    });
+
     // Register all commands
     context.subscriptions.push(initCommand);
     context.subscriptions.push(viewTechnicalDebtCommand);
     context.subscriptions.push(checkLatestCommitCommand);
     context.subscriptions.push(calculateSIRCommand);
     context.subscriptions.push(analyzeCommitCommand);
+    context.subscriptions.push(diagnosticCommand);
     context.subscriptions.push(gitEventListener);
     
     // Check auto-scan setting

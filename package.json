@@ -45,6 +45,10 @@
       {
         "command": "RapidPay.analyzeCommit",
         "title": "RapidPay: Analyze Commit for SATD Opportunities (CAIG)"
+      },
+      {
+        "command": "RapidPay.diagnostic",
+        "title": "RapidPay: Diagnostic Scan (Debug - No LLM)"
       }
     ],
     "configuration": {

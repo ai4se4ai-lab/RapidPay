@@ -71,6 +71,139 @@ function buildLexicalPattern(): RegExp {
 const LEXICAL_REGEX = buildLexicalPattern();
 
 /**
+ * Supported source file extensions for scanning
+ */
+const SUPPORTED_EXTENSIONS = ['.py', '.js', '.ts', '.tsx', '.jsx', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rb', '.php'];
+
+/**
+ * Recursively get all source files in a directory
+ */
+async function getAllSourceFiles(dirPath: string, files: string[] = []): Promise<string[]> {
+  try {
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    
+    for (const entry of entries) {
+      const fullPath = path.join(dirPath, entry.name);
+      
+      // Skip hidden directories and common non-source directories
+      if (entry.name.startsWith('.') || 
+          entry.name === 'node_modules' || 
+          entry.name === '__pycache__' ||
+          entry.name === 'venv' ||
+          entry.name === 'dist' ||
+          entry.name === 'build' ||
+          entry.name === 'out') {
+        continue;
+      }
+      
+      if (entry.isDirectory()) {
+        await getAllSourceFiles(fullPath, files);
+      } else if (entry.isFile()) {
+        const ext = path.extname(entry.name).toLowerCase();
+        if (SUPPORTED_EXTENSIONS.includes(ext)) {
+          files.push(fullPath);
+        }
+      }
+    }
+  } catch (error) {
+    console.warn(`Could not read directory ${dirPath}: ${error}`);
+  }
+  
+  return files;
+}
+
+/**
+ * Fallback filesystem-based lexical filtering (when git grep is unavailable)
+ * This searches all source files directly without requiring Git
+ */
+async function filesystemLexicalFiltering(workspaceRoot: string): Promise<CandidateComment[]> {
+  const candidates: CandidateComment[] = [];
+  
+  console.log('=== FILESYSTEM SEARCH DEBUG ===');
+  console.log(`Workspace root: ${workspaceRoot}`);
+  console.log(`LEXICAL_REGEX pattern: ${LEXICAL_REGEX.source}`);
+  
+  try {
+    // Get all source files
+    const sourceFiles = await getAllSourceFiles(workspaceRoot);
+    console.log(`Found ${sourceFiles.length} source files to scan:`);
+    sourceFiles.forEach(f => console.log(`  - ${f}`));
+    
+    for (const filePath of sourceFiles) {
+      try {
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const lines = content.split('\n');
+        const relativePath = path.relative(workspaceRoot, filePath);
+        
+        console.log(`\nScanning file: ${relativePath} (${lines.length} lines)`);
+        
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const lineNumber = i + 1;
+          
+          // Check if line contains any SATD pattern
+          const patternMatch = line.match(LEXICAL_REGEX);
+          const hasComment = isCommentLine(line, filePath);
+          
+          // Debug: Log lines that have potential matches
+          if (patternMatch) {
+            console.log(`  Line ${lineNumber}: Pattern '${patternMatch[0]}' found, isComment=${hasComment}`);
+            console.log(`    Content: "${line.substring(0, 100)}..."`);
+          }
+          
+          if (patternMatch && hasComment) {
+            const matchedPattern = patternMatch[0];
+            console.log(`  >>> MATCH: Line ${lineNumber} - "${matchedPattern}"`);
+            
+            // Get surrounding context
+            const startLine = Math.max(0, i - 5);
+            const endLine = Math.min(lines.length, i + 6);
+            const context = lines.slice(startLine, endLine).join('\n');
+            
+            // Try to get commit info, but don't fail if unavailable
+            let commitHash = 'untracked';
+            let commitDate = new Date().toISOString();
+            
+            try {
+              const { stdout: blame } = await execPromise(
+                `git blame -L ${lineNumber},${lineNumber} --porcelain "${relativePath}"`,
+                { cwd: workspaceRoot }
+              );
+              commitHash = blame.split('\n')[0].split(' ')[0];
+              
+              const { stdout: date } = await execPromise(
+                `git show -s --format=%ci ${commitHash}`,
+                { cwd: workspaceRoot }
+              );
+              commitDate = date.trim();
+            } catch {
+              // File not tracked by git, use defaults
+            }
+            
+            candidates.push({
+              file: relativePath,
+              line: lineNumber,
+              content: line.trim(),
+              context,
+              commitHash,
+              commitDate,
+              matchedPattern
+            });
+          }
+        }
+      } catch (error) {
+        console.warn(`Could not read file ${filePath}: ${error}`);
+      }
+    }
+  } catch (error) {
+    console.error(`Filesystem filtering error: ${error}`);
+  }
+  
+  console.log(`Filesystem search found ${candidates.length} candidates`);
+  return candidates;
+}
+
+/**
  * Candidate comment from Stage 1 lexical filtering
  */
 interface CandidateComment {
@@ -95,14 +228,53 @@ export async function lexicalFiltering(workspaceRoot: string): Promise<Candidate
   const candidates: CandidateComment[] = [];
   
   try {
-    // Build grep pattern from lexical patterns
-    const grepPattern = LEXICAL_PATTERNS.slice(0, 20).join('|'); // Use first 20 patterns for git grep
+    // Build grep pattern from lexical patterns (only single-word patterns for git grep reliability)
+    const singleWordPatterns = LEXICAL_PATTERNS.filter(p => !p.includes(' ')).slice(0, 15);
+    const grepPattern = singleWordPatterns.join('|');
+    
+    console.log(`Lexical filtering: Searching for patterns in ${workspaceRoot}`);
+    console.log(`Patterns: ${grepPattern}`);
     
     // Get all files with potential SATD comments using git grep
-    const { stdout } = await execPromise(
-      `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java" "*.c" "*.cpp" "*.h" "*.hpp" "*.cs" "*.go" "*.rb" "*.php"`,
-      { cwd: workspaceRoot, maxBuffer: 10 * 1024 * 1024 }
-    ).catch(() => ({ stdout: '' }));
+    let stdout = '';
+    let useFilesystemFallback = false;
+    
+    try {
+      const result = await execPromise(
+        `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java" "*.c" "*.cpp" "*.h" "*.hpp" "*.cs" "*.go" "*.rb" "*.php"`,
+        { cwd: workspaceRoot, maxBuffer: 10 * 1024 * 1024 }
+      );
+      stdout = result.stdout;
+      const matchCount = stdout.split('\n').filter(l => l.trim()).length;
+      console.log(`Git grep found ${matchCount} potential matches`);
+      
+      // If git grep succeeds but finds nothing, try filesystem fallback
+      if (matchCount === 0) {
+        console.log('Git grep found 0 matches - trying filesystem fallback...');
+        useFilesystemFallback = true;
+      }
+    } catch (error: any) {
+      // git grep returns exit code 1 when no matches found (not an error)
+      // exit code 2+ indicates actual errors
+      if (error.code === 1) {
+        console.log('Git grep returned exit code 1 (no matches) - trying filesystem fallback...');
+        useFilesystemFallback = true;
+      } else {
+        console.warn(`Git grep failed (code ${error.code}): ${error.message}`);
+        console.log('Falling back to filesystem search...');
+        useFilesystemFallback = true;
+      }
+    }
+    
+    // Fallback: If git grep failed or found nothing, use filesystem search
+    if (useFilesystemFallback) {
+      const fallbackCandidates = await filesystemLexicalFiltering(workspaceRoot);
+      if (fallbackCandidates.length > 0) {
+        return fallbackCandidates;
+      }
+      // If filesystem also found nothing, continue with git grep results (empty)
+      console.log('Filesystem fallback also found no candidates');
+    }
     
     const lines = stdout.split('\n').filter(line => line.trim() !== '');
     
@@ -160,30 +332,31 @@ export async function lexicalFiltering(workspaceRoot: string): Promise<Candidate
 }
 
 /**
- * Check if a line is likely a comment based on file extension
+ * Check if a line contains a comment based on file extension
+ * Now properly handles inline comments (e.g., code # FIXME: comment)
  */
 function isCommentLine(content: string, filePath: string): boolean {
   const trimmed = content.trim();
   const ext = path.extname(filePath).toLowerCase();
   
-  // Python comments
+  // Python comments - check for # anywhere in the line (inline comments)
   if (ext === '.py') {
-    return trimmed.startsWith('#') || trimmed.startsWith('"""') || trimmed.startsWith("'''");
+    return trimmed.includes('#') || trimmed.startsWith('"""') || trimmed.startsWith("'''");
   }
   
-  // C-style comments (JS, TS, Java, C, C++, Go, etc.)
+  // C-style comments (JS, TS, Java, C, C++, Go, etc.) - check for // or /* anywhere
   if (['.js', '.jsx', '.ts', '.tsx', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go'].includes(ext)) {
-    return trimmed.startsWith('//') || trimmed.startsWith('/*') || trimmed.startsWith('*');
+    return trimmed.includes('//') || trimmed.includes('/*') || trimmed.startsWith('*');
   }
   
-  // Ruby comments
+  // Ruby comments - check for # anywhere
   if (ext === '.rb') {
-    return trimmed.startsWith('#');
+    return trimmed.includes('#');
   }
   
-  // PHP comments
+  // PHP comments - check for comment markers anywhere
   if (ext === '.php') {
-    return trimmed.startsWith('//') || trimmed.startsWith('#') || trimmed.startsWith('/*') || trimmed.startsWith('*');
+    return trimmed.includes('//') || trimmed.includes('#') || trimmed.includes('/*') || trimmed.startsWith('*');
   }
   
   // Default: accept any line that contains common comment markers
@@ -369,14 +542,26 @@ export async function scanRepositoryForTechnicalDebt(): Promise<TechnicalDebt[]>
     const workspaceRoot = getWorkspaceRoot();
     
     if (!workspaceRoot) {
+      console.error('scanRepositoryForTechnicalDebt: No workspace root found');
       if (typeof vscode !== 'undefined' && vscode.window) {
         vscode.window.showInformationMessage('No workspace folder open');
       }
       return [];
     }
     
+    console.log(`scanRepositoryForTechnicalDebt: Scanning ${workspaceRoot}`);
+    
     // Use quick scan for initial detection, then classify with LLM
     const candidates = await lexicalFiltering(workspaceRoot);
+    
+    console.log(`scanRepositoryForTechnicalDebt: Found ${candidates.length} candidates`);
+    
+    if (candidates.length === 0) {
+      console.warn('scanRepositoryForTechnicalDebt: No candidates found. Possible causes:');
+      console.warn('  - Files may not be tracked by Git (run: git add .)');
+      console.warn('  - No SATD patterns (TODO, FIXME, HACK, etc.) found in comments');
+      console.warn('  - Files may not have supported extensions (.py, .js, .ts, etc.)');
+    }
     
     // Return candidates without LLM classification for faster initial scan
     // LLM classification can be done later via enhanceTechnicalDebtWithAI
@@ -400,6 +585,7 @@ export async function scanRepositoryForTechnicalDebt(): Promise<TechnicalDebt[]>
       } as TechnicalDebt;
     });
   } catch (error) {
+    console.error(`scanRepositoryForTechnicalDebt: Error - ${error}`);
     if (typeof vscode !== 'undefined' && vscode.window) {
       vscode.window.showErrorMessage(`Failed to scan repository: ${error}`);
     }
