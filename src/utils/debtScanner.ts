@@ -119,23 +119,19 @@ async function getAllSourceFiles(dirPath: string, files: string[] = []): Promise
 async function filesystemLexicalFiltering(workspaceRoot: string): Promise<CandidateComment[]> {
   const candidates: CandidateComment[] = [];
   
-  console.log('=== FILESYSTEM SEARCH DEBUG ===');
-  console.log(`Workspace root: ${workspaceRoot}`);
-  console.log(`LEXICAL_REGEX pattern: ${LEXICAL_REGEX.source}`);
+  console.log('Using filesystem search (Git not available or no matches found)');
+  console.log(`Scanning directory: ${workspaceRoot}`);
   
   try {
     // Get all source files
     const sourceFiles = await getAllSourceFiles(workspaceRoot);
-    console.log(`Found ${sourceFiles.length} source files to scan:`);
-    sourceFiles.forEach(f => console.log(`  - ${f}`));
+    console.log(`Found ${sourceFiles.length} source files to scan`);
     
     for (const filePath of sourceFiles) {
       try {
         const content = fs.readFileSync(filePath, 'utf-8');
         const lines = content.split('\n');
         const relativePath = path.relative(workspaceRoot, filePath);
-        
-        console.log(`\nScanning file: ${relativePath} (${lines.length} lines)`);
         
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
@@ -145,15 +141,8 @@ async function filesystemLexicalFiltering(workspaceRoot: string): Promise<Candid
           const patternMatch = line.match(LEXICAL_REGEX);
           const hasComment = isCommentLine(line, filePath);
           
-          // Debug: Log lines that have potential matches
-          if (patternMatch) {
-            console.log(`  Line ${lineNumber}: Pattern '${patternMatch[0]}' found, isComment=${hasComment}`);
-            console.log(`    Content: "${line.substring(0, 100)}..."`);
-          }
-          
           if (patternMatch && hasComment) {
             const matchedPattern = patternMatch[0];
-            console.log(`  >>> MATCH: Line ${lineNumber} - "${matchedPattern}"`);
             
             // Get surrounding context
             const startLine = Math.max(0, i - 5);
@@ -199,7 +188,7 @@ async function filesystemLexicalFiltering(workspaceRoot: string): Promise<Candid
     console.error(`Filesystem filtering error: ${error}`);
   }
   
-  console.log(`Filesystem search found ${candidates.length} candidates`);
+  console.log(`Filesystem search found ${candidates.length} candidate comments`);
   return candidates;
 }
 
@@ -298,31 +287,35 @@ export async function lexicalFiltering(workspaceRoot: string): Promise<Candidate
       const context = await getSurroundingContext(workspaceRoot, file, lineNum, 5);
       
       // Get commit information
+      let commitHash = 'untracked';
+      let commitDate = new Date().toISOString();
+      
       try {
         const { stdout: blame } = await execPromise(
           `git blame -L ${lineNum},${lineNum} --porcelain "${file}"`,
           { cwd: workspaceRoot }
         );
         
-        const commitHash = blame.split('\n')[0].split(' ')[0];
-        const { stdout: commitDate } = await execPromise(
+        commitHash = blame.split('\n')[0].split(' ')[0];
+        const { stdout: date } = await execPromise(
           `git show -s --format=%ci ${commitHash}`,
           { cwd: workspaceRoot }
         );
-        
-        candidates.push({
-          file,
-          line: lineNum,
-          content: content.trim(),
-          context,
-          commitHash,
-          commitDate: commitDate.trim(),
-          matchedPattern
-        });
+        commitDate = date.trim();
       } catch (error) {
-        // Skip files that can't be blamed (e.g., uncommitted files)
-        console.warn(`Could not get blame info for ${file}:${lineNum}`);
+        // File not tracked by git, use defaults but still include the candidate
+        console.warn(`Could not get blame info for ${file}:${lineNum} - using defaults`);
       }
+      
+      candidates.push({
+        file,
+        line: lineNum,
+        content: content.trim(),
+        context,
+        commitHash,
+        commitDate,
+        matchedPattern
+      });
     }
   } catch (error) {
     console.error(`Lexical filtering error: ${error}`);
@@ -697,28 +690,87 @@ async function lexicalFilteringCLI(repoPath: string): Promise<CandidateComment[]
   const candidates: CandidateComment[] = [];
   
   try {
-    const grepPattern = LEXICAL_PATTERNS.slice(0, 20).join('|');
+    // Build grep pattern from lexical patterns (only single-word patterns for git grep reliability)
+    const singleWordPatterns = LEXICAL_PATTERNS.filter(p => !p.includes(' ')).slice(0, 15);
+    const grepPattern = singleWordPatterns.join('|');
     
-    const { stdout } = await execPromise(
-      `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java" "*.c" "*.cpp" "*.h" "*.hpp" "*.cs" "*.go" "*.rb" "*.php"`,
-      { cwd: repoPath, maxBuffer: 10 * 1024 * 1024 }
-    ).catch(() => ({ stdout: '' }));
+    console.log(`Lexical filtering: Searching for patterns in ${repoPath}`);
+    console.log(`Patterns: ${grepPattern}`);
+    
+    let stdout = '';
+    let useFilesystemFallback = false;
+    
+    try {
+      const result = await execPromise(
+        `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java" "*.c" "*.cpp" "*.h" "*.hpp" "*.cs" "*.go" "*.rb" "*.php"`,
+        { cwd: repoPath, maxBuffer: 10 * 1024 * 1024 }
+      );
+      stdout = result.stdout;
+      const matchCount = stdout.split('\n').filter(l => l.trim()).length;
+      console.log(`Git grep found ${matchCount} potential matches`);
+      
+      // If git grep succeeds but finds nothing, try filesystem fallback
+      if (matchCount === 0) {
+        console.log('Git grep found 0 matches - trying filesystem fallback...');
+        useFilesystemFallback = true;
+      }
+    } catch (error: any) {
+      // git grep returns exit code 1 when no matches found (not an error)
+      // exit code 2+ indicates actual errors
+      if (error.code === 1) {
+        console.log('Git grep returned exit code 1 (no matches) - trying filesystem fallback...');
+        useFilesystemFallback = true;
+      } else {
+        console.warn(`Git grep failed (code ${error.code}): ${error.message}`);
+        console.log('Falling back to filesystem search...');
+        useFilesystemFallback = true;
+      }
+    }
+    
+    // Fallback: If git grep failed or found nothing, use filesystem search
+    if (useFilesystemFallback) {
+      const fallbackCandidates = await filesystemLexicalFiltering(repoPath);
+      if (fallbackCandidates.length > 0) {
+        return fallbackCandidates;
+      }
+      console.log('Filesystem fallback also found no candidates');
+    }
     
     const lines = stdout.split('\n').filter(line => line.trim() !== '');
+    console.log(`Processing ${lines.length} lines from git grep...`);
     
     for (const line of lines) {
-      const match = line.match(/^([^:]+):(\d+):(.*)$/);
-      if (!match) continue;
+      // More flexible regex to handle git grep output format: filepath:line:content
+      // Use non-greedy match to handle file paths that might contain colons
+      // Pattern matches: anything : digits : rest of line
+      const match = line.match(/^(.+?):(\d+):(.*)$/);
+      if (!match) {
+        console.log(`  Skipping line (no match): ${line.substring(0, 80)}`);
+        continue;
+      }
       
       const [, file, lineNumber, content] = match;
       const lineNum = parseInt(lineNumber, 10);
       
-      if (!file || !lineNum || !content) continue;
-      if (!isCommentLine(content, file)) continue;
+      if (!file || !lineNum || !content) {
+        console.log(`  Skipping line (missing data): file=${file}, line=${lineNum}, content=${content ? 'yes' : 'no'}`);
+        continue;
+      }
+      
+      const isComment = isCommentLine(content, file);
+      if (!isComment) {
+        console.log(`  Skipping line ${lineNum} in ${file} (not a comment): ${content.substring(0, 60)}...`);
+        continue;
+      }
       
       const patternMatch = content.match(LEXICAL_REGEX);
       const matchedPattern = patternMatch ? patternMatch[0] : 'unknown';
       const context = await getSurroundingContext(repoPath, file, lineNum, 5);
+      
+      console.log(`  ✓ Found candidate: ${file}:${lineNum} - ${matchedPattern}`);
+      
+      let commitHash = 'untracked';
+      let commitDate = new Date().toISOString();
       
       try {
         const { stdout: blame } = await execPromise(
@@ -726,27 +778,32 @@ async function lexicalFilteringCLI(repoPath: string): Promise<CandidateComment[]
           { cwd: repoPath }
         );
         
-        const commitHash = blame.split('\n')[0].split(' ')[0];
-        const { stdout: commitDate } = await execPromise(
+        commitHash = blame.split('\n')[0].split(' ')[0];
+        const { stdout: date } = await execPromise(
           `git show -s --format=%ci ${commitHash}`,
           { cwd: repoPath }
         );
-        
-        candidates.push({
-          file,
-          line: lineNum,
-          content: content.trim(),
-          context,
-          commitHash,
-          commitDate: commitDate.trim(),
-          matchedPattern
-        });
+        commitDate = date.trim();
       } catch (error) {
-        // Skip files that can't be blamed
+        // File not tracked by git, use defaults but still include the candidate
+        // Don't warn for untracked files - this is expected
       }
+      
+      candidates.push({
+        file,
+        line: lineNum,
+        content: content.trim(),
+        context,
+        commitHash,
+        commitDate,
+        matchedPattern
+      });
     }
   } catch (error) {
     console.error(`Lexical filtering error: ${error}`);
+    // Try filesystem fallback on any error
+    console.log('Attempting filesystem fallback due to error...');
+    return await filesystemLexicalFiltering(repoPath);
   }
   
   return candidates;

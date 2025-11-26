@@ -98,6 +98,44 @@ export function getOpenAIClient(): OpenAI | null {
 }
 
 /**
+ * Retry helper with exponential backoff for rate limit errors
+ */
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  initialDelay: number = 1000
+): Promise<T> {
+  let lastError: any;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error: any) {
+      lastError = error;
+      
+      // Check if it's a rate limit error (429) or quota error
+      const isRateLimit = error?.status === 429 || 
+                          error?.message?.includes('429') ||
+                          error?.message?.includes('quota') ||
+                          error?.message?.includes('rate limit');
+      
+      if (isRateLimit && attempt < maxRetries - 1) {
+        // Exponential backoff: 1s, 2s, 4s, etc.
+        const delay = initialDelay * Math.pow(2, attempt);
+        console.warn(`Rate limit hit, retrying in ${delay}ms (attempt ${attempt + 1}/${maxRetries})...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      // If not a rate limit error or max retries reached, throw
+      throw error;
+    }
+  }
+  
+  throw lastError;
+}
+
+/**
  * PROMPT 1: SATD Instance Detection (SID)
  * Classifies a code comment as SATD or non-SATD with confidence score
  * 
@@ -125,20 +163,22 @@ CLASSIFICATION: TRUE or FALSE
 CONFIDENCE: <number from 0 to 100>`;
 
   try {
-    const response = await openaiClient.chat.completions.create({
-      model: modelName,
-      messages: [
-        {
-          role: "system",
-          content: "You are a code analysis assistant specialized in detecting Self-Admitted Technical Debt (SATD) in source code comments. SATD includes TODO comments, FIXME notes, hack acknowledgments, workaround descriptions, and any developer-written text acknowledging suboptimal code quality or implementation shortcuts."
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
-      max_tokens: 100,
-      temperature: 0.1
+    const response = await retryWithBackoff(async () => {
+      return await openaiClient!.chat.completions.create({
+        model: modelName,
+        messages: [
+          {
+            role: "system",
+            content: "You are a code analysis assistant specialized in detecting Self-Admitted Technical Debt (SATD) in source code comments. SATD includes TODO comments, FIXME notes, hack acknowledgments, workaround descriptions, and any developer-written text acknowledging suboptimal code quality or implementation shortcuts."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        max_tokens: 100,
+        temperature: 0.1
+      });
     });
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
@@ -156,9 +196,16 @@ CONFIDENCE: <number from 0 to 100>`;
       confidence,
       rawResponse: responseText
     };
-  } catch (error) {
-    console.error(`Failed to classify SATD: ${error}`);
-    return { isSATD: false, confidence: 0 };
+  } catch (error: any) {
+    const errorMessage = error?.message || String(error);
+    console.error(`Failed to classify SATD: ${errorMessage}`);
+    
+    // Return a more informative error result
+    return { 
+      isSATD: false, 
+      confidence: 0,
+      error: errorMessage
+    };
   }
 }
 
@@ -459,19 +506,30 @@ export async function batchClassifySATD(
 ): Promise<Map<string, SATDClassificationResult>> {
   const results = new Map<string, SATDClassificationResult>();
   
-  // Process in batches to avoid rate limits
-  const batchSize = 5;
-  for (let i = 0; i < comments.length; i += batchSize) {
-    const batch = comments.slice(i, i + batchSize);
-    const promises = batch.map(async ({ comment, context, id }) => {
+  // Process sequentially with delays to avoid rate limits
+  // Reduced batch size and increased delays for better rate limit handling
+  const delayBetweenRequests = 2000; // 2 seconds between requests
+  const delayBetweenBatches = 5000; // 5 seconds between batches
+  
+  for (let i = 0; i < comments.length; i++) {
+    const { comment, context, id } = comments[i];
+    
+    try {
       const result = await classifySATD(comment, context);
       results.set(id, result);
-    });
-    await Promise.all(promises);
+      
+      // Add delay between requests (except for the last one)
+      if (i < comments.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, delayBetweenRequests));
+      }
+    } catch (error) {
+      console.error(`Failed to classify comment ${id}: ${error}`);
+      results.set(id, { isSATD: false, confidence: 0 });
+    }
     
-    // Small delay between batches to avoid rate limits
-    if (i + batchSize < comments.length) {
-      await new Promise(resolve => setTimeout(resolve, 100));
+    // Extra delay every 5 items to respect rate limits
+    if ((i + 1) % 5 === 0 && i < comments.length - 1) {
+      await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
     }
   }
   

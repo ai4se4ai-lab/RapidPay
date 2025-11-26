@@ -401,6 +401,9 @@ export interface SATDClassificationResult {
     
     /** Raw LLM response */
     rawResponse?: string;
+    
+    /** Error message if classification failed */
+    error?: string;
 }
 
 /**
