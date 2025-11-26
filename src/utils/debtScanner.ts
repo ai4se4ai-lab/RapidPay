@@ -740,12 +740,85 @@ async function lexicalFilteringCLI(repoPath: string): Promise<CandidateComment[]
     console.log(`Processing ${lines.length} lines from git grep...`);
     
     for (const line of lines) {
+      // Debug: Show raw line (first 100 chars)
+      const rawLine = line.trim();
+      console.log(`  Raw line (first 100 chars): "${rawLine.substring(0, 100)}"`);
+      
       // More flexible regex to handle git grep output format: filepath:line:content
-      // Use non-greedy match to handle file paths that might contain colons
-      // Pattern matches: anything : digits : rest of line
-      const match = line.match(/^(.+?):(\d+):(.*)$/);
+      // Pattern: filepath:line:content (filepath can contain colons on Windows)
+      // Try multiple patterns to handle different formats
+      let match = rawLine.match(/^([^:]+?):(\d+):(.*)$/);
+      
+      // If that doesn't work, try with non-greedy match for file path
       if (!match) {
-        console.log(`  Skipping line (no match): ${line.substring(0, 80)}`);
+        match = rawLine.match(/^(.+?):(\d+):(.*)$/);
+      }
+      
+      // If still no match, try with spaces after colons
+      if (!match) {
+        match = rawLine.match(/^(.+?):\s*(\d+):\s*(.*)$/);
+      }
+      
+      if (!match) {
+        console.log(`  ❌ No regex match for line. Length: ${rawLine.length}, First 50 chars: "${rawLine.substring(0, 50)}"`);
+        // Try to manually parse as last resort
+        const colonIndex = rawLine.indexOf(':');
+        if (colonIndex > 0) {
+          const afterFirstColon = rawLine.substring(colonIndex + 1);
+          const secondColonIndex = afterFirstColon.indexOf(':');
+          if (secondColonIndex > 0) {
+            const file = rawLine.substring(0, colonIndex);
+            const lineNumStr = afterFirstColon.substring(0, secondColonIndex).trim();
+            const content = afterFirstColon.substring(secondColonIndex + 1);
+            const lineNum = parseInt(lineNumStr, 10);
+            
+            if (file && !isNaN(lineNum) && content) {
+              console.log(`  ✓ Manual parse successful: file="${file}", line=${lineNum}`);
+              // Use manual parse result
+              const isComment = isCommentLine(content, file);
+              if (!isComment) {
+                console.log(`  Skipping line ${lineNum} in ${file} (not a comment): ${content.substring(0, 60)}...`);
+                continue;
+              }
+              
+              const patternMatch = content.match(LEXICAL_REGEX);
+              const matchedPattern = patternMatch ? patternMatch[0] : 'unknown';
+              const context = await getSurroundingContext(repoPath, file, lineNum, 5);
+              
+              console.log(`  ✓ Found candidate: ${file}:${lineNum} - ${matchedPattern}`);
+              
+              let commitHash = 'untracked';
+              let commitDate = new Date().toISOString();
+              
+              try {
+                const { stdout: blame } = await execPromise(
+                  `git blame -L ${lineNum},${lineNum} --porcelain "${file}"`,
+                  { cwd: repoPath }
+                );
+                
+                commitHash = blame.split('\n')[0].split(' ')[0];
+                const { stdout: date } = await execPromise(
+                  `git show -s --format=%ci ${commitHash}`,
+                  { cwd: repoPath }
+                );
+                commitDate = date.trim();
+              } catch (error) {
+                // File not tracked by git, use defaults
+              }
+              
+              candidates.push({
+                file,
+                line: lineNum,
+                content: content.trim(),
+                context,
+                commitHash,
+                commitDate,
+                matchedPattern
+              });
+              continue;
+            }
+          }
+        }
         continue;
       }
       
