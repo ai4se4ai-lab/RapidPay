@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "scenario_id": "scenario1",
+    "scenario_name": "Feature Rush - New Chain Introduction",
+    "description": "Developer adds quick-and-dirty feature under deadline pressure, creating a new 3-node SATD chain",
+    "commit_message": "feat: Add inventory integration and caching for orders",
+    "author": "developer@example.com",
+    "before_satd_count": 0,
+    "after_satd_count": 9,
+    "before_chain_count": 0,
+    "after_chain_count": 1
+  },
+  "before_state": {
+    "files": ["order_service.py"],
+    "satd_instances": [],
+    "chains": []
+  },
+  "after_state": {
+    "files": ["order_service.py", "inventory_service.py", "cache_manager.py"],
+    "satd_instances": [
+      {
+        "id": "satd-s1-1",
+        "file": "order_service.py",
+        "line": 46,
+        "pattern": "TODO",
+        "content": "TODO: This direct instantiation of InventoryService creates tight coupling. We should use dependency injection to allow for testing and flexibility.",
+        "debt_type": "Design",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s1-2",
+        "file": "order_service.py",
+        "line": 60,
+        "pattern": "HACK",
+        "content": "HACK: Quick validation added during feature rush - no proper error handling. If inventory check fails, we just proceed anyway.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s1-3",
+        "file": "order_service.py",
+        "line": 85,
+        "pattern": "FIXME",
+        "content": "FIXME: No transaction support here. If reservation partially fails, we end up with inconsistent state between orders and inventory.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s1-4",
+        "file": "order_service.py",
+        "line": 100,
+        "pattern": "TODO",
+        "content": "TODO: Need to handle partial cancellation scenarios where some items have already shipped.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s1-5",
+        "file": "order_service.py",
+        "line": 116,
+        "pattern": "HACK",
+        "content": "HACK: This method iterates through ALL orders every time it's called. No pagination, no filtering, no caching.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s1-6",
+        "file": "inventory_service.py",
+        "line": 38,
+        "pattern": "TODO",
+        "content": "TODO: Cache initialization is done synchronously in constructor. This blocks the service startup.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s1-7",
+        "file": "inventory_service.py",
+        "line": 58,
+        "pattern": "HACK",
+        "content": "HACK: Using cache without proper invalidation strategy. Cached values might be stale causing overselling issues.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s1-8",
+        "file": "inventory_service.py",
+        "line": 81,
+        "pattern": "FIXME",
+        "content": "FIXME: Not invalidating cache here! This creates a race condition where availability check sees stale data.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s1-9",
+        "file": "cache_manager.py",
+        "line": 33,
+        "pattern": "TODO",
+        "content": "TODO: This lock implementation is naive. Using a single global lock means all cache operations are serialized.",
+        "debt_type": "Design",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s1-10",
+        "file": "cache_manager.py",
+        "line": 50,
+        "pattern": "HACK",
+        "content": "HACK: Expired entries are deleted lazily on access. This means expired data can accumulate causing memory bloat.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s1-11",
+        "file": "cache_manager.py",
+        "line": 68,
+        "pattern": "FIXME",
+        "content": "FIXME: No size limit on cache! The cache will grow unbounded until we run out of memory.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-s1-1",
+        "source_satd": "satd-s1-1",
+        "target_satd": "satd-s1-6",
+        "type": "module",
+        "weight": 0.9,
+        "description": "OrderService directly imports and instantiates InventoryService"
+      },
+      {
+        "id": "rel-s1-2",
+        "source_satd": "satd-s1-2",
+        "target_satd": "satd-s1-7",
+        "type": "call",
+        "weight": 0.8,
+        "description": "Order validation calls inventory check_availability which has cache issues"
+      },
+      {
+        "id": "rel-s1-3",
+        "source_satd": "satd-s1-3",
+        "target_satd": "satd-s1-8",
+        "type": "call",
+        "weight": 0.85,
+        "description": "Transaction issue in orders calls cache race condition in inventory"
+      },
+      {
+        "id": "rel-s1-4",
+        "source_satd": "satd-s1-6",
+        "target_satd": "satd-s1-9",
+        "type": "module",
+        "weight": 0.9,
+        "description": "InventoryService instantiates CacheManager in constructor"
+      },
+      {
+        "id": "rel-s1-5",
+        "source_satd": "satd-s1-7",
+        "target_satd": "satd-s1-10",
+        "type": "call",
+        "weight": 0.8,
+        "description": "Stale cache reads depend on lazy expiration in cache manager"
+      },
+      {
+        "id": "rel-s1-6",
+        "source_satd": "satd-s1-8",
+        "target_satd": "satd-s1-11",
+        "type": "data",
+        "weight": 0.75,
+        "description": "Race condition propagates to unbounded cache growth"
+      }
+    ],
+    "chains": [
+      {
+        "id": "chain-s1-A",
+        "name": "Order-Inventory-Cache Chain",
+        "nodes": ["satd-s1-1", "satd-s1-2", "satd-s1-3", "satd-s1-6", "satd-s1-7", "satd-s1-8", "satd-s1-9", "satd-s1-10", "satd-s1-11"],
+        "length": 9,
+        "root_node": "satd-s1-1",
+        "description": "New chain created by feature rush connecting order processing to caching"
+      }
+    ]
+  },
+  "expected_sir_ranking": {
+    "description": "Expected SIR ranking after commit",
+    "ranking": [
+      {"rank": 1, "satd_id": "satd-s1-1", "rationale": "Root of chain, design debt affects all downstream"},
+      {"rank": 2, "satd_id": "satd-s1-6", "rationale": "Bridge node connecting orders to cache"},
+      {"rank": 3, "satd_id": "satd-s1-3", "rationale": "Critical defect with propagation to cache"},
+      {"rank": 4, "satd_id": "satd-s1-9", "rationale": "Cache lock issue affects all cache operations"},
+      {"rank": 5, "satd_id": "satd-s1-8", "rationale": "Race condition in cache invalidation"}
+    ]
+  },
+  "commit_analysis": {
+    "files_added": ["inventory_service.py", "cache_manager.py"],
+    "files_modified": ["order_service.py"],
+    "new_satd_introduced": 11,
+    "chain_impact": "New 3-file chain created spanning order -> inventory -> cache layers"
+  }
+}
+

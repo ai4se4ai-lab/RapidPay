@@ -1,0 +1,380 @@
+{
+  "metadata": {
+    "scenario_id": "scenario3",
+    "scenario_name": "Multi-Developer Collaboration - Chain Merge",
+    "description": "Two isolated SATD chains (logging and metrics) get merged when a developer adds an observability aggregator",
+    "commit_message": "feat: Add unified observability aggregator for logs and metrics",
+    "author": "developer@example.com",
+    "before_satd_count": 8,
+    "after_satd_count": 18,
+    "before_chain_count": 2,
+    "after_chain_count": 1
+  },
+  "before_state": {
+    "files": ["log_service.py", "log_formatter.py", "metrics_collector.py", "metrics_exporter.py"],
+    "satd_instances": [
+      {
+        "id": "satd-s3-pre-1",
+        "file": "log_service.py",
+        "line": 38,
+        "pattern": "TODO",
+        "content": "TODO: Log storage is in-memory only. All logs are lost on restart.",
+        "debt_type": "Architecture",
+        "severity": "high",
+        "chain": "chain-logging"
+      },
+      {
+        "id": "satd-s3-pre-2",
+        "file": "log_service.py",
+        "line": 54,
+        "pattern": "HACK",
+        "content": "HACK: Simple truncation when limit reached. This discards oldest logs without any archiving.",
+        "debt_type": "Implementation",
+        "severity": "medium",
+        "chain": "chain-logging"
+      },
+      {
+        "id": "satd-s3-pre-3",
+        "file": "log_formatter.py",
+        "line": 27,
+        "pattern": "FIXME",
+        "content": "FIXME: Format configuration is not validated. Invalid timestamp format string will cause runtime errors.",
+        "debt_type": "Defect",
+        "severity": "medium",
+        "chain": "chain-logging"
+      },
+      {
+        "id": "satd-s3-pre-4",
+        "file": "log_formatter.py",
+        "line": 53,
+        "pattern": "TODO",
+        "content": "TODO: No timezone handling. Logs will have inconsistent times in distributed systems.",
+        "debt_type": "Implementation",
+        "severity": "medium",
+        "chain": "chain-logging"
+      },
+      {
+        "id": "satd-s3-pre-5",
+        "file": "metrics_collector.py",
+        "line": 42,
+        "pattern": "HACK",
+        "content": "HACK: Storing all metrics in memory indefinitely. For high-throughput apps, this will consume massive amounts of memory.",
+        "debt_type": "Architecture",
+        "severity": "critical",
+        "chain": "chain-metrics"
+      },
+      {
+        "id": "satd-s3-pre-6",
+        "file": "metrics_collector.py",
+        "line": 98,
+        "pattern": "TODO",
+        "content": "TODO: No percentile calculations (p50, p95, p99). This limits usefulness for SLA monitoring.",
+        "debt_type": "Implementation",
+        "severity": "medium",
+        "chain": "chain-metrics"
+      },
+      {
+        "id": "satd-s3-pre-7",
+        "file": "metrics_exporter.py",
+        "line": 24,
+        "pattern": "TODO",
+        "content": "TODO: Export endpoint is not configurable at runtime. Changing the monitoring backend requires code changes.",
+        "debt_type": "Design",
+        "severity": "medium",
+        "chain": "chain-metrics"
+      },
+      {
+        "id": "satd-s3-pre-8",
+        "file": "metrics_exporter.py",
+        "line": 43,
+        "pattern": "FIXME",
+        "content": "FIXME: Auto-flush when buffer is full is synchronous and blocks.",
+        "debt_type": "Implementation",
+        "severity": "high",
+        "chain": "chain-metrics"
+      }
+    ],
+    "chains": [
+      {
+        "id": "chain-s3-logging",
+        "name": "Logging Chain",
+        "nodes": ["satd-s3-pre-1", "satd-s3-pre-2", "satd-s3-pre-3", "satd-s3-pre-4"],
+        "length": 4,
+        "isolated": true
+      },
+      {
+        "id": "chain-s3-metrics",
+        "name": "Metrics Chain",
+        "nodes": ["satd-s3-pre-5", "satd-s3-pre-6", "satd-s3-pre-7", "satd-s3-pre-8"],
+        "length": 4,
+        "isolated": true
+      }
+    ]
+  },
+  "after_state": {
+    "files": ["log_service.py", "log_formatter.py", "metrics_collector.py", "metrics_exporter.py", "observability_aggregator.py"],
+    "satd_instances": [
+      {
+        "id": "satd-s3-1",
+        "file": "log_service.py",
+        "line": 41,
+        "pattern": "TODO",
+        "content": "TODO: Log storage is in-memory only. All logs are lost on restart.",
+        "debt_type": "Architecture",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-2",
+        "file": "log_service.py",
+        "line": 60,
+        "pattern": "HACK",
+        "content": "HACK: Simple truncation when limit reached. This discards oldest logs without any archiving.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-3",
+        "file": "log_service.py",
+        "line": 75,
+        "pattern": "FIXME",
+        "content": "FIXME: Aggregator notification is synchronous. If aggregator is slow, it blocks logging.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-4",
+        "file": "log_formatter.py",
+        "line": 27,
+        "pattern": "FIXME",
+        "content": "FIXME: Format configuration is not validated.",
+        "debt_type": "Defect",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-5",
+        "file": "log_formatter.py",
+        "line": 53,
+        "pattern": "TODO",
+        "content": "TODO: No timezone handling.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-6",
+        "file": "metrics_collector.py",
+        "line": 45,
+        "pattern": "HACK",
+        "content": "HACK: Storing all metrics in memory indefinitely.",
+        "debt_type": "Architecture",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s3-7",
+        "file": "metrics_collector.py",
+        "line": 55,
+        "pattern": "BUG",
+        "content": "BUG: Aggregator notification happens before the metric is fully recorded. Race condition potential.",
+        "debt_type": "Defect",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-8",
+        "file": "metrics_collector.py",
+        "line": 121,
+        "pattern": "TODO",
+        "content": "TODO: No percentile calculations (p50, p95, p99).",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-9",
+        "file": "metrics_exporter.py",
+        "line": 24,
+        "pattern": "TODO",
+        "content": "TODO: Export endpoint is not configurable at runtime.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-10",
+        "file": "metrics_exporter.py",
+        "line": 43,
+        "pattern": "FIXME",
+        "content": "FIXME: Auto-flush when buffer is full is synchronous and blocks.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-11",
+        "file": "observability_aggregator.py",
+        "line": 47,
+        "pattern": "TODO",
+        "content": "TODO: Connecting to both logging and metrics creates tight coupling.",
+        "debt_type": "Architecture",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-12",
+        "file": "observability_aggregator.py",
+        "line": 56,
+        "pattern": "HACK",
+        "content": "HACK: Correlation tracking is simplistic. Using a global current_id that gets overwritten.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-13",
+        "file": "observability_aggregator.py",
+        "line": 60,
+        "pattern": "FIXME",
+        "content": "FIXME: No buffer size limit! Records grow unboundedly.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s3-14",
+        "file": "observability_aggregator.py",
+        "line": 105,
+        "pattern": "BUG",
+        "content": "BUG: This creates a feedback loop! Logging an error generates a metric, which if it fails, could log an error.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s3-15",
+        "file": "observability_aggregator.py",
+        "line": 118,
+        "pattern": "TODO",
+        "content": "TODO: This is O(n) where n is all records. For large systems with millions of records, this will be extremely slow.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s3-16",
+        "file": "observability_aggregator.py",
+        "line": 151,
+        "pattern": "HACK",
+        "content": "HACK: Health calculation logic is hardcoded. Thresholds should be configurable per environment.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-17",
+        "file": "observability_aggregator.py",
+        "line": 172,
+        "pattern": "NOTE",
+        "content": "NOTE: Full table scan for every query. This is acceptable for small datasets but will not scale.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s3-18",
+        "file": "observability_aggregator.py",
+        "line": 196,
+        "pattern": "TODO",
+        "content": "TODO: Dashboard data generation is synchronous and expensive. Should be cached and refreshed in background.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-s3-1",
+        "source_satd": "satd-s3-11",
+        "target_satd": "satd-s3-1",
+        "type": "module",
+        "weight": 0.9,
+        "description": "Aggregator imports and uses LogService (bridging to logging chain)"
+      },
+      {
+        "id": "rel-s3-2",
+        "source_satd": "satd-s3-11",
+        "target_satd": "satd-s3-6",
+        "type": "module",
+        "weight": 0.9,
+        "description": "Aggregator imports and uses MetricsCollector (bridging to metrics chain)"
+      },
+      {
+        "id": "rel-s3-3",
+        "source_satd": "satd-s3-3",
+        "target_satd": "satd-s3-12",
+        "type": "call",
+        "weight": 0.8,
+        "description": "Sync notification calls simplistic correlation tracking"
+      },
+      {
+        "id": "rel-s3-4",
+        "source_satd": "satd-s3-7",
+        "target_satd": "satd-s3-13",
+        "type": "data",
+        "weight": 0.85,
+        "description": "Metric race condition feeds unbounded buffer growth"
+      },
+      {
+        "id": "rel-s3-5",
+        "source_satd": "satd-s3-14",
+        "target_satd": "satd-s3-3",
+        "type": "control",
+        "weight": 0.9,
+        "description": "Feedback loop bug triggers sync notification issue"
+      },
+      {
+        "id": "rel-s3-6",
+        "source_satd": "satd-s3-13",
+        "target_satd": "satd-s3-15",
+        "type": "data",
+        "weight": 0.75,
+        "description": "Unbounded records makes O(n) query extremely slow"
+      },
+      {
+        "id": "rel-s3-7",
+        "source_satd": "satd-s3-1",
+        "target_satd": "satd-s3-2",
+        "type": "data",
+        "weight": 0.7,
+        "description": "In-memory storage leads to truncation workaround"
+      },
+      {
+        "id": "rel-s3-8",
+        "source_satd": "satd-s3-6",
+        "target_satd": "satd-s3-8",
+        "type": "data",
+        "weight": 0.7,
+        "description": "Memory storage limits advanced analytics capability"
+      }
+    ],
+    "chains": [
+      {
+        "id": "chain-s3-merged",
+        "name": "Unified Observability Chain",
+        "nodes": [
+          "satd-s3-1", "satd-s3-2", "satd-s3-3", "satd-s3-4", "satd-s3-5",
+          "satd-s3-6", "satd-s3-7", "satd-s3-8", "satd-s3-9", "satd-s3-10",
+          "satd-s3-11", "satd-s3-12", "satd-s3-13", "satd-s3-14", "satd-s3-15",
+          "satd-s3-16", "satd-s3-17", "satd-s3-18"
+        ],
+        "length": 18,
+        "root_node": "satd-s3-11",
+        "description": "Merged chain connecting logging and metrics through aggregator"
+      }
+    ]
+  },
+  "expected_sir_ranking": {
+    "description": "Expected SIR ranking after chain merge",
+    "ranking": [
+      {"rank": 1, "satd_id": "satd-s3-11", "rationale": "Bridge node connecting both chains, highest impact"},
+      {"rank": 2, "satd_id": "satd-s3-14", "rationale": "Critical feedback loop bug affecting both chains"},
+      {"rank": 3, "satd_id": "satd-s3-13", "rationale": "Unbounded growth affects all aggregated telemetry"},
+      {"rank": 4, "satd_id": "satd-s3-6", "rationale": "Critical memory issue in metrics chain"},
+      {"rank": 5, "satd_id": "satd-s3-1", "rationale": "Critical memory issue in logging chain"}
+    ]
+  },
+  "commit_analysis": {
+    "files_added": ["observability_aggregator.py"],
+    "files_modified": ["log_service.py", "metrics_collector.py"],
+    "new_satd_introduced": 10,
+    "existing_satd_affected": 8,
+    "chain_merge": "Two isolated 4-node chains merged into one 18-node chain through bridge"
+  }
+}
+
