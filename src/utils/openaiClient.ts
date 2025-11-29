@@ -148,7 +148,12 @@ export async function classifySATD(
   surroundingCode: string
 ): Promise<SATDClassificationResult> {
   if (!openaiClient) {
-    return { isSATD: false, confidence: 0 };
+    console.error('classifySATD: OpenAI client is not initialized');
+    return { 
+      isSATD: false, 
+      confidence: 0,
+      error: 'OpenAI client not initialized. Please check your API key configuration.'
+    };
   }
 
   const prompt = `Given the following code comment and its surrounding code context, determine whether this comment represents a developer's acknowledgment of suboptimal implementation, technical shortcuts, or known limitations that constitute SATD. Consider comments that express concerns about code quality, temporary solutions, known issues, or areas needing improvement. Respond with 'TRUE' if the comment indicates SATD, or 'FALSE' otherwise. Also provide a confidence score from 0 to 100.
@@ -163,6 +168,8 @@ CLASSIFICATION: TRUE or FALSE
 CONFIDENCE: <number from 0 to 100>`;
 
   try {
+    console.log(`classifySATD: Calling LLM for comment: "${commentText.substring(0, 50)}..."`);
+    
     const response = await retryWithBackoff(async () => {
       return await openaiClient!.chat.completions.create({
         model: modelName,
@@ -183,6 +190,8 @@ CONFIDENCE: <number from 0 to 100>`;
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
     
+    console.log(`classifySATD: LLM response: "${responseText}"`);
+    
     // Parse response
     const classificationMatch = responseText.match(/CLASSIFICATION:\s*(TRUE|FALSE)/i);
     const confidenceMatch = responseText.match(/CONFIDENCE:\s*(\d+)/i);
@@ -198,13 +207,25 @@ CONFIDENCE: <number from 0 to 100>`;
     };
   } catch (error: any) {
     const errorMessage = error?.message || String(error);
-    console.error(`Failed to classify SATD: ${errorMessage}`);
+    const statusCode = error?.status || error?.response?.status;
+    
+    // Provide more helpful error messages based on error type
+    let userFriendlyError = errorMessage;
+    if (statusCode === 401 || errorMessage.includes('Incorrect API key') || errorMessage.includes('invalid_api_key')) {
+      userFriendlyError = 'Invalid OpenAI API key. Please check your API key in settings.';
+    } else if (statusCode === 429 || errorMessage.includes('rate limit') || errorMessage.includes('quota')) {
+      userFriendlyError = 'OpenAI rate limit exceeded. Please wait and try again, or upgrade your API plan.';
+    } else if (errorMessage.includes('network') || errorMessage.includes('ENOTFOUND') || errorMessage.includes('ETIMEDOUT')) {
+      userFriendlyError = 'Network error connecting to OpenAI. Please check your internet connection.';
+    }
+    
+    console.error(`classifySATD failed: ${userFriendlyError} (original: ${errorMessage})`);
     
     // Return a more informative error result
     return { 
       isSATD: false, 
       confidence: 0,
-      error: errorMessage
+      error: userFriendlyError
     };
   }
 }

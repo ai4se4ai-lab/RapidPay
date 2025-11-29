@@ -599,14 +599,41 @@ export async function enhanceTechnicalDebtWithAI(
   threshold: number = 0.7
 ): Promise<TechnicalDebt[]> {
   const enhancedDebtItems: TechnicalDebt[] = [];
+  let llmSuccessCount = 0;
+  let llmFailCount = 0;
+  let llmErrorMessage = '';
   
-  for (const item of debtItems) {
+  console.log(`enhanceTechnicalDebtWithAI: Processing ${debtItems.length} items with threshold ${threshold}`);
+  
+  for (let i = 0; i < debtItems.length; i++) {
+    const item = debtItems[i];
+    
     try {
       // Perform LLM classification (Stage 2 of SID)
       const classificationResult = await classifySATD(
         item.content,
         item.extendedContent || ''
       );
+      
+      console.log(`Item ${i + 1}/${debtItems.length}: ${item.file}:${item.line} - isSATD=${classificationResult.isSATD}, confidence=${classificationResult.confidence}`);
+      
+      // Check if LLM returned an error
+      if (classificationResult.error) {
+        llmFailCount++;
+        llmErrorMessage = classificationResult.error;
+        console.warn(`LLM error for ${item.file}:${item.line}: ${classificationResult.error}`);
+        
+        // On LLM error, keep the item as-is (don't filter it out)
+        enhancedDebtItems.push({
+          ...item,
+          isActualDebt: undefined, // Unknown - LLM failed
+          confidence: undefined,
+          llmError: classificationResult.error
+        });
+        continue;
+      }
+      
+      llmSuccessCount++;
       
       // Apply confidence threshold
       if (classificationResult.confidence >= threshold) {
@@ -626,11 +653,46 @@ export async function enhanceTechnicalDebtWithAI(
           isActualDebt: false, // Below confidence threshold
           confidence: classificationResult.confidence
         });
+      } else {
+        // LLM says not SATD with low confidence - still include for transparency
+        enhancedDebtItems.push({
+          ...item,
+          isActualDebt: false,
+          confidence: classificationResult.confidence
+        });
       }
     } catch (error) {
-      console.error(`Failed to enhance technical debt item: ${error}`);
-      enhancedDebtItems.push(item);
+      llmFailCount++;
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      llmErrorMessage = errorMsg;
+      console.error(`Failed to enhance technical debt item ${item.file}:${item.line}: ${errorMsg}`);
+      
+      // On error, keep the item (don't silently drop it)
+      enhancedDebtItems.push({
+        ...item,
+        isActualDebt: undefined,
+        confidence: undefined,
+        llmError: errorMsg
+      });
     }
+  }
+  
+  console.log(`enhanceTechnicalDebtWithAI: LLM succeeded for ${llmSuccessCount}/${debtItems.length}, failed for ${llmFailCount}`);
+  
+  // Show warning to user if all LLM calls failed
+  if (llmFailCount > 0 && llmSuccessCount === 0 && typeof vscode !== 'undefined' && vscode?.window) {
+    vscode.window.showWarningMessage(
+      `LLM classification failed for all ${llmFailCount} items. Error: ${llmErrorMessage}. Items kept without AI classification.`,
+      'Check API Key'
+    ).then(selection => {
+      if (selection === 'Check API Key' && vscode) {
+        vscode.commands.executeCommand('workbench.action.openSettings', 'RapidPay.openaiApiKey');
+      }
+    });
+  } else if (llmFailCount > 0 && typeof vscode !== 'undefined' && vscode?.window) {
+    vscode.window.showWarningMessage(
+      `LLM classification failed for ${llmFailCount}/${debtItems.length} items. Some items may not have AI classification.`
+    );
   }
   
   return enhancedDebtItems;
