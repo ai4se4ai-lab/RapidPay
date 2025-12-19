@@ -325,3 +325,7 @@ if __name__ == "__main__":
     print(f"  Total records: {dashboard['health']['metrics']['total_records']}")
     print(f"  Active traces: {len(dashboard['active_traces'])}")
 
+
+
+
+

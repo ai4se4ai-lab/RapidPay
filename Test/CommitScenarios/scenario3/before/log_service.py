@@ -146,3 +146,7 @@ if __name__ == "__main__":
     for entry in logger.get_entries(limit=5):
         print(f"  [{entry['level']}] {entry['message']}")
 
+
+
+
+

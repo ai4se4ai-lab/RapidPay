@@ -176,3 +176,7 @@ if __name__ == "__main__":
     print("\nAdmin permissions:")
     print(f"  user-002 can delete users: {checker.check_permission('user-002', 'users', 'delete')}")
 
+
+
+
+

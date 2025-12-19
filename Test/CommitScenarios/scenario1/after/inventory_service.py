@@ -172,3 +172,7 @@ if __name__ == "__main__":
     service.reserve_stock("PROD-A", 30)
     print(service.get_inventory_status("PROD-A"))
 
+
+
+
+
