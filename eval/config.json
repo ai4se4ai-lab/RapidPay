@@ -1,0 +1,142 @@
+{
+  "experiments": {
+    "exp1": {
+      "name": "SATD Dataset Generator",
+      "description": "Extracts code comments from GitHub repositories and creates CSV datasets for SATD analysis",
+      "output_dir": "./results",
+      "repos_dir": "./repos",
+      "excluded_directories": [
+        "test",
+        "vendor",
+        "node_modules",
+        "third_party",
+        "external",
+        ".git"
+      ],
+      "progress_report_interval": 100
+    }
+  },
+  "repositories": {
+    "AC": {
+      "name": "Apache Commons Lang",
+      "url": "https://github.com/apache/commons-lang.git",
+      "languages": ["java"],
+      "extensions": [".java"],
+      "enabled": true
+    },
+    "SF": {
+      "name": "Spring Framework",
+      "url": "https://github.com/spring-projects/spring-framework.git",
+      "languages": ["java", "kotlin"],
+      "extensions": [".java", ".kt"],
+      "enabled": true
+    },
+    "TF": {
+      "name": "TensorFlow",
+      "url": "https://github.com/tensorflow/tensorflow.git",
+      "languages": ["python", "cpp"],
+      "extensions": [".py", ".cc", ".cpp", ".h", ".hpp"],
+      "enabled": true
+    },
+    "RE": {
+      "name": "React",
+      "url": "https://github.com/facebook/react.git",
+      "languages": ["javascript", "typescript"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx"],
+      "enabled": true
+    },
+    "VS": {
+      "name": "VSCode",
+      "url": "https://github.com/microsoft/vscode.git",
+      "languages": ["typescript", "javascript"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx"],
+      "enabled": true
+    },
+    "AN": {
+      "name": "Android AOSP Common Kernel",
+      "url": "https://github.com/aosp-mirror/kernel_common.git",
+      "languages": ["c", "cpp"],
+      "extensions": [".c", ".h", ".cpp", ".hpp"],
+      "enabled": true
+    },
+    "SC": {
+      "name": "SciPy",
+      "url": "https://github.com/scipy/scipy.git",
+      "languages": ["python", "c", "cpp"],
+      "extensions": [".py", ".c", ".cpp", ".h", ".pyx"],
+      "enabled": true
+    },
+    "PO": {
+      "name": "PostgreSQL",
+      "url": "https://github.com/postgres/postgres.git",
+      "languages": ["c"],
+      "extensions": [".c", ".h"],
+      "enabled": true
+    },
+    "KU": {
+      "name": "Kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes.git",
+      "languages": ["go"],
+      "extensions": [".go"],
+      "enabled": true
+    },
+    "FI": {
+      "name": "Firefox (Gecko)",
+      "url": "https://github.com/nicotine-plus/nicotine-plus.git",
+      "languages": ["javascript", "python", "cpp"],
+      "extensions": [".js", ".jsx", ".py", ".cpp", ".c", ".h"],
+      "enabled": true
+    }
+  },
+  "satd_patterns": {
+    "explicit": [
+      "\\bTODO\\b",
+      "\\bFIXME\\b",
+      "\\bHACK\\b",
+      "\\bXXX\\b",
+      "\\bBUG\\b",
+      "\\bKLUDGE\\b",
+      "\\bTRICKY\\b",
+      "\\bWARNING\\b",
+      "\\bNOTE\\b",
+      "\\bTEMP\\b",
+      "\\bTEMPORARY\\b",
+      "\\bDEPRECATED\\b"
+    ],
+    "implicit": [
+      "\\bworkaround\\b",
+      "\\bquick.?fix\\b",
+      "\\bdirty\\b",
+      "\\bugly\\b",
+      "\\bshould.?be\\b",
+      "\\bneed.?to\\b",
+      "\\bneeds?.?refactor\\b",
+      "\\bcleanup\\b",
+      "\\bclean.?up\\b",
+      "\\boptimize\\b",
+      "\\bimprove\\b",
+      "\\bbetter.?way\\b",
+      "\\bfor.?now\\b",
+      "\\btemporarily\\b",
+      "\\bnot.?ideal\\b",
+      "\\bsuboptimal\\b",
+      "\\bshould.?fix\\b",
+      "\\bmust.?fix\\b",
+      "\\bbroken\\b",
+      "\\bincomplete\\b",
+      "\\bmissing\\b",
+      "\\bplaceholder\\b",
+      "\\bstub\\b",
+      "\\bdummy\\b",
+      "\\bmagic.?number\\b",
+      "\\bhardcode[d]?\\b",
+      "\\bhard.?code[d]?\\b"
+    ]
+  },
+  "global_settings": {
+    "git_clone_depth": 1,
+    "default_encoding": "utf-8",
+    "comment_hash_length": 12
+  }
+}
+

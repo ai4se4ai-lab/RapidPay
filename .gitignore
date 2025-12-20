@@ -7,3 +7,6 @@ dist/
 .env
 npm-debug.log
 package-lock.json
+eval/results/*.csv
+eval/repos/*
+
