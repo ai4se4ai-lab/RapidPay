@@ -14,6 +14,64 @@
         ".git"
       ],
       "progress_report_interval": 100
+    },
+    "rq1": {
+      "name": "RQ1 SATD Detection and Chain Evaluation",
+      "description": "Evaluates SID accuracy and IRD chain discovery effectiveness across subject systems",
+      "subject_systems": ["AC", "RE", "SC"],
+      "output_dir": "./RQ1/results",
+      "ground_truth_dir": "./RQ1/ground_truth",
+      "repos_dir": "./repos",
+      "excluded_directories": [
+        "test",
+        "vendor",
+        "node_modules",
+        "third_party",
+        "external",
+        ".git"
+      ],
+      "stratified_sampling": {
+        "satd_sample_size": 200,
+        "non_satd_sample_size": 200,
+        "random_seed": 42,
+        "line_tolerance": 5
+      },
+      "openai_config": {
+        "api_key_env": "OPENAI_API_KEY",
+        "model_name": "gpt-4o",
+        "use_llm": false,
+        "confidence_threshold": 0.7,
+        "max_retries": 3,
+        "retry_delay_ms": 1000
+      },
+      "sid_config": {
+        "detection_level": "comprehensive",
+        "include_implicit": true,
+        "batch_size": 10
+      },
+      "ird_config": {
+        "max_dependency_hops": 5,
+        "relationship_types": ["call", "data", "control", "module"],
+        "edge_sample_size": 100
+      },
+      "chain_config": {
+        "chain_sample_size": 10,
+        "min_chain_length": 2
+      },
+      "thresholds": {
+        "precision_threshold": 0.80,
+        "recall_threshold": 0.90,
+        "f1_threshold": 0.85,
+        "chain_accuracy_threshold": 0.85,
+        "relationship_precision_threshold": 0.70,
+        "edge_correctness_threshold": 0.87,
+        "chain_coherence_threshold": 0.71
+      },
+      "annotation_config": {
+        "disagreement_rate": 0.125,
+        "coherence_scale_min": 1,
+        "coherence_scale_max": 5
+      }
     }
   },
   "repositories": {
@@ -29,63 +87,63 @@
       "url": "https://github.com/spring-projects/spring-framework.git",
       "languages": ["java", "kotlin"],
       "extensions": [".java", ".kt"],
-      "enabled": true
+      "enabled": false
     },
     "TF": {
       "name": "TensorFlow",
       "url": "https://github.com/tensorflow/tensorflow.git",
       "languages": ["python", "cpp"],
       "extensions": [".py", ".cc", ".cpp", ".h", ".hpp"],
-      "enabled": true
+      "enabled": false
     },
     "RE": {
       "name": "React",
       "url": "https://github.com/facebook/react.git",
       "languages": ["javascript", "typescript"],
       "extensions": [".js", ".jsx", ".ts", ".tsx"],
-      "enabled": true
+      "enabled": false
     },
     "VS": {
       "name": "VSCode",
       "url": "https://github.com/microsoft/vscode.git",
       "languages": ["typescript", "javascript"],
       "extensions": [".ts", ".tsx", ".js", ".jsx"],
-      "enabled": true
+      "enabled": false
     },
     "AN": {
       "name": "Android AOSP Common Kernel",
       "url": "https://github.com/aosp-mirror/kernel_common.git",
       "languages": ["c", "cpp"],
       "extensions": [".c", ".h", ".cpp", ".hpp"],
-      "enabled": true
+      "enabled": false
     },
     "SC": {
       "name": "SciPy",
       "url": "https://github.com/scipy/scipy.git",
       "languages": ["python", "c", "cpp"],
       "extensions": [".py", ".c", ".cpp", ".h", ".pyx"],
-      "enabled": true
+      "enabled": false
     },
     "PO": {
       "name": "PostgreSQL",
       "url": "https://github.com/postgres/postgres.git",
       "languages": ["c"],
       "extensions": [".c", ".h"],
-      "enabled": true
+      "enabled": false
     },
     "KU": {
       "name": "Kubernetes",
       "url": "https://github.com/kubernetes/kubernetes.git",
       "languages": ["go"],
       "extensions": [".go"],
-      "enabled": true
+      "enabled": false
     },
     "FI": {
       "name": "Firefox (Gecko)",
       "url": "https://github.com/nicotine-plus/nicotine-plus.git",
       "languages": ["javascript", "python", "cpp"],
       "extensions": [".js", ".jsx", ".py", ".cpp", ".c", ".h"],
-      "enabled": true
+      "enabled": false
     }
   },
   "satd_patterns": {
