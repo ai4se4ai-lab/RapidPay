@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P29,MSc,2,CH1128,Firefox,5,0.8143,Top-5,4,4,5,4,4,Rejected,True,1,
+P29,MSc,2,CH1034,Spring Framework,2,0.2657,Bottom-5,4,3,5,2,3,Modified,True,0,
+P29,MSc,2,CH557,TensorFlow,3,0.4286,Mid-5,4,4,5,5,3,Accepted,True,2,
+P29,MSc,2,CH1338,React,3,0.5486,Mid-5,4,3,3,4,4,Rejected,False,5,
+P29,MSc,2,CH1016,Spring Framework,1,0.1429,Bottom-5,3,4,4,2,4,Rejected,True,0,
+P29,MSc,2,CH1652,PostgreSQL,1,0.0829,Bottom-5,3,4,4,4,3,Accepted,True,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P29,MSc,2,CH1390,React,5,0.8343,Top-5,4,4,3,3,3,Accepted,True,2,Helpful for understanding legacy code in my thesis project.
+P29,MSc,2,CH694,TensorFlow,3,0.4886,Mid-5,3,2,3,3,5,Accepted,False,5,
+P29,MSc,2,CH1037,Spring Framework,4,0.7514,Top-5,4,3,3,2,3,Accepted,True,1,
+P29,MSc,2,CH391,TensorFlow,7,1.0,Top-5,4,4,4,4,3,Accepted,True,4,I needed more context to fully understand some implicit SATD comments.
+P29,MSc,2,CH075,SciPy,3,0.5486,Mid-5,4,3,4,2,3,Modified,True,4,
+P29,MSc,2,CH007,SciPy,7,1.0,Top-5,4,3,4,2,4,Modified,False,2,The color coding for dependency types was helpful for quick comprehension.
+P29,MSc,2,CH847,VS Code,2,0.2657,Bottom-5,4,3,4,3,3,Modified,True,3,
+P29,MSc,2,CH215,TensorFlow,5,0.8343,Top-5,4,4,5,5,4,Deferred,True,1,
+P29,MSc,2,CH252,TensorFlow,1,0.0829,Bottom-5,4,2,3,4,3,Deferred,True,0,The color coding for dependency types was helpful for quick comprehension.
+P29,MSc,2,CH1503,Kubernetes,3,0.4086,Mid-5,3,1,2,3,4,Rejected,False,3,The visualization helped me understand complex code relationships in unfamiliar projects.
+P29,MSc,2,CH1062,Spring Framework,3,0.4486,Mid-5,3,3,5,3,3,Rejected,True,5,Helpful for understanding legacy code in my thesis project.

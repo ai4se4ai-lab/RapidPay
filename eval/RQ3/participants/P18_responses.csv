@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P18,PhD,4,CH787,VS Code,2,0.3057,Bottom-5,5,3,4,4,4,Modified,True,5,
+P18,PhD,4,CH365,TensorFlow,3,0.4686,Mid-5,4,5,5,3,2,Modified,True,5,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P18,PhD,4,CH919,Android,3,0.4686,Mid-5,4,4,5,4,3,Deferred,True,5,
+P18,PhD,4,CH370,TensorFlow,1,0.0829,Bottom-5,4,4,3,3,5,Deferred,False,1,
+P18,PhD,4,CH462,TensorFlow,5,0.7543,Top-5,4,3,5,4,5,Rejected,True,0,
+P18,PhD,4,CH023,SciPy,2,0.2857,Bottom-5,4,4,3,5,3,Accepted,True,2,The chain coherence metric would be valuable for my research on software evolution.
+P18,PhD,4,CH1537,Kubernetes,3,0.4886,Mid-5,4,4,4,3,5,Modified,True,2,
+P18,PhD,4,CH1815,PostgreSQL,4,0.7914,Top-5,4,5,3,3,4,Deferred,True,2,
+P18,PhD,4,CH584,TensorFlow,3,0.4686,Mid-5,4,5,4,2,5,Rejected,True,4,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P18,PhD,4,CH1628,Kubernetes,5,0.8543,Top-5,5,5,4,3,5,Modified,True,4,
+P18,PhD,4,CH888,Android,3,0.5886,Mid-5,4,4,4,3,3,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P18,PhD,4,CH1046,Spring Framework,7,1.0,Top-5,5,4,5,3,4,Deferred,True,5,
+P18,PhD,4,CH1473,Kubernetes,7,1.0,Top-5,4,5,3,4,4,Accepted,True,4,
+P18,PhD,4,CH1129,Firefox,3,0.5086,Mid-5,5,5,4,3,4,Accepted,True,0,Good balance between precision and recall in SATD detection.
+P18,PhD,4,CH1133,Firefox,7,1.0,Top-5,4,3,5,5,3,Accepted,True,4,
+P18,PhD,4,CH1532,Kubernetes,1,0.1429,Bottom-5,5,5,4,3,4,Accepted,False,4,
+P18,PhD,4,CH621,TensorFlow,1,0.1229,Bottom-5,5,4,5,4,4,Deferred,False,0,

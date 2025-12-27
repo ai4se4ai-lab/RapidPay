@@ -1,0 +1,67 @@
+{
+  "generated_at": "2025-12-22T20:09:42.782938",
+  "generator": "RQ1 Evaluation Suite",
+  "total_repos": 1,
+  "successful": 1,
+  "failed": 0,
+  "repositories": {
+    "AC": {
+      "repo_id": "AC",
+      "repo_name": "Apache Commons Lang",
+      "total_chains": 94,
+      "total_edges": 0,
+      "average_chain_length": 3.48,
+      "max_chain_length": 7,
+      "min_chain_length": 2,
+      "chain_length_distribution": {
+        "4": 24,
+        "2": 26,
+        "3": 26,
+        "5": 11,
+        "7": 4,
+        "6": 3
+      },
+      "chains_sampled": 5,
+      "coherence_scores": [
+        4,
+        1,
+        4,
+        4,
+        4
+      ],
+      "average_coherence": 3.4,
+      "median_coherence": 4,
+      "coherence_distribution": {
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 4,
+        "5": 0
+      },
+      "high_coherence_percentage": 80.0,
+      "chains_considered_together": 4,
+      "joint_consideration_rate": 80.0
+    }
+  },
+  "aggregate_metrics": {
+    "total_chains": 94,
+    "total_edges": 0,
+    "chains_sampled": 5,
+    "coherence_distribution": {
+      "1": 1,
+      "2": 0,
+      "3": 0,
+      "4": 4,
+      "5": 0
+    },
+    "average_coherence": 3.4,
+    "median_coherence": 4,
+    "high_coherence_percentage": 80.0
+  },
+  "per_repo_averages": {
+    "chains": 94.0,
+    "average_chain_length": 3.48,
+    "average_coherence": 3.4,
+    "high_coherence_percentage": 80.0
+  }
+}

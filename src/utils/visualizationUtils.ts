@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { TechnicalDebt, SatdRelationship, RelationshipType, DebtType, Chain } from '../models';
 import * as fs from 'fs';
+
 /**
  * Open a file at a specific position in VS Code
  * @param filePath Path to the file
@@ -49,9 +50,6 @@ export function loadHtmlTemplate(context: vscode.ExtensionContext, templatePath:
     }
 }
 
-// src/utils/visualizationUtils.ts
-// Update the function signature to include the chains parameter
-
 /**
  * Generate HTML content for the webview visualization
  * @param context Extension context
@@ -77,10 +75,9 @@ export function generateGraphVisualizationHTML(
         createdDate: debt.createdDate,
         sirScore: debt.sirScore || 0,
         sirComponents: debt.sirComponents || {
-            severity: 0,
-            outDependencies: 0,
-            inDependencies: 0,
-            chainLengthFactor: 0
+            fanout_w: 0,
+            chainLen_w: 0,
+            reachability_w: 0
         }
     }));
     
@@ -100,11 +97,12 @@ export function generateGraphVisualizationHTML(
     let template = loadHtmlTemplate(context, 'resources/templates/graphVisualization.html');
     
     // Replace placeholders with actual data
+    // Using the updated RelationshipType enum values
     template = template
-        .replace(/RELATIONSHIP_TYPE_CALL_GRAPH/g, RelationshipType.CALL_GRAPH)
-        .replace(/RELATIONSHIP_TYPE_DATA_DEPENDENCY/g, RelationshipType.DATA_DEPENDENCY)
-        .replace(/RELATIONSHIP_TYPE_CONTROL_FLOW/g, RelationshipType.CONTROL_FLOW)
-        .replace(/RELATIONSHIP_TYPE_MODULE_DEPENDENCY/g, RelationshipType.MODULE_DEPENDENCY)
+        .replace(/RELATIONSHIP_TYPE_CALL_GRAPH/g, RelationshipType.CALL)
+        .replace(/RELATIONSHIP_TYPE_DATA_DEPENDENCY/g, RelationshipType.DATA)
+        .replace(/RELATIONSHIP_TYPE_CONTROL_FLOW/g, RelationshipType.CONTROL)
+        .replace(/RELATIONSHIP_TYPE_MODULE_DEPENDENCY/g, RelationshipType.MODULE)
         .replace(/DEBT_ITEMS_COUNT/g, debtItems.length.toString())
         .replace(/RELATIONSHIPS_COUNT/g, relationships.length.toString())
         .replace(/CHAINS_COUNT/g, chains.length.toString())

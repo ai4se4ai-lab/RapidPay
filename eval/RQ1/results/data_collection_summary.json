@@ -1,0 +1,51 @@
+{
+  "generated_at": "2025-12-22T20:07:14.418405",
+  "generator": "RQ1 Evaluation Suite",
+  "total_repos": 1,
+  "successful": 1,
+  "failed": 0,
+  "total_comments": 8063,
+  "total_satd_candidates": 631,
+  "repositories": {
+    "AC": {
+      "repo_id": "AC",
+      "repo_name": "Apache Commons Lang",
+      "total_comments": 8063,
+      "satd_candidates": 631,
+      "explicit_satd": 531,
+      "implicit_satd": 140,
+      "non_satd": 7432,
+      "satd_ratio": 0.0783,
+      "output_file": "C:\\Users\\babaei\\Desktop\\Research\\Ai4SE4AI\\RapidPay\\eval\\RQ1\\results\\AC_all_comments.csv",
+      "processing_time_seconds": 6.75,
+      "languages": [
+        "java"
+      ],
+      "unique_patterns_matched": [
+        "\\bshould.?be\\b",
+        "\\bfor.?now\\b",
+        "\\bTODO\\b",
+        "\\bplaceholder\\b",
+        "\\bNOTE\\b",
+        "\\bXXX\\b",
+        "\\bworkaround\\b",
+        "\\bbroken\\b",
+        "\\bBUG\\b",
+        "\\bclean.?up\\b",
+        "\\bneed.?to\\b",
+        "\\bTRICKY\\b",
+        "\\bDEPRECATED\\b",
+        "\\bbetter.?way\\b",
+        "\\bFIXME\\b",
+        "\\bhard.?code[d]?\\b",
+        "\\bWARNING\\b",
+        "\\bmissing\\b",
+        "\\boptimize\\b",
+        "\\bTEMP\\b",
+        "\\bimprove\\b",
+        "\\bTEMPORARY\\b",
+        "\\bHACK\\b"
+      ]
+    }
+  }
+}
