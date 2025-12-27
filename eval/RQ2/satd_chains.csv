@@ -1,0 +1,1932 @@
+chain_id,project,chain_length,num_dependencies,sir_score,sir_bucket,avg_resolution_time_days,total_files_affected
+CH001,SciPy,4,7,0.7514,Top-5,31,4
+CH002,SciPy,1,0,0.0829,Bottom-5,9,1
+CH003,SciPy,1,0,0.0629,Bottom-5,31,1
+CH004,SciPy,3,5,0.5086,Mid-5,35,3
+CH005,SciPy,1,0,0.1029,Bottom-5,29,1
+CH006,SciPy,4,7,0.6114,Mid-5,43,2
+CH007,SciPy,7,12,1.0,Top-5,8,3
+CH008,SciPy,5,11,0.8743,Top-5,38,5
+CH009,SciPy,7,17,1.0,Top-5,3,5
+CH010,SciPy,2,2,0.2657,Bottom-5,25,2
+CH011,SciPy,3,4,0.4086,Mid-5,22,3
+CH012,SciPy,1,0,0.1429,Bottom-5,33,1
+CH013,SciPy,3,4,0.3686,Bottom-5,9,3
+CH014,SciPy,3,5,0.4486,Mid-5,1,2
+CH015,SciPy,1,0,0.0629,Bottom-5,6,1
+CH016,SciPy,4,9,0.7914,Top-5,7,3
+CH017,SciPy,3,5,0.4286,Mid-5,41,2
+CH018,SciPy,2,2,0.2257,Bottom-5,40,1
+CH019,SciPy,1,0,0.0629,Bottom-5,33,1
+CH020,SciPy,1,0,0.0629,Bottom-5,6,1
+CH021,SciPy,6,10,0.9571,Top-5,41,3
+CH022,SciPy,2,2,0.2057,Bottom-5,31,2
+CH023,SciPy,2,2,0.2857,Bottom-5,4,2
+CH024,SciPy,5,9,0.8743,Top-5,6,3
+CH025,SciPy,2,2,0.3057,Bottom-5,36,2
+CH026,SciPy,6,11,0.9571,Top-5,43,5
+CH027,SciPy,2,2,0.2457,Bottom-5,38,2
+CH028,SciPy,1,0,0.1029,Bottom-5,10,1
+CH029,SciPy,1,0,0.0829,Bottom-5,5,1
+CH030,SciPy,4,9,0.8314,Top-5,28,3
+CH031,SciPy,1,0,0.0829,Bottom-5,13,1
+CH032,SciPy,4,7,0.6114,Mid-5,45,3
+CH033,SciPy,3,3,0.3286,Bottom-5,11,1
+CH034,SciPy,2,2,0.3257,Bottom-5,19,2
+CH035,SciPy,2,2,0.3457,Bottom-5,7,1
+CH036,SciPy,2,2,0.2257,Bottom-5,22,2
+CH037,SciPy,5,10,0.9143,Top-5,23,3
+CH038,SciPy,4,6,0.6314,Mid-5,42,2
+CH039,SciPy,1,0,0.0629,Bottom-5,39,1
+CH040,SciPy,5,8,0.8143,Top-5,19,3
+CH041,SciPy,2,2,0.2857,Bottom-5,21,2
+CH042,SciPy,1,0,0.1229,Bottom-5,1,1
+CH043,SciPy,3,4,0.3486,Bottom-5,40,2
+CH044,SciPy,3,5,0.4286,Mid-5,35,3
+CH045,SciPy,3,5,0.4886,Mid-5,8,3
+CH046,SciPy,2,2,0.2457,Bottom-5,42,1
+CH047,SciPy,2,2,0.3457,Bottom-5,45,2
+CH048,SciPy,6,9,0.9171,Top-5,31,5
+CH049,SciPy,1,0,0.1029,Bottom-5,23,1
+CH050,SciPy,1,0,0.1229,Bottom-5,42,1
+CH051,SciPy,4,9,0.7914,Top-5,22,4
+CH052,SciPy,2,2,0.3057,Bottom-5,41,2
+CH053,SciPy,2,2,0.2457,Bottom-5,18,2
+CH054,SciPy,2,2,0.2857,Bottom-5,43,2
+CH055,SciPy,1,0,0.0629,Bottom-5,37,1
+CH056,SciPy,3,3,0.3886,Bottom-5,19,3
+CH057,SciPy,3,3,0.4686,Mid-5,14,3
+CH058,SciPy,2,2,0.3457,Bottom-5,8,2
+CH059,SciPy,4,7,0.6514,Mid-5,10,2
+CH060,SciPy,5,11,0.9143,Top-5,31,3
+CH061,SciPy,2,2,0.2857,Bottom-5,22,2
+CH062,SciPy,2,2,0.2657,Bottom-5,13,2
+CH063,SciPy,2,2,0.3657,Bottom-5,45,2
+CH064,SciPy,7,10,1.0,Top-5,43,5
+CH065,SciPy,1,0,0.0629,Bottom-5,21,1
+CH066,SciPy,3,6,0.5486,Mid-5,1,2
+CH067,SciPy,4,7,0.7114,Top-5,6,4
+CH068,SciPy,3,4,0.4286,Mid-5,23,3
+CH069,SciPy,2,2,0.3057,Bottom-5,6,2
+CH070,SciPy,2,2,0.3057,Bottom-5,37,2
+CH071,SciPy,3,5,0.5086,Mid-5,17,3
+CH072,SciPy,4,6,0.6114,Mid-5,43,3
+CH073,SciPy,3,5,0.5486,Mid-5,29,3
+CH074,SciPy,4,11,0.7914,Top-5,31,3
+CH075,SciPy,3,4,0.5486,Mid-5,44,2
+CH076,SciPy,4,6,0.6714,Mid-5,17,4
+CH077,SciPy,1,0,0.0829,Bottom-5,17,1
+CH078,SciPy,7,16,1.0,Top-5,22,5
+CH079,SciPy,3,4,0.4886,Mid-5,41,3
+CH080,SciPy,1,0,0.0829,Bottom-5,12,1
+CH081,SciPy,1,0,0.0629,Bottom-5,42,1
+CH082,SciPy,2,2,0.2857,Bottom-5,13,2
+CH083,SciPy,1,0,0.1029,Bottom-5,13,1
+CH084,SciPy,3,4,0.4486,Mid-5,8,3
+CH085,SciPy,2,2,0.3457,Bottom-5,2,2
+CH086,SciPy,1,0,0.1029,Bottom-5,1,1
+CH087,SciPy,1,0,0.1029,Bottom-5,36,1
+CH088,SciPy,3,4,0.5486,Mid-5,1,1
+CH089,SciPy,2,2,0.2657,Bottom-5,21,1
+CH090,SciPy,2,2,0.3657,Bottom-5,26,2
+CH091,SciPy,6,15,0.9571,Top-5,23,3
+CH092,SciPy,2,2,0.3057,Bottom-5,35,2
+CH093,SciPy,2,2,0.2657,Bottom-5,35,2
+CH094,SciPy,2,2,0.2857,Bottom-5,23,2
+CH095,SciPy,3,4,0.4886,Mid-5,25,2
+CH096,SciPy,4,9,0.7714,Top-5,14,3
+CH097,SciPy,2,2,0.3457,Bottom-5,27,2
+CH098,SciPy,3,6,0.5486,Mid-5,17,2
+CH099,SciPy,2,2,0.2657,Bottom-5,42,2
+CH100,SciPy,1,0,0.1029,Bottom-5,13,1
+CH101,SciPy,1,0,0.0829,Bottom-5,39,1
+CH102,SciPy,1,0,0.1429,Bottom-5,38,1
+CH103,SciPy,4,9,0.7714,Top-5,13,2
+CH104,SciPy,3,3,0.3686,Bottom-5,21,2
+CH105,SciPy,1,0,0.1229,Bottom-5,1,1
+CH106,SciPy,1,0,0.1229,Bottom-5,41,1
+CH107,SciPy,1,0,0.1029,Bottom-5,15,1
+CH108,SciPy,4,8,0.7514,Top-5,4,3
+CH109,SciPy,2,2,0.3057,Bottom-5,10,2
+CH110,SciPy,5,11,0.8943,Top-5,29,3
+CH111,SciPy,3,3,0.4486,Mid-5,8,2
+CH112,SciPy,4,8,0.7114,Top-5,4,2
+CH113,SciPy,4,10,0.8714,Top-5,15,3
+CH114,SciPy,3,5,0.5686,Mid-5,35,3
+CH115,SciPy,1,0,0.1229,Bottom-5,15,1
+CH116,SciPy,1,0,0.1229,Bottom-5,4,1
+CH117,SciPy,1,0,0.1229,Bottom-5,12,1
+CH118,SciPy,3,3,0.4286,Mid-5,15,2
+CH119,SciPy,1,0,0.1429,Bottom-5,30,1
+CH120,SciPy,2,2,0.2257,Bottom-5,28,2
+CH121,SciPy,2,2,0.2857,Bottom-5,8,2
+CH122,SciPy,4,7,0.6714,Mid-5,25,3
+CH123,SciPy,2,2,0.3257,Bottom-5,4,2
+CH124,SciPy,2,2,0.2657,Bottom-5,22,2
+CH125,SciPy,4,8,0.6914,Mid-5,21,4
+CH126,SciPy,1,0,0.0629,Bottom-5,24,1
+CH127,SciPy,7,15,1.0,Top-5,15,4
+CH128,SciPy,4,7,0.6914,Mid-5,14,4
+CH129,SciPy,1,0,0.0829,Bottom-5,11,1
+CH130,SciPy,3,5,0.5286,Mid-5,34,3
+CH131,SciPy,2,2,0.2657,Bottom-5,13,2
+CH132,SciPy,2,2,0.2257,Bottom-5,3,2
+CH133,SciPy,3,6,0.5286,Mid-5,13,2
+CH134,SciPy,1,0,0.0829,Bottom-5,35,1
+CH135,SciPy,3,5,0.5086,Mid-5,15,3
+CH136,SciPy,2,2,0.2657,Bottom-5,29,2
+CH137,SciPy,1,0,0.0629,Bottom-5,20,1
+CH138,SciPy,1,0,0.0829,Bottom-5,12,1
+CH139,SciPy,5,10,0.9143,Top-5,18,4
+CH140,SciPy,4,7,0.7514,Top-5,30,3
+CH141,SciPy,3,5,0.5086,Mid-5,37,2
+CH142,SciPy,1,0,0.1229,Bottom-5,38,1
+CH143,SciPy,1,0,0.1029,Bottom-5,35,1
+CH144,SciPy,2,2,0.3257,Bottom-5,3,2
+CH145,SciPy,1,0,0.1029,Bottom-5,7,1
+CH146,SciPy,2,2,0.2457,Bottom-5,21,2
+CH147,SciPy,2,2,0.2257,Bottom-5,35,2
+CH148,SciPy,2,2,0.2657,Bottom-5,3,1
+CH149,TensorFlow,5,9,0.8743,Top-5,37,4
+CH150,TensorFlow,3,3,0.4486,Mid-5,21,3
+CH151,TensorFlow,5,12,0.9143,Top-5,30,4
+CH152,TensorFlow,1,0,0.1429,Bottom-5,3,1
+CH153,TensorFlow,2,2,0.3057,Bottom-5,18,2
+CH154,TensorFlow,2,2,0.2257,Bottom-5,22,2
+CH155,TensorFlow,1,0,0.1229,Bottom-5,29,1
+CH156,TensorFlow,3,4,0.4486,Mid-5,1,3
+CH157,TensorFlow,2,2,0.3257,Bottom-5,22,2
+CH158,TensorFlow,2,2,0.3257,Bottom-5,18,2
+CH159,TensorFlow,2,2,0.2857,Bottom-5,34,2
+CH160,TensorFlow,1,0,0.1429,Bottom-5,42,1
+CH161,TensorFlow,5,10,0.9143,Top-5,24,4
+CH162,TensorFlow,2,2,0.3057,Bottom-5,16,2
+CH163,TensorFlow,1,0,0.0629,Bottom-5,26,1
+CH164,TensorFlow,4,7,0.6914,Mid-5,17,4
+CH165,TensorFlow,3,4,0.4086,Mid-5,30,3
+CH166,TensorFlow,2,2,0.2057,Bottom-5,12,2
+CH167,TensorFlow,3,4,0.4686,Mid-5,1,3
+CH168,TensorFlow,1,0,0.1229,Bottom-5,18,1
+CH169,TensorFlow,2,2,0.2657,Bottom-5,29,2
+CH170,TensorFlow,7,13,1.0,Top-5,43,5
+CH171,TensorFlow,1,0,0.1429,Bottom-5,32,1
+CH172,TensorFlow,2,2,0.3457,Bottom-5,34,2
+CH173,TensorFlow,2,2,0.2657,Bottom-5,2,2
+CH174,TensorFlow,1,0,0.1229,Bottom-5,38,1
+CH175,TensorFlow,3,4,0.5086,Mid-5,14,3
+CH176,TensorFlow,3,5,0.5486,Mid-5,12,3
+CH177,TensorFlow,5,11,0.9143,Top-5,38,4
+CH178,TensorFlow,2,2,0.2857,Bottom-5,37,2
+CH179,TensorFlow,1,0,0.1229,Bottom-5,11,1
+CH180,TensorFlow,1,0,0.1229,Bottom-5,3,1
+CH181,TensorFlow,1,0,0.0629,Bottom-5,30,1
+CH182,TensorFlow,1,0,0.0829,Bottom-5,37,1
+CH183,TensorFlow,3,5,0.4886,Mid-5,33,3
+CH184,TensorFlow,1,0,0.1029,Bottom-5,36,1
+CH185,TensorFlow,1,0,0.0629,Bottom-5,22,1
+CH186,TensorFlow,2,2,0.3057,Bottom-5,12,2
+CH187,TensorFlow,3,4,0.4486,Mid-5,26,3
+CH188,TensorFlow,6,12,0.9571,Top-5,33,6
+CH189,TensorFlow,2,2,0.3257,Bottom-5,11,1
+CH190,TensorFlow,5,9,0.8743,Top-5,39,5
+CH191,TensorFlow,3,4,0.5486,Mid-5,33,3
+CH192,TensorFlow,2,2,0.3257,Bottom-5,43,2
+CH193,TensorFlow,2,2,0.2457,Bottom-5,16,2
+CH194,TensorFlow,1,0,0.0829,Bottom-5,2,1
+CH195,TensorFlow,3,3,0.4686,Mid-5,41,3
+CH196,TensorFlow,3,4,0.4686,Mid-5,31,2
+CH197,TensorFlow,2,2,0.3057,Bottom-5,42,2
+CH198,TensorFlow,2,2,0.3457,Bottom-5,35,2
+CH199,TensorFlow,3,5,0.5286,Mid-5,21,2
+CH200,TensorFlow,4,9,0.7314,Top-5,18,4
+CH201,TensorFlow,1,0,0.0629,Bottom-5,26,1
+CH202,TensorFlow,3,6,0.6486,Mid-5,22,3
+CH203,TensorFlow,6,11,0.9571,Top-5,35,5
+CH204,TensorFlow,1,0,0.0629,Bottom-5,33,1
+CH205,TensorFlow,3,5,0.5686,Mid-5,6,3
+CH206,TensorFlow,2,2,0.3057,Bottom-5,19,2
+CH207,TensorFlow,4,7,0.6514,Mid-5,35,4
+CH208,TensorFlow,3,5,0.5486,Mid-5,19,3
+CH209,TensorFlow,1,0,0.0629,Bottom-5,37,1
+CH210,TensorFlow,3,4,0.4086,Mid-5,36,1
+CH211,TensorFlow,3,6,0.4686,Mid-5,19,3
+CH212,TensorFlow,1,0,0.1029,Bottom-5,21,1
+CH213,TensorFlow,3,4,0.3886,Bottom-5,15,3
+CH214,TensorFlow,4,8,0.7714,Top-5,16,4
+CH215,TensorFlow,5,8,0.8343,Top-5,34,3
+CH216,TensorFlow,1,0,0.1029,Bottom-5,9,1
+CH217,TensorFlow,1,0,0.1229,Bottom-5,35,1
+CH218,TensorFlow,3,5,0.4886,Mid-5,6,3
+CH219,TensorFlow,1,0,0.0829,Bottom-5,32,1
+CH220,TensorFlow,2,2,0.2257,Bottom-5,33,2
+CH221,TensorFlow,1,0,0.0629,Bottom-5,16,1
+CH222,TensorFlow,4,6,0.6314,Mid-5,11,4
+CH223,TensorFlow,1,0,0.1029,Bottom-5,29,1
+CH224,TensorFlow,3,3,0.4486,Mid-5,37,3
+CH225,TensorFlow,1,0,0.0829,Bottom-5,4,1
+CH226,TensorFlow,1,0,0.0629,Bottom-5,42,1
+CH227,TensorFlow,4,11,0.8514,Top-5,33,3
+CH228,TensorFlow,1,0,0.1029,Bottom-5,8,1
+CH229,TensorFlow,1,0,0.1429,Bottom-5,28,1
+CH230,TensorFlow,5,13,0.9143,Top-5,22,3
+CH231,TensorFlow,6,10,0.9571,Top-5,44,5
+CH232,TensorFlow,3,6,0.5686,Mid-5,1,3
+CH233,TensorFlow,2,2,0.2857,Bottom-5,4,2
+CH234,TensorFlow,4,6,0.6514,Mid-5,31,4
+CH235,TensorFlow,1,0,0.1229,Bottom-5,23,1
+CH236,TensorFlow,1,0,0.0829,Bottom-5,28,1
+CH237,TensorFlow,2,2,0.2257,Bottom-5,42,2
+CH238,TensorFlow,6,11,0.9571,Top-5,23,5
+CH239,TensorFlow,1,0,0.1429,Bottom-5,39,1
+CH240,TensorFlow,3,3,0.4686,Mid-5,26,3
+CH241,TensorFlow,1,0,0.1229,Bottom-5,7,1
+CH242,TensorFlow,1,0,0.1429,Bottom-5,35,1
+CH243,TensorFlow,1,0,0.1429,Bottom-5,7,1
+CH244,TensorFlow,3,4,0.4486,Mid-5,38,3
+CH245,TensorFlow,3,5,0.5086,Mid-5,8,3
+CH246,TensorFlow,3,3,0.4286,Mid-5,8,3
+CH247,TensorFlow,2,2,0.2857,Bottom-5,26,2
+CH248,TensorFlow,1,0,0.0629,Bottom-5,26,1
+CH249,TensorFlow,5,9,0.8343,Top-5,23,4
+CH250,TensorFlow,5,7,0.7943,Top-5,29,5
+CH251,TensorFlow,1,0,0.0629,Bottom-5,38,1
+CH252,TensorFlow,1,0,0.0829,Bottom-5,17,1
+CH253,TensorFlow,3,4,0.4486,Mid-5,14,3
+CH254,TensorFlow,7,11,1.0,Top-5,19,6
+CH255,TensorFlow,1,0,0.1029,Bottom-5,35,1
+CH256,TensorFlow,2,2,0.2857,Bottom-5,3,2
+CH257,TensorFlow,3,4,0.3686,Bottom-5,28,3
+CH258,TensorFlow,3,4,0.4286,Mid-5,36,2
+CH259,TensorFlow,1,0,0.1029,Bottom-5,10,1
+CH260,TensorFlow,3,3,0.3286,Bottom-5,1,2
+CH261,TensorFlow,2,2,0.3657,Bottom-5,2,2
+CH262,TensorFlow,4,7,0.7314,Top-5,6,4
+CH263,TensorFlow,2,2,0.3057,Bottom-5,16,2
+CH264,TensorFlow,5,11,0.9143,Top-5,37,4
+CH265,TensorFlow,2,2,0.2457,Bottom-5,23,2
+CH266,TensorFlow,5,6,0.7143,Top-5,42,3
+CH267,TensorFlow,2,2,0.2657,Bottom-5,22,2
+CH268,TensorFlow,1,0,0.0629,Bottom-5,14,1
+CH269,TensorFlow,1,0,0.0629,Bottom-5,16,1
+CH270,TensorFlow,7,17,1.0,Top-5,24,5
+CH271,TensorFlow,2,2,0.2257,Bottom-5,42,2
+CH272,TensorFlow,1,0,0.1029,Bottom-5,9,1
+CH273,TensorFlow,1,0,0.1029,Bottom-5,25,1
+CH274,TensorFlow,3,5,0.3886,Bottom-5,18,3
+CH275,TensorFlow,1,0,0.1029,Bottom-5,35,1
+CH276,TensorFlow,2,2,0.3057,Bottom-5,17,2
+CH277,TensorFlow,3,5,0.5486,Mid-5,24,3
+CH278,TensorFlow,1,0,0.1429,Bottom-5,9,1
+CH279,TensorFlow,4,10,0.6914,Mid-5,5,4
+CH280,TensorFlow,5,12,0.9143,Top-5,40,2
+CH281,TensorFlow,2,2,0.2657,Bottom-5,4,2
+CH282,TensorFlow,3,6,0.4886,Mid-5,44,2
+CH283,TensorFlow,2,2,0.3257,Bottom-5,29,2
+CH284,TensorFlow,3,5,0.6286,Mid-5,15,3
+CH285,TensorFlow,2,2,0.3257,Bottom-5,3,2
+CH286,TensorFlow,1,0,0.0629,Bottom-5,27,1
+CH287,TensorFlow,2,2,0.2857,Bottom-5,6,2
+CH288,TensorFlow,1,0,0.1029,Bottom-5,35,1
+CH289,TensorFlow,1,0,0.1429,Bottom-5,45,1
+CH290,TensorFlow,1,0,0.1429,Bottom-5,29,1
+CH291,TensorFlow,3,4,0.4886,Mid-5,7,3
+CH292,TensorFlow,2,2,0.2857,Bottom-5,5,2
+CH293,TensorFlow,2,2,0.3457,Bottom-5,5,2
+CH294,TensorFlow,1,0,0.1029,Bottom-5,44,1
+CH295,TensorFlow,4,9,0.7114,Top-5,23,3
+CH296,TensorFlow,1,0,0.0829,Bottom-5,10,1
+CH297,TensorFlow,1,0,0.0829,Bottom-5,26,1
+CH298,TensorFlow,5,11,0.9143,Top-5,44,4
+CH299,TensorFlow,4,8,0.7114,Top-5,23,3
+CH300,TensorFlow,4,9,0.8114,Top-5,17,4
+CH301,TensorFlow,1,0,0.0829,Bottom-5,10,1
+CH302,TensorFlow,3,5,0.4286,Mid-5,21,3
+CH303,TensorFlow,5,7,0.7743,Top-5,19,4
+CH304,TensorFlow,3,5,0.4686,Mid-5,26,3
+CH305,TensorFlow,1,0,0.1229,Bottom-5,12,1
+CH306,TensorFlow,4,9,0.8314,Top-5,41,4
+CH307,TensorFlow,5,10,0.8543,Top-5,26,5
+CH308,TensorFlow,1,0,0.1429,Bottom-5,44,1
+CH309,TensorFlow,1,0,0.0829,Bottom-5,29,1
+CH310,TensorFlow,1,0,0.1429,Bottom-5,2,1
+CH311,TensorFlow,1,0,0.1429,Bottom-5,9,1
+CH312,TensorFlow,5,11,0.9143,Top-5,39,4
+CH313,TensorFlow,6,12,0.8771,Top-5,12,5
+CH314,TensorFlow,1,0,0.0629,Bottom-5,11,1
+CH315,TensorFlow,2,2,0.2057,Bottom-5,36,2
+CH316,TensorFlow,1,0,0.1029,Bottom-5,43,1
+CH317,TensorFlow,2,2,0.3057,Bottom-5,33,2
+CH318,TensorFlow,2,2,0.2657,Bottom-5,24,2
+CH319,TensorFlow,2,2,0.2857,Bottom-5,1,2
+CH320,TensorFlow,3,5,0.4886,Mid-5,8,3
+CH321,TensorFlow,7,12,1.0,Top-5,3,5
+CH322,TensorFlow,2,2,0.3457,Bottom-5,2,2
+CH323,TensorFlow,1,0,0.0829,Bottom-5,4,1
+CH324,TensorFlow,1,0,0.1429,Bottom-5,30,1
+CH325,TensorFlow,4,10,0.7514,Top-5,39,4
+CH326,TensorFlow,5,13,0.8143,Top-5,30,4
+CH327,TensorFlow,1,0,0.1429,Bottom-5,33,1
+CH328,TensorFlow,3,5,0.5686,Mid-5,44,3
+CH329,TensorFlow,1,0,0.0629,Bottom-5,41,1
+CH330,TensorFlow,1,0,0.1229,Bottom-5,1,1
+CH331,TensorFlow,4,8,0.7314,Top-5,38,3
+CH332,TensorFlow,2,2,0.3057,Bottom-5,21,2
+CH333,TensorFlow,1,0,0.1229,Bottom-5,6,1
+CH334,TensorFlow,1,0,0.0629,Bottom-5,39,1
+CH335,TensorFlow,7,12,1.0,Top-5,17,4
+CH336,TensorFlow,2,2,0.2857,Bottom-5,44,2
+CH337,TensorFlow,2,2,0.2457,Bottom-5,33,2
+CH338,TensorFlow,4,10,0.8114,Top-5,42,3
+CH339,TensorFlow,4,8,0.7914,Top-5,16,4
+CH340,TensorFlow,1,0,0.1429,Bottom-5,1,1
+CH341,TensorFlow,2,2,0.3057,Bottom-5,7,1
+CH342,TensorFlow,2,2,0.2657,Bottom-5,14,2
+CH343,TensorFlow,2,2,0.3057,Bottom-5,3,2
+CH344,TensorFlow,5,9,0.8343,Top-5,30,3
+CH345,TensorFlow,2,2,0.2657,Bottom-5,13,2
+CH346,TensorFlow,1,0,0.1429,Bottom-5,6,1
+CH347,TensorFlow,6,12,0.9371,Top-5,19,4
+CH348,TensorFlow,3,4,0.4486,Mid-5,13,3
+CH349,TensorFlow,5,12,0.7943,Top-5,35,3
+CH350,TensorFlow,2,2,0.2657,Bottom-5,19,2
+CH351,TensorFlow,4,8,0.7914,Top-5,10,4
+CH352,TensorFlow,2,2,0.3057,Bottom-5,2,2
+CH353,TensorFlow,5,11,0.9143,Top-5,42,4
+CH354,TensorFlow,2,2,0.2857,Bottom-5,30,1
+CH355,TensorFlow,1,0,0.0629,Bottom-5,14,1
+CH356,TensorFlow,3,4,0.4086,Mid-5,38,3
+CH357,TensorFlow,1,0,0.0829,Bottom-5,35,1
+CH358,TensorFlow,2,2,0.2857,Bottom-5,3,2
+CH359,TensorFlow,5,13,0.8743,Top-5,27,4
+CH360,TensorFlow,1,0,0.1229,Bottom-5,17,1
+CH361,TensorFlow,1,0,0.1229,Bottom-5,23,1
+CH362,TensorFlow,3,4,0.5286,Mid-5,7,3
+CH363,TensorFlow,2,2,0.3257,Bottom-5,14,2
+CH364,TensorFlow,2,2,0.3057,Bottom-5,10,2
+CH365,TensorFlow,3,6,0.4686,Mid-5,4,3
+CH366,TensorFlow,3,6,0.5686,Mid-5,25,2
+CH367,TensorFlow,1,0,0.1229,Bottom-5,35,1
+CH368,TensorFlow,3,4,0.5086,Mid-5,35,2
+CH369,TensorFlow,2,2,0.2057,Bottom-5,38,2
+CH370,TensorFlow,1,0,0.0829,Bottom-5,12,1
+CH371,TensorFlow,5,9,0.8743,Top-5,12,3
+CH372,TensorFlow,4,6,0.7114,Top-5,23,3
+CH373,TensorFlow,1,0,0.1229,Bottom-5,13,1
+CH374,TensorFlow,4,5,0.5714,Mid-5,12,3
+CH375,TensorFlow,2,2,0.2657,Bottom-5,18,2
+CH376,TensorFlow,1,0,0.0829,Bottom-5,37,1
+CH377,TensorFlow,7,13,1.0,Top-5,3,5
+CH378,TensorFlow,1,0,0.1429,Bottom-5,42,1
+CH379,TensorFlow,1,0,0.0629,Bottom-5,45,1
+CH380,TensorFlow,5,8,0.7343,Top-5,7,4
+CH381,TensorFlow,4,7,0.6714,Mid-5,31,4
+CH382,TensorFlow,4,7,0.7514,Top-5,45,4
+CH383,TensorFlow,2,2,0.2257,Bottom-5,45,2
+CH384,TensorFlow,7,12,1.0,Top-5,13,5
+CH385,TensorFlow,1,0,0.1229,Bottom-5,44,1
+CH386,TensorFlow,3,4,0.5086,Mid-5,40,3
+CH387,TensorFlow,5,9,0.8743,Top-5,43,4
+CH388,TensorFlow,3,3,0.5086,Mid-5,33,3
+CH389,TensorFlow,2,2,0.3057,Bottom-5,10,2
+CH390,TensorFlow,1,0,0.1029,Bottom-5,36,1
+CH391,TensorFlow,7,11,1.0,Top-5,13,4
+CH392,TensorFlow,3,4,0.5086,Mid-5,21,3
+CH393,TensorFlow,1,0,0.0629,Bottom-5,5,1
+CH394,TensorFlow,2,2,0.2457,Bottom-5,10,2
+CH395,TensorFlow,2,2,0.2457,Bottom-5,3,2
+CH396,TensorFlow,2,2,0.3457,Bottom-5,23,2
+CH397,TensorFlow,3,5,0.5686,Mid-5,20,3
+CH398,TensorFlow,2,2,0.3457,Bottom-5,4,2
+CH399,TensorFlow,5,13,0.8943,Top-5,28,5
+CH400,TensorFlow,3,5,0.5486,Mid-5,22,3
+CH401,TensorFlow,1,0,0.1029,Bottom-5,19,1
+CH402,TensorFlow,2,2,0.2657,Bottom-5,14,2
+CH403,TensorFlow,4,9,0.7314,Top-5,23,4
+CH404,TensorFlow,4,10,0.8714,Top-5,11,3
+CH405,TensorFlow,1,0,0.0829,Bottom-5,3,1
+CH406,TensorFlow,2,2,0.3057,Bottom-5,41,2
+CH407,TensorFlow,1,0,0.1429,Bottom-5,7,1
+CH408,TensorFlow,4,10,0.7714,Top-5,20,3
+CH409,TensorFlow,1,0,0.1029,Bottom-5,31,1
+CH410,TensorFlow,3,4,0.5286,Mid-5,19,3
+CH411,TensorFlow,4,9,0.7914,Top-5,36,3
+CH412,TensorFlow,4,8,0.7314,Top-5,42,4
+CH413,TensorFlow,2,2,0.3057,Bottom-5,31,2
+CH414,TensorFlow,1,0,0.1229,Bottom-5,28,1
+CH415,TensorFlow,4,6,0.7114,Top-5,29,3
+CH416,TensorFlow,1,0,0.0629,Bottom-5,7,1
+CH417,TensorFlow,3,6,0.4886,Mid-5,36,3
+CH418,TensorFlow,1,0,0.1029,Bottom-5,39,1
+CH419,TensorFlow,2,2,0.2857,Bottom-5,29,2
+CH420,TensorFlow,7,14,1.0,Top-5,12,6
+CH421,TensorFlow,2,2,0.3457,Bottom-5,14,2
+CH422,TensorFlow,1,0,0.1029,Bottom-5,4,1
+CH423,TensorFlow,1,0,0.1229,Bottom-5,20,1
+CH424,TensorFlow,1,0,0.1229,Bottom-5,41,1
+CH425,TensorFlow,2,2,0.2657,Bottom-5,18,1
+CH426,TensorFlow,4,9,0.8314,Top-5,28,4
+CH427,TensorFlow,2,2,0.3057,Bottom-5,44,2
+CH428,TensorFlow,2,2,0.2657,Bottom-5,34,2
+CH429,TensorFlow,1,0,0.1229,Bottom-5,13,1
+CH430,TensorFlow,5,10,0.9143,Top-5,30,2
+CH431,TensorFlow,5,10,0.8743,Top-5,31,5
+CH432,TensorFlow,3,5,0.5086,Mid-5,22,3
+CH433,TensorFlow,1,0,0.1429,Bottom-5,15,1
+CH434,TensorFlow,1,0,0.0829,Bottom-5,7,1
+CH435,TensorFlow,1,0,0.1029,Bottom-5,27,1
+CH436,TensorFlow,1,0,0.0829,Bottom-5,26,1
+CH437,TensorFlow,2,2,0.2257,Bottom-5,14,2
+CH438,TensorFlow,3,5,0.5086,Mid-5,35,3
+CH439,TensorFlow,1,0,0.0829,Bottom-5,32,1
+CH440,TensorFlow,7,15,1.0,Top-5,7,5
+CH441,TensorFlow,4,8,0.7714,Top-5,7,4
+CH442,TensorFlow,5,6,0.7543,Top-5,5,5
+CH443,TensorFlow,3,5,0.5286,Mid-5,41,3
+CH444,TensorFlow,1,0,0.1429,Bottom-5,31,1
+CH445,TensorFlow,3,5,0.4286,Mid-5,17,3
+CH446,TensorFlow,1,0,0.1229,Bottom-5,36,1
+CH447,TensorFlow,1,0,0.0629,Bottom-5,43,1
+CH448,TensorFlow,2,2,0.3057,Bottom-5,3,2
+CH449,TensorFlow,6,11,0.9571,Top-5,34,6
+CH450,TensorFlow,1,0,0.0629,Bottom-5,21,1
+CH451,TensorFlow,3,4,0.5086,Mid-5,31,3
+CH452,TensorFlow,2,2,0.2457,Bottom-5,6,2
+CH453,TensorFlow,5,10,0.8943,Top-5,22,4
+CH454,TensorFlow,3,4,0.4686,Mid-5,38,3
+CH455,TensorFlow,5,9,0.8743,Top-5,36,4
+CH456,TensorFlow,2,2,0.2057,Bottom-5,40,2
+CH457,TensorFlow,1,0,0.1429,Bottom-5,16,1
+CH458,TensorFlow,3,4,0.3886,Bottom-5,7,3
+CH459,TensorFlow,1,0,0.0629,Bottom-5,25,1
+CH460,TensorFlow,2,2,0.2657,Bottom-5,3,1
+CH461,TensorFlow,6,14,0.9571,Top-5,3,5
+CH462,TensorFlow,5,8,0.7543,Top-5,40,5
+CH463,TensorFlow,7,12,1.0,Top-5,12,6
+CH464,TensorFlow,6,13,0.9571,Top-5,19,5
+CH465,TensorFlow,6,14,0.9571,Top-5,30,6
+CH466,TensorFlow,4,9,0.6914,Mid-5,7,4
+CH467,TensorFlow,5,8,0.8343,Top-5,22,5
+CH468,TensorFlow,3,6,0.5086,Mid-5,7,3
+CH469,TensorFlow,1,0,0.1229,Bottom-5,37,1
+CH470,TensorFlow,3,4,0.4886,Mid-5,6,3
+CH471,TensorFlow,2,2,0.3457,Bottom-5,5,2
+CH472,TensorFlow,5,10,0.9143,Top-5,10,4
+CH473,TensorFlow,5,9,0.8343,Top-5,21,5
+CH474,TensorFlow,2,2,0.2857,Bottom-5,43,2
+CH475,TensorFlow,3,4,0.5686,Mid-5,17,3
+CH476,TensorFlow,2,2,0.2857,Bottom-5,39,2
+CH477,TensorFlow,1,0,0.1029,Bottom-5,38,1
+CH478,TensorFlow,2,2,0.3257,Bottom-5,29,2
+CH479,TensorFlow,4,6,0.5714,Mid-5,26,3
+CH480,TensorFlow,4,6,0.6914,Mid-5,33,3
+CH481,TensorFlow,1,0,0.1429,Bottom-5,21,1
+CH482,TensorFlow,4,8,0.6714,Mid-5,37,3
+CH483,TensorFlow,3,5,0.5286,Mid-5,31,3
+CH484,TensorFlow,6,11,0.9571,Top-5,8,5
+CH485,TensorFlow,5,10,0.8143,Top-5,34,5
+CH486,TensorFlow,1,0,0.0629,Bottom-5,32,1
+CH487,TensorFlow,1,0,0.1029,Bottom-5,31,1
+CH488,TensorFlow,4,8,0.7714,Top-5,41,4
+CH489,TensorFlow,1,0,0.0829,Bottom-5,16,1
+CH490,TensorFlow,1,0,0.0629,Bottom-5,32,1
+CH491,TensorFlow,3,4,0.5286,Mid-5,3,3
+CH492,TensorFlow,3,4,0.4686,Mid-5,13,2
+CH493,TensorFlow,4,7,0.6514,Mid-5,6,3
+CH494,TensorFlow,3,5,0.4286,Mid-5,11,3
+CH495,TensorFlow,3,4,0.4686,Mid-5,18,3
+CH496,TensorFlow,3,4,0.5486,Mid-5,17,2
+CH497,TensorFlow,2,2,0.3057,Bottom-5,20,2
+CH498,TensorFlow,1,0,0.1029,Bottom-5,32,1
+CH499,TensorFlow,1,0,0.1229,Bottom-5,45,1
+CH500,TensorFlow,2,2,0.3257,Bottom-5,12,1
+CH501,TensorFlow,3,5,0.5286,Mid-5,27,3
+CH502,TensorFlow,7,14,1.0,Top-5,37,6
+CH503,TensorFlow,1,0,0.0829,Bottom-5,32,1
+CH504,TensorFlow,5,10,0.9143,Top-5,14,5
+CH505,TensorFlow,3,5,0.4686,Mid-5,35,3
+CH506,TensorFlow,1,0,0.0829,Bottom-5,29,1
+CH507,TensorFlow,2,2,0.3457,Bottom-5,38,2
+CH508,TensorFlow,1,0,0.1229,Bottom-5,6,1
+CH509,TensorFlow,1,0,0.0629,Bottom-5,23,1
+CH510,TensorFlow,1,0,0.1029,Bottom-5,44,1
+CH511,TensorFlow,1,0,0.1229,Bottom-5,18,1
+CH512,TensorFlow,1,0,0.1029,Bottom-5,39,1
+CH513,TensorFlow,1,0,0.0829,Bottom-5,43,1
+CH514,TensorFlow,3,6,0.6286,Mid-5,40,3
+CH515,TensorFlow,4,7,0.6114,Mid-5,8,4
+CH516,TensorFlow,2,2,0.2657,Bottom-5,26,2
+CH517,TensorFlow,2,2,0.2257,Bottom-5,43,2
+CH518,TensorFlow,5,8,0.8343,Top-5,31,3
+CH519,TensorFlow,1,0,0.1429,Bottom-5,11,1
+CH520,TensorFlow,2,2,0.2857,Bottom-5,13,2
+CH521,TensorFlow,2,2,0.2657,Bottom-5,18,2
+CH522,TensorFlow,3,5,0.4686,Mid-5,19,3
+CH523,TensorFlow,1,0,0.1229,Bottom-5,1,1
+CH524,TensorFlow,3,4,0.5686,Mid-5,43,3
+CH525,TensorFlow,2,2,0.2657,Bottom-5,12,2
+CH526,TensorFlow,1,0,0.0629,Bottom-5,30,1
+CH527,TensorFlow,5,9,0.8743,Top-5,25,4
+CH528,TensorFlow,3,4,0.4686,Mid-5,6,2
+CH529,TensorFlow,1,0,0.1429,Bottom-5,18,1
+CH530,TensorFlow,4,9,0.7914,Top-5,21,4
+CH531,TensorFlow,1,0,0.1429,Bottom-5,14,1
+CH532,TensorFlow,2,2,0.2257,Bottom-5,28,2
+CH533,TensorFlow,1,0,0.0829,Bottom-5,33,1
+CH534,TensorFlow,7,12,1.0,Top-5,7,4
+CH535,TensorFlow,2,2,0.2857,Bottom-5,13,2
+CH536,TensorFlow,1,0,0.0829,Bottom-5,32,1
+CH537,TensorFlow,2,2,0.3257,Bottom-5,41,2
+CH538,TensorFlow,1,0,0.1429,Bottom-5,30,1
+CH539,TensorFlow,4,9,0.7714,Top-5,10,3
+CH540,TensorFlow,3,5,0.5086,Mid-5,45,3
+CH541,TensorFlow,1,0,0.1229,Bottom-5,1,1
+CH542,TensorFlow,1,0,0.0629,Bottom-5,10,1
+CH543,TensorFlow,2,2,0.3657,Bottom-5,18,2
+CH544,TensorFlow,1,0,0.1429,Bottom-5,13,1
+CH545,TensorFlow,1,0,0.1429,Bottom-5,23,1
+CH546,TensorFlow,5,7,0.7543,Top-5,31,3
+CH547,TensorFlow,1,0,0.1229,Bottom-5,45,1
+CH548,TensorFlow,1,0,0.1429,Bottom-5,42,1
+CH549,TensorFlow,3,5,0.5086,Mid-5,12,3
+CH550,TensorFlow,2,2,0.2857,Bottom-5,15,2
+CH551,TensorFlow,3,6,0.6086,Mid-5,38,2
+CH552,TensorFlow,1,0,0.0829,Bottom-5,5,1
+CH553,TensorFlow,5,11,0.9143,Top-5,39,5
+CH554,TensorFlow,7,13,1.0,Top-5,6,5
+CH555,TensorFlow,1,0,0.1429,Bottom-5,28,1
+CH556,TensorFlow,4,8,0.6714,Mid-5,36,3
+CH557,TensorFlow,3,4,0.4286,Mid-5,7,3
+CH558,TensorFlow,1,0,0.1429,Bottom-5,7,1
+CH559,TensorFlow,2,2,0.3257,Bottom-5,38,2
+CH560,TensorFlow,1,0,0.1029,Bottom-5,25,1
+CH561,TensorFlow,4,8,0.7914,Top-5,21,4
+CH562,TensorFlow,2,2,0.3257,Bottom-5,31,2
+CH563,TensorFlow,3,5,0.5086,Mid-5,19,3
+CH564,TensorFlow,2,2,0.3457,Bottom-5,23,2
+CH565,TensorFlow,4,6,0.6914,Mid-5,12,4
+CH566,TensorFlow,1,0,0.1229,Bottom-5,7,1
+CH567,TensorFlow,1,0,0.0829,Bottom-5,11,1
+CH568,TensorFlow,3,3,0.3286,Bottom-5,44,3
+CH569,TensorFlow,5,7,0.7943,Top-5,25,4
+CH570,TensorFlow,2,2,0.3057,Bottom-5,26,2
+CH571,TensorFlow,1,0,0.0629,Bottom-5,13,1
+CH572,TensorFlow,6,12,0.9571,Top-5,1,4
+CH573,TensorFlow,3,4,0.4286,Mid-5,23,3
+CH574,TensorFlow,4,5,0.6114,Mid-5,30,3
+CH575,TensorFlow,2,2,0.3057,Bottom-5,42,2
+CH576,TensorFlow,1,0,0.1229,Bottom-5,24,1
+CH577,TensorFlow,2,2,0.2857,Bottom-5,22,1
+CH578,TensorFlow,4,8,0.7114,Top-5,8,4
+CH579,TensorFlow,1,0,0.1429,Bottom-5,22,1
+CH580,TensorFlow,3,4,0.4286,Mid-5,6,1
+CH581,TensorFlow,5,8,0.8343,Top-5,22,5
+CH582,TensorFlow,2,2,0.3057,Bottom-5,5,2
+CH583,TensorFlow,5,7,0.7943,Top-5,36,4
+CH584,TensorFlow,3,5,0.4686,Mid-5,10,2
+CH585,TensorFlow,1,0,0.1229,Bottom-5,29,1
+CH586,TensorFlow,3,4,0.3886,Bottom-5,12,3
+CH587,TensorFlow,3,4,0.4886,Mid-5,3,3
+CH588,TensorFlow,4,5,0.6714,Mid-5,1,4
+CH589,TensorFlow,2,2,0.3257,Bottom-5,15,2
+CH590,TensorFlow,2,2,0.3057,Bottom-5,13,2
+CH591,TensorFlow,1,0,0.1029,Bottom-5,26,1
+CH592,TensorFlow,3,4,0.4286,Mid-5,41,3
+CH593,TensorFlow,2,2,0.2057,Bottom-5,36,2
+CH594,TensorFlow,1,0,0.1229,Bottom-5,3,1
+CH595,TensorFlow,6,13,0.9571,Top-5,23,6
+CH596,TensorFlow,4,9,0.7314,Top-5,1,4
+CH597,TensorFlow,2,2,0.2857,Bottom-5,16,2
+CH598,TensorFlow,2,2,0.3057,Bottom-5,26,2
+CH599,TensorFlow,1,0,0.1029,Bottom-5,32,1
+CH600,TensorFlow,2,2,0.2657,Bottom-5,44,1
+CH601,TensorFlow,2,2,0.3257,Bottom-5,11,2
+CH602,TensorFlow,5,10,0.8943,Top-5,18,4
+CH603,TensorFlow,6,13,0.9571,Top-5,27,4
+CH604,TensorFlow,1,0,0.1029,Bottom-5,3,1
+CH605,TensorFlow,1,0,0.0829,Bottom-5,12,1
+CH606,TensorFlow,1,0,0.1429,Bottom-5,12,1
+CH607,TensorFlow,3,3,0.4286,Mid-5,42,3
+CH608,TensorFlow,1,0,0.0629,Bottom-5,43,1
+CH609,TensorFlow,1,0,0.1429,Bottom-5,37,1
+CH610,TensorFlow,3,5,0.4286,Mid-5,37,3
+CH611,TensorFlow,2,2,0.3457,Bottom-5,10,1
+CH612,TensorFlow,2,2,0.2657,Bottom-5,38,2
+CH613,TensorFlow,1,0,0.1429,Bottom-5,25,1
+CH614,TensorFlow,1,0,0.0629,Bottom-5,45,1
+CH615,TensorFlow,1,0,0.1429,Bottom-5,39,1
+CH616,TensorFlow,5,7,0.7943,Top-5,38,3
+CH617,TensorFlow,1,0,0.0829,Bottom-5,40,1
+CH618,TensorFlow,1,0,0.1429,Bottom-5,27,1
+CH619,TensorFlow,1,0,0.1229,Bottom-5,13,1
+CH620,TensorFlow,2,2,0.3257,Bottom-5,43,2
+CH621,TensorFlow,1,0,0.1229,Bottom-5,24,1
+CH622,TensorFlow,4,7,0.7314,Top-5,15,4
+CH623,TensorFlow,4,7,0.6314,Mid-5,25,3
+CH624,TensorFlow,3,4,0.4486,Mid-5,44,3
+CH625,TensorFlow,3,4,0.4486,Mid-5,20,3
+CH626,TensorFlow,4,6,0.6914,Mid-5,39,3
+CH627,TensorFlow,1,0,0.1229,Bottom-5,2,1
+CH628,TensorFlow,1,0,0.1029,Bottom-5,36,1
+CH629,TensorFlow,3,5,0.5286,Mid-5,22,3
+CH630,TensorFlow,1,0,0.0829,Bottom-5,23,1
+CH631,TensorFlow,1,0,0.1429,Bottom-5,38,1
+CH632,TensorFlow,4,10,0.7314,Top-5,16,4
+CH633,TensorFlow,2,2,0.2857,Bottom-5,3,2
+CH634,TensorFlow,2,2,0.2257,Bottom-5,39,2
+CH635,TensorFlow,2,2,0.2657,Bottom-5,42,2
+CH636,TensorFlow,3,4,0.5286,Mid-5,29,3
+CH637,TensorFlow,2,2,0.3257,Bottom-5,19,1
+CH638,TensorFlow,1,0,0.1429,Bottom-5,9,1
+CH639,TensorFlow,2,2,0.3057,Bottom-5,7,2
+CH640,TensorFlow,2,2,0.2657,Bottom-5,28,2
+CH641,TensorFlow,7,14,0.94,Top-5,18,7
+CH642,TensorFlow,1,0,0.1429,Bottom-5,36,1
+CH643,TensorFlow,1,0,0.0829,Bottom-5,25,1
+CH644,TensorFlow,1,0,0.0629,Bottom-5,6,1
+CH645,TensorFlow,3,4,0.4086,Mid-5,2,2
+CH646,TensorFlow,4,10,0.7314,Top-5,27,4
+CH647,TensorFlow,3,5,0.4486,Mid-5,21,3
+CH648,TensorFlow,3,4,0.4886,Mid-5,21,3
+CH649,TensorFlow,1,0,0.0829,Bottom-5,27,1
+CH650,TensorFlow,6,12,0.9571,Top-5,2,6
+CH651,TensorFlow,3,5,0.5286,Mid-5,45,3
+CH652,TensorFlow,4,8,0.7714,Top-5,5,3
+CH653,TensorFlow,1,0,0.0629,Bottom-5,37,1
+CH654,TensorFlow,2,2,0.3257,Bottom-5,23,2
+CH655,TensorFlow,2,2,0.2457,Bottom-5,4,2
+CH656,TensorFlow,2,2,0.2057,Bottom-5,12,2
+CH657,TensorFlow,5,5,0.7143,Top-5,2,4
+CH658,TensorFlow,2,2,0.3457,Bottom-5,10,2
+CH659,TensorFlow,3,5,0.5486,Mid-5,5,3
+CH660,TensorFlow,1,0,0.0629,Bottom-5,40,1
+CH661,TensorFlow,1,0,0.1029,Bottom-5,9,1
+CH662,TensorFlow,2,2,0.2857,Bottom-5,34,2
+CH663,TensorFlow,3,5,0.5286,Mid-5,41,3
+CH664,TensorFlow,1,0,0.0829,Bottom-5,15,1
+CH665,TensorFlow,5,7,0.7943,Top-5,9,5
+CH666,TensorFlow,2,2,0.3257,Bottom-5,35,2
+CH667,TensorFlow,2,2,0.3457,Bottom-5,43,2
+CH668,TensorFlow,5,10,0.8543,Top-5,11,5
+CH669,TensorFlow,1,0,0.0829,Bottom-5,2,1
+CH670,TensorFlow,2,2,0.2657,Bottom-5,30,2
+CH671,TensorFlow,3,5,0.5686,Mid-5,41,3
+CH672,TensorFlow,2,2,0.2657,Bottom-5,7,2
+CH673,TensorFlow,4,8,0.7114,Top-5,37,3
+CH674,TensorFlow,2,2,0.2857,Bottom-5,30,2
+CH675,TensorFlow,1,0,0.0829,Bottom-5,15,1
+CH676,TensorFlow,3,3,0.4086,Mid-5,26,3
+CH677,TensorFlow,2,2,0.2657,Bottom-5,43,2
+CH678,TensorFlow,2,2,0.3457,Bottom-5,15,2
+CH679,TensorFlow,1,0,0.0629,Bottom-5,18,1
+CH680,TensorFlow,1,0,0.0829,Bottom-5,40,1
+CH681,TensorFlow,6,10,0.9571,Top-5,23,4
+CH682,TensorFlow,6,14,0.9171,Top-5,24,5
+CH683,TensorFlow,4,4,0.5514,Mid-5,2,4
+CH684,TensorFlow,1,0,0.0629,Bottom-5,1,1
+CH685,TensorFlow,1,0,0.0829,Bottom-5,8,1
+CH686,TensorFlow,2,2,0.2257,Bottom-5,31,2
+CH687,TensorFlow,3,4,0.4286,Mid-5,30,3
+CH688,TensorFlow,3,6,0.5086,Mid-5,1,2
+CH689,TensorFlow,5,13,0.9143,Top-5,45,4
+CH690,TensorFlow,3,4,0.4086,Mid-5,9,2
+CH691,TensorFlow,1,0,0.0629,Bottom-5,14,1
+CH692,TensorFlow,4,9,0.7514,Top-5,40,4
+CH693,TensorFlow,3,6,0.5086,Mid-5,32,3
+CH694,TensorFlow,3,4,0.4886,Mid-5,5,3
+CH695,TensorFlow,3,5,0.4886,Mid-5,3,3
+CH696,TensorFlow,2,2,0.2257,Bottom-5,32,2
+CH697,TensorFlow,1,0,0.0629,Bottom-5,6,1
+CH698,TensorFlow,5,10,0.8743,Top-5,17,5
+CH699,TensorFlow,4,6,0.6514,Mid-5,33,3
+CH700,TensorFlow,5,9,0.7743,Top-5,5,4
+CH701,TensorFlow,4,10,0.8714,Top-5,15,3
+CH702,TensorFlow,1,0,0.0829,Bottom-5,17,1
+CH703,TensorFlow,3,5,0.4486,Mid-5,7,3
+CH704,TensorFlow,4,7,0.6714,Mid-5,1,4
+CH705,TensorFlow,2,2,0.3057,Bottom-5,20,2
+CH706,TensorFlow,3,4,0.5286,Mid-5,30,2
+CH707,TensorFlow,2,2,0.2257,Bottom-5,41,2
+CH708,TensorFlow,4,10,0.8714,Top-5,15,4
+CH709,TensorFlow,2,2,0.2257,Bottom-5,22,2
+CH710,TensorFlow,1,0,0.1229,Bottom-5,24,1
+CH711,TensorFlow,1,0,0.1029,Bottom-5,29,1
+CH712,TensorFlow,1,0,0.1429,Bottom-5,2,1
+CH713,TensorFlow,6,15,0.9571,Top-5,2,5
+CH714,TensorFlow,6,12,0.9571,Top-5,17,5
+CH715,TensorFlow,1,0,0.0829,Bottom-5,44,1
+CH716,TensorFlow,1,0,0.0829,Bottom-5,11,1
+CH717,TensorFlow,3,4,0.4886,Mid-5,39,2
+CH718,TensorFlow,7,14,1.0,Top-5,15,7
+CH719,TensorFlow,2,2,0.2657,Bottom-5,8,2
+CH720,TensorFlow,3,4,0.4486,Mid-5,2,3
+CH721,TensorFlow,1,0,0.0829,Bottom-5,42,1
+CH722,TensorFlow,4,7,0.5914,Mid-5,18,4
+CH723,TensorFlow,1,0,0.0629,Bottom-5,35,1
+CH724,TensorFlow,4,7,0.7114,Top-5,41,4
+CH725,TensorFlow,3,4,0.4886,Mid-5,9,3
+CH726,TensorFlow,1,0,0.1429,Bottom-5,37,1
+CH727,TensorFlow,1,0,0.1229,Bottom-5,13,1
+CH728,TensorFlow,1,0,0.0629,Bottom-5,11,1
+CH729,TensorFlow,1,0,0.1229,Bottom-5,5,1
+CH730,TensorFlow,1,0,0.0629,Bottom-5,5,1
+CH731,VS Code,1,0,0.1229,Bottom-5,12,1
+CH732,VS Code,7,13,1.0,Top-5,27,5
+CH733,VS Code,1,0,0.0629,Bottom-5,9,1
+CH734,VS Code,5,11,0.8743,Top-5,34,3
+CH735,VS Code,3,5,0.5686,Mid-5,37,3
+CH736,VS Code,3,3,0.4486,Mid-5,21,3
+CH737,VS Code,6,11,0.9571,Top-5,5,3
+CH738,VS Code,1,0,0.1029,Bottom-5,23,1
+CH739,VS Code,3,3,0.4086,Mid-5,29,3
+CH740,VS Code,3,4,0.4486,Mid-5,17,3
+CH741,VS Code,1,0,0.1229,Bottom-5,39,1
+CH742,VS Code,2,2,0.2857,Bottom-5,12,2
+CH743,VS Code,2,2,0.3057,Bottom-5,21,2
+CH744,VS Code,2,2,0.2657,Bottom-5,24,1
+CH745,VS Code,3,5,0.4086,Mid-5,12,3
+CH746,VS Code,2,2,0.2657,Bottom-5,7,2
+CH747,VS Code,1,0,0.1229,Bottom-5,8,1
+CH748,VS Code,3,6,0.5686,Mid-5,11,2
+CH749,VS Code,1,0,0.0829,Bottom-5,30,1
+CH750,VS Code,1,0,0.1029,Bottom-5,38,1
+CH751,VS Code,3,3,0.3886,Bottom-5,42,3
+CH752,VS Code,1,0,0.0629,Bottom-5,7,1
+CH753,VS Code,4,11,0.7514,Top-5,12,3
+CH754,VS Code,1,0,0.0629,Bottom-5,38,1
+CH755,VS Code,7,12,1.0,Top-5,19,5
+CH756,VS Code,3,5,0.5886,Mid-5,42,3
+CH757,VS Code,5,10,0.9143,Top-5,25,3
+CH758,VS Code,1,0,0.1229,Bottom-5,43,1
+CH759,VS Code,1,0,0.1029,Bottom-5,40,1
+CH760,VS Code,3,5,0.4686,Mid-5,24,3
+CH761,VS Code,2,2,0.3057,Bottom-5,21,2
+CH762,VS Code,1,0,0.0829,Bottom-5,12,1
+CH763,VS Code,5,9,0.8743,Top-5,30,3
+CH764,VS Code,4,8,0.7314,Top-5,42,2
+CH765,VS Code,4,7,0.6714,Mid-5,9,4
+CH766,VS Code,1,0,0.1429,Bottom-5,8,1
+CH767,VS Code,3,4,0.5286,Mid-5,29,2
+CH768,VS Code,4,7,0.6914,Mid-5,7,4
+CH769,VS Code,3,5,0.5286,Mid-5,6,3
+CH770,VS Code,4,4,0.6314,Mid-5,11,2
+CH771,VS Code,1,0,0.0629,Bottom-5,37,1
+CH772,VS Code,1,0,0.1229,Bottom-5,41,1
+CH773,VS Code,6,8,0.8771,Top-5,33,4
+CH774,VS Code,2,2,0.3257,Bottom-5,34,1
+CH775,VS Code,1,0,0.0829,Bottom-5,26,1
+CH776,VS Code,5,11,0.9143,Top-5,2,4
+CH777,VS Code,1,0,0.1429,Bottom-5,45,1
+CH778,VS Code,1,0,0.0829,Bottom-5,21,1
+CH779,VS Code,4,8,0.7714,Top-5,32,3
+CH780,VS Code,1,0,0.1029,Bottom-5,23,1
+CH781,VS Code,2,2,0.3057,Bottom-5,45,2
+CH782,VS Code,3,4,0.5286,Mid-5,14,3
+CH783,VS Code,3,4,0.5486,Mid-5,24,2
+CH784,VS Code,3,5,0.5886,Mid-5,2,2
+CH785,VS Code,1,0,0.1429,Bottom-5,16,1
+CH786,VS Code,2,2,0.2857,Bottom-5,11,2
+CH787,VS Code,2,2,0.3057,Bottom-5,6,2
+CH788,VS Code,4,10,0.8114,Top-5,42,3
+CH789,VS Code,1,0,0.1029,Bottom-5,14,1
+CH790,VS Code,4,7,0.7514,Top-5,4,4
+CH791,VS Code,6,16,0.9571,Top-5,41,6
+CH792,VS Code,4,9,0.8114,Top-5,14,3
+CH793,VS Code,3,4,0.3686,Bottom-5,43,2
+CH794,VS Code,1,0,0.1029,Bottom-5,30,1
+CH795,VS Code,4,4,0.6114,Mid-5,45,3
+CH796,VS Code,5,12,0.8543,Top-5,32,5
+CH797,VS Code,6,10,0.9371,Top-5,25,5
+CH798,VS Code,2,2,0.2657,Bottom-5,10,2
+CH799,VS Code,5,13,0.9143,Top-5,26,3
+CH800,VS Code,4,5,0.6514,Mid-5,22,4
+CH801,VS Code,3,5,0.5086,Mid-5,3,2
+CH802,VS Code,1,0,0.1029,Bottom-5,31,1
+CH803,VS Code,3,5,0.5686,Mid-5,45,3
+CH804,VS Code,2,2,0.2657,Bottom-5,19,2
+CH805,VS Code,5,11,0.9143,Top-5,7,4
+CH806,VS Code,1,0,0.1229,Bottom-5,12,1
+CH807,VS Code,1,0,0.0829,Bottom-5,2,1
+CH808,VS Code,1,0,0.1029,Bottom-5,34,1
+CH809,VS Code,3,5,0.5886,Mid-5,36,2
+CH810,VS Code,2,2,0.3057,Bottom-5,31,2
+CH811,VS Code,3,5,0.5686,Mid-5,18,3
+CH812,VS Code,1,0,0.1429,Bottom-5,8,1
+CH813,VS Code,2,2,0.2457,Bottom-5,28,2
+CH814,VS Code,2,2,0.3657,Bottom-5,36,2
+CH815,VS Code,2,2,0.2657,Bottom-5,36,1
+CH816,VS Code,5,12,0.9143,Top-5,12,4
+CH817,VS Code,5,8,0.8343,Top-5,27,3
+CH818,VS Code,2,2,0.2657,Bottom-5,31,2
+CH819,VS Code,3,5,0.4686,Mid-5,37,2
+CH820,VS Code,1,0,0.1429,Bottom-5,43,1
+CH821,VS Code,1,0,0.0629,Bottom-5,29,1
+CH822,VS Code,1,0,0.1429,Bottom-5,10,1
+CH823,VS Code,5,11,0.8943,Top-5,23,3
+CH824,VS Code,3,5,0.4686,Mid-5,37,3
+CH825,VS Code,4,7,0.7514,Top-5,41,3
+CH826,VS Code,3,5,0.4686,Mid-5,41,2
+CH827,VS Code,3,5,0.4486,Mid-5,21,2
+CH828,VS Code,4,9,0.7714,Top-5,19,3
+CH829,VS Code,3,4,0.5086,Mid-5,7,3
+CH830,VS Code,1,0,0.0829,Bottom-5,17,1
+CH831,VS Code,1,0,0.0629,Bottom-5,26,1
+CH832,VS Code,1,0,0.1229,Bottom-5,12,1
+CH833,VS Code,1,0,0.1229,Bottom-5,34,1
+CH834,VS Code,5,11,0.9143,Top-5,21,3
+CH835,VS Code,3,4,0.4286,Mid-5,14,3
+CH836,VS Code,5,10,0.9143,Top-5,35,2
+CH837,VS Code,2,2,0.2457,Bottom-5,6,2
+CH838,VS Code,1,0,0.1029,Bottom-5,45,1
+CH839,VS Code,2,2,0.3457,Bottom-5,25,2
+CH840,VS Code,4,6,0.6714,Mid-5,25,3
+CH841,VS Code,1,0,0.1029,Bottom-5,41,1
+CH842,VS Code,2,2,0.2457,Bottom-5,9,2
+CH843,VS Code,1,0,0.1429,Bottom-5,33,1
+CH844,VS Code,5,8,0.8343,Top-5,36,3
+CH845,VS Code,1,0,0.1029,Bottom-5,6,1
+CH846,VS Code,4,10,0.8714,Top-5,27,4
+CH847,VS Code,2,2,0.2657,Bottom-5,42,2
+CH848,VS Code,1,0,0.1229,Bottom-5,1,1
+CH849,VS Code,2,2,0.3257,Bottom-5,41,2
+CH850,VS Code,3,3,0.4286,Mid-5,20,3
+CH851,VS Code,3,5,0.4686,Mid-5,20,3
+CH852,VS Code,6,12,0.9571,Top-5,16,4
+CH853,VS Code,1,0,0.1429,Bottom-5,45,1
+CH854,VS Code,7,11,1.0,Top-5,19,4
+CH855,VS Code,1,0,0.1029,Bottom-5,12,1
+CH856,VS Code,6,10,0.9571,Top-5,12,4
+CH857,VS Code,4,10,0.8714,Top-5,10,3
+CH858,VS Code,2,2,0.3257,Bottom-5,44,2
+CH859,VS Code,3,4,0.4086,Mid-5,32,3
+CH860,VS Code,5,11,0.8743,Top-5,45,3
+CH861,VS Code,1,0,0.1429,Bottom-5,9,1
+CH862,Android,1,0,0.1229,Bottom-5,28,1
+CH863,Android,1,0,0.0829,Bottom-5,5,1
+CH864,Android,1,0,0.0829,Bottom-5,5,1
+CH865,Android,2,2,0.2657,Bottom-5,5,1
+CH866,Android,3,4,0.4286,Mid-5,7,2
+CH867,Android,2,2,0.2457,Bottom-5,33,1
+CH868,Android,4,7,0.6314,Mid-5,42,3
+CH869,Android,1,0,0.1029,Bottom-5,36,1
+CH870,Android,1,0,0.1029,Bottom-5,11,1
+CH871,Android,1,0,0.1429,Bottom-5,11,1
+CH872,Android,2,2,0.3257,Bottom-5,26,1
+CH873,Android,2,2,0.2857,Bottom-5,18,2
+CH874,Android,1,0,0.1429,Bottom-5,36,1
+CH875,Android,1,0,0.0829,Bottom-5,38,1
+CH876,Android,3,4,0.4886,Mid-5,2,3
+CH877,Android,3,5,0.5886,Mid-5,26,3
+CH878,Android,2,2,0.2257,Bottom-5,8,2
+CH879,Android,1,0,0.1029,Bottom-5,30,1
+CH880,Android,6,9,0.9171,Top-5,13,3
+CH881,Android,5,10,0.8543,Top-5,1,3
+CH882,Android,1,0,0.1429,Bottom-5,8,1
+CH883,Android,3,3,0.4286,Mid-5,29,3
+CH884,Android,5,12,0.7743,Top-5,1,3
+CH885,Android,1,0,0.0629,Bottom-5,43,1
+CH886,Android,1,0,0.1429,Bottom-5,11,1
+CH887,Android,4,7,0.7514,Top-5,15,3
+CH888,Android,3,5,0.5886,Mid-5,18,3
+CH889,Android,2,2,0.2457,Bottom-5,39,1
+CH890,Android,1,0,0.1429,Bottom-5,44,1
+CH891,Android,3,4,0.5086,Mid-5,27,2
+CH892,Android,2,2,0.2857,Bottom-5,32,1
+CH893,Android,4,10,0.8114,Top-5,39,2
+CH894,Android,1,0,0.1429,Bottom-5,38,1
+CH895,Android,5,11,0.7943,Top-5,4,4
+CH896,Android,2,2,0.2257,Bottom-5,30,2
+CH897,Android,2,2,0.2657,Bottom-5,34,2
+CH898,Android,3,5,0.5686,Mid-5,3,2
+CH899,Android,1,0,0.1029,Bottom-5,13,1
+CH900,Android,2,2,0.3257,Bottom-5,34,1
+CH901,Android,2,2,0.3657,Bottom-5,42,2
+CH902,Android,2,2,0.3257,Bottom-5,42,2
+CH903,Android,1,0,0.1029,Bottom-5,1,1
+CH904,Android,2,2,0.3257,Bottom-5,25,2
+CH905,Android,3,4,0.4886,Mid-5,16,2
+CH906,Android,1,0,0.0829,Bottom-5,10,1
+CH907,Android,1,0,0.1029,Bottom-5,35,1
+CH908,Android,2,2,0.2657,Bottom-5,29,2
+CH909,Android,3,6,0.5486,Mid-5,43,3
+CH910,Android,1,0,0.1029,Bottom-5,42,1
+CH911,Android,4,7,0.7514,Top-5,37,3
+CH912,Android,3,6,0.5886,Mid-5,24,2
+CH913,Android,1,0,0.0829,Bottom-5,39,1
+CH914,Android,4,11,0.8714,Top-5,1,2
+CH915,Android,3,4,0.4886,Mid-5,19,3
+CH916,Android,4,9,0.8314,Top-5,9,2
+CH917,Android,2,2,0.3257,Bottom-5,44,2
+CH918,Android,3,5,0.5886,Mid-5,38,2
+CH919,Android,3,5,0.4686,Mid-5,25,2
+CH920,Android,3,5,0.4486,Mid-5,22,2
+CH921,Android,4,8,0.7714,Top-5,13,3
+CH922,Android,2,2,0.3057,Bottom-5,12,2
+CH923,Android,2,2,0.2457,Bottom-5,14,2
+CH924,Android,3,6,0.5086,Mid-5,44,2
+CH925,Android,2,2,0.2257,Bottom-5,13,2
+CH926,Android,1,0,0.0629,Bottom-5,30,1
+CH927,Android,2,2,0.2857,Bottom-5,24,2
+CH928,Android,2,2,0.2857,Bottom-5,17,2
+CH929,Android,1,0,0.1429,Bottom-5,37,1
+CH930,Android,2,2,0.3057,Bottom-5,39,2
+CH931,Android,2,2,0.3457,Bottom-5,42,1
+CH932,Android,1,0,0.1229,Bottom-5,22,1
+CH933,Android,1,0,0.1229,Bottom-5,14,1
+CH934,Android,1,0,0.0629,Bottom-5,14,1
+CH935,Android,4,6,0.6914,Mid-5,35,3
+CH936,Android,2,2,0.2457,Bottom-5,5,2
+CH937,Android,5,10,0.9143,Top-5,32,4
+CH938,Android,3,5,0.5286,Mid-5,11,2
+CH939,Android,1,0,0.0629,Bottom-5,36,1
+CH940,Android,3,4,0.4286,Mid-5,43,1
+CH941,Android,1,0,0.1029,Bottom-5,14,1
+CH942,Android,3,5,0.5286,Mid-5,2,2
+CH943,Android,1,0,0.1429,Bottom-5,9,1
+CH944,Android,1,0,0.0829,Bottom-5,6,1
+CH945,Android,2,2,0.3457,Bottom-5,44,2
+CH946,Android,3,4,0.4486,Mid-5,1,2
+CH947,Android,1,0,0.0629,Bottom-5,37,1
+CH948,Android,5,10,0.8543,Top-5,11,4
+CH949,Android,1,0,0.1229,Bottom-5,34,1
+CH950,Android,4,10,0.8314,Top-5,37,3
+CH951,Android,1,0,0.1029,Bottom-5,11,1
+CH952,Android,2,2,0.2857,Bottom-5,12,2
+CH953,Android,2,2,0.3257,Bottom-5,39,2
+CH954,Android,2,2,0.3257,Bottom-5,10,2
+CH955,Android,2,2,0.2857,Bottom-5,5,2
+CH956,Android,1,0,0.0829,Bottom-5,15,1
+CH957,Android,5,12,0.9143,Top-5,36,4
+CH958,Android,1,0,0.1429,Bottom-5,25,1
+CH959,Android,3,5,0.4886,Mid-5,31,2
+CH960,Android,3,5,0.5286,Mid-5,40,3
+CH961,Android,2,2,0.3057,Bottom-5,32,1
+CH962,Android,3,5,0.5286,Mid-5,32,2
+CH963,Android,3,4,0.3886,Bottom-5,12,1
+CH964,Android,4,9,0.8314,Top-5,4,3
+CH965,Android,7,11,1.0,Top-5,7,4
+CH966,Android,1,0,0.1229,Bottom-5,8,1
+CH967,Android,1,0,0.1429,Bottom-5,8,1
+CH968,Android,7,14,1.0,Top-5,7,4
+CH969,Android,1,0,0.0629,Bottom-5,2,1
+CH970,Spring Framework,6,9,0.8171,Top-5,16,3
+CH971,Spring Framework,4,6,0.6314,Mid-5,6,3
+CH972,Spring Framework,2,2,0.2257,Bottom-5,21,2
+CH973,Spring Framework,2,2,0.2657,Bottom-5,43,2
+CH974,Spring Framework,1,0,0.0829,Bottom-5,21,1
+CH975,Spring Framework,1,0,0.0829,Bottom-5,13,1
+CH976,Spring Framework,5,10,0.9143,Top-5,45,2
+CH977,Spring Framework,2,2,0.2657,Bottom-5,4,2
+CH978,Spring Framework,2,2,0.2257,Bottom-5,44,2
+CH979,Spring Framework,4,8,0.6914,Mid-5,25,2
+CH980,Spring Framework,2,2,0.2257,Bottom-5,3,2
+CH981,Spring Framework,3,5,0.5086,Mid-5,3,2
+CH982,Spring Framework,1,0,0.1229,Bottom-5,25,1
+CH983,Spring Framework,3,6,0.5886,Mid-5,42,3
+CH984,Spring Framework,3,4,0.5486,Mid-5,20,3
+CH985,Spring Framework,3,4,0.4086,Mid-5,18,2
+CH986,Spring Framework,2,2,0.2657,Bottom-5,16,2
+CH987,Spring Framework,2,2,0.3457,Bottom-5,6,1
+CH988,Spring Framework,3,4,0.5486,Mid-5,2,3
+CH989,Spring Framework,1,0,0.1029,Bottom-5,45,1
+CH990,Spring Framework,2,2,0.3057,Bottom-5,45,1
+CH991,Spring Framework,4,8,0.6514,Mid-5,18,4
+CH992,Spring Framework,1,0,0.1229,Bottom-5,10,1
+CH993,Spring Framework,2,2,0.3057,Bottom-5,7,2
+CH994,Spring Framework,3,5,0.4886,Mid-5,29,2
+CH995,Spring Framework,3,4,0.5086,Mid-5,36,2
+CH996,Spring Framework,3,4,0.5086,Mid-5,27,1
+CH997,Spring Framework,3,4,0.5086,Mid-5,45,2
+CH998,Spring Framework,3,5,0.4486,Mid-5,29,2
+CH999,Spring Framework,2,2,0.2257,Bottom-5,30,1
+CH1000,Spring Framework,1,0,0.1229,Bottom-5,19,1
+CH1001,Spring Framework,4,10,0.8314,Top-5,20,3
+CH1002,Spring Framework,1,0,0.0829,Bottom-5,32,1
+CH1003,Spring Framework,1,0,0.1029,Bottom-5,9,1
+CH1004,Spring Framework,2,2,0.2257,Bottom-5,28,2
+CH1005,Spring Framework,6,15,0.9571,Top-5,24,4
+CH1006,Spring Framework,1,0,0.0829,Bottom-5,5,1
+CH1007,Spring Framework,2,2,0.2857,Bottom-5,38,1
+CH1008,Spring Framework,3,6,0.5886,Mid-5,7,2
+CH1009,Spring Framework,3,4,0.3886,Bottom-5,35,2
+CH1010,Spring Framework,1,0,0.1229,Bottom-5,22,1
+CH1011,Spring Framework,6,12,0.9571,Top-5,6,4
+CH1012,Spring Framework,1,0,0.0829,Bottom-5,6,1
+CH1013,Spring Framework,1,0,0.1029,Bottom-5,5,1
+CH1014,Spring Framework,2,2,0.3057,Bottom-5,1,2
+CH1015,Spring Framework,2,2,0.3457,Bottom-5,34,2
+CH1016,Spring Framework,1,0,0.1429,Bottom-5,6,1
+CH1017,Spring Framework,1,0,0.0829,Bottom-5,38,1
+CH1018,Spring Framework,6,12,0.9171,Top-5,44,3
+CH1019,Spring Framework,1,0,0.0629,Bottom-5,18,1
+CH1020,Spring Framework,2,2,0.3257,Bottom-5,3,2
+CH1021,Spring Framework,3,5,0.4486,Mid-5,21,1
+CH1022,Spring Framework,2,2,0.2857,Bottom-5,14,2
+CH1023,Spring Framework,1,0,0.0829,Bottom-5,44,1
+CH1024,Spring Framework,1,0,0.1429,Bottom-5,3,1
+CH1025,Spring Framework,2,2,0.2857,Bottom-5,27,2
+CH1026,Spring Framework,3,5,0.4486,Mid-5,1,2
+CH1027,Spring Framework,3,6,0.6086,Mid-5,39,2
+CH1028,Spring Framework,4,9,0.8314,Top-5,11,3
+CH1029,Spring Framework,2,2,0.3057,Bottom-5,38,2
+CH1030,Spring Framework,1,0,0.0629,Bottom-5,34,1
+CH1031,Spring Framework,6,12,0.9571,Top-5,40,3
+CH1032,Spring Framework,2,2,0.2257,Bottom-5,33,2
+CH1033,Spring Framework,5,8,0.8343,Top-5,8,3
+CH1034,Spring Framework,2,2,0.2657,Bottom-5,8,2
+CH1035,Spring Framework,1,0,0.1029,Bottom-5,8,1
+CH1036,Spring Framework,3,4,0.4886,Mid-5,25,2
+CH1037,Spring Framework,4,9,0.7514,Top-5,2,3
+CH1038,Spring Framework,2,2,0.2257,Bottom-5,2,2
+CH1039,Spring Framework,1,0,0.0829,Bottom-5,30,1
+CH1040,Spring Framework,4,6,0.6914,Mid-5,38,3
+CH1041,Spring Framework,2,2,0.2457,Bottom-5,41,1
+CH1042,Spring Framework,2,2,0.2257,Bottom-5,30,2
+CH1043,Spring Framework,2,2,0.2657,Bottom-5,25,2
+CH1044,Spring Framework,5,10,0.9143,Top-5,16,4
+CH1045,Spring Framework,2,2,0.2657,Bottom-5,34,2
+CH1046,Spring Framework,7,14,1.0,Top-5,11,4
+CH1047,Spring Framework,5,9,0.8743,Top-5,20,4
+CH1048,Spring Framework,1,0,0.1429,Bottom-5,4,1
+CH1049,Spring Framework,3,5,0.4486,Mid-5,38,2
+CH1050,Spring Framework,4,8,0.7914,Top-5,45,3
+CH1051,Spring Framework,3,5,0.5886,Mid-5,11,3
+CH1052,Spring Framework,2,2,0.3057,Bottom-5,22,1
+CH1053,Spring Framework,1,0,0.1229,Bottom-5,34,1
+CH1054,Spring Framework,1,0,0.1229,Bottom-5,27,1
+CH1055,Spring Framework,3,4,0.4886,Mid-5,17,2
+CH1056,Spring Framework,1,0,0.1229,Bottom-5,15,1
+CH1057,Spring Framework,6,11,0.9371,Top-5,34,4
+CH1058,Spring Framework,3,6,0.5086,Mid-5,18,2
+CH1059,Spring Framework,1,0,0.0629,Bottom-5,10,1
+CH1060,Spring Framework,3,5,0.5886,Mid-5,5,3
+CH1061,Spring Framework,3,5,0.5686,Mid-5,37,2
+CH1062,Spring Framework,3,4,0.4486,Mid-5,15,2
+CH1063,Spring Framework,1,0,0.0829,Bottom-5,22,1
+CH1064,Spring Framework,4,7,0.5914,Mid-5,40,3
+CH1065,Firefox,2,2,0.3057,Bottom-5,9,1
+CH1066,Firefox,4,5,0.5914,Mid-5,37,3
+CH1067,Firefox,1,0,0.1429,Bottom-5,42,1
+CH1068,Firefox,5,11,0.8543,Top-5,38,4
+CH1069,Firefox,2,2,0.3057,Bottom-5,35,1
+CH1070,Firefox,1,0,0.1429,Bottom-5,22,1
+CH1071,Firefox,2,2,0.3057,Bottom-5,12,2
+CH1072,Firefox,6,14,0.9571,Top-5,37,2
+CH1073,Firefox,1,0,0.1429,Bottom-5,13,1
+CH1074,Firefox,3,3,0.4286,Mid-5,40,3
+CH1075,Firefox,1,0,0.0629,Bottom-5,38,1
+CH1076,Firefox,1,0,0.1429,Bottom-5,39,1
+CH1077,Firefox,5,10,0.9143,Top-5,42,4
+CH1078,Firefox,5,6,0.6343,Mid-5,6,2
+CH1079,Firefox,2,2,0.2657,Bottom-5,12,2
+CH1080,Firefox,1,0,0.0629,Bottom-5,18,1
+CH1081,Firefox,3,4,0.4486,Mid-5,26,2
+CH1082,Firefox,6,9,0.9171,Top-5,7,4
+CH1083,Firefox,3,5,0.5686,Mid-5,8,2
+CH1084,Firefox,2,2,0.2857,Bottom-5,12,2
+CH1085,Firefox,1,0,0.0829,Bottom-5,31,1
+CH1086,Firefox,1,0,0.1429,Bottom-5,42,1
+CH1087,Firefox,5,6,0.7543,Top-5,34,3
+CH1088,Firefox,4,10,0.7714,Top-5,21,3
+CH1089,Firefox,1,0,0.0829,Bottom-5,29,1
+CH1090,Firefox,3,3,0.4486,Mid-5,44,2
+CH1091,Firefox,2,2,0.3257,Bottom-5,20,2
+CH1092,Firefox,1,0,0.1229,Bottom-5,6,1
+CH1093,Firefox,2,2,0.2457,Bottom-5,36,1
+CH1094,Firefox,3,5,0.5086,Mid-5,35,2
+CH1095,Firefox,2,2,0.3457,Bottom-5,1,2
+CH1096,Firefox,2,2,0.3057,Bottom-5,17,2
+CH1097,Firefox,1,0,0.0629,Bottom-5,8,1
+CH1098,Firefox,1,0,0.0829,Bottom-5,37,1
+CH1099,Firefox,1,0,0.1229,Bottom-5,45,1
+CH1100,Firefox,4,9,0.8114,Top-5,8,3
+CH1101,Firefox,1,0,0.1429,Bottom-5,2,1
+CH1102,Firefox,1,0,0.0629,Bottom-5,38,1
+CH1103,Firefox,2,2,0.2657,Bottom-5,25,1
+CH1104,Firefox,7,14,1.0,Top-5,32,4
+CH1105,Firefox,5,8,0.8343,Top-5,15,2
+CH1106,Firefox,1,0,0.1429,Bottom-5,6,1
+CH1107,Firefox,2,2,0.3257,Bottom-5,11,2
+CH1108,Firefox,1,0,0.1229,Bottom-5,45,1
+CH1109,Firefox,4,10,0.8714,Top-5,27,3
+CH1110,Firefox,1,0,0.1029,Bottom-5,34,1
+CH1111,Firefox,2,2,0.2257,Bottom-5,13,2
+CH1112,Firefox,6,13,0.9571,Top-5,40,4
+CH1113,Firefox,3,4,0.4886,Mid-5,17,1
+CH1114,Firefox,6,15,0.9571,Top-5,34,3
+CH1115,Firefox,2,2,0.3057,Bottom-5,22,2
+CH1116,Firefox,3,5,0.5486,Mid-5,39,3
+CH1117,Firefox,3,4,0.5286,Mid-5,23,2
+CH1118,Firefox,7,11,1.0,Top-5,15,4
+CH1119,Firefox,1,0,0.1429,Bottom-5,5,1
+CH1120,Firefox,2,2,0.2457,Bottom-5,11,2
+CH1121,Firefox,1,0,0.0829,Bottom-5,39,1
+CH1122,Firefox,7,14,1.0,Top-5,38,4
+CH1123,Firefox,2,2,0.3057,Bottom-5,17,2
+CH1124,Firefox,1,0,0.0829,Bottom-5,6,1
+CH1125,Firefox,3,5,0.4686,Mid-5,12,2
+CH1126,Firefox,1,0,0.1229,Bottom-5,34,1
+CH1127,Firefox,6,13,0.9571,Top-5,39,2
+CH1128,Firefox,5,9,0.8143,Top-5,36,2
+CH1129,Firefox,3,5,0.5086,Mid-5,43,3
+CH1130,Firefox,3,5,0.5086,Mid-5,8,2
+CH1131,Firefox,4,9,0.7114,Top-5,4,3
+CH1132,Firefox,2,2,0.2057,Bottom-5,41,2
+CH1133,Firefox,7,16,1.0,Top-5,7,3
+CH1134,Firefox,4,9,0.8314,Top-5,27,3
+CH1135,Firefox,1,0,0.1029,Bottom-5,21,1
+CH1136,Firefox,1,0,0.0629,Bottom-5,38,1
+CH1137,Firefox,2,2,0.2657,Bottom-5,16,1
+CH1138,Firefox,5,9,0.8743,Top-5,29,4
+CH1139,Firefox,5,6,0.7343,Top-5,28,3
+CH1140,Firefox,3,6,0.4886,Mid-5,31,3
+CH1141,Firefox,4,6,0.6714,Mid-5,5,3
+CH1142,Firefox,2,2,0.3457,Bottom-5,9,2
+CH1143,Firefox,2,2,0.3657,Bottom-5,17,2
+CH1144,Firefox,3,5,0.5886,Mid-5,43,2
+CH1145,Firefox,1,0,0.0829,Bottom-5,45,1
+CH1146,Firefox,1,0,0.1429,Bottom-5,2,1
+CH1147,Firefox,5,9,0.8743,Top-5,22,3
+CH1148,Firefox,1,0,0.1429,Bottom-5,31,1
+CH1149,Firefox,1,0,0.1429,Bottom-5,27,1
+CH1150,Firefox,2,2,0.3057,Bottom-5,34,2
+CH1151,Firefox,4,11,0.8514,Top-5,43,3
+CH1152,Firefox,2,2,0.3657,Bottom-5,20,2
+CH1153,Firefox,4,6,0.6514,Mid-5,7,3
+CH1154,Firefox,1,0,0.0829,Bottom-5,26,1
+CH1155,React,4,8,0.7314,Top-5,8,4
+CH1156,React,1,0,0.1229,Bottom-5,42,1
+CH1157,React,7,14,1.0,Top-5,3,5
+CH1158,React,2,2,0.2657,Bottom-5,33,1
+CH1159,React,1,0,0.1229,Bottom-5,43,1
+CH1160,React,1,0,0.1029,Bottom-5,34,1
+CH1161,React,3,5,0.4686,Mid-5,5,3
+CH1162,React,1,0,0.0629,Bottom-5,22,1
+CH1163,React,4,7,0.6914,Mid-5,8,4
+CH1164,React,3,5,0.5086,Mid-5,6,3
+CH1165,React,1,0,0.1029,Bottom-5,7,1
+CH1166,React,4,8,0.7714,Top-5,29,3
+CH1167,React,1,0,0.1429,Bottom-5,42,1
+CH1168,React,4,8,0.7914,Top-5,12,3
+CH1169,React,3,4,0.5686,Mid-5,17,2
+CH1170,React,1,0,0.1429,Bottom-5,3,1
+CH1171,React,1,0,0.1029,Bottom-5,29,1
+CH1172,React,3,6,0.5286,Mid-5,23,3
+CH1173,React,1,0,0.1429,Bottom-5,7,1
+CH1174,React,4,8,0.7914,Top-5,29,4
+CH1175,React,1,0,0.1429,Bottom-5,42,1
+CH1176,React,2,2,0.2657,Bottom-5,4,2
+CH1177,React,3,3,0.4486,Mid-5,28,2
+CH1178,React,2,2,0.2257,Bottom-5,6,2
+CH1179,React,4,10,0.8114,Top-5,22,3
+CH1180,React,2,2,0.3257,Bottom-5,39,2
+CH1181,React,1,0,0.1229,Bottom-5,41,1
+CH1182,React,2,2,0.3457,Bottom-5,22,2
+CH1183,React,2,2,0.2257,Bottom-5,28,2
+CH1184,React,2,2,0.3657,Bottom-5,16,2
+CH1185,React,4,10,0.8514,Top-5,5,4
+CH1186,React,3,3,0.4486,Mid-5,23,3
+CH1187,React,1,0,0.1029,Bottom-5,30,1
+CH1188,React,1,0,0.1429,Bottom-5,22,1
+CH1189,React,2,2,0.2657,Bottom-5,15,1
+CH1190,React,2,2,0.2857,Bottom-5,19,2
+CH1191,React,3,5,0.4686,Mid-5,10,3
+CH1192,React,3,5,0.5486,Mid-5,1,3
+CH1193,React,1,0,0.1429,Bottom-5,16,1
+CH1194,React,1,0,0.0829,Bottom-5,37,1
+CH1195,React,1,0,0.1429,Bottom-5,37,1
+CH1196,React,1,0,0.1229,Bottom-5,5,1
+CH1197,React,4,6,0.6314,Mid-5,29,3
+CH1198,React,1,0,0.1429,Bottom-5,23,1
+CH1199,React,3,3,0.3886,Bottom-5,31,3
+CH1200,React,5,9,0.8743,Top-5,4,4
+CH1201,React,2,2,0.2857,Bottom-5,6,2
+CH1202,React,3,3,0.4086,Mid-5,29,2
+CH1203,React,3,5,0.4486,Mid-5,41,2
+CH1204,React,2,2,0.3257,Bottom-5,22,2
+CH1205,React,7,9,0.92,Top-5,3,4
+CH1206,React,2,2,0.2257,Bottom-5,26,2
+CH1207,React,1,0,0.0829,Bottom-5,26,1
+CH1208,React,2,2,0.3057,Bottom-5,44,2
+CH1209,React,1,0,0.0629,Bottom-5,6,1
+CH1210,React,1,0,0.1229,Bottom-5,35,1
+CH1211,React,5,10,0.8943,Top-5,1,5
+CH1212,React,4,9,0.7314,Top-5,37,4
+CH1213,React,1,0,0.1229,Bottom-5,1,1
+CH1214,React,1,0,0.1029,Bottom-5,40,1
+CH1215,React,3,3,0.3886,Bottom-5,17,3
+CH1216,React,2,2,0.2057,Bottom-5,5,2
+CH1217,React,4,8,0.7114,Top-5,23,3
+CH1218,React,3,6,0.5686,Mid-5,9,2
+CH1219,React,4,11,0.7914,Top-5,44,4
+CH1220,React,3,5,0.4886,Mid-5,37,3
+CH1221,React,4,8,0.7514,Top-5,39,3
+CH1222,React,3,3,0.4686,Mid-5,18,3
+CH1223,React,2,2,0.2657,Bottom-5,10,2
+CH1224,React,2,2,0.3057,Bottom-5,31,1
+CH1225,React,1,0,0.0629,Bottom-5,4,1
+CH1226,React,1,0,0.1429,Bottom-5,14,1
+CH1227,React,2,2,0.3057,Bottom-5,6,2
+CH1228,React,3,4,0.5086,Mid-5,36,2
+CH1229,React,4,5,0.6314,Mid-5,14,3
+CH1230,React,3,4,0.4286,Mid-5,31,3
+CH1231,React,1,0,0.0829,Bottom-5,9,1
+CH1232,React,1,0,0.1429,Bottom-5,33,1
+CH1233,React,4,7,0.7514,Top-5,7,4
+CH1234,React,1,0,0.1429,Bottom-5,1,1
+CH1235,React,5,10,0.9143,Top-5,35,4
+CH1236,React,2,2,0.2457,Bottom-5,11,2
+CH1237,React,2,2,0.3057,Bottom-5,5,2
+CH1238,React,1,0,0.0629,Bottom-5,30,1
+CH1239,React,1,0,0.1029,Bottom-5,22,1
+CH1240,React,1,0,0.1029,Bottom-5,32,1
+CH1241,React,1,0,0.0629,Bottom-5,5,1
+CH1242,React,1,0,0.1429,Bottom-5,34,1
+CH1243,React,1,0,0.1429,Bottom-5,42,1
+CH1244,React,3,5,0.4286,Mid-5,2,3
+CH1245,React,4,9,0.7314,Top-5,3,4
+CH1246,React,7,13,1.0,Top-5,3,5
+CH1247,React,3,5,0.5286,Mid-5,38,3
+CH1248,React,1,0,0.1429,Bottom-5,38,1
+CH1249,React,1,0,0.0829,Bottom-5,11,1
+CH1250,React,2,2,0.2457,Bottom-5,14,2
+CH1251,React,2,2,0.2257,Bottom-5,28,2
+CH1252,React,4,9,0.7714,Top-5,39,4
+CH1253,React,3,4,0.4486,Mid-5,44,3
+CH1254,React,1,0,0.1229,Bottom-5,39,1
+CH1255,React,4,6,0.6714,Mid-5,31,4
+CH1256,React,5,12,0.8543,Top-5,36,4
+CH1257,React,3,3,0.4686,Mid-5,40,3
+CH1258,React,1,0,0.0829,Bottom-5,43,1
+CH1259,React,2,2,0.2257,Bottom-5,27,1
+CH1260,React,5,10,0.9143,Top-5,42,5
+CH1261,React,1,0,0.1429,Bottom-5,15,1
+CH1262,React,4,5,0.6314,Mid-5,2,3
+CH1263,React,1,0,0.0829,Bottom-5,30,1
+CH1264,React,2,2,0.3257,Bottom-5,8,1
+CH1265,React,1,0,0.0829,Bottom-5,39,1
+CH1266,React,1,0,0.0829,Bottom-5,45,1
+CH1267,React,2,2,0.3257,Bottom-5,30,2
+CH1268,React,2,2,0.2857,Bottom-5,15,1
+CH1269,React,1,0,0.0629,Bottom-5,25,1
+CH1270,React,1,0,0.0829,Bottom-5,4,1
+CH1271,React,3,5,0.4686,Mid-5,40,3
+CH1272,React,4,7,0.6514,Mid-5,10,3
+CH1273,React,5,12,0.9143,Top-5,27,4
+CH1274,React,1,0,0.0829,Bottom-5,39,1
+CH1275,React,1,0,0.1029,Bottom-5,15,1
+CH1276,React,3,6,0.5886,Mid-5,35,2
+CH1277,React,3,5,0.5086,Mid-5,45,2
+CH1278,React,4,9,0.8314,Top-5,31,4
+CH1279,React,2,2,0.3057,Bottom-5,41,2
+CH1280,React,1,0,0.1229,Bottom-5,14,1
+CH1281,React,5,13,0.9143,Top-5,9,4
+CH1282,React,3,4,0.4286,Mid-5,37,2
+CH1283,React,4,7,0.6314,Mid-5,16,4
+CH1284,React,1,0,0.1429,Bottom-5,18,1
+CH1285,React,2,2,0.2857,Bottom-5,11,1
+CH1286,React,1,0,0.1429,Bottom-5,8,1
+CH1287,React,1,0,0.1429,Bottom-5,40,1
+CH1288,React,1,0,0.1429,Bottom-5,25,1
+CH1289,React,1,0,0.1229,Bottom-5,20,1
+CH1290,React,6,13,0.9571,Top-5,2,4
+CH1291,React,3,5,0.4486,Mid-5,24,3
+CH1292,React,3,5,0.4886,Mid-5,25,2
+CH1293,React,2,2,0.2257,Bottom-5,20,2
+CH1294,React,1,0,0.1429,Bottom-5,38,1
+CH1295,React,1,0,0.0629,Bottom-5,3,1
+CH1296,React,3,5,0.5486,Mid-5,4,2
+CH1297,React,2,2,0.3457,Bottom-5,19,2
+CH1298,React,3,4,0.4286,Mid-5,44,3
+CH1299,React,6,11,0.9571,Top-5,7,4
+CH1300,React,1,0,0.0829,Bottom-5,4,1
+CH1301,React,4,6,0.6514,Mid-5,15,2
+CH1302,React,3,5,0.4486,Mid-5,45,3
+CH1303,React,2,2,0.3457,Bottom-5,34,2
+CH1304,React,2,2,0.2457,Bottom-5,1,2
+CH1305,React,3,4,0.3686,Bottom-5,15,3
+CH1306,React,1,0,0.1429,Bottom-5,5,1
+CH1307,React,3,4,0.4086,Mid-5,32,3
+CH1308,React,1,0,0.1029,Bottom-5,29,1
+CH1309,React,1,0,0.1029,Bottom-5,35,1
+CH1310,React,3,4,0.4286,Mid-5,33,3
+CH1311,React,3,3,0.4886,Mid-5,28,2
+CH1312,React,3,6,0.5286,Mid-5,45,3
+CH1313,React,2,2,0.2857,Bottom-5,17,2
+CH1314,React,4,8,0.7314,Top-5,20,3
+CH1315,React,3,4,0.5286,Mid-5,8,3
+CH1316,React,6,12,0.9571,Top-5,1,3
+CH1317,React,2,2,0.2257,Bottom-5,42,2
+CH1318,React,3,5,0.4686,Mid-5,30,2
+CH1319,React,1,0,0.1029,Bottom-5,22,1
+CH1320,React,3,5,0.5286,Mid-5,40,3
+CH1321,React,1,0,0.0829,Bottom-5,12,1
+CH1322,React,6,11,0.9571,Top-5,3,5
+CH1323,React,1,0,0.1229,Bottom-5,29,1
+CH1324,React,1,0,0.1429,Bottom-5,19,1
+CH1325,React,1,0,0.1029,Bottom-5,44,1
+CH1326,React,1,0,0.1029,Bottom-5,34,1
+CH1327,React,1,0,0.1029,Bottom-5,36,1
+CH1328,React,5,11,0.8943,Top-5,22,5
+CH1329,React,2,2,0.3057,Bottom-5,38,2
+CH1330,React,3,5,0.4886,Mid-5,27,2
+CH1331,React,2,2,0.3457,Bottom-5,8,2
+CH1332,React,2,2,0.3457,Bottom-5,9,1
+CH1333,React,2,2,0.3457,Bottom-5,21,2
+CH1334,React,2,2,0.2457,Bottom-5,39,2
+CH1335,React,5,11,0.9143,Top-5,38,4
+CH1336,React,2,2,0.2857,Bottom-5,13,2
+CH1337,React,3,5,0.4886,Mid-5,25,3
+CH1338,React,3,4,0.5486,Mid-5,27,2
+CH1339,React,6,10,0.9571,Top-5,31,5
+CH1340,React,1,0,0.1429,Bottom-5,9,1
+CH1341,React,4,7,0.6514,Mid-5,16,4
+CH1342,React,1,0,0.1229,Bottom-5,43,1
+CH1343,React,4,10,0.8114,Top-5,44,4
+CH1344,React,1,0,0.1229,Bottom-5,20,1
+CH1345,React,1,0,0.0829,Bottom-5,31,1
+CH1346,React,3,4,0.4886,Mid-5,2,2
+CH1347,React,1,0,0.1229,Bottom-5,8,1
+CH1348,React,1,0,0.0629,Bottom-5,25,1
+CH1349,React,3,3,0.4886,Mid-5,8,2
+CH1350,React,4,11,0.8514,Top-5,7,3
+CH1351,React,7,11,1.0,Top-5,19,6
+CH1352,React,4,6,0.6514,Mid-5,39,3
+CH1353,React,3,3,0.4486,Mid-5,24,2
+CH1354,React,3,4,0.4086,Mid-5,26,3
+CH1355,React,4,6,0.7114,Top-5,6,3
+CH1356,React,6,11,0.9571,Top-5,41,4
+CH1357,React,3,6,0.5286,Mid-5,34,3
+CH1358,React,3,5,0.5686,Mid-5,4,3
+CH1359,React,7,12,0.96,Top-5,29,4
+CH1360,React,1,0,0.1229,Bottom-5,31,1
+CH1361,React,2,2,0.2257,Bottom-5,27,2
+CH1362,React,1,0,0.0629,Bottom-5,7,1
+CH1363,React,3,5,0.5686,Mid-5,24,3
+CH1364,React,3,4,0.4486,Mid-5,25,3
+CH1365,React,7,15,1.0,Top-5,9,4
+CH1366,React,2,2,0.2057,Bottom-5,31,2
+CH1367,React,1,0,0.0629,Bottom-5,22,1
+CH1368,React,2,2,0.2857,Bottom-5,6,2
+CH1369,React,7,13,1.0,Top-5,20,4
+CH1370,React,1,0,0.1429,Bottom-5,7,1
+CH1371,React,1,0,0.1229,Bottom-5,36,1
+CH1372,React,2,2,0.3257,Bottom-5,14,1
+CH1373,React,2,2,0.2657,Bottom-5,39,2
+CH1374,React,1,0,0.0829,Bottom-5,23,1
+CH1375,React,3,4,0.5086,Mid-5,29,3
+CH1376,React,2,2,0.2857,Bottom-5,6,2
+CH1377,React,4,9,0.8314,Top-5,30,3
+CH1378,React,6,11,0.9571,Top-5,42,5
+CH1379,React,3,5,0.5886,Mid-5,18,3
+CH1380,React,4,7,0.6114,Mid-5,31,3
+CH1381,React,1,0,0.1029,Bottom-5,4,1
+CH1382,React,1,0,0.1029,Bottom-5,43,1
+CH1383,React,3,4,0.4486,Mid-5,9,3
+CH1384,React,5,8,0.7943,Top-5,22,4
+CH1385,React,2,2,0.3457,Bottom-5,33,1
+CH1386,React,1,0,0.1229,Bottom-5,21,1
+CH1387,React,3,4,0.4686,Mid-5,37,3
+CH1388,React,1,0,0.1429,Bottom-5,28,1
+CH1389,React,5,11,0.9143,Top-5,16,4
+CH1390,React,5,8,0.8343,Top-5,1,5
+CH1391,React,1,0,0.1429,Bottom-5,38,1
+CH1392,React,1,0,0.1229,Bottom-5,9,1
+CH1393,React,1,0,0.1229,Bottom-5,5,1
+CH1394,React,1,0,0.1429,Bottom-5,32,1
+CH1395,React,2,2,0.2657,Bottom-5,20,2
+CH1396,React,1,0,0.1229,Bottom-5,40,1
+CH1397,React,1,0,0.0629,Bottom-5,32,1
+CH1398,React,3,4,0.5886,Mid-5,16,3
+CH1399,React,7,14,1.0,Top-5,4,6
+CH1400,React,3,5,0.4686,Mid-5,41,3
+CH1401,React,4,9,0.7514,Top-5,37,2
+CH1402,React,1,0,0.1429,Bottom-5,18,1
+CH1403,React,4,8,0.6714,Mid-5,11,4
+CH1404,React,1,0,0.0629,Bottom-5,32,1
+CH1405,React,2,2,0.2257,Bottom-5,7,2
+CH1406,React,2,2,0.2657,Bottom-5,13,2
+CH1407,React,2,2,0.2657,Bottom-5,6,1
+CH1408,React,3,4,0.4086,Mid-5,16,3
+CH1409,Kubernetes,1,0,0.1229,Bottom-5,43,1
+CH1410,Kubernetes,3,4,0.4886,Mid-5,26,3
+CH1411,Kubernetes,2,2,0.3257,Bottom-5,22,1
+CH1412,Kubernetes,2,2,0.2457,Bottom-5,23,2
+CH1413,Kubernetes,7,16,1.0,Top-5,26,4
+CH1414,Kubernetes,3,6,0.5486,Mid-5,18,3
+CH1415,Kubernetes,1,0,0.1229,Bottom-5,5,1
+CH1416,Kubernetes,1,0,0.1029,Bottom-5,20,1
+CH1417,Kubernetes,2,2,0.3457,Bottom-5,35,2
+CH1418,Kubernetes,3,3,0.5286,Mid-5,10,3
+CH1419,Kubernetes,5,10,0.8943,Top-5,39,4
+CH1420,Kubernetes,1,0,0.1229,Bottom-5,17,1
+CH1421,Kubernetes,3,3,0.4486,Mid-5,33,3
+CH1422,Kubernetes,1,0,0.1429,Bottom-5,33,1
+CH1423,Kubernetes,2,2,0.3057,Bottom-5,16,2
+CH1424,Kubernetes,1,0,0.0829,Bottom-5,9,1
+CH1425,Kubernetes,3,5,0.4486,Mid-5,22,2
+CH1426,Kubernetes,3,5,0.5486,Mid-5,1,2
+CH1427,Kubernetes,1,0,0.1229,Bottom-5,2,1
+CH1428,Kubernetes,1,0,0.1429,Bottom-5,3,1
+CH1429,Kubernetes,2,2,0.3457,Bottom-5,1,2
+CH1430,Kubernetes,1,0,0.0829,Bottom-5,20,1
+CH1431,Kubernetes,5,9,0.8543,Top-5,32,5
+CH1432,Kubernetes,2,2,0.3657,Bottom-5,8,2
+CH1433,Kubernetes,1,0,0.1229,Bottom-5,25,1
+CH1434,Kubernetes,1,0,0.1229,Bottom-5,45,1
+CH1435,Kubernetes,3,5,0.5086,Mid-5,28,3
+CH1436,Kubernetes,5,10,0.9143,Top-5,24,4
+CH1437,Kubernetes,1,0,0.0829,Bottom-5,6,1
+CH1438,Kubernetes,2,2,0.3257,Bottom-5,45,1
+CH1439,Kubernetes,4,5,0.6514,Mid-5,37,3
+CH1440,Kubernetes,4,7,0.6914,Mid-5,35,3
+CH1441,Kubernetes,3,6,0.6086,Mid-5,12,2
+CH1442,Kubernetes,2,2,0.2257,Bottom-5,45,2
+CH1443,Kubernetes,2,2,0.2857,Bottom-5,7,2
+CH1444,Kubernetes,3,4,0.4486,Mid-5,7,3
+CH1445,Kubernetes,1,0,0.1429,Bottom-5,34,1
+CH1446,Kubernetes,2,2,0.2457,Bottom-5,13,1
+CH1447,Kubernetes,1,0,0.1029,Bottom-5,41,1
+CH1448,Kubernetes,2,2,0.2657,Bottom-5,6,2
+CH1449,Kubernetes,4,8,0.7514,Top-5,41,2
+CH1450,Kubernetes,3,4,0.4686,Mid-5,28,3
+CH1451,Kubernetes,1,0,0.0629,Bottom-5,2,1
+CH1452,Kubernetes,2,2,0.2657,Bottom-5,11,2
+CH1453,Kubernetes,2,2,0.3257,Bottom-5,19,2
+CH1454,Kubernetes,3,3,0.4686,Mid-5,30,2
+CH1455,Kubernetes,3,5,0.5486,Mid-5,17,3
+CH1456,Kubernetes,4,7,0.7514,Top-5,15,4
+CH1457,Kubernetes,3,5,0.5886,Mid-5,18,3
+CH1458,Kubernetes,3,4,0.4286,Mid-5,5,2
+CH1459,Kubernetes,1,0,0.1029,Bottom-5,29,1
+CH1460,Kubernetes,4,12,0.8714,Top-5,23,3
+CH1461,Kubernetes,6,16,0.9571,Top-5,25,5
+CH1462,Kubernetes,2,2,0.3057,Bottom-5,29,2
+CH1463,Kubernetes,3,5,0.6086,Mid-5,29,2
+CH1464,Kubernetes,1,0,0.0629,Bottom-5,7,1
+CH1465,Kubernetes,2,2,0.2657,Bottom-5,9,2
+CH1466,Kubernetes,1,0,0.1429,Bottom-5,7,1
+CH1467,Kubernetes,3,5,0.4686,Mid-5,3,2
+CH1468,Kubernetes,3,5,0.4686,Mid-5,22,3
+CH1469,Kubernetes,2,2,0.3457,Bottom-5,7,2
+CH1470,Kubernetes,1,0,0.1429,Bottom-5,36,1
+CH1471,Kubernetes,1,0,0.0829,Bottom-5,9,1
+CH1472,Kubernetes,2,2,0.2857,Bottom-5,7,2
+CH1473,Kubernetes,7,12,1.0,Top-5,2,4
+CH1474,Kubernetes,2,2,0.3457,Bottom-5,19,2
+CH1475,Kubernetes,1,0,0.1229,Bottom-5,45,1
+CH1476,Kubernetes,3,5,0.4886,Mid-5,37,3
+CH1477,Kubernetes,1,0,0.1229,Bottom-5,32,1
+CH1478,Kubernetes,4,10,0.7114,Top-5,20,3
+CH1479,Kubernetes,1,0,0.1429,Bottom-5,11,1
+CH1480,Kubernetes,3,4,0.4486,Mid-5,19,3
+CH1481,Kubernetes,2,2,0.2057,Bottom-5,29,2
+CH1482,Kubernetes,3,4,0.4686,Mid-5,40,3
+CH1483,Kubernetes,3,4,0.5086,Mid-5,23,3
+CH1484,Kubernetes,4,10,0.8514,Top-5,29,4
+CH1485,Kubernetes,1,0,0.1229,Bottom-5,42,1
+CH1486,Kubernetes,5,8,0.8343,Top-5,40,3
+CH1487,Kubernetes,3,4,0.4086,Mid-5,4,3
+CH1488,Kubernetes,2,2,0.2457,Bottom-5,9,2
+CH1489,Kubernetes,3,6,0.5486,Mid-5,45,3
+CH1490,Kubernetes,6,10,0.8971,Top-5,2,5
+CH1491,Kubernetes,3,5,0.5086,Mid-5,26,2
+CH1492,Kubernetes,4,8,0.6714,Mid-5,6,4
+CH1493,Kubernetes,1,0,0.0829,Bottom-5,28,1
+CH1494,Kubernetes,1,0,0.1229,Bottom-5,28,1
+CH1495,Kubernetes,2,2,0.2857,Bottom-5,26,1
+CH1496,Kubernetes,1,0,0.0829,Bottom-5,38,1
+CH1497,Kubernetes,2,2,0.2857,Bottom-5,15,2
+CH1498,Kubernetes,2,2,0.2857,Bottom-5,7,1
+CH1499,Kubernetes,3,5,0.5086,Mid-5,28,2
+CH1500,Kubernetes,2,2,0.3457,Bottom-5,29,2
+CH1501,Kubernetes,2,2,0.2057,Bottom-5,20,2
+CH1502,Kubernetes,4,10,0.8514,Top-5,4,4
+CH1503,Kubernetes,3,4,0.4086,Mid-5,17,3
+CH1504,Kubernetes,2,2,0.2857,Bottom-5,39,2
+CH1505,Kubernetes,5,14,0.9143,Top-5,6,5
+CH1506,Kubernetes,1,0,0.0629,Bottom-5,41,1
+CH1507,Kubernetes,2,2,0.2657,Bottom-5,39,2
+CH1508,Kubernetes,1,0,0.0829,Bottom-5,22,1
+CH1509,Kubernetes,2,2,0.3057,Bottom-5,22,2
+CH1510,Kubernetes,2,2,0.2057,Bottom-5,39,2
+CH1511,Kubernetes,5,11,0.9143,Top-5,41,5
+CH1512,Kubernetes,3,4,0.4286,Mid-5,9,3
+CH1513,Kubernetes,1,0,0.0629,Bottom-5,25,1
+CH1514,Kubernetes,2,2,0.3257,Bottom-5,14,2
+CH1515,Kubernetes,2,2,0.2657,Bottom-5,28,2
+CH1516,Kubernetes,2,2,0.2857,Bottom-5,38,2
+CH1517,Kubernetes,1,0,0.0629,Bottom-5,4,1
+CH1518,Kubernetes,1,0,0.0629,Bottom-5,7,1
+CH1519,Kubernetes,3,4,0.3686,Bottom-5,21,3
+CH1520,Kubernetes,4,10,0.8514,Top-5,28,3
+CH1521,Kubernetes,2,2,0.3057,Bottom-5,8,2
+CH1522,Kubernetes,1,0,0.0829,Bottom-5,3,1
+CH1523,Kubernetes,4,8,0.7914,Top-5,42,3
+CH1524,Kubernetes,2,2,0.2857,Bottom-5,4,1
+CH1525,Kubernetes,2,2,0.3657,Bottom-5,5,1
+CH1526,Kubernetes,2,2,0.2657,Bottom-5,22,2
+CH1527,Kubernetes,7,12,1.0,Top-5,17,6
+CH1528,Kubernetes,1,0,0.1229,Bottom-5,31,1
+CH1529,Kubernetes,1,0,0.0829,Bottom-5,29,1
+CH1530,Kubernetes,4,9,0.7514,Top-5,31,3
+CH1531,Kubernetes,1,0,0.0829,Bottom-5,33,1
+CH1532,Kubernetes,1,0,0.1429,Bottom-5,21,1
+CH1533,Kubernetes,1,0,0.1029,Bottom-5,10,1
+CH1534,Kubernetes,3,4,0.4686,Mid-5,13,2
+CH1535,Kubernetes,3,6,0.5486,Mid-5,36,3
+CH1536,Kubernetes,2,2,0.2657,Bottom-5,45,2
+CH1537,Kubernetes,3,5,0.4886,Mid-5,17,3
+CH1538,Kubernetes,3,5,0.4486,Mid-5,43,3
+CH1539,Kubernetes,1,0,0.0829,Bottom-5,13,1
+CH1540,Kubernetes,2,2,0.2057,Bottom-5,25,2
+CH1541,Kubernetes,3,6,0.5686,Mid-5,35,2
+CH1542,Kubernetes,1,0,0.1429,Bottom-5,33,1
+CH1543,Kubernetes,2,2,0.2657,Bottom-5,38,2
+CH1544,Kubernetes,1,0,0.0829,Bottom-5,33,1
+CH1545,Kubernetes,3,6,0.4886,Mid-5,42,3
+CH1546,Kubernetes,2,2,0.3057,Bottom-5,43,2
+CH1547,Kubernetes,1,0,0.1429,Bottom-5,25,1
+CH1548,Kubernetes,3,5,0.4686,Mid-5,10,3
+CH1549,Kubernetes,3,4,0.5086,Mid-5,1,3
+CH1550,Kubernetes,1,0,0.0629,Bottom-5,43,1
+CH1551,Kubernetes,3,5,0.5486,Mid-5,10,3
+CH1552,Kubernetes,3,3,0.4286,Mid-5,13,3
+CH1553,Kubernetes,3,5,0.5686,Mid-5,33,3
+CH1554,Kubernetes,3,4,0.5286,Mid-5,40,3
+CH1555,Kubernetes,2,2,0.3457,Bottom-5,38,2
+CH1556,Kubernetes,5,10,0.9143,Top-5,40,5
+CH1557,Kubernetes,2,2,0.2057,Bottom-5,1,2
+CH1558,Kubernetes,3,5,0.5486,Mid-5,19,3
+CH1559,Kubernetes,3,6,0.5286,Mid-5,8,3
+CH1560,Kubernetes,1,0,0.1429,Bottom-5,24,1
+CH1561,Kubernetes,7,18,1.0,Top-5,5,5
+CH1562,Kubernetes,7,17,1.0,Top-5,38,6
+CH1563,Kubernetes,3,5,0.4486,Mid-5,17,3
+CH1564,Kubernetes,1,0,0.0829,Bottom-5,23,1
+CH1565,Kubernetes,1,0,0.0829,Bottom-5,38,1
+CH1566,Kubernetes,1,0,0.1229,Bottom-5,25,1
+CH1567,Kubernetes,5,9,0.8143,Top-5,31,4
+CH1568,Kubernetes,1,0,0.1229,Bottom-5,17,1
+CH1569,Kubernetes,5,10,0.8343,Top-5,28,4
+CH1570,Kubernetes,3,4,0.4886,Mid-5,23,3
+CH1571,Kubernetes,1,0,0.1429,Bottom-5,1,1
+CH1572,Kubernetes,3,5,0.4686,Mid-5,39,3
+CH1573,Kubernetes,5,9,0.8743,Top-5,13,5
+CH1574,Kubernetes,3,5,0.5486,Mid-5,39,3
+CH1575,Kubernetes,1,0,0.0829,Bottom-5,26,1
+CH1576,Kubernetes,3,5,0.4686,Mid-5,31,3
+CH1577,Kubernetes,2,2,0.3257,Bottom-5,5,2
+CH1578,Kubernetes,1,0,0.1229,Bottom-5,35,1
+CH1579,Kubernetes,4,9,0.8314,Top-5,37,4
+CH1580,Kubernetes,5,11,0.8943,Top-5,5,5
+CH1581,Kubernetes,1,0,0.0629,Bottom-5,41,1
+CH1582,Kubernetes,3,5,0.5286,Mid-5,22,3
+CH1583,Kubernetes,3,4,0.4286,Mid-5,24,2
+CH1584,Kubernetes,2,2,0.2857,Bottom-5,37,2
+CH1585,Kubernetes,1,0,0.0629,Bottom-5,28,1
+CH1586,Kubernetes,1,0,0.1029,Bottom-5,5,1
+CH1587,Kubernetes,4,7,0.7514,Top-5,24,4
+CH1588,Kubernetes,6,16,0.9371,Top-5,3,4
+CH1589,Kubernetes,3,3,0.4486,Mid-5,34,3
+CH1590,Kubernetes,2,2,0.2457,Bottom-5,33,2
+CH1591,Kubernetes,3,3,0.4886,Mid-5,35,3
+CH1592,Kubernetes,2,2,0.3657,Bottom-5,2,2
+CH1593,Kubernetes,1,0,0.1029,Bottom-5,16,1
+CH1594,Kubernetes,2,2,0.2257,Bottom-5,15,2
+CH1595,Kubernetes,2,2,0.2657,Bottom-5,11,2
+CH1596,Kubernetes,2,2,0.3457,Bottom-5,20,2
+CH1597,Kubernetes,2,2,0.3457,Bottom-5,3,2
+CH1598,Kubernetes,1,0,0.1229,Bottom-5,33,1
+CH1599,Kubernetes,2,2,0.2857,Bottom-5,15,2
+CH1600,Kubernetes,1,0,0.0829,Bottom-5,42,1
+CH1601,Kubernetes,3,4,0.3886,Bottom-5,27,2
+CH1602,Kubernetes,1,0,0.0829,Bottom-5,43,1
+CH1603,Kubernetes,1,0,0.1029,Bottom-5,26,1
+CH1604,Kubernetes,6,10,0.9571,Top-5,40,6
+CH1605,Kubernetes,4,6,0.7114,Top-5,28,2
+CH1606,Kubernetes,2,2,0.2857,Bottom-5,22,2
+CH1607,Kubernetes,1,0,0.1429,Bottom-5,37,1
+CH1608,Kubernetes,3,5,0.5486,Mid-5,28,3
+CH1609,Kubernetes,3,5,0.5086,Mid-5,10,2
+CH1610,Kubernetes,5,12,0.8943,Top-5,23,4
+CH1611,Kubernetes,4,6,0.5914,Mid-5,29,4
+CH1612,Kubernetes,3,5,0.4686,Mid-5,7,3
+CH1613,Kubernetes,2,2,0.2457,Bottom-5,38,2
+CH1614,Kubernetes,4,7,0.6514,Mid-5,43,4
+CH1615,Kubernetes,1,0,0.1229,Bottom-5,22,1
+CH1616,Kubernetes,1,0,0.0829,Bottom-5,33,1
+CH1617,Kubernetes,3,4,0.4486,Mid-5,3,3
+CH1618,Kubernetes,4,9,0.8114,Top-5,12,4
+CH1619,Kubernetes,3,4,0.4486,Mid-5,38,3
+CH1620,Kubernetes,1,0,0.0629,Bottom-5,43,1
+CH1621,Kubernetes,3,5,0.5686,Mid-5,6,3
+CH1622,Kubernetes,1,0,0.0829,Bottom-5,41,1
+CH1623,Kubernetes,4,9,0.7714,Top-5,12,4
+CH1624,Kubernetes,1,0,0.1229,Bottom-5,45,1
+CH1625,Kubernetes,7,17,1.0,Top-5,20,5
+CH1626,Kubernetes,3,5,0.5486,Mid-5,21,2
+CH1627,Kubernetes,2,2,0.2857,Bottom-5,31,2
+CH1628,Kubernetes,5,9,0.8543,Top-5,19,4
+CH1629,Kubernetes,1,0,0.1029,Bottom-5,43,1
+CH1630,Kubernetes,5,9,0.8143,Top-5,4,5
+CH1631,Kubernetes,4,8,0.6914,Mid-5,36,4
+CH1632,Kubernetes,1,0,0.1429,Bottom-5,9,1
+CH1633,Kubernetes,1,0,0.0629,Bottom-5,32,1
+CH1634,Kubernetes,1,0,0.0629,Bottom-5,34,1
+CH1635,Kubernetes,5,10,0.9143,Top-5,34,5
+CH1636,Kubernetes,4,7,0.6314,Mid-5,6,3
+CH1637,Kubernetes,4,8,0.7314,Top-5,22,4
+CH1638,Kubernetes,2,2,0.2257,Bottom-5,3,2
+CH1639,PostgreSQL,3,5,0.4886,Mid-5,17,3
+CH1640,PostgreSQL,2,2,0.2657,Bottom-5,29,2
+CH1641,PostgreSQL,3,3,0.4486,Mid-5,19,3
+CH1642,PostgreSQL,1,0,0.1429,Bottom-5,7,1
+CH1643,PostgreSQL,6,12,0.9571,Top-5,29,6
+CH1644,PostgreSQL,1,0,0.1429,Bottom-5,19,1
+CH1645,PostgreSQL,4,8,0.7914,Top-5,12,4
+CH1646,PostgreSQL,5,10,0.9143,Top-5,27,4
+CH1647,PostgreSQL,3,3,0.3886,Bottom-5,44,3
+CH1648,PostgreSQL,1,0,0.1429,Bottom-5,23,1
+CH1649,PostgreSQL,4,11,0.7914,Top-5,34,3
+CH1650,PostgreSQL,4,9,0.8114,Top-5,29,3
+CH1651,PostgreSQL,1,0,0.0629,Bottom-5,38,1
+CH1652,PostgreSQL,1,0,0.0829,Bottom-5,33,1
+CH1653,PostgreSQL,1,0,0.1429,Bottom-5,24,1
+CH1654,PostgreSQL,3,6,0.5486,Mid-5,24,3
+CH1655,PostgreSQL,1,0,0.1229,Bottom-5,21,1
+CH1656,PostgreSQL,3,6,0.5086,Mid-5,3,3
+CH1657,PostgreSQL,5,8,0.8343,Top-5,44,4
+CH1658,PostgreSQL,3,5,0.4886,Mid-5,42,3
+CH1659,PostgreSQL,2,2,0.2257,Bottom-5,31,2
+CH1660,PostgreSQL,1,0,0.1429,Bottom-5,18,1
+CH1661,PostgreSQL,1,0,0.0629,Bottom-5,25,1
+CH1662,PostgreSQL,1,0,0.0629,Bottom-5,8,1
+CH1663,PostgreSQL,1,0,0.1229,Bottom-5,29,1
+CH1664,PostgreSQL,1,0,0.0829,Bottom-5,33,1
+CH1665,PostgreSQL,5,10,0.8743,Top-5,23,4
+CH1666,PostgreSQL,3,4,0.4286,Mid-5,32,2
+CH1667,PostgreSQL,5,10,0.9143,Top-5,29,4
+CH1668,PostgreSQL,1,0,0.1029,Bottom-5,12,1
+CH1669,PostgreSQL,3,5,0.5286,Mid-5,25,3
+CH1670,PostgreSQL,7,13,1.0,Top-5,38,5
+CH1671,PostgreSQL,2,2,0.3057,Bottom-5,24,2
+CH1672,PostgreSQL,2,2,0.2657,Bottom-5,42,2
+CH1673,PostgreSQL,1,0,0.0829,Bottom-5,4,1
+CH1674,PostgreSQL,4,6,0.6714,Mid-5,2,2
+CH1675,PostgreSQL,3,4,0.5286,Mid-5,17,3
+CH1676,PostgreSQL,1,0,0.1229,Bottom-5,20,1
+CH1677,PostgreSQL,1,0,0.1229,Bottom-5,31,1
+CH1678,PostgreSQL,7,16,1.0,Top-5,7,5
+CH1679,PostgreSQL,3,4,0.4886,Mid-5,42,3
+CH1680,PostgreSQL,3,5,0.5086,Mid-5,13,3
+CH1681,PostgreSQL,1,0,0.0629,Bottom-5,41,1
+CH1682,PostgreSQL,2,2,0.3457,Bottom-5,35,1
+CH1683,PostgreSQL,2,2,0.3057,Bottom-5,9,2
+CH1684,PostgreSQL,3,5,0.4086,Mid-5,19,2
+CH1685,PostgreSQL,3,4,0.5486,Mid-5,40,3
+CH1686,PostgreSQL,2,2,0.2457,Bottom-5,12,2
+CH1687,PostgreSQL,3,5,0.5086,Mid-5,25,2
+CH1688,PostgreSQL,3,6,0.5686,Mid-5,20,2
+CH1689,PostgreSQL,1,0,0.1429,Bottom-5,24,1
+CH1690,PostgreSQL,6,14,0.9571,Top-5,3,5
+CH1691,PostgreSQL,1,0,0.1229,Bottom-5,17,1
+CH1692,PostgreSQL,2,2,0.2657,Bottom-5,40,2
+CH1693,PostgreSQL,2,2,0.2857,Bottom-5,25,2
+CH1694,PostgreSQL,1,0,0.0629,Bottom-5,41,1
+CH1695,PostgreSQL,2,2,0.3257,Bottom-5,25,2
+CH1696,PostgreSQL,2,2,0.2057,Bottom-5,27,2
+CH1697,PostgreSQL,4,8,0.6314,Mid-5,39,4
+CH1698,PostgreSQL,3,4,0.4886,Mid-5,30,2
+CH1699,PostgreSQL,3,4,0.5086,Mid-5,15,3
+CH1700,PostgreSQL,1,0,0.0629,Bottom-5,23,1
+CH1701,PostgreSQL,1,0,0.1429,Bottom-5,7,1
+CH1702,PostgreSQL,1,0,0.1229,Bottom-5,26,1
+CH1703,PostgreSQL,1,0,0.0629,Bottom-5,29,1
+CH1704,PostgreSQL,1,0,0.1429,Bottom-5,14,1
+CH1705,PostgreSQL,1,0,0.0829,Bottom-5,41,1
+CH1706,PostgreSQL,1,0,0.1429,Bottom-5,36,1
+CH1707,PostgreSQL,3,4,0.5086,Mid-5,5,2
+CH1708,PostgreSQL,1,0,0.1029,Bottom-5,12,1
+CH1709,PostgreSQL,1,0,0.1029,Bottom-5,44,1
+CH1710,PostgreSQL,1,0,0.1029,Bottom-5,23,1
+CH1711,PostgreSQL,5,12,0.8343,Top-5,24,3
+CH1712,PostgreSQL,4,8,0.7314,Top-5,37,4
+CH1713,PostgreSQL,2,2,0.3657,Bottom-5,2,2
+CH1714,PostgreSQL,2,2,0.2857,Bottom-5,13,2
+CH1715,PostgreSQL,1,0,0.0629,Bottom-5,18,1
+CH1716,PostgreSQL,3,4,0.4686,Mid-5,9,3
+CH1717,PostgreSQL,3,4,0.4886,Mid-5,1,3
+CH1718,PostgreSQL,6,14,0.9571,Top-5,15,4
+CH1719,PostgreSQL,1,0,0.1029,Bottom-5,13,1
+CH1720,PostgreSQL,6,15,0.9571,Top-5,34,3
+CH1721,PostgreSQL,1,0,0.1029,Bottom-5,3,1
+CH1722,PostgreSQL,5,9,0.8743,Top-5,21,3
+CH1723,PostgreSQL,2,2,0.2457,Bottom-5,17,2
+CH1724,PostgreSQL,1,0,0.0629,Bottom-5,5,1
+CH1725,PostgreSQL,2,2,0.2657,Bottom-5,42,2
+CH1726,PostgreSQL,1,0,0.1229,Bottom-5,29,1
+CH1727,PostgreSQL,3,6,0.5486,Mid-5,19,2
+CH1728,PostgreSQL,2,2,0.3057,Bottom-5,7,2
+CH1729,PostgreSQL,2,2,0.2857,Bottom-5,29,2
+CH1730,PostgreSQL,1,0,0.1029,Bottom-5,9,1
+CH1731,PostgreSQL,4,9,0.7514,Top-5,16,4
+CH1732,PostgreSQL,2,2,0.3057,Bottom-5,15,2
+CH1733,PostgreSQL,1,0,0.1429,Bottom-5,18,1
+CH1734,PostgreSQL,2,2,0.3057,Bottom-5,12,1
+CH1735,PostgreSQL,7,12,1.0,Top-5,20,3
+CH1736,PostgreSQL,3,4,0.5286,Mid-5,33,3
+CH1737,PostgreSQL,5,11,0.8143,Top-5,30,4
+CH1738,PostgreSQL,4,6,0.6114,Mid-5,18,4
+CH1739,PostgreSQL,1,0,0.1229,Bottom-5,24,1
+CH1740,PostgreSQL,2,2,0.3457,Bottom-5,44,2
+CH1741,PostgreSQL,2,2,0.3257,Bottom-5,1,2
+CH1742,PostgreSQL,2,2,0.2857,Bottom-5,25,2
+CH1743,PostgreSQL,1,0,0.0629,Bottom-5,2,1
+CH1744,PostgreSQL,3,5,0.6086,Mid-5,25,2
+CH1745,PostgreSQL,2,2,0.2857,Bottom-5,29,2
+CH1746,PostgreSQL,3,4,0.3886,Bottom-5,2,3
+CH1747,PostgreSQL,2,2,0.3257,Bottom-5,30,2
+CH1748,PostgreSQL,4,11,0.8514,Top-5,14,4
+CH1749,PostgreSQL,5,12,0.9143,Top-5,14,4
+CH1750,PostgreSQL,1,0,0.0829,Bottom-5,20,1
+CH1751,PostgreSQL,3,5,0.4686,Mid-5,13,3
+CH1752,PostgreSQL,2,2,0.3057,Bottom-5,32,2
+CH1753,PostgreSQL,5,9,0.8743,Top-5,5,5
+CH1754,PostgreSQL,5,10,0.8343,Top-5,24,4
+CH1755,PostgreSQL,3,3,0.4886,Mid-5,6,2
+CH1756,PostgreSQL,5,12,0.9143,Top-5,8,4
+CH1757,PostgreSQL,6,11,0.9571,Top-5,36,4
+CH1758,PostgreSQL,2,2,0.2457,Bottom-5,22,1
+CH1759,PostgreSQL,1,0,0.1029,Bottom-5,2,1
+CH1760,PostgreSQL,2,2,0.3657,Bottom-5,16,2
+CH1761,PostgreSQL,2,2,0.3057,Bottom-5,21,2
+CH1762,PostgreSQL,2,2,0.3457,Bottom-5,45,2
+CH1763,PostgreSQL,3,5,0.5286,Mid-5,19,2
+CH1764,PostgreSQL,2,2,0.2857,Bottom-5,8,2
+CH1765,PostgreSQL,2,2,0.3457,Bottom-5,25,2
+CH1766,PostgreSQL,5,11,0.8743,Top-5,26,5
+CH1767,PostgreSQL,4,8,0.7914,Top-5,31,3
+CH1768,PostgreSQL,2,2,0.3257,Bottom-5,3,2
+CH1769,PostgreSQL,2,2,0.2657,Bottom-5,43,2
+CH1770,PostgreSQL,5,6,0.7543,Top-5,26,3
+CH1771,PostgreSQL,3,3,0.4486,Mid-5,22,3
+CH1772,PostgreSQL,2,2,0.2657,Bottom-5,39,2
+CH1773,PostgreSQL,1,0,0.1229,Bottom-5,31,1
+CH1774,PostgreSQL,1,0,0.1229,Bottom-5,45,1
+CH1775,PostgreSQL,1,0,0.0829,Bottom-5,5,1
+CH1776,PostgreSQL,5,11,0.8943,Top-5,7,4
+CH1777,PostgreSQL,2,2,0.3257,Bottom-5,45,2
+CH1778,PostgreSQL,2,2,0.2857,Bottom-5,11,2
+CH1779,PostgreSQL,4,8,0.6914,Mid-5,27,3
+CH1780,PostgreSQL,1,0,0.0829,Bottom-5,40,1
+CH1781,PostgreSQL,1,0,0.1229,Bottom-5,12,1
+CH1782,PostgreSQL,4,8,0.7314,Top-5,10,3
+CH1783,PostgreSQL,3,3,0.4686,Mid-5,39,2
+CH1784,PostgreSQL,5,11,0.9143,Top-5,31,4
+CH1785,PostgreSQL,3,4,0.5286,Mid-5,13,2
+CH1786,PostgreSQL,3,3,0.4686,Mid-5,40,3
+CH1787,PostgreSQL,4,8,0.7514,Top-5,14,4
+CH1788,PostgreSQL,2,2,0.3457,Bottom-5,21,2
+CH1789,PostgreSQL,4,9,0.8314,Top-5,42,3
+CH1790,PostgreSQL,2,2,0.3657,Bottom-5,7,2
+CH1791,PostgreSQL,5,8,0.7143,Top-5,30,4
+CH1792,PostgreSQL,4,8,0.7114,Top-5,3,3
+CH1793,PostgreSQL,5,6,0.7543,Top-5,8,4
+CH1794,PostgreSQL,3,6,0.4486,Mid-5,31,3
+CH1795,PostgreSQL,2,2,0.2857,Bottom-5,21,1
+CH1796,PostgreSQL,2,2,0.3457,Bottom-5,21,2
+CH1797,PostgreSQL,2,2,0.2657,Bottom-5,23,2
+CH1798,PostgreSQL,1,0,0.1429,Bottom-5,13,1
+CH1799,PostgreSQL,4,7,0.7114,Top-5,32,3
+CH1800,PostgreSQL,3,3,0.4486,Mid-5,14,3
+CH1801,PostgreSQL,4,7,0.6714,Mid-5,40,3
+CH1802,PostgreSQL,4,8,0.7514,Top-5,9,3
+CH1803,PostgreSQL,1,0,0.1029,Bottom-5,39,1
+CH1804,PostgreSQL,7,13,1.0,Top-5,13,3
+CH1805,PostgreSQL,2,2,0.2457,Bottom-5,20,2
+CH1806,PostgreSQL,1,0,0.1229,Bottom-5,10,1
+CH1807,PostgreSQL,1,0,0.1229,Bottom-5,31,1
+CH1808,PostgreSQL,4,11,0.7714,Top-5,22,4
+CH1809,PostgreSQL,1,0,0.0829,Bottom-5,14,1
+CH1810,PostgreSQL,5,11,0.9143,Top-5,36,3
+CH1811,PostgreSQL,2,2,0.2257,Bottom-5,39,2
+CH1812,PostgreSQL,1,0,0.1029,Bottom-5,3,1
+CH1813,PostgreSQL,2,2,0.2257,Bottom-5,45,2
+CH1814,PostgreSQL,3,4,0.3886,Bottom-5,7,3
+CH1815,PostgreSQL,4,8,0.7914,Top-5,8,3
+CH1816,PostgreSQL,1,0,0.0829,Bottom-5,26,1
+CH1817,PostgreSQL,1,0,0.1029,Bottom-5,43,1
+CH1818,PostgreSQL,2,2,0.3057,Bottom-5,31,2
+CH1819,PostgreSQL,2,2,0.2257,Bottom-5,11,2
+CH1820,PostgreSQL,1,0,0.1429,Bottom-5,7,1
+CH1821,PostgreSQL,1,0,0.1029,Bottom-5,42,1
+CH1822,Apache Commons,1,0,0.0629,Bottom-5,26,1
+CH1823,Apache Commons,4,8,0.6514,Mid-5,31,3
+CH1824,Apache Commons,1,0,0.1029,Bottom-5,43,1
+CH1825,Apache Commons,6,14,0.9571,Top-5,19,4
+CH1826,Apache Commons,1,0,0.0829,Bottom-5,25,1
+CH1827,Apache Commons,5,9,0.8743,Top-5,27,4
+CH1828,Apache Commons,2,2,0.2457,Bottom-5,43,2
+CH1829,Apache Commons,1,0,0.0829,Bottom-5,3,1
+CH1830,Apache Commons,7,13,1.0,Top-5,6,4
+CH1831,Apache Commons,1,0,0.0829,Bottom-5,18,1
+CH1832,Apache Commons,4,7,0.6514,Mid-5,32,3
+CH1833,Apache Commons,1,0,0.0629,Bottom-5,40,1
+CH1834,Apache Commons,4,9,0.8314,Top-5,9,2
+CH1835,Apache Commons,2,2,0.3257,Bottom-5,5,2
+CH1836,Apache Commons,4,9,0.7114,Top-5,10,3
+CH1837,Apache Commons,2,2,0.3257,Bottom-5,44,2
+CH1838,Apache Commons,1,0,0.1229,Bottom-5,6,1
+CH1839,Apache Commons,1,0,0.1429,Bottom-5,15,1
+CH1840,Apache Commons,1,0,0.0629,Bottom-5,10,1
+CH1841,Apache Commons,4,8,0.6914,Mid-5,44,3
+CH1842,Apache Commons,4,7,0.7514,Top-5,41,2
+CH1843,Apache Commons,2,2,0.2857,Bottom-5,18,2
+CH1844,Apache Commons,2,2,0.2857,Bottom-5,1,2
+CH1845,Apache Commons,5,8,0.7943,Top-5,13,4
+CH1846,Apache Commons,2,2,0.3057,Bottom-5,38,1
+CH1847,Apache Commons,1,0,0.1429,Bottom-5,29,1
+CH1848,Apache Commons,1,0,0.1229,Bottom-5,4,1
+CH1849,Apache Commons,1,0,0.0629,Bottom-5,37,1
+CH1850,Apache Commons,3,6,0.4686,Mid-5,11,3
+CH1851,Apache Commons,1,0,0.1029,Bottom-5,8,1
+CH1852,Apache Commons,1,0,0.0629,Bottom-5,10,1
+CH1853,Apache Commons,2,2,0.2657,Bottom-5,19,2
+CH1854,Apache Commons,4,7,0.6514,Mid-5,1,3
+CH1855,Apache Commons,1,0,0.1429,Bottom-5,10,1
+CH1856,Apache Commons,1,0,0.1029,Bottom-5,5,1
+CH1857,Apache Commons,3,4,0.5286,Mid-5,2,3
+CH1858,Apache Commons,2,2,0.3457,Bottom-5,3,2
+CH1859,Apache Commons,2,2,0.2857,Bottom-5,6,2
+CH1860,Apache Commons,3,5,0.5686,Mid-5,33,3
+CH1861,Apache Commons,2,2,0.2857,Bottom-5,15,2
+CH1862,Apache Commons,3,3,0.3886,Bottom-5,44,3
+CH1863,Apache Commons,2,2,0.3057,Bottom-5,12,2
+CH1864,Apache Commons,5,10,0.9143,Top-5,36,2
+CH1865,Apache Commons,5,8,0.6943,Mid-5,8,3
+CH1866,Apache Commons,1,0,0.1429,Bottom-5,29,1
+CH1867,Apache Commons,3,4,0.4686,Mid-5,10,3
+CH1868,Apache Commons,1,0,0.0829,Bottom-5,38,1
+CH1869,Apache Commons,2,2,0.2457,Bottom-5,13,2
+CH1870,Apache Commons,7,9,0.96,Top-5,24,3
+CH1871,Apache Commons,4,7,0.5914,Mid-5,8,3
+CH1872,Apache Commons,1,0,0.1229,Bottom-5,35,1
+CH1873,Apache Commons,2,2,0.2457,Bottom-5,27,2
+CH1874,Apache Commons,2,2,0.3457,Bottom-5,22,2
+CH1875,Apache Commons,1,0,0.1429,Bottom-5,31,1
+CH1876,Apache Commons,2,2,0.2657,Bottom-5,3,2
+CH1877,Apache Commons,1,0,0.0629,Bottom-5,2,1
+CH1878,Apache Commons,2,2,0.3457,Bottom-5,34,1
+CH1879,Apache Commons,1,0,0.0829,Bottom-5,12,1
+CH1880,Apache Commons,1,0,0.0629,Bottom-5,31,1
+CH1881,Apache Commons,3,4,0.4086,Mid-5,16,3
+CH1882,Apache Commons,1,0,0.0829,Bottom-5,26,1
+CH1883,Apache Commons,1,0,0.0829,Bottom-5,5,1
+CH1884,Apache Commons,1,0,0.0829,Bottom-5,14,1
+CH1885,Apache Commons,5,9,0.8743,Top-5,3,4
+CH1886,Apache Commons,1,0,0.0829,Bottom-5,6,1
+CH1887,Apache Commons,2,2,0.2657,Bottom-5,15,2
+CH1888,Apache Commons,3,3,0.5086,Mid-5,21,2
+CH1889,Apache Commons,3,4,0.5086,Mid-5,40,2
+CH1890,Apache Commons,6,11,0.9571,Top-5,40,3
+CH1891,Apache Commons,4,10,0.8714,Top-5,8,3
+CH1892,Apache Commons,1,0,0.0829,Bottom-5,40,1
+CH1893,Apache Commons,1,0,0.0629,Bottom-5,26,1
+CH1894,Apache Commons,5,12,0.9143,Top-5,7,4
+CH1895,Apache Commons,4,9,0.7514,Top-5,31,3
+CH1896,Apache Commons,2,2,0.2457,Bottom-5,15,2
+CH1897,Apache Commons,2,2,0.2457,Bottom-5,13,2
+CH1898,Apache Commons,5,10,0.8743,Top-5,16,2
+CH1899,Apache Commons,4,9,0.7514,Top-5,2,4
+CH1900,Apache Commons,3,5,0.5486,Mid-5,17,3
+CH1901,Apache Commons,5,8,0.7943,Top-5,19,4
+CH1902,Apache Commons,3,4,0.4486,Mid-5,26,3
+CH1903,Apache Commons,1,0,0.1029,Bottom-5,11,1
+CH1904,Apache Commons,1,0,0.1229,Bottom-5,17,1
+CH1905,Apache Commons,3,4,0.5086,Mid-5,24,3
+CH1906,Apache Commons,1,0,0.0829,Bottom-5,16,1
+CH1907,Apache Commons,2,2,0.2457,Bottom-5,19,1
+CH1908,Apache Commons,1,0,0.1229,Bottom-5,34,1
+CH1909,Apache Commons,2,2,0.3457,Bottom-5,16,1
+CH1910,Apache Commons,2,2,0.2457,Bottom-5,25,2
+CH1911,Apache Commons,5,7,0.7943,Top-5,20,4
+CH1912,Apache Commons,2,2,0.3257,Bottom-5,36,2
+CH1913,Apache Commons,7,13,1.0,Top-5,10,4
+CH1914,Apache Commons,2,2,0.3457,Bottom-5,20,2
+CH1915,Apache Commons,4,5,0.5314,Mid-5,15,3
+CH1916,Apache Commons,3,4,0.4686,Mid-5,9,2
+CH1917,Apache Commons,2,2,0.3257,Bottom-5,18,2
+CH1918,Apache Commons,5,10,0.9143,Top-5,32,3
+CH1919,Apache Commons,6,12,0.8971,Top-5,45,2
+CH1920,Apache Commons,1,0,0.0829,Bottom-5,18,1
+CH1921,Apache Commons,4,10,0.8314,Top-5,26,2
+CH1922,Apache Commons,2,2,0.3257,Bottom-5,29,2
+CH1923,Apache Commons,1,0,0.1229,Bottom-5,37,1
+CH1924,Apache Commons,6,17,0.9571,Top-5,11,2
+CH1925,Apache Commons,3,4,0.4286,Mid-5,45,2
+CH1926,Apache Commons,3,5,0.4486,Mid-5,38,2
+CH1927,Apache Commons,2,2,0.2657,Bottom-5,7,2
+CH1928,Apache Commons,1,0,0.0629,Bottom-5,37,1
+CH1929,Apache Commons,2,2,0.3057,Bottom-5,30,2
+CH1930,Apache Commons,1,0,0.0829,Bottom-5,6,1
+CH1931,Apache Commons,1,0,0.1429,Bottom-5,3,1

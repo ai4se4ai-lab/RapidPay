@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P30,MSc,4,CH1792,PostgreSQL,4,0.7114,Top-5,4,4,3,3,5,Deferred,True,3,
+P30,MSc,4,CH331,TensorFlow,4,0.7314,Top-5,5,3,5,2,4,Accepted,True,0,Helpful for understanding legacy code in my thesis project.
+P30,MSc,4,CH1141,Firefox,4,0.6714,Mid-5,4,3,3,4,3,Accepted,False,5,The visualization helped me understand complex code relationships in unfamiliar projects.
+P30,MSc,4,CH651,TensorFlow,3,0.5286,Mid-5,3,4,5,3,3,Modified,True,5,
+P30,MSc,4,CH924,Android,3,0.5086,Mid-5,4,4,4,4,3,Accepted,True,4,Helpful for understanding legacy code in my thesis project.
+P30,MSc,4,CH995,Spring Framework,3,0.5086,Mid-5,5,4,3,3,4,Deferred,True,2,
+P30,MSc,4,CH1564,Kubernetes,1,0.0829,Bottom-5,5,4,3,3,4,Modified,True,4,
+P30,MSc,4,CH1165,React,1,0.1029,Bottom-5,3,3,4,3,2,Deferred,False,5,
+P30,MSc,4,CH143,SciPy,1,0.1029,Bottom-5,3,4,3,5,2,Rejected,True,2,
+P30,MSc,4,CH755,VS Code,7,1.0,Top-5,4,5,4,4,4,Modified,False,4,
+P30,MSc,4,CH903,Android,1,0.1029,Bottom-5,3,4,5,3,4,Accepted,True,4,The tool's suggestions sometimes felt too aggressive for my experience level.
+P30,MSc,4,CH281,TensorFlow,2,0.2657,Bottom-5,3,5,4,4,4,Accepted,True,1,
+P30,MSc,4,CH1230,React,3,0.4286,Mid-5,4,4,3,3,3,Modified,True,2,I learned a lot about technical debt propagation through this tool.
+P30,MSc,4,CH1125,Firefox,3,0.4686,Mid-5,4,5,3,4,3,Deferred,True,0,
+P30,MSc,4,CH1776,PostgreSQL,5,0.8943,Top-5,5,5,4,3,4,Accepted,False,4,
+P30,MSc,4,CH1157,React,7,1.0,Top-5,4,5,3,4,4,Rejected,True,2,
+P30,MSc,4,CH1109,Firefox,4,0.8714,Top-5,4,4,4,4,3,Deferred,False,3,I needed more context to fully understand some implicit SATD comments.

@@ -1,0 +1,13 @@
+role,outcome,count,percentage
+Professional,Accepted,94,46.1
+Professional,Modified,48,23.5
+Professional,Deferred,33,16.2
+Professional,Rejected,29,14.2
+PhD,Accepted,77,41.2
+PhD,Modified,46,24.6
+PhD,Deferred,46,24.6
+PhD,Rejected,18,9.6
+MSc,Accepted,49,41.2
+MSc,Modified,28,23.5
+MSc,Deferred,29,24.4
+MSc,Rejected,13,10.9

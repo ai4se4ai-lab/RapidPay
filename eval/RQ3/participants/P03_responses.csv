@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P03,Professional,15,CH585,TensorFlow,1,0.1229,Bottom-5,4,5,5,3,4,Modified,True,0,
+P03,Professional,15,CH501,TensorFlow,3,0.5286,Mid-5,5,5,4,5,4,Modified,True,4,
+P03,Professional,15,CH921,Android,4,0.7714,Top-5,5,5,3,3,5,Deferred,True,3,
+P03,Professional,15,CH851,VS Code,3,0.4686,Mid-5,5,5,5,5,4,Modified,True,3,
+P03,Professional,15,CH689,TensorFlow,5,0.9143,Top-5,5,5,4,5,4,Modified,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P03,Professional,15,CH886,Android,1,0.1429,Bottom-5,5,4,4,2,5,Modified,False,2,
+P03,Professional,15,CH397,TensorFlow,3,0.5686,Mid-5,4,5,4,3,4,Modified,False,2,
+P03,Professional,15,CH609,TensorFlow,1,0.1429,Bottom-5,5,5,5,5,5,Rejected,False,5,
+P03,Professional,15,CH295,TensorFlow,4,0.7114,Top-5,3,5,4,5,4,Accepted,True,0,The module-level dependencies were particularly insightful for our microservices architecture.
+P03,Professional,15,CH881,Android,5,0.8543,Top-5,5,4,5,4,4,Accepted,True,2,
+P03,Professional,15,CH1128,Firefox,5,0.8143,Top-5,5,5,3,5,5,Accepted,True,3,
+P03,Professional,15,CH819,VS Code,3,0.4686,Mid-5,5,4,3,4,5,Accepted,True,5,
+P03,Professional,15,CH645,TensorFlow,3,0.4086,Mid-5,3,4,4,3,5,Modified,True,5,
+P03,Professional,15,CH1476,Kubernetes,3,0.4886,Mid-5,4,4,4,4,5,Deferred,True,0,
+P03,Professional,15,CH1635,Kubernetes,5,0.9143,Top-5,4,5,5,4,5,Rejected,True,2,Commit-time suggestions were relevant to my current work context.
+P03,Professional,15,CH255,TensorFlow,1,0.1029,Bottom-5,4,3,5,3,5,Modified,False,1,
+P03,Professional,15,CH1930,Apache Commons,1,0.0829,Bottom-5,5,5,5,3,4,Deferred,True,1,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
