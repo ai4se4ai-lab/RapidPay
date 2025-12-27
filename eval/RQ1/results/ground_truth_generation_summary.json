@@ -1,0 +1,52 @@
+{
+  "generated_at": "2025-12-22T20:14:30.364574",
+  "generator": "RQ1 Evaluation Suite",
+  "total_repos": 1,
+  "successful": 1,
+  "failed": 0,
+  "total_samples": 400,
+  "total_satd": 174,
+  "total_non_satd": 226,
+  "overall_disagreement_rate": 13.2,
+  "repositories": {
+    "AC": {
+      "repo_id": "AC",
+      "total_comments_available": 8063,
+      "samples_taken": {
+        "satd": 200,
+        "non_satd": 200,
+        "total": 400
+      },
+      "template_file": "C:\\Users\\babaei\\Desktop\\Research\\Ai4SE4AI\\RapidPay\\eval\\RQ1\\ground_truth\\AC_ground_truth_template.csv",
+      "ground_truth_file": "C:\\Users\\babaei\\Desktop\\Research\\Ai4SE4AI\\RapidPay\\eval\\RQ1\\ground_truth\\AC_ground_truth.csv",
+      "statistics": {
+        "total_samples": 400,
+        "satd_count": 174,
+        "non_satd_count": 226,
+        "explicit_satd": 143,
+        "implicit_satd": 16,
+        "implicit_percentage": 9.2,
+        "disagreement_count": 53,
+        "disagreement_rate": 13.2,
+        "debt_type_distribution": {
+          "Implementation": 92,
+          "Test": 34,
+          "Requirement": 20,
+          "Documentation": 10,
+          "Design": 12,
+          "Defect": 9
+        },
+        "lexical_baseline": {
+          "true_positives": 159,
+          "false_positives": 41,
+          "false_negatives": 15,
+          "true_negatives": 185,
+          "precision": 0.795,
+          "recall": 0.9138,
+          "f1_score": 0.8503
+        }
+      },
+      "synthetic_annotations": true
+    }
+  }
+}

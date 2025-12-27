@@ -1,6 +1,21 @@
 // src/analyzers/moduleDependencyAnalyzer.ts
-import * as vscode from 'vscode';
-import { TechnicalDebt, SatdRelationship, RelationshipType } from '../models';
+// Conditional import for vscode (only available in VS Code extension context)
+let vscode: typeof import('vscode') | undefined;
+try {
+  vscode = require('vscode');
+} catch {
+  // vscode module not available (CLI mode)
+  vscode = undefined;
+}
+
+import { 
+    TechnicalDebt, 
+    SatdRelationship, 
+    RelationshipType,
+    WeightedEdge,
+    DEFAULT_RELATIONSHIP_WEIGHTS,
+    MAX_DEPENDENCY_HOPS
+} from '../models';
 import * as path from 'path';
 import * as parser from '@babel/parser';
 import traverse from '@babel/traverse';
@@ -14,24 +29,31 @@ const execPromise = promisify(exec);
 /**
  * Analyzes module/file dependencies between technical debt items.
  * If module X (with SATD A) depends on module Y (with SATD B), 
- * this establishes a higher-level link.
+ * this establishes a higher-level link with module dependency weight (0.8-1.0).
  */
 export class ModuleDependencyAnalyzer {
     private workspaceRoot: string | null = null;
+    private maxHops: number = MAX_DEPENDENCY_HOPS;
     
     /**
      * Initialize the analyzer with workspace root
-     * @param workspaceRoot Root directory of the workspace
      */
     public async initialize(workspaceRoot: string): Promise<void> {
         this.workspaceRoot = workspaceRoot;
     }
     
     /**
+     * Set maximum hop count for dependency analysis
+     */
+    public setMaxHops(hops: number): void {
+        this.maxHops = Math.min(hops, MAX_DEPENDENCY_HOPS);
+    }
+    
+    /**
      * Find relationships between technical debt items based on module dependencies
      * @param debtItems List of technical debt items to analyze
      * @param fileContentMap Map of file paths to their content
-     * @returns List of module dependency relationships
+     * @returns List of module dependency relationships with weighted edges
      */
     public async findRelationships(
         debtItems: TechnicalDebt[], 
@@ -46,26 +68,44 @@ export class ModuleDependencyAnalyzer {
         // Map debt items by file for easier access
         const debtByFile = this.groupDebtItemsByFile(debtItems);
         
-        // Build a module dependency map
-        const dependencyMap = await this.buildModuleDependencyMap(debtByFile.keys(), fileContentMap);
+        // Build a module dependency map with hop counts
+        const dependencyMap = await this.buildModuleDependencyMap(
+            debtByFile.keys(), 
+            fileContentMap,
+            debtByFile
+        );
         
         // Find relationships based on module dependencies
-        for (const [sourceFile, targetFiles] of dependencyMap.entries()) {
+        for (const [sourceFile, dependencies] of dependencyMap.entries()) {
             const sourceDebts = debtByFile.get(sourceFile) || [];
             
-            for (const targetFile of targetFiles) {
+            for (const { targetFile, hops, isDirect } of dependencies) {
+                if (hops > this.maxHops) continue;
+                
                 const targetDebts = debtByFile.get(targetFile) || [];
                 
-                // Create relationships between all debt items in the source file
-                // and all debt items in the target file
                 for (const sourceDebt of sourceDebts) {
                     for (const targetDebt of targetDebts) {
+                        if (sourceDebt.id === targetDebt.id) continue;
+                        
+                        const weight = this.calculateEdgeWeight(hops, isDirect);
+                        
+                        const edge: WeightedEdge = {
+                            sourceId: sourceDebt.id,
+                            targetId: targetDebt.id,
+                            type: RelationshipType.MODULE,
+                            weight,
+                            hops
+                        };
+                        
                         relationships.push({
                             sourceId: sourceDebt.id,
                             targetId: targetDebt.id,
-                            types: [RelationshipType.MODULE_DEPENDENCY],
-                            strength: 0.5, // Module dependencies are moderately weak
-                            description: `SATD in module ${sourceFile} depends on module ${targetFile} which contains another SATD.`
+                            types: [RelationshipType.MODULE],
+                            edges: [edge],
+                            strength: weight,
+                            description: `SATD in module ${path.basename(sourceFile)} depends on module ${path.basename(targetFile)} which contains another SATD (${hops} hop(s)).`,
+                            hopCount: hops
                         });
                     }
                 }
@@ -77,8 +117,6 @@ export class ModuleDependencyAnalyzer {
     
     /**
      * Group technical debt items by file
-     * @param debtItems List of technical debt items
-     * @returns Map of file paths to debt items in them
      */
     private groupDebtItemsByFile(debtItems: TechnicalDebt[]): Map<string, TechnicalDebt[]> {
         const debtByFile = new Map<string, TechnicalDebt[]>();
@@ -94,68 +132,133 @@ export class ModuleDependencyAnalyzer {
     }
     
     /**
-     * Build a map of module dependencies
-     * @param filePaths Paths of files to analyze
-     * @param fileContentMap Map of file paths to their content
-     * @returns Map of source files to target files they depend on
+     * Calculate edge weight based on hop count and directness
+     */
+    private calculateEdgeWeight(hops: number, isDirect: boolean): number {
+        const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.MODULE];
+        
+        if (isDirect) {
+            // Direct imports get higher weight
+            return weights.max;
+        }
+        
+        // Weight decreases with hop count
+        const normalizedHops = Math.min(hops, this.maxHops) / this.maxHops;
+        return weights.max - (normalizedHops * (weights.max - weights.min));
+    }
+    
+    /**
+     * Build a map of module dependencies with hop counts
      */
     private async buildModuleDependencyMap(
         filePaths: IterableIterator<string>,
-        fileContentMap: Map<string, string>
-    ): Promise<Map<string, Set<string>>> {
-        const dependencyMap = new Map<string, Set<string>>();
+        fileContentMap: Map<string, string>,
+        debtByFile: Map<string, TechnicalDebt[]>
+    ): Promise<Map<string, Array<{ targetFile: string; hops: number; isDirect: boolean }>>> {
+        const dependencyMap = new Map<string, Array<{ targetFile: string; hops: number; isDirect: boolean }>>();
+        const directDependencies = new Map<string, Set<string>>();
         
-        // For each file, find its dependencies
-        for (const filePath of filePaths) {
+        // First pass: collect direct dependencies
+        for (const filePath of Array.from(fileContentMap.keys())) {
             const fileContent = fileContentMap.get(filePath);
             if (!fileContent) continue;
             
-            // Skip files based on extension
-            if (!this.isParsableFile(filePath)) {
-                continue;
-            }
-            
-            // Find imports and requires in the file
-            const dependencies = await this.findFileDependencies(filePath, fileContent);
-            
-            // Add to the dependency map
-            dependencyMap.set(filePath, dependencies);
+            const dependencies = await this.findFileDependencies(filePath, fileContent, debtByFile);
+            directDependencies.set(filePath, dependencies);
+        }
+        
+        // Second pass: compute transitive dependencies up to maxHops
+        for (const filePath of Array.from(debtByFile.keys())) {
+            const reachable = this.computeReachableModules(filePath, directDependencies, debtByFile);
+            dependencyMap.set(filePath, reachable);
         }
         
         return dependencyMap;
     }
     
     /**
-     * Check if a file is a JavaScript or TypeScript file
-     * @param filePath Path to the file
-     * @returns True if the file is JavaScript or TypeScript
+     * Compute reachable modules using BFS with hop counting
+     */
+    private computeReachableModules(
+        startFile: string,
+        directDependencies: Map<string, Set<string>>,
+        debtByFile: Map<string, TechnicalDebt[]>
+    ): Array<{ targetFile: string; hops: number; isDirect: boolean }> {
+        const reachable: Array<{ targetFile: string; hops: number; isDirect: boolean }> = [];
+        const visited = new Set<string>();
+        const queue: Array<{ file: string; hops: number }> = [{ file: startFile, hops: 0 }];
+        
+        while (queue.length > 0) {
+            const { file, hops } = queue.shift()!;
+            
+            if (hops >= this.maxHops) continue;
+            if (visited.has(file)) continue;
+            visited.add(file);
+            
+            const deps = directDependencies.get(file) || new Set();
+            
+            for (const dep of deps) {
+                // Only include if the dependency has SATD
+                if (debtByFile.has(dep) && dep !== startFile) {
+                    // Check if we already have this target with fewer hops
+                    const existing = reachable.find(r => r.targetFile === dep);
+                    if (!existing || existing.hops > hops + 1) {
+                        if (existing) {
+                            existing.hops = hops + 1;
+                            existing.isDirect = hops === 0;
+                        } else {
+                            reachable.push({
+                                targetFile: dep,
+                                hops: hops + 1,
+                                isDirect: hops === 0
+                            });
+                        }
+                    }
+                }
+                
+                if (!visited.has(dep)) {
+                    queue.push({ file: dep, hops: hops + 1 });
+                }
+            }
+        }
+        
+        return reachable;
+    }
+    
+    /**
+     * Check if a file is a parsable file
      */
     private isParsableFile(filePath: string): boolean {
         const ext = path.extname(filePath).toLowerCase();
-        return ['.js', '.jsx', '.ts', '.tsx'].includes(ext);
+        return ['.js', '.jsx', '.ts', '.tsx', '.py'].includes(ext);
     }
     
     /**
      * Find dependencies of a file
-     * @param filePath Path to the file
-     * @param fileContent Content of the file
-     * @returns Set of target files the file depends on
      */
     private async findFileDependencies(
         filePath: string,
-        fileContent: string
+        fileContent: string,
+        debtByFile: Map<string, TechnicalDebt[]>
     ): Promise<Set<string>> {
         const dependencies = new Set<string>();
         
+        if (!this.isParsableFile(filePath)) {
+            return dependencies;
+        }
+        
+        const ext = path.extname(filePath).toLowerCase();
+        
+        if (ext === '.py') {
+            return this.findPythonDependencies(filePath, fileContent, debtByFile);
+        }
+        
         try {
-            // Parse the code into an AST
             const ast = this.parseCode(filePath, fileContent);
             if (!ast) return dependencies;
             
-            // Track import and require statements
             const moduleSpecifiers: string[] = [];
             
-            // Find import statements
             traverse(ast, {
                 ImportDeclaration: (path) => {
                     const source = path.node.source.value;
@@ -164,7 +267,6 @@ export class ModuleDependencyAnalyzer {
                     }
                 },
                 CallExpression: (path) => {
-                    // Find require statements
                     if (t.isIdentifier(path.node.callee) && path.node.callee.name === 'require') {
                         const args = path.node.arguments;
                         if (args.length > 0 && t.isStringLiteral(args[0])) {
@@ -174,9 +276,8 @@ export class ModuleDependencyAnalyzer {
                 }
             });
             
-            // Resolve module specifiers to actual file paths
             for (const specifier of moduleSpecifiers) {
-                const resolvedPath = await this.resolveModulePath(filePath, specifier);
+                const resolvedPath = await this.resolveModulePath(filePath, specifier, debtByFile);
                 if (resolvedPath) {
                     dependencies.add(resolvedPath);
                 }
@@ -190,158 +291,144 @@ export class ModuleDependencyAnalyzer {
     }
     
     /**
-     * Parse code into an AST
-     * @param filePath Path to the file
-     * @param fileContent Content of the file
-     * @returns Parsed AST
+     * Find Python file dependencies
      */
-        private parseCode(filePath: string, fileContent: string): any {
-            try {
-                const ext = path.extname(filePath).toLowerCase();
-                const plugins: any[] = [];
-                
-                // Add appropriate plugins based on file extension
-                if (['.ts', '.tsx'].includes(ext)) {
-                    plugins.push('typescript');
+    private async findPythonDependencies(
+        filePath: string,
+        fileContent: string,
+        debtByFile: Map<string, TechnicalDebt[]>
+    ): Promise<Set<string>> {
+        const dependencies = new Set<string>();
+        const lines = fileContent.split('\n');
+        
+        for (const line of lines) {
+            const trimmedLine = line.trim();
+            
+            // Skip non-import lines
+            if (!trimmedLine.startsWith('import') && !trimmedLine.startsWith('from')) continue;
+            if (trimmedLine.startsWith('#')) continue;
+            
+            // Handle "import module" syntax
+            const importMatch = trimmedLine.match(/^import\s+([a-zA-Z0-9_.]+)/);
+            if (importMatch) {
+                const modulePath = this.resolvePythonModule(filePath, importMatch[1], debtByFile);
+                if (modulePath) {
+                    dependencies.add(modulePath);
                 }
-                if (['.jsx', '.tsx'].includes(ext)) {
-                    plugins.push('jsx');
+                continue;
+            }
+            
+            // Handle "from module import ..." syntax
+            const fromImportMatch = trimmedLine.match(/^from\s+([a-zA-Z0-9_.]+)\s+import/);
+            if (fromImportMatch) {
+                const modulePath = this.resolvePythonModule(filePath, fromImportMatch[1], debtByFile);
+                if (modulePath) {
+                    dependencies.add(modulePath);
                 }
-                
-                // For Python files, we need a different approach since Babel doesn't support Python
-                if (ext === '.py') {
-                    // Basic parsing for Python files
-                    return this.parsePythonCode(fileContent);
-                }
-                
-                return parser.parse(fileContent, {
-                    sourceType: 'module',
-                    plugins: plugins
-                });
-            } catch (error) {
-                console.error(`Error parsing ${filePath}:`, error);
-                return null;
             }
         }
+        
+        return dependencies;
+    }
     
-        private parsePythonCode(fileContent: string): any {
-            // A very simple Python parser that just identifies function definitions and calls
-            const ast: { type: string; body: { type: string; id: { name: string }; loc: { start: { line: number }; end: { line: number } }; calls: string[] }[] } = {
-                type: 'Program',
-                body: []
-            };
-            
-            const lines = fileContent.split('\n');
-            const functions: {[name: string]: {start: number, end: number, calls: string[]}} = {};
-            let currentFunction: string | null = null;
-            let indentLevel = 0;
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                const lineNumber = i + 1;
-                
-                // Skip empty lines
-                if (line.trim() === '') continue;
-                
-                // Calculate indent level
-                const currentIndent = line.length - line.trimLeft().length;
-                
-                // Detect function definition
-                const funcDefMatch = line.match(/^\s*def\s+([a-zA-Z0-9_]+)\s*\(/);
-                if (funcDefMatch) {
-                    currentFunction = funcDefMatch[1];
-                    indentLevel = currentIndent;
-                    functions[currentFunction] = {
-                        start: lineNumber,
-                        end: lineNumber, // Will be updated when the function ends
-                        calls: []
-                    };
-                    continue;
-                }
-                
-                // Check if we're exiting a function based on indentation
-                if (currentFunction && currentIndent <= indentLevel && !line.trim().startsWith('#')) {
-                    functions[currentFunction].end = lineNumber - 1;
-                    currentFunction = null;
-                }
-                
-                // Detect function calls within a function
-                if (currentFunction) {
-                    const funcCallMatches = line.match(/([a-zA-Z0-9_]+)\s*\(/g);
-                    if (funcCallMatches) {
-                        for (const match of funcCallMatches) {
-                            const funcName = match.replace(/\s*\($/, '');
-                            if (funcName !== currentFunction) { // Avoid self-recursion detection
-                                functions[currentFunction].calls.push(funcName);
-                            }
-                        }
-                    }
-                }
+    /**
+     * Resolve Python module to file path
+     */
+    private resolvePythonModule(
+        currentFile: string,
+        moduleName: string,
+        debtByFile: Map<string, TechnicalDebt[]>
+    ): string | null {
+        const possiblePaths = [
+            moduleName.replace(/\./g, '/') + '.py',
+            moduleName.replace(/\./g, '/') + '/__init__.py',
+            path.join(path.dirname(currentFile), moduleName.replace(/\./g, '/') + '.py'),
+            path.join(path.dirname(currentFile), moduleName.replace(/\./g, '/'), '__init__.py')
+        ];
+        
+        for (const possiblePath of possiblePaths) {
+            const normalizedPath = path.normalize(possiblePath);
+            if (debtByFile.has(normalizedPath)) {
+                return normalizedPath;
             }
-            
-            // If we ended the file inside a function, close it
-            if (currentFunction) {
-                functions[currentFunction].end = lines.length;
+            // Also check without leading ./
+            const cleanPath = normalizedPath.replace(/^\.[\\/]/, '');
+            if (debtByFile.has(cleanPath)) {
+                return cleanPath;
             }
-            
-            // Build the AST representation
-            for (const [name, data] of Object.entries(functions)) {
-                ast.body.push({
-                    type: 'FunctionDeclaration',
-                    id: { name },
-                    loc: {
-                        start: { line: data.start },
-                        end: { line: data.end }
-                    },
-                    calls: data.calls
-                });
-            }
-            
-            return ast;
         }
+        
+        return null;
+    }
+    
+    /**
+     * Parse code into an AST
+     */
+    private parseCode(filePath: string, fileContent: string): any {
+        try {
+            const ext = path.extname(filePath).toLowerCase();
+            const plugins: any[] = [];
+            
+            if (['.ts', '.tsx'].includes(ext)) {
+                plugins.push('typescript');
+            }
+            if (['.jsx', '.tsx'].includes(ext)) {
+                plugins.push('jsx');
+            }
+            
+            return parser.parse(fileContent, {
+                sourceType: 'module',
+                plugins: plugins
+            });
+        } catch (error) {
+            console.error(`Error parsing ${filePath}:`, error);
+            return null;
+        }
+    }
     
     /**
      * Resolve a module specifier to an actual file path
-     * @param sourcePath Path of the source file
-     * @param specifier Module specifier
-     * @returns Resolved file path or null
      */
-    private async resolveModulePath(sourcePath: string, specifier: string): Promise<string | null> {
+    private async resolveModulePath(
+        sourcePath: string, 
+        specifier: string,
+        debtByFile: Map<string, TechnicalDebt[]>
+    ): Promise<string | null> {
         if (!this.workspaceRoot) {
             return null;
         }
         
-        // Skip external modules
+        // Skip external modules (npm packages)
         if (specifier.startsWith('@') || !specifier.startsWith('.')) {
             return null;
         }
         
         // Resolve relative paths
         const sourceDir = path.dirname(sourcePath);
-        let resolvedPath = path.resolve(sourceDir, specifier);
+        let resolvedPath = path.join(sourceDir, specifier);
+        resolvedPath = path.normalize(resolvedPath);
         
-        // Check if the resolved path exists
-        // If not, try adding extensions
-        const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+        // Check various extensions
+        const extensions = ['.js', '.jsx', '.ts', '.tsx', ''];
+        
         for (const ext of extensions) {
-            try {
-                // Check if file exists with this extension
-                const fullPath = resolvedPath + ext;
-                await vscode.workspace.fs.stat(vscode.Uri.file(`${this.workspaceRoot}/${fullPath}`));
+            const fullPath = resolvedPath + ext;
+            if (debtByFile.has(fullPath)) {
                 return fullPath;
-            } catch (error) {
-                // File doesn't exist with this extension, try the next one
+            }
+            // Try without leading ./
+            const cleanPath = fullPath.replace(/^\.[\\/]/, '');
+            if (debtByFile.has(cleanPath)) {
+                return cleanPath;
             }
         }
         
         // Check if it's a directory with an index file
         for (const ext of extensions) {
-            try {
-                const indexPath = path.join(resolvedPath, `index${ext}`);
-                await vscode.workspace.fs.stat(vscode.Uri.file(`${this.workspaceRoot}/${indexPath}`));
+            if (ext === '') continue;
+            const indexPath = path.join(resolvedPath, `index${ext}`);
+            if (debtByFile.has(indexPath)) {
                 return indexPath;
-            } catch (error) {
-                // Index file doesn't exist with this extension, try the next one
             }
         }
         

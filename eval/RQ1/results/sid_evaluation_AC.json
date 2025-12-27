@@ -1,0 +1,366 @@
+{
+  "generated_at": "2025-12-22T20:09:04.614420",
+  "generator": "RQ1 Evaluation Suite",
+  "repo_id": "AC",
+  "repo_name": "Apache Commons Lang",
+  "detection_mode": "lexical",
+  "total_detected": 631,
+  "total_ground_truth": 193,
+  "true_positives": 175,
+  "false_positives": 456,
+  "false_negatives": 18,
+  "precision": 0.2773,
+  "recall": 0.9067,
+  "f1_score": 0.4248,
+  "explicit_satd_detected": 531,
+  "implicit_satd_detected": 100,
+  "explicit_satd_ground_truth": 158,
+  "implicit_satd_ground_truth": 17,
+  "missed_satd": [
+    {
+      "id": "satd-3b5c8be0a5d9",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\math\\Fraction.java",
+      "line": "477",
+      "content": "*\n     * Cached output toProperString (class is immutable).",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Implementation"
+    },
+    {
+      "id": "satd-5fd1b50c7507",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\SystemUtils.java",
+      "line": "2273",
+      "content": "*\n     * Gets the current user home directory as a {@link Path}.\n     * <p>\n     * The result is based on the system property {@value SystemProperties#USER_HOME}.\n     * </p>\n     *\n     * @return a d",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-0c44e9da4ddf",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": "6436",
+      "content": "*\n     * Reverses the order of the given array in the given range.\n     * <p>\n     * This method does nothing for a {@code null} input array.\n     * </p>\n     *\n     * @param array               the a",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-094a0bda4667",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\concurrent\\package-info.java",
+      "line": "104",
+      "content": "get messaging service",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Implementation"
+    },
+    {
+      "id": "satd-f0be3c5a18d3",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\SystemProperties.java",
+      "line": "1032",
+      "content": "*\n     * The System property name {@value}.\n     *\n     * @see <a href=\"https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html\">jdk.includeInExceptions</a>\n     * @since 3.15.0",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Documentation"
+    },
+    {
+      "id": "satd-471f03f4a3d3",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\reflect\\TypeUtils.java",
+      "line": "109",
+      "content": "*\n         * Constructor\n         *\n         * @param rawClass      type.\n         * @param useOwner      owner type to use, if any.\n         * @param typeArguments formal type arguments.",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-6e792452148d",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\time\\FastDatePrinter.java",
+      "line": "1498",
+      "content": "This will identify token as text.",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-c2efdecfa330",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\BooleanUtils.java",
+      "line": "735",
+      "content": "Previously used equalsIgnoreCase, which was fast for interned 'true'.",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-1ecbb7387b6d",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\reflect\\TypeUtils.java",
+      "line": "521",
+      "content": "*\n     * Tests whether {@code wildcardType} equals {@code type}.\n     *\n     * @param wildcardType LHS.\n     * @param type         RHS.\n     * @return Whether {@code wildcardType} equals {@code type}.",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-3d2fe1fe78df",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\math\\NumberUtils.java",
+      "line": "1749",
+      "content": "*\n     * Converts a {@link String} to a {@code short}, returning {@code zero} if the conversion fails.\n     *\n     * <p>\n     * If the string is {@code null}, {@code zero} is returned.\n     * </p>\n   ",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Defect"
+    },
+    {
+      "id": "satd-24a7a2735337",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\BitField.java",
+      "line": "269",
+      "content": "*\n     * Sets the bits.\n     *\n     * @param holder the short data containing the bits we're\n     *  interested in\n     * @return the value of holder with the specified bits set\n     *  to {@code 1}",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-573bc98be31d",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\concurrent\\AtomicInitializer.java",
+      "line": "117",
+      "content": "*\n     * Constructs a new instance.\n     *\n     * @param initializer the initializer supplier called by {@link #initialize()}.\n     * @param closer the closer consumer called by {@link #close()}.",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Implementation"
+    },
+    {
+      "id": "satd-af461b09fdb9",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\SystemUtils.java",
+      "line": "1928",
+      "content": "*\n     * The constant {@code true} if this is Windows Vista.\n     * <p>\n     * The result depends on the value of the {@link #OS_NAME} constant.\n     * </p>\n     * <p>\n     * The field will return {@c",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-fc0245c14638",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArraySorter.java",
+      "line": "1",
+      "content": "* Licensed to the Apache Software Foundation (ASF) under one or more\n * contributor license agreements.  See the NOTICE file distributed with\n * this work for additional information regarding copyrigh",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Test"
+    },
+    {
+      "id": "satd-b7bb5ca910d7",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\math\\IEEE754rUtils.java",
+      "line": "54",
+      "content": "*\n     * Gets the maximum of two {@code double} values.\n     *\n     * <p>NaN is only returned if all numbers are NaN as per IEEE-754r.</p>\n     *\n     * @param a  value 1.\n     * @param b  value 2.\n  ",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Implementation"
+    },
+    {
+      "id": "satd-b73dc9b4489b",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": "7460",
+      "content": "*\n     * Shuffles randomly the elements of the specified array using the <a href=\"https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle\">Fisher-Yates shuffle\n     * algorithm</a>.\n     *\n     * @",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Test"
+    },
+    {
+      "id": "satd-97447fb1e654",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\CachedRandomBits.java",
+      "line": "118",
+      "content": "1. Get current position within byte (0-7) using bitIndex & 0x7",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": ""
+    },
+    {
+      "id": "satd-27a4cdd17264",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\text\\StrBuilder.java",
+      "line": "198",
+      "content": "* {@inheritDoc}",
+      "is_explicit": false,
+      "is_implicit": false,
+      "debt_type": "Documentation"
+    }
+  ],
+  "false_positives_list": [
+    {
+      "id": "satd-4aa4707a61bd",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArchUtils.java",
+      "line": 139,
+      "content": "*\n     * Make private in 4.0.\n     *\n     * @deprecated TODO Make private in 4.0.",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-299304271bca",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArraySorter.java",
+      "line": 22,
+      "content": "*\n * Sorts and returns arrays in the fluent style.\n *\n * TODO For 4.0, rename to ArraySort, since we cover the sort() method here, see also ArrayFill.\n * @since 3.12.0",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-14a4c0935eb7",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArraySorter.java",
+      "line": 160,
+      "content": "*\n     * Constructs a new instance.\n     *\n     * @deprecated Will be removed in 4.0.0.",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-b62bd9c5b51c",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5590,
+      "content": "No need to check maxIndex here, because method only currently called from removeElements()",
+      "is_explicit": false,
+      "is_implicit": true,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-2d5a00b7b102",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 290,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-e306838f8c7a",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 354,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-3af9e7a0f02b",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 484,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-410a43cecc8b",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 584,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-a9b2b95252f8",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 680,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-3725d7ee1d38",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 744,
+      "content": "*\n     * Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one t",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-bec0657f8c06",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 3131,
+      "content": "* Note on use of @SafeVarargs:\n         *\n         * By returning null when 'array' is null, we avoid returning the vararg\n         * array to the caller. We also avoid relying on the type of the vara",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-ec015ec345bc",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 3288,
+      "content": "*\n     * Tests whether two arrays have equal content, using equals(), handling multidimensional arrays\n     * correctly.\n     * <p>\n     * Multi-dimensional primitive arrays are also handled correctly",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-73789fb24560",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5251,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified boolean array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     *",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-b626b7d595c2",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5270,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified byte array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * If",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-1fa1208208c6",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5289,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified char array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * If",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-11f2830ae963",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5308,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified double array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * ",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-e6be7def960d",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5327,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified float array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * I",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-e40b5c718e54",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5346,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified int array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * If ",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-eb61ecf717a1",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5365,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified long array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * If",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    },
+    {
+      "id": "satd-f6765fb43c4f",
+      "file": "src\\main\\java\\org\\apache\\commons\\lang3\\ArrayUtils.java",
+      "line": 5384,
+      "content": "*\n     * Removes the occurrences of the specified element from the specified short array.\n     * <p>\n     * All subsequent elements are shifted to the left (subtracts one from their indices).\n     * I",
+      "is_explicit": true,
+      "is_implicit": false,
+      "detection_mode": ""
+    }
+  ],
+  "detection_time_seconds": 0.0
+}

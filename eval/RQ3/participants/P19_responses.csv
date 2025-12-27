@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P19,PhD,6,CH1865,Apache Commons,5,0.6943,Mid-5,5,5,2,5,4,Deferred,True,4,
+P19,PhD,6,CH1684,PostgreSQL,3,0.4086,Mid-5,3,5,4,5,3,Modified,False,2,Good balance between precision and recall in SATD detection.
+P19,PhD,6,CH399,TensorFlow,5,0.8943,Top-5,5,5,4,2,4,Modified,True,3,
+P19,PhD,6,CH1760,PostgreSQL,2,0.3657,Bottom-5,4,5,4,5,5,Modified,True,5,Would be interesting to compare SIR rankings with historical bug-fix data.
+P19,PhD,6,CH588,TensorFlow,4,0.6714,Mid-5,4,4,3,3,4,Accepted,False,3,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P19,PhD,6,CH867,Android,2,0.2457,Bottom-5,4,4,2,4,3,Accepted,True,1,
+P19,PhD,6,CH989,Spring Framework,1,0.1029,Bottom-5,4,3,4,3,4,Modified,True,2,
+P19,PhD,6,CH1666,PostgreSQL,3,0.4286,Mid-5,5,5,4,3,4,Modified,True,1,
+P19,PhD,6,CH1595,Kubernetes,2,0.2657,Bottom-5,4,4,5,4,5,Rejected,True,0,The methodology for computing SIR scores seems well-grounded in graph theory.
+P19,PhD,6,CH1894,Apache Commons,5,0.9143,Top-5,5,4,4,3,3,Accepted,False,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P19,PhD,6,CH1418,Kubernetes,3,0.5286,Mid-5,5,5,3,5,4,Accepted,True,0,
+P19,PhD,6,CH1880,Apache Commons,1,0.0629,Bottom-5,5,4,4,3,4,Modified,False,4,Interesting to see how call and data dependencies contribute differently to propagation.
+P19,PhD,6,CH1901,Apache Commons,5,0.7943,Top-5,3,4,4,3,4,Accepted,True,2,Interesting to see how call and data dependencies contribute differently to propagation.
+P19,PhD,6,CH641,TensorFlow,7,0.94,Top-5,5,5,4,5,5,Accepted,False,3,
+P19,PhD,6,CH1127,Firefox,6,0.9571,Top-5,5,4,5,4,5,Modified,False,2,Would be interesting to compare SIR rankings with historical bug-fix data.
+P19,PhD,6,CH663,TensorFlow,3,0.5286,Mid-5,5,4,3,2,4,Modified,False,4,
+P19,PhD,6,CH1174,React,4,0.7914,Top-5,4,4,4,3,5,Modified,True,1,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."

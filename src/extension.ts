@@ -1,220 +1,538 @@
 // src/extension.ts
 import * as vscode from 'vscode';
-import { TechnicalDebt } from './models';
+import { 
+    TechnicalDebt, 
+    SatdRelationship,
+    Chain,
+    SATDGraph,
+    DEFAULT_SATD_CONFIG,
+    DEFAULT_SIR_WEIGHTS,
+    DEFAULT_CAIG_WEIGHTS
+} from './models';
 import { initializeOpenAI, resetOpenAIClient } from './utils/openaiClient';
-import { getRepositoryInfo, wasCommitMadeRecently } from './utils/gitUtils';
-import { scanRepositoryForTechnicalDebt, enhanceTechnicalDebtWithAI } from './utils/debtScanner';
+import { getRepositoryInfo, wasCommitMadeRecently, getWorkspaceRoot } from './utils/gitUtils';
+import { 
+    scanRepositoryForTechnicalDebt, 
+    enhanceTechnicalDebtWithAI,
+    detectSATDInstances
+} from './utils/debtScanner';
 import { showTechnicalDebtPanel, withProgressNotification } from './utils/uiUtils';
 import { SatdChainAnalyzer } from './satdChainAnalyzer';
-
-import { 
-  initializeCommitMonitor, 
-  checkCommitForTechnicalDebtFixes, 
-  setTechnicalDebtItems,
-  disposeCommitMonitor,
-  getTechnicalDebtItems
-} from './utils/commitMonitor';
-import { registerVisualizationCommands } from './visualization/visualizationCommands';
 import { SatdRelationshipAnalyzer } from './satdRelationshipAnalyzer';
+import { CommitMonitor, createCommitMonitor } from './utils/commitMonitor';
+import { EffortScorer } from './utils/effortScorer';
+import { registerVisualizationCommands } from './visualization/visualizationCommands';
 
-// Keep track of technical debt items globally
+// Global state
 let technicalDebtItems: TechnicalDebt[] = [];
+let relationships: SatdRelationship[] = [];
+let chains: Chain[] = [];
+let satdGraph: SATDGraph | null = null;
+let commitMonitor: CommitMonitor | null = null;
+let relationshipAnalyzer: SatdRelationshipAnalyzer | null = null;
+let chainAnalyzer: SatdChainAnalyzer | null = null;
 
+/**
+ * Activate the RapidPay extension
+ */
 export function activate(context: vscode.ExtensionContext) {
-  console.log('RapidPay Extension is now active');
+    console.log('RapidPay Extension is now active');
+    console.log('Implementing: SID, IRD, SIR, and CAIG from the research paper');
 
-  // Register visualization commands
-  registerVisualizationCommands(context);
+    // Register visualization commands
+    registerVisualizationCommands(context);
 
-  // Command: Initialize and scan repository
-  const initCommand = vscode.commands.registerCommand('RapidPay.init', async () => {
-    if (!initializeOpenAI()) {
-      return;
-    }
+    // Initialize analyzers
+    chainAnalyzer = new SatdChainAnalyzer();
     
-    await withProgressNotification('RapidPay', async (progress) => {
-      progress.report({ message: "Getting repository information..." });
-      const repoInfo = await getRepositoryInfo();
-      
-      if (!repoInfo) {
-        return;
-      }
-      
-      progress.report({ message: "Scanning repository for technical debt..." });
-      const debtItems = await scanRepositoryForTechnicalDebt();
-      
-      progress.report({ message: "Analyzing technical debt items..." });
-      technicalDebtItems = await enhanceTechnicalDebtWithAI(debtItems);
-      
-      // Initialize the commit monitor with the debt items
-      setTechnicalDebtItems(technicalDebtItems);
-      await initializeCommitMonitor(context, technicalDebtItems);
-      
-      // Check if relationship analysis is enabled
-      const config = vscode.workspace.getConfiguration('RapidPay');
-      const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled');
-      const chainAnalysisEnabled = config.get<boolean>('chainAnalysisEnabled');
-      const sirScoreEnabled = config.get<boolean>('sirScoreEnabled');
-
-      if (relationshipAnalysisEnabled) {
-        progress.report({ message: "Analyzing relationships between technical debt items..." });
+    // Command: Initialize and scan repository (Full Pipeline)
+    const initCommand = vscode.commands.registerCommand('RapidPay.init', async () => {
+        console.log('=== RapidPay.init STARTED ===');
         
-        // Create and initialize relationship analyzer
-        const analyzer = new SatdRelationshipAnalyzer();
-        await analyzer.initialize(repoInfo.workspaceRoot || '');
+        if (!initializeOpenAI()) {
+            console.log('OpenAI initialization failed - aborting');
+            return;
+        }
+        console.log('OpenAI initialized successfully');
         
-        // This doesn't need to block the initialization, but we'll
-        // pre-compute relationships in the background
-        analyzer.analyzeRelationships(technicalDebtItems).then(relationships => {
-          if (chainAnalysisEnabled) {
-            progress.report({ message: "Discovering technical debt chains..." });
+        await withProgressNotification('RapidPay', async (progress) => {
+            const config = vscode.workspace.getConfiguration('RapidPay');
             
-            // Create the chain analyzer
-            const chainAnalyzer = new SatdChainAnalyzer();
+            progress.report({ message: "Getting repository information..." });
+            const repoInfo = await getRepositoryInfo();
             
-            // Find chains in the relationships
-            const { relationships: enhancedRelationships, chains } = 
-              chainAnalyzer.findChains(technicalDebtItems, relationships);
+            if (!repoInfo) {
+                console.log('getRepositoryInfo() returned null - aborting');
+                return;
+            }
             
-            if (sirScoreEnabled) {
-              // Get SIR score weights from config
-              const sirWeights = config.get<{
-                severity: number;
-                outgoingInfluence: number;
-                incomingDependency: number;
-                chainLength: number;
-              }>('sirScoreWeights');
-              
-              // Apply the weights if configured
-              if (sirWeights) {
-                chainAnalyzer.setSirWeights(
-                  sirWeights.severity,
-                  sirWeights.outgoingInfluence,
-                  sirWeights.incomingDependency,
-                  sirWeights.chainLength
+            const workspaceRoot = repoInfo.workspaceRoot || '';
+            console.log(`Workspace root: ${workspaceRoot}`);
+            console.log(`Branch: ${repoInfo.branch}, Commits: ${repoInfo.commitCount}`);
+            
+            // Step 1: SID - SATD Instance Detection
+            progress.report({ message: "Stage 1: SATD Instance Detection (SID) - Lexical filtering..." });
+            const confidenceThreshold = config.get<number>('confidenceThreshold') || 0.7;
+            console.log(`Confidence threshold: ${confidenceThreshold}`);
+            
+            // Use quick scan for initial detection
+            console.log('Starting scanRepositoryForTechnicalDebt()...');
+            const debtItems = await scanRepositoryForTechnicalDebt();
+            console.log(`scanRepositoryForTechnicalDebt() returned ${debtItems.length} items`);
+            
+            // Log first few items for debugging
+            if (debtItems.length > 0) {
+                console.log('First few items found:');
+                debtItems.slice(0, 5).forEach((item, i) => {
+                    console.log(`  ${i+1}. ${item.file}:${item.line} - ${item.content.substring(0, 50)}...`);
+                });
+            } else {
+                console.warn('WARNING: No SATD items found! Check:');
+                console.warn('  1. Is this folder a Git repository?');
+                console.warn('  2. Are the files committed to Git?');
+                console.warn('  3. Do files contain TODO/FIXME/HACK/etc. comments?');
+                
+                vscode.window.showWarningMessage(
+                    'No SATD patterns found in repository. Make sure files contain TODO/FIXME/HACK comments and are tracked by Git.',
+                    'Run Diagnostic'
+                ).then(selection => {
+                    if (selection === 'Run Diagnostic') {
+                        vscode.commands.executeCommand('RapidPay.diagnostic');
+                    }
+                });
+            }
+            
+            progress.report({ message: `Found ${debtItems.length} potential SATD instances. Running LLM classification...` });
+            console.log('Starting enhanceTechnicalDebtWithAI()...');
+            
+            // Enhanced progress reporting for LLM classification
+            if (debtItems.length > 0) {
+                vscode.window.setStatusBarMessage(`RapidPay: Classifying ${debtItems.length} items with LLM...`, 60000);
+            }
+            
+            technicalDebtItems = await enhanceTechnicalDebtWithAI(debtItems, confidenceThreshold);
+            console.log(`enhanceTechnicalDebtWithAI() returned ${technicalDebtItems.length} items`);
+            
+            // Check for LLM errors
+            const itemsWithErrors = technicalDebtItems.filter(item => item.llmError);
+            if (itemsWithErrors.length > 0) {
+                console.warn(`${itemsWithErrors.length} items had LLM errors`);
+            }
+            
+            console.log(`SID: Detected ${technicalDebtItems.length} SATD instances (${itemsWithErrors.length} with LLM errors)`);
+            
+            // Step 2: IRD - Inter-SATD Relationship Discovery
+            const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled', true);
+            
+            if (relationshipAnalysisEnabled && technicalDebtItems.length > 0) {
+                progress.report({ message: "Stage 2: Inter-SATD Relationship Discovery (IRD)..." });
+                
+                relationshipAnalyzer = new SatdRelationshipAnalyzer();
+                await relationshipAnalyzer.initialize(workspaceRoot);
+                
+                const maxHops = config.get<number>('maxDependencyHops') || 5;
+                relationshipAnalyzer.setMaxHops(maxHops);
+                
+                relationships = await relationshipAnalyzer.analyzeRelationships(technicalDebtItems);
+                
+                // Build SATD graph
+                satdGraph = relationshipAnalyzer.buildSATDGraph(technicalDebtItems, relationships);
+                chains = satdGraph.chains;
+                
+                console.log(`IRD: Found ${relationships.length} relationships, ${chains.length} chains`);
+                
+                // Step 3: SIR - SATD Impact Ripple Scoring
+                progress.report({ message: "Stage 3: SATD Impact Ripple (SIR) Scoring..." });
+                
+                const sirWeights = config.get<{ alpha: number; beta: number; gamma: number }>('sirWeights') 
+                    || DEFAULT_SIR_WEIGHTS;
+                
+                chainAnalyzer!.setSirWeights(sirWeights.alpha, sirWeights.beta, sirWeights.gamma);
+                
+                // Find chains and calculate SIR
+                const chainResult = chainAnalyzer!.findChains(technicalDebtItems, relationships);
+                relationships = chainResult.relationships;
+                chains = chainResult.chains;
+                
+                // Calculate SIR scores
+                technicalDebtItems = chainAnalyzer!.calculateSIRScores(technicalDebtItems, relationships);
+                
+                // Rank by SIR
+                technicalDebtItems = chainAnalyzer!.rankBySIR(technicalDebtItems);
+                
+                console.log(`SIR: Scored and ranked ${technicalDebtItems.length} instances`);
+                
+                // Step 4: Calculate Effort Scores
+                progress.report({ message: "Calculating historical effort scores..." });
+                
+                const effortScorer = new EffortScorer(workspaceRoot);
+                technicalDebtItems = await effortScorer.calculateEffortScores(technicalDebtItems);
+                
+                // Step 5: Initialize CAIG Commit Monitor
+                progress.report({ message: "Stage 4: Initializing Commit-Aware Insight Generation (CAIG)..." });
+                
+                commitMonitor = new CommitMonitor(workspaceRoot);
+                
+                const caigWeights = config.get<{ eta1: number; eta2: number; eta3: number; eta4: number }>('caigWeights')
+                    || DEFAULT_CAIG_WEIGHTS;
+                
+                commitMonitor.setWeights(caigWeights);
+                
+                const windowSize = config.get<number>('commitWindowSize') || 50;
+                commitMonitor.setWindowSize(windowSize);
+                
+                // Start monitoring commits
+                await commitMonitor.startMonitoring(
+                    technicalDebtItems,
+                    (rankedDebts) => {
+                        // Handle new commit - show notification
+                        if (rankedDebts.length > 0) {
+                            const topDebt = rankedDebts[0];
+                            vscode.window.showInformationMessage(
+                                `CAIG: Found ${rankedDebts.length} relevant SATD opportunities. Top: ${topDebt.file}:${topDebt.line}`,
+                                'View Details'
+                            ).then(selection => {
+                                if (selection === 'View Details') {
+                                    showTechnicalDebtPanel(rankedDebts, context);
+                                }
+                            });
+                        }
+                    }
                 );
-              }
-              
-              // Calculate SIR scores
-              const debtItemsWithScores = chainAnalyzer.calculateSIRScores(
-                technicalDebtItems,
-                enhancedRelationships
-              );
-              
-              // Update the technical debt items with scores
-              technicalDebtItems = debtItemsWithScores;
+                
+                console.log('CAIG: Commit monitoring started');
             }
             
-            // Update the commit monitor with the updated debt items
-            setTechnicalDebtItems(technicalDebtItems);
+            // Show results
+            const itemsWithLLMErrors = technicalDebtItems.filter(item => item.llmError).length;
+            const confirmedItems = technicalDebtItems.filter(item => item.isActualDebt === true).length;
             
-            console.log(`Found ${chains.length} chains among ${relationships.length} relationships.`);
+            let resultMessage = `RapidPay Analysis Complete:\n` +
+                `• ${technicalDebtItems.length} SATD instances detected`;
             
-            // If chains were found, notify the user
-            if (chains.length > 0) {
-              vscode.window.showInformationMessage(
-                `Found ${chains.length} technical debt chains. Use "Visualize Relationships" to explore them.`
-              );
+            if (confirmedItems > 0) {
+                resultMessage += ` (${confirmedItems} LLM-confirmed)`;
             }
-          }
-        }).catch(error => {
-          console.error('Error analyzing relationships and chains:', error);
+            
+            resultMessage += `\n• ${relationships.length} relationships discovered\n` +
+                `• ${chains.length} chains identified`;
+            
+            if (itemsWithLLMErrors > 0) {
+                resultMessage += `\n⚠ ${itemsWithLLMErrors} items had LLM classification errors`;
+            }
+            
+            vscode.window.showInformationMessage(
+                resultMessage,
+                'View Details',
+                'Visualize Relationships'
+            ).then(selection => {
+                if (selection === 'View Details') {
+                    vscode.commands.executeCommand('RapidPay.viewTechnicalDebt');
+                } else if (selection === 'Visualize Relationships') {
+                    vscode.commands.executeCommand('RapidPay.visualizeRelationships');
+                }
+            });
         });
-      }
-      
-      vscode.window.showInformationMessage(
-        `Found ${technicalDebtItems.length} technical debt items in the repository.`,
-        'View Details',
-        'Visualize Relationships'
-      ).then(selection => {
-        if (selection === 'View Details') {
-          vscode.commands.executeCommand('RapidPay.viewTechnicalDebt');
-        } else if (selection === 'Visualize Relationships') {
-          vscode.commands.executeCommand('RapidPay.visualizeRelationships');
-        }
-      });
     });
-  });
 
-  // Command: View technical debt items
-  const viewTechnicalDebtCommand = vscode.commands.registerCommand('RapidPay.viewTechnicalDebt', async () => {
-    // Get the current technical debt items (they might have been updated)
-    const debtItems = getTechnicalDebtItems();
-    
-    if (debtItems.length === 0) {
-      vscode.window.showInformationMessage('No technical debt items found. Run the initialization command first.');
-      return;
-    }
-    
-    showTechnicalDebtPanel(debtItems, context);
-  });
-
-  // Command: Check the latest commit for technical debt fixes
-  const checkLatestCommitCommand = vscode.commands.registerCommand('RapidPay.checkLatestCommit', async () => {
-    // Make sure we have an OpenAI instance
-    if (!initializeOpenAI()) {
-      vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
-      return;
-    }
-    
-    // Check if we have technical debt items loaded
-    if (getTechnicalDebtItems().length === 0) {
-      const shouldScan = await vscode.window.showInformationMessage(
-        'No technical debt items found. Would you like to scan the repository first?',
-        'Yes', 'No'
-      );
-      
-      if (shouldScan === 'Yes') {
-        // Run the init command first
-        await vscode.commands.executeCommand('RapidPay.init');
+    // Command: View technical debt items
+    const viewTechnicalDebtCommand = vscode.commands.registerCommand('RapidPay.viewTechnicalDebt', async () => {
+        if (technicalDebtItems.length === 0) {
+            vscode.window.showInformationMessage('No technical debt items found. Run the initialization command first.');
+            return;
+        }
         
-        if (getTechnicalDebtItems().length === 0) {
-          // If still no items, exit
-          vscode.window.showInformationMessage('No technical debt items were found during scanning.');
-          return;
-        }
-      } else {
-        return;
-      }
-    }
-    
-    // Show progress notification
-    await withProgressNotification('RapidPay', async (progress) => {
-      progress.report({ message: "Checking the latest commit for technical debt fixes..." });
-      await checkCommitForTechnicalDebtFixes();
-      progress.report({ message: "Finished checking the latest commit." });
+        showTechnicalDebtPanel(technicalDebtItems, context);
     });
-  });
 
-  // Event: Listen for Git post-commit events through file changes
-  const gitEventListener = vscode.workspace.onDidSaveTextDocument(async (document) => {
-    // Look for changes to git related files
-    const fileName = document.fileName.toLowerCase();
-    
-    // Check if this might be related to a git commit
-    if (fileName.includes('.git')) {
-      // Check if a commit just happened
-      try {
-        if (await wasCommitMadeRecently()) {
-          await checkCommitForTechnicalDebtFixes();
+    // Command: Check the latest commit for technical debt fixes
+    const checkLatestCommitCommand = vscode.commands.registerCommand('RapidPay.checkLatestCommit', async () => {
+        if (!initializeOpenAI()) {
+            vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
+            return;
         }
-      } catch (error) {
-        console.error('Error checking for recent commits:', error);
-      }
-    }
-  });
+        
+        if (technicalDebtItems.length === 0) {
+            const shouldScan = await vscode.window.showInformationMessage(
+                'No technical debt items found. Would you like to scan the repository first?',
+                'Yes', 'No'
+            );
+            
+            if (shouldScan === 'Yes') {
+                await vscode.commands.executeCommand('RapidPay.init');
+            }
+            return;
+        }
+        
+        await withProgressNotification('RapidPay', async (progress) => {
+            progress.report({ message: "Checking the latest commit for SATD opportunities..." });
+            
+            if (commitMonitor) {
+                const workspaceRoot = getWorkspaceRoot();
+                if (workspaceRoot) {
+                    const { exec } = require('child_process');
+                    const { promisify } = require('util');
+                    const execPromise = promisify(exec);
+                    
+                    const { stdout } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
+                    const commitHash = stdout.trim();
+                    
+                    await commitMonitor.checkCommitForTechnicalDebtFixes(technicalDebtItems, commitHash);
+                }
+            }
+            
+            progress.report({ message: "Finished checking the latest commit." });
+        });
+    });
 
-  // Register commands
-  context.subscriptions.push(initCommand);
-  context.subscriptions.push(viewTechnicalDebtCommand);
-  context.subscriptions.push(checkLatestCommitCommand);
-  context.subscriptions.push(gitEventListener);
-  
-  // Check auto-scan setting
-  const config = vscode.workspace.getConfiguration('RapidPay');
-  const autoScan = config.get<boolean>('autoScanOnStartup');
-  
-  if (autoScan) {
-    vscode.commands.executeCommand('RapidPay.init');
-  }
+    // Command: Calculate SIR Scores
+    const calculateSIRCommand = vscode.commands.registerCommand('RapidPay.calculateSIR', async () => {
+        if (technicalDebtItems.length === 0) {
+            vscode.window.showInformationMessage('No technical debt items found. Run the initialization command first.');
+            return;
+        }
+        
+        await withProgressNotification('RapidPay', async (progress) => {
+            progress.report({ message: "Calculating SATD Impact Ripple scores..." });
+            
+            const config = vscode.workspace.getConfiguration('RapidPay');
+            const sirWeights = config.get<{ alpha: number; beta: number; gamma: number }>('sirWeights') 
+                || DEFAULT_SIR_WEIGHTS;
+            
+            chainAnalyzer!.setSirWeights(sirWeights.alpha, sirWeights.beta, sirWeights.gamma);
+            
+            technicalDebtItems = chainAnalyzer!.calculateSIRScores(technicalDebtItems, relationships);
+            technicalDebtItems = chainAnalyzer!.rankBySIR(technicalDebtItems);
+            
+            // Show top 5 by SIR
+            const top5 = technicalDebtItems.slice(0, 5);
+            let message = 'Top 5 SATD by Impact (SIR):\n';
+            for (const debt of top5) {
+                message += `• [${(debt.sirScore || 0).toFixed(2)}] ${debt.file}:${debt.line}\n`;
+            }
+            
+            vscode.window.showInformationMessage(message, 'View All').then(selection => {
+                if (selection === 'View All') {
+                    showTechnicalDebtPanel(technicalDebtItems, context);
+                }
+            });
+        });
+    });
+
+    // Command: Analyze current commit for SATD opportunities (CAIG)
+    const analyzeCommitCommand = vscode.commands.registerCommand('RapidPay.analyzeCommit', async () => {
+        if (!initializeOpenAI()) {
+            vscode.window.showErrorMessage('Failed to initialize OpenAI client. Check your API key.');
+            return;
+        }
+        
+        if (technicalDebtItems.length === 0) {
+            await vscode.commands.executeCommand('RapidPay.init');
+            return;
+        }
+        
+        await withProgressNotification('RapidPay', async (progress) => {
+            progress.report({ message: "Running CAIG analysis on recent commit..." });
+            
+            const workspaceRoot = getWorkspaceRoot();
+            if (!workspaceRoot || !commitMonitor) {
+                vscode.window.showErrorMessage('Could not access repository');
+                return;
+            }
+            
+            const { exec } = require('child_process');
+            const { promisify } = require('util');
+            const execPromise = promisify(exec);
+            
+            try {
+                const { stdout: hashOutput } = await execPromise('git rev-parse HEAD', { cwd: workspaceRoot });
+                const commitHash = hashOutput.trim();
+                
+                const { stdout: metaOutput } = await execPromise(
+                    `git show -s --format="%H|%an|%ae|%at|%s" ${commitHash}`,
+                    { cwd: workspaceRoot }
+                );
+                
+                const [hash, author, authorEmail, timestamp, message] = metaOutput.trim().split('|');
+                
+                const { stdout: filesOutput } = await execPromise(
+                    `git diff-tree --no-commit-id --name-only -r ${commitHash}`,
+                    { cwd: workspaceRoot }
+                );
+                
+                const modifiedFiles = filesOutput.trim().split('\n').filter((f: string) => f);
+                
+                const { stdout: diff } = await execPromise(
+                    `git show ${commitHash} --format=""`,
+                    { cwd: workspaceRoot, maxBuffer: 5 * 1024 * 1024 }
+                ).catch(() => ({ stdout: '' }));
+                
+                const commitInfo = {
+                    hash,
+                    message,
+                    author,
+                    authorEmail,
+                    timestamp: new Date(parseInt(timestamp, 10) * 1000),
+                    modifiedFiles,
+                    diff
+                };
+                
+                progress.report({ message: "Analyzing commit relevance and fix potential..." });
+                
+                const rankedDebts = await commitMonitor.analyzeCommitRelevance(technicalDebtItems, commitInfo);
+                
+                if (rankedDebts.length > 0) {
+                    vscode.window.showInformationMessage(
+                        `CAIG found ${rankedDebts.length} SATD opportunities related to this commit.`,
+                        'View Recommendations'
+                    ).then(selection => {
+                        if (selection === 'View Recommendations') {
+                            showTechnicalDebtPanel(rankedDebts, context);
+                        }
+                    });
+                } else {
+                    vscode.window.showInformationMessage('No SATD opportunities found for this commit.');
+                }
+                
+            } catch (error) {
+                console.error('CAIG analysis error:', error);
+                vscode.window.showErrorMessage('Failed to analyze commit');
+            }
+        });
+    });
+
+    // Event: Listen for Git post-commit events through file changes
+    const gitEventListener = vscode.workspace.onDidSaveTextDocument(async (document) => {
+        const fileName = document.fileName.toLowerCase();
+        
+        if (fileName.includes('.git')) {
+            try {
+                if (await wasCommitMadeRecently()) {
+                    if (commitMonitor && technicalDebtItems.length > 0) {
+                        vscode.commands.executeCommand('RapidPay.analyzeCommit');
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking for recent commits:', error);
+            }
+        }
+    });
+
+    // Command: Diagnostic quick scan (no LLM, just lexical detection)
+    const diagnosticCommand = vscode.commands.registerCommand('RapidPay.diagnostic', async () => {
+        console.log('=== RapidPay DIAGNOSTIC SCAN ===');
+        
+        const workspaceRoot = getWorkspaceRoot();
+        if (!workspaceRoot) {
+            vscode.window.showErrorMessage('No workspace folder open');
+            return;
+        }
+        
+        console.log(`Scanning: ${workspaceRoot}`);
+        
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: "RapidPay Diagnostic",
+            cancellable: false
+        }, async (progress) => {
+            progress.report({ message: "Running diagnostic scan (no LLM)..." });
+            
+            const debtItems = await scanRepositoryForTechnicalDebt();
+            
+            console.log(`\n=== DIAGNOSTIC RESULTS ===`);
+            console.log(`Workspace: ${workspaceRoot}`);
+            console.log(`Items found: ${debtItems.length}`);
+            
+            if (debtItems.length > 0) {
+                console.log('\nAll items:');
+                debtItems.forEach((item, i) => {
+                    console.log(`${i+1}. ${item.file}:${item.line}`);
+                    console.log(`   Content: ${item.content}`);
+                    console.log(`   Type: ${item.debtType}`);
+                });
+                
+                vscode.window.showInformationMessage(
+                    `Diagnostic: Found ${debtItems.length} SATD items (without LLM). Check Developer Console (Ctrl+Shift+I) for details.`,
+                    'Show Details'
+                ).then(selection => {
+                    if (selection === 'Show Details') {
+                        showTechnicalDebtPanel(debtItems, context);
+                    }
+                });
+            } else {
+                vscode.window.showWarningMessage(
+                    `Diagnostic: Found 0 SATD items. Check Developer Console (Ctrl+Shift+I) for debug logs.`
+                );
+            }
+        });
+    });
+
+    // Register all commands
+    context.subscriptions.push(initCommand);
+    context.subscriptions.push(viewTechnicalDebtCommand);
+    context.subscriptions.push(checkLatestCommitCommand);
+    context.subscriptions.push(calculateSIRCommand);
+    context.subscriptions.push(analyzeCommitCommand);
+    context.subscriptions.push(diagnosticCommand);
+    context.subscriptions.push(gitEventListener);
+    
+    // Check auto-scan setting
+    const config = vscode.workspace.getConfiguration('RapidPay');
+    const autoScan = config.get<boolean>('autoScanOnStartup');
+    
+    if (autoScan) {
+        vscode.commands.executeCommand('RapidPay.init');
+    }
+}
+
+/**
+ * Deactivate the extension
+ */
+export function deactivate() {
+    console.log('RapidPay Extension is deactivating');
+    
+    // Stop commit monitoring
+    if (commitMonitor) {
+        commitMonitor.stopMonitoring();
+        commitMonitor = null;
+    }
+    
+    // Reset OpenAI client
+    resetOpenAIClient();
+    
+    // Clear global state
+    technicalDebtItems = [];
+    relationships = [];
+    chains = [];
+    satdGraph = null;
+    relationshipAnalyzer = null;
+    chainAnalyzer = null;
+}
+
+/**
+ * Get current technical debt items (for other modules)
+ */
+export function getTechnicalDebtItems(): TechnicalDebt[] {
+    return technicalDebtItems;
+}
+
+/**
+ * Get current relationships (for visualization)
+ */
+export function getRelationships(): SatdRelationship[] {
+    return relationships;
+}
+
+/**
+ * Get current chains (for visualization)
+ */
+export function getChains(): Chain[] {
+    return chains;
+}
+
+/**
+ * Get the SATD graph (for advanced queries)
+ */
+export function getSATDGraph(): SATDGraph | null {
+    return satdGraph;
 }

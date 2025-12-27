@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "scenario_id": "scenario2",
+    "scenario_name": "Cascading Debt - Chain Extension",
+    "description": "Existing authentication module with 2 SATD instances gets extended with session management, creating a 4-node chain",
+    "commit_message": "feat: Add distributed session management with role-based access",
+    "author": "developer@example.com",
+    "before_satd_count": 2,
+    "after_satd_count": 12,
+    "before_chain_count": 1,
+    "after_chain_count": 1
+  },
+  "before_state": {
+    "files": ["auth_handler.py"],
+    "satd_instances": [
+      {
+        "id": "satd-s2-pre-1",
+        "file": "auth_handler.py",
+        "line": 52,
+        "pattern": "TODO",
+        "content": "TODO: Token expiration time is hardcoded to 24 hours. This should be configurable per user role.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-pre-2",
+        "file": "auth_handler.py",
+        "line": 65,
+        "pattern": "HACK",
+        "content": "HACK: Using MD5 for password hashing which is cryptographically weak.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      }
+    ],
+    "chains": [
+      {
+        "id": "chain-s2-pre-A",
+        "name": "Authentication Handler Chain",
+        "nodes": ["satd-s2-pre-1", "satd-s2-pre-2"],
+        "length": 2
+      }
+    ]
+  },
+  "after_state": {
+    "files": ["auth_handler.py", "session_manager.py", "permission_checker.py", "audit_logger.py"],
+    "satd_instances": [
+      {
+        "id": "satd-s2-1",
+        "file": "auth_handler.py",
+        "line": 53,
+        "pattern": "TODO",
+        "content": "TODO: Token expiration time is hardcoded to 24 hours. This should be configurable per user role.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-2",
+        "file": "auth_handler.py",
+        "line": 56,
+        "pattern": "FIXME",
+        "content": "FIXME: SessionManager is instantiated here without configuration. In production we need different Redis endpoints.",
+        "debt_type": "Design",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s2-3",
+        "file": "auth_handler.py",
+        "line": 80,
+        "pattern": "HACK",
+        "content": "HACK: Using MD5 for password hashing which is cryptographically weak.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s2-4",
+        "file": "auth_handler.py",
+        "line": 144,
+        "pattern": "TODO",
+        "content": "TODO: This is O(n) where n is number of tokens. Very slow for users with many active sessions.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-5",
+        "file": "session_manager.py",
+        "line": 35,
+        "pattern": "TODO",
+        "content": "TODO: Redis connection is not implemented! Currently using in-memory storage which loses all sessions on restart.",
+        "debt_type": "Architecture",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s2-6",
+        "file": "session_manager.py",
+        "line": 40,
+        "pattern": "HACK",
+        "content": "HACK: Session timeout hardcoded to 30 minutes idle time. This should come from configuration.",
+        "debt_type": "Design",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-7",
+        "file": "session_manager.py",
+        "line": 87,
+        "pattern": "FIXME",
+        "content": "FIXME: Timezone handling is completely missing. All times are assumed to be in server local time.",
+        "debt_type": "Defect",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s2-8",
+        "file": "session_manager.py",
+        "line": 114,
+        "pattern": "BUG",
+        "content": "BUG: Not removing from user_sessions index. Memory leak - inactive sessions are never cleaned up.",
+        "debt_type": "Defect",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s2-9",
+        "file": "permission_checker.py",
+        "line": 33,
+        "pattern": "HACK",
+        "content": "HACK: Role definitions are hardcoded here instead of in a database. Any role changes require code deployment.",
+        "debt_type": "Design",
+        "severity": "high"
+      },
+      {
+        "id": "satd-s2-10",
+        "file": "permission_checker.py",
+        "line": 62,
+        "pattern": "TODO",
+        "content": "TODO: Permission checking is O(n*m) where n is roles and m is permissions per role. Should cache computed permissions.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-11",
+        "file": "permission_checker.py",
+        "line": 67,
+        "pattern": "FIXME",
+        "content": "FIXME: Denied access should be logged with more context - IP address, session info, etc.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-12",
+        "file": "audit_logger.py",
+        "line": 37,
+        "pattern": "TODO",
+        "content": "TODO: Currently storing events in memory only. Need to persist to a proper audit log storage.",
+        "debt_type": "Architecture",
+        "severity": "critical"
+      },
+      {
+        "id": "satd-s2-13",
+        "file": "audit_logger.py",
+        "line": 73,
+        "pattern": "HACK",
+        "content": "HACK: Printing to stdout as temporary logging. This is not suitable for production.",
+        "debt_type": "Implementation",
+        "severity": "medium"
+      },
+      {
+        "id": "satd-s2-14",
+        "file": "audit_logger.py",
+        "line": 133,
+        "pattern": "FIXME",
+        "content": "FIXME: No indexing on user_id. This is O(n) scan of all events. Will be extremely slow with large audit logs.",
+        "debt_type": "Implementation",
+        "severity": "high"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel-s2-1",
+        "source_satd": "satd-s2-2",
+        "target_satd": "satd-s2-5",
+        "type": "module",
+        "weight": 0.9,
+        "description": "AuthHandler instantiates SessionManager without proper config"
+      },
+      {
+        "id": "rel-s2-2",
+        "source_satd": "satd-s2-1",
+        "target_satd": "satd-s2-6",
+        "type": "data",
+        "weight": 0.7,
+        "description": "Token expiration config issue propagates to session timeout issue"
+      },
+      {
+        "id": "rel-s2-3",
+        "source_satd": "satd-s2-5",
+        "target_satd": "satd-s2-8",
+        "type": "data",
+        "weight": 0.85,
+        "description": "In-memory session storage leads to memory leak"
+      },
+      {
+        "id": "rel-s2-4",
+        "source_satd": "satd-s2-6",
+        "target_satd": "satd-s2-9",
+        "type": "module",
+        "weight": 0.8,
+        "description": "SessionManager uses PermissionChecker with hardcoded roles"
+      },
+      {
+        "id": "rel-s2-5",
+        "source_satd": "satd-s2-9",
+        "target_satd": "satd-s2-12",
+        "type": "module",
+        "weight": 0.9,
+        "description": "PermissionChecker uses AuditLogger which has storage issues"
+      },
+      {
+        "id": "rel-s2-6",
+        "source_satd": "satd-s2-11",
+        "target_satd": "satd-s2-13",
+        "type": "call",
+        "weight": 0.75,
+        "description": "Incomplete permission logging connects to stdout logging hack"
+      }
+    ],
+    "chains": [
+      {
+        "id": "chain-s2-A",
+        "name": "Authentication-Session-Permission-Audit Chain",
+        "nodes": ["satd-s2-1", "satd-s2-2", "satd-s2-3", "satd-s2-4", "satd-s2-5", "satd-s2-6", "satd-s2-7", "satd-s2-8", "satd-s2-9", "satd-s2-10", "satd-s2-11", "satd-s2-12", "satd-s2-13", "satd-s2-14"],
+        "length": 14,
+        "root_node": "satd-s2-2",
+        "description": "Extended authentication chain now spans 4 files"
+      }
+    ]
+  },
+  "expected_sir_ranking": {
+    "description": "Expected SIR ranking after commit",
+    "ranking": [
+      {"rank": 1, "satd_id": "satd-s2-2", "rationale": "New root connecting auth to session management"},
+      {"rank": 2, "satd_id": "satd-s2-5", "rationale": "Critical architecture debt in session storage"},
+      {"rank": 3, "satd_id": "satd-s2-9", "rationale": "Hardcoded roles affect all permission checks"},
+      {"rank": 4, "satd_id": "satd-s2-12", "rationale": "Audit storage issues affect compliance"},
+      {"rank": 5, "satd_id": "satd-s2-3", "rationale": "Critical security issue in password hashing"}
+    ]
+  },
+  "commit_analysis": {
+    "files_added": ["session_manager.py", "permission_checker.py", "audit_logger.py"],
+    "files_modified": ["auth_handler.py"],
+    "new_satd_introduced": 12,
+    "existing_satd_affected": 2,
+    "chain_extension": "2-node chain extended to 14-node chain across 4 files"
+  }
+}
+
+
+
+
+
+

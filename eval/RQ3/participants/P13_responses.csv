@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P13,PhD,5,CH129,SciPy,1,0.0829,Bottom-5,3,4,3,2,4,Accepted,True,4,
+P13,PhD,5,CH267,TensorFlow,2,0.2657,Bottom-5,5,5,5,3,2,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P13,PhD,5,CH997,Spring Framework,3,0.5086,Mid-5,5,3,4,2,3,Modified,False,1,The stratified bucket approach for prioritization is methodologically sound.
+P13,PhD,5,CH394,TensorFlow,2,0.2457,Bottom-5,5,5,4,3,4,Modified,True,5,
+P13,PhD,5,CH1549,Kubernetes,3,0.5086,Mid-5,4,5,4,4,3,Modified,True,4,
+P13,PhD,5,CH805,VS Code,5,0.9143,Top-5,4,5,4,4,5,Accepted,True,3,
+P13,PhD,5,CH1262,React,4,0.6314,Mid-5,4,5,4,5,3,Modified,False,2,
+P13,PhD,5,CH1637,Kubernetes,4,0.7314,Top-5,5,5,3,4,3,Deferred,True,1,
+P13,PhD,5,CH983,Spring Framework,3,0.5886,Mid-5,4,4,4,4,5,Accepted,False,4,
+P13,PhD,5,CH035,SciPy,2,0.3457,Bottom-5,5,5,2,4,4,Accepted,False,2,
+P13,PhD,5,CH403,TensorFlow,4,0.7314,Top-5,4,5,5,3,5,Accepted,True,3,
+P13,PhD,5,CH535,TensorFlow,2,0.2857,Bottom-5,5,3,3,3,4,Modified,True,4,
+P13,PhD,5,CH007,SciPy,7,1.0,Top-5,5,3,4,5,2,Accepted,False,0,
+P13,PhD,5,CH339,TensorFlow,4,0.7914,Top-5,5,5,5,4,5,Accepted,True,4,
+P13,PhD,5,CH1611,Kubernetes,4,0.5914,Mid-5,5,4,4,3,4,Accepted,True,4,Interesting to see how call and data dependencies contribute differently to propagation.
+P13,PhD,5,CH650,TensorFlow,6,0.9571,Top-5,4,5,4,5,3,Deferred,False,2,
+P13,PhD,5,CH1282,React,3,0.4286,Mid-5,4,4,5,4,5,Accepted,False,1,The chain coherence metric would be valuable for my research on software evolution.
