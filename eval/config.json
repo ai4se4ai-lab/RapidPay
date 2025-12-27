@@ -1,0 +1,200 @@
+{
+  "experiments": {
+    "exp1": {
+      "name": "SATD Dataset Generator",
+      "description": "Extracts code comments from GitHub repositories and creates CSV datasets for SATD analysis",
+      "output_dir": "./results",
+      "repos_dir": "./repos",
+      "excluded_directories": [
+        "test",
+        "vendor",
+        "node_modules",
+        "third_party",
+        "external",
+        ".git"
+      ],
+      "progress_report_interval": 100
+    },
+    "rq1": {
+      "name": "RQ1 SATD Detection and Chain Evaluation",
+      "description": "Evaluates SID accuracy and IRD chain discovery effectiveness across subject systems",
+      "subject_systems": ["AC", "RE", "SC"],
+      "output_dir": "./RQ1/results",
+      "ground_truth_dir": "./RQ1/ground_truth",
+      "repos_dir": "./repos",
+      "excluded_directories": [
+        "test",
+        "vendor",
+        "node_modules",
+        "third_party",
+        "external",
+        ".git"
+      ],
+      "stratified_sampling": {
+        "satd_sample_size": 200,
+        "non_satd_sample_size": 200,
+        "random_seed": 42,
+        "line_tolerance": 5
+      },
+      "openai_config": {
+        "api_key_env": "OPENAI_API_KEY",
+        "model_name": "gpt-4o",
+        "use_llm": false,
+        "confidence_threshold": 0.7,
+        "max_retries": 3,
+        "retry_delay_ms": 1000
+      },
+      "sid_config": {
+        "detection_level": "comprehensive",
+        "include_implicit": true,
+        "batch_size": 10
+      },
+      "ird_config": {
+        "max_dependency_hops": 5,
+        "relationship_types": ["call", "data", "control", "module"],
+        "edge_sample_size": 100
+      },
+      "chain_config": {
+        "chain_sample_size": 10,
+        "min_chain_length": 2
+      },
+      "thresholds": {
+        "precision_threshold": 0.80,
+        "recall_threshold": 0.90,
+        "f1_threshold": 0.85,
+        "chain_accuracy_threshold": 0.85,
+        "relationship_precision_threshold": 0.70,
+        "edge_correctness_threshold": 0.87,
+        "chain_coherence_threshold": 0.71
+      },
+      "annotation_config": {
+        "disagreement_rate": 0.125,
+        "coherence_scale_min": 1,
+        "coherence_scale_max": 5
+      }
+    }
+  },
+  "repositories": {
+    "AC": {
+      "name": "Apache Commons Lang",
+      "url": "https://github.com/apache/commons-lang.git",
+      "languages": ["java"],
+      "extensions": [".java"],
+      "enabled": true
+    },
+    "SF": {
+      "name": "Spring Framework",
+      "url": "https://github.com/spring-projects/spring-framework.git",
+      "languages": ["java", "kotlin"],
+      "extensions": [".java", ".kt"],
+      "enabled": false
+    },
+    "TF": {
+      "name": "TensorFlow",
+      "url": "https://github.com/tensorflow/tensorflow.git",
+      "languages": ["python", "cpp"],
+      "extensions": [".py", ".cc", ".cpp", ".h", ".hpp"],
+      "enabled": false
+    },
+    "RE": {
+      "name": "React",
+      "url": "https://github.com/facebook/react.git",
+      "languages": ["javascript", "typescript"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx"],
+      "enabled": false
+    },
+    "VS": {
+      "name": "VSCode",
+      "url": "https://github.com/microsoft/vscode.git",
+      "languages": ["typescript", "javascript"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx"],
+      "enabled": false
+    },
+    "AN": {
+      "name": "Android AOSP Common Kernel",
+      "url": "https://github.com/aosp-mirror/kernel_common.git",
+      "languages": ["c", "cpp"],
+      "extensions": [".c", ".h", ".cpp", ".hpp"],
+      "enabled": false
+    },
+    "SC": {
+      "name": "SciPy",
+      "url": "https://github.com/scipy/scipy.git",
+      "languages": ["python", "c", "cpp"],
+      "extensions": [".py", ".c", ".cpp", ".h", ".pyx"],
+      "enabled": false
+    },
+    "PO": {
+      "name": "PostgreSQL",
+      "url": "https://github.com/postgres/postgres.git",
+      "languages": ["c"],
+      "extensions": [".c", ".h"],
+      "enabled": false
+    },
+    "KU": {
+      "name": "Kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes.git",
+      "languages": ["go"],
+      "extensions": [".go"],
+      "enabled": false
+    },
+    "FI": {
+      "name": "Firefox (Gecko)",
+      "url": "https://github.com/nicotine-plus/nicotine-plus.git",
+      "languages": ["javascript", "python", "cpp"],
+      "extensions": [".js", ".jsx", ".py", ".cpp", ".c", ".h"],
+      "enabled": false
+    }
+  },
+  "satd_patterns": {
+    "explicit": [
+      "\\bTODO\\b",
+      "\\bFIXME\\b",
+      "\\bHACK\\b",
+      "\\bXXX\\b",
+      "\\bBUG\\b",
+      "\\bKLUDGE\\b",
+      "\\bTRICKY\\b",
+      "\\bWARNING\\b",
+      "\\bNOTE\\b",
+      "\\bTEMP\\b",
+      "\\bTEMPORARY\\b",
+      "\\bDEPRECATED\\b"
+    ],
+    "implicit": [
+      "\\bworkaround\\b",
+      "\\bquick.?fix\\b",
+      "\\bdirty\\b",
+      "\\bugly\\b",
+      "\\bshould.?be\\b",
+      "\\bneed.?to\\b",
+      "\\bneeds?.?refactor\\b",
+      "\\bcleanup\\b",
+      "\\bclean.?up\\b",
+      "\\boptimize\\b",
+      "\\bimprove\\b",
+      "\\bbetter.?way\\b",
+      "\\bfor.?now\\b",
+      "\\btemporarily\\b",
+      "\\bnot.?ideal\\b",
+      "\\bsuboptimal\\b",
+      "\\bshould.?fix\\b",
+      "\\bmust.?fix\\b",
+      "\\bbroken\\b",
+      "\\bincomplete\\b",
+      "\\bmissing\\b",
+      "\\bplaceholder\\b",
+      "\\bstub\\b",
+      "\\bdummy\\b",
+      "\\bmagic.?number\\b",
+      "\\bhardcode[d]?\\b",
+      "\\bhard.?code[d]?\\b"
+    ]
+  },
+  "global_settings": {
+    "git_clone_depth": 1,
+    "default_encoding": "utf-8",
+    "comment_hash_length": 12
+  }
+}
+

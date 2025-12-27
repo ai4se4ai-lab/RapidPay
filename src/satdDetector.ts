@@ -541,7 +541,9 @@ export class SatdDetector {
             if (hasComment) {
                 // Check for patterns
                 for (const { pattern, isExplicit } of allPatterns) {
-                    const regex = new RegExp(`\\b${pattern}\\b`, 'i');
+                    // Escape special regex characters in the pattern
+                    const escapedPattern = pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`\\b${escapedPattern}\\b`, 'i');
                     if (regex.test(line)) {
                         // Get context (up to 2 lines before and after)
                         const startLine = Math.max(0, i - 2);

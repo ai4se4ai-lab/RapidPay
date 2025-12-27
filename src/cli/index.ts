@@ -25,9 +25,38 @@ import {
 import { scanRepositoryCLI, lexicalFiltering, llmClassification, LEXICAL_PATTERNS } from '../utils/debtScanner';
 import { SatdRelationshipAnalyzer } from '../satdRelationshipAnalyzer';
 import { SatdChainAnalyzer } from '../satdChainAnalyzer';
-import { initializeOpenAICLI } from '../utils/openaiClient';
+import { initializeOpenAICLI, getOpenAIClient } from '../utils/openaiClient';
 import { Neo4jClient } from './neo4jClient';
 import { EffortScorer } from '../utils/effortScorer';
+
+/**
+ * Load environment variables from .env file
+ */
+function loadEnvFile(): void {
+    const envPath = path.join(process.cwd(), '.env');
+    
+    if (fs.existsSync(envPath)) {
+        const envContent = fs.readFileSync(envPath, 'utf-8');
+        const lines = envContent.split('\n');
+        
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (trimmed && !trimmed.startsWith('#')) {
+                const [key, ...valueParts] = trimmed.split('=');
+                if (key && valueParts.length > 0) {
+                    const value = valueParts.join('=').trim();
+                    // Remove quotes if present
+                    const cleanValue = value.replace(/^["']|["']$/g, '');
+                    process.env[key.trim()] = cleanValue;
+                }
+            }
+        }
+        console.log('Loaded .env file successfully');
+    }
+}
+
+// Load .env file at startup
+loadEnvFile();
 
 const program = new Command();
 
@@ -75,11 +104,31 @@ program
             } else {
                 // Full scan with LLM
                 const apiKey = process.env.OPENAI_API_KEY;
+                const modelName = process.env.OPENAI_MODEL_NAME || 'gpt-4o';
+                
                 if (!apiKey) {
                     console.error('Error: OPENAI_API_KEY environment variable not set');
+                    console.error('Please set it in your .env file or as an environment variable');
+                    console.error('Example: export OPENAI_API_KEY=your_key_here');
                     process.exit(1);
                 }
-                initializeOpenAICLI(apiKey);
+                
+                console.log(`Initializing OpenAI client with model: ${modelName}...`);
+                const initialized = initializeOpenAICLI(apiKey, modelName);
+                
+                if (!initialized) {
+                    console.error('Failed to initialize OpenAI client');
+                    process.exit(1);
+                }
+                
+                // Verify client is initialized
+                const client = getOpenAIClient();
+                if (!client) {
+                    console.error('OpenAI client is not initialized');
+                    process.exit(1);
+                }
+                
+                console.log('OpenAI client initialized successfully\n');
                 
                 satdInstances = await scanRepositoryCLI(repoPath, { 
                     ...DEFAULT_SATD_CONFIG,
@@ -318,9 +367,32 @@ program
                 }));
             } else {
                 const apiKey = process.env.OPENAI_API_KEY;
-                if (apiKey) {
-                    initializeOpenAICLI(apiKey);
+                const modelName = process.env.OPENAI_MODEL_NAME || 'gpt-4o';
+                
+                if (!apiKey) {
+                    console.error('Error: OPENAI_API_KEY environment variable not set');
+                    console.error('Please set it in your .env file or as an environment variable');
+                    console.error('Or use --quick flag for lexical-only analysis');
+                    process.exit(1);
                 }
+                
+                console.log(`Initializing OpenAI client with model: ${modelName}...`);
+                const initialized = initializeOpenAICLI(apiKey, modelName);
+                
+                if (!initialized) {
+                    console.error('Failed to initialize OpenAI client');
+                    process.exit(1);
+                }
+                
+                // Verify client is initialized
+                const client = getOpenAIClient();
+                if (!client) {
+                    console.error('OpenAI client is not initialized');
+                    process.exit(1);
+                }
+                
+                console.log('OpenAI client initialized successfully\n');
+                
                 satdInstances = await scanRepositoryCLI(repoPath, {
                     ...DEFAULT_SATD_CONFIG,
                     confidenceThreshold: parseFloat(options.threshold)
@@ -466,6 +538,198 @@ function convertToCSV(debts: TechnicalDebt[]): string {
     return [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
 }
 
+// Helper: Check if a line contains a comment based on file extension
+function isCommentLine(content: string, filePath: string): boolean {
+    const trimmed = content.trim();
+    const ext = path.extname(filePath).toLowerCase();
+    
+    // Python comments - check for # anywhere in the line (inline comments)
+    if (ext === '.py') {
+        return trimmed.includes('#') || trimmed.startsWith('"""') || trimmed.startsWith("'''");
+    }
+    
+    // C-style comments (JS, TS, Java, C, C++, Go, etc.) - check for // or /* anywhere
+    if (['.js', '.jsx', '.ts', '.tsx', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go'].includes(ext)) {
+        return trimmed.includes('//') || trimmed.includes('/*') || trimmed.startsWith('*');
+    }
+    
+    // Ruby comments - check for # anywhere
+    if (ext === '.rb') {
+        return trimmed.includes('#');
+    }
+    
+    // PHP comments - check for comment markers anywhere
+    if (ext === '.php') {
+        return trimmed.includes('//') || trimmed.includes('#') || trimmed.includes('/*') || trimmed.startsWith('*');
+    }
+    
+    // Default: accept any line that contains common comment markers
+    return trimmed.includes('//') || trimmed.includes('#') || trimmed.includes('/*');
+}
+
+// Helper: Get surrounding code context for a line
+async function getSurroundingContext(
+    repoPath: string,
+    filePath: string,
+    lineNumber: number,
+    contextLines: number
+): Promise<string> {
+    try {
+        const fullPath = path.join(repoPath, filePath);
+        const content = fs.readFileSync(fullPath, 'utf-8');
+        const lines = content.split('\n');
+        
+        const startLine = Math.max(0, lineNumber - contextLines - 1);
+        const endLine = Math.min(lines.length, lineNumber + contextLines);
+        
+        return lines.slice(startLine, endLine).join('\n');
+    } catch (error) {
+        return '';
+    }
+}
+
+// Helper: Build lexical regex pattern
+function buildLexicalPattern(): RegExp {
+    const escapedPatterns = LEXICAL_PATTERNS.map(p => 
+        p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    );
+    return new RegExp(`\\b(${escapedPatterns.join('|')})\\b`, 'i');
+}
+
+const LEXICAL_REGEX = buildLexicalPattern();
+
+// Helper: Get all source files in a directory
+async function getAllSourceFiles(dirPath: string, files: string[] = []): Promise<string[]> {
+    try {
+        const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+        
+        for (const entry of entries) {
+            const fullPath = path.join(dirPath, entry.name);
+            
+            // Skip hidden directories and common non-source directories
+            if (entry.name.startsWith('.') || 
+                entry.name === 'node_modules' || 
+                entry.name === '__pycache__' ||
+                entry.name === 'venv' ||
+                entry.name === 'dist' ||
+                entry.name === 'build' ||
+                entry.name === 'out') {
+                continue;
+            }
+            
+            if (entry.isDirectory()) {
+                await getAllSourceFiles(fullPath, files);
+            } else if (entry.isFile()) {
+                const ext = path.extname(entry.name).toLowerCase();
+                const SUPPORTED_EXTENSIONS = ['.py', '.js', '.ts', '.tsx', '.jsx', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rb', '.php'];
+                if (SUPPORTED_EXTENSIONS.includes(ext)) {
+                    files.push(fullPath);
+                }
+            }
+        }
+    } catch (error) {
+        console.warn(`Could not read directory ${dirPath}: ${error}`);
+    }
+    
+    return files;
+}
+
+// Helper: Filesystem-based lexical filtering (fallback when git grep fails)
+async function filesystemLexicalFiltering(repoPath: string): Promise<Array<{
+    file: string;
+    line: number;
+    content: string;
+    context: string;
+    commitHash: string;
+    commitDate: string;
+    matchedPattern: string;
+}>> {
+    const candidates: Array<{
+        file: string;
+        line: number;
+        content: string;
+        context: string;
+        commitHash: string;
+        commitDate: string;
+        matchedPattern: string;
+    }> = [];
+    
+    console.log('=== FILESYSTEM SEARCH (Git not available or no matches) ===');
+    console.log(`Repository: ${repoPath}`);
+    
+    try {
+        const sourceFiles = await getAllSourceFiles(repoPath);
+        console.log(`Found ${sourceFiles.length} source files to scan`);
+        
+        for (const filePath of sourceFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf-8');
+                const lines = content.split('\n');
+                const relativePath = path.relative(repoPath, filePath);
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const lineNumber = i + 1;
+                    
+                    // Check if line contains any SATD pattern
+                    const patternMatch = line.match(LEXICAL_REGEX);
+                    const hasComment = isCommentLine(line, filePath);
+                    
+                    if (patternMatch && hasComment) {
+                        const matchedPattern = patternMatch[0];
+                        
+                        // Get surrounding context
+                        const startLine = Math.max(0, i - 5);
+                        const endLine = Math.min(lines.length, i + 6);
+                        const context = lines.slice(startLine, endLine).join('\n');
+                        
+                        // Try to get commit info, but don't fail if unavailable
+                        let commitHash = 'untracked';
+                        let commitDate = new Date().toISOString();
+                        
+                        try {
+                            const { exec } = require('child_process');
+                            const { promisify } = require('util');
+                            const execPromise = promisify(exec);
+                            
+                            const { stdout: blame } = await execPromise(
+                                `git blame -L ${lineNumber},${lineNumber} --porcelain "${relativePath}"`,
+                                { cwd: repoPath }
+                            );
+                            commitHash = blame.split('\n')[0].split(' ')[0];
+                            
+                            const { stdout: date } = await execPromise(
+                                `git show -s --format=%ci ${commitHash}`,
+                                { cwd: repoPath }
+                            );
+                            commitDate = date.trim();
+                        } catch {
+                            // File not tracked by git, use defaults
+                        }
+                        
+                        candidates.push({
+                            file: relativePath,
+                            line: lineNumber,
+                            content: line.trim(),
+                            context,
+                            commitHash,
+                            commitDate,
+                            matchedPattern
+                        });
+                    }
+                }
+            } catch (error) {
+                console.warn(`Could not read file ${filePath}: ${error}`);
+            }
+        }
+    } catch (error) {
+        console.error(`Filesystem filtering error: ${error}`);
+    }
+    
+    console.log(`Filesystem search found ${candidates.length} candidates`);
+    return candidates;
+}
+
 // Helper: CLI lexical filtering
 async function lexicalFilteringCLI(repoPath: string): Promise<Array<{
     file: string;
@@ -493,10 +757,44 @@ async function lexicalFilteringCLI(repoPath: string): Promise<Array<{
     try {
         const grepPattern = LEXICAL_PATTERNS.slice(0, 20).join('|');
         
-        const { stdout } = await execPromise(
-            `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java"`,
-            { cwd: repoPath, maxBuffer: 10 * 1024 * 1024 }
-        ).catch(() => ({ stdout: '' }));
+        let stdout = '';
+        let useFilesystemFallback = false;
+        
+        try {
+            const result = await execPromise(
+                `git grep -n -E "\\b(${grepPattern})\\b" -- "*.py" "*.js" "*.ts" "*.tsx" "*.jsx" "*.java" "*.c" "*.cpp" "*.h" "*.hpp" "*.cs" "*.go" "*.rb" "*.php"`,
+                { cwd: repoPath, maxBuffer: 10 * 1024 * 1024 }
+            );
+            stdout = result.stdout;
+            const matchCount = stdout.split('\n').filter(l => l.trim()).length;
+            console.log(`Git grep found ${matchCount} potential matches`);
+            
+            // If git grep succeeds but finds nothing, try filesystem fallback
+            if (matchCount === 0) {
+                console.log('Git grep found 0 matches - trying filesystem fallback...');
+                useFilesystemFallback = true;
+            }
+        } catch (error: any) {
+            // git grep returns exit code 1 when no matches found (not an error)
+            // exit code 2+ indicates actual errors
+            if (error.code === 1) {
+                console.log('Git grep returned exit code 1 (no matches) - trying filesystem fallback...');
+                useFilesystemFallback = true;
+            } else {
+                console.warn(`Git grep failed (code ${error.code}): ${error.message}`);
+                console.log('Falling back to filesystem search...');
+                useFilesystemFallback = true;
+            }
+        }
+        
+        // Fallback: If git grep failed or found nothing, use filesystem search
+        if (useFilesystemFallback) {
+            const fallbackCandidates = await filesystemLexicalFiltering(repoPath);
+            if (fallbackCandidates.length > 0) {
+                return fallbackCandidates;
+            }
+            console.log('Filesystem fallback also found no candidates');
+        }
         
         const lines = stdout.split('\n').filter((line: string) => line.trim() !== '');
         
@@ -508,6 +806,16 @@ async function lexicalFilteringCLI(repoPath: string): Promise<Array<{
             const lineNum = parseInt(lineNumber, 10);
             
             if (!file || !lineNum || !content) continue;
+            
+            // Check if line contains a comment (critical check!)
+            if (!isCommentLine(content, file)) continue;
+            
+            // Find which pattern matched
+            const patternMatch = content.match(LEXICAL_REGEX);
+            const matchedPattern = patternMatch ? patternMatch[0] : 'unknown';
+            
+            // Get surrounding context
+            const context = await getSurroundingContext(repoPath, file, lineNum, 5);
             
             try {
                 const { stdout: blame } = await execPromise(
@@ -525,17 +833,28 @@ async function lexicalFilteringCLI(repoPath: string): Promise<Array<{
                     file,
                     line: lineNum,
                     content: content.trim(),
-                    context: '',
+                    context,
                     commitHash,
                     commitDate: commitDate.trim(),
-                    matchedPattern: 'TODO'
+                    matchedPattern
                 });
             } catch {
-                // Skip files that can't be blamed
+                // Skip files that can't be blamed, but still include them
+                candidates.push({
+                    file,
+                    line: lineNum,
+                    content: content.trim(),
+                    context,
+                    commitHash: 'untracked',
+                    commitDate: new Date().toISOString(),
+                    matchedPattern
+                });
             }
         }
     } catch (error) {
         console.error(`Lexical filtering error: ${error}`);
+        // Try filesystem fallback on any error
+        return await filesystemLexicalFiltering(repoPath);
     }
     
     return candidates;

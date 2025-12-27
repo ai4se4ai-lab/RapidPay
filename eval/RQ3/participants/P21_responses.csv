@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P21,PhD,5,CH099,SciPy,2,0.2657,Bottom-5,5,4,2,5,3,Deferred,False,2,
+P21,PhD,5,CH487,TensorFlow,1,0.1029,Bottom-5,4,4,2,5,4,Rejected,True,2,
+P21,PhD,5,CH1731,PostgreSQL,4,0.7514,Top-5,4,4,5,4,5,Accepted,True,3,
+P21,PhD,5,CH1383,React,3,0.4486,Mid-5,4,5,4,4,5,Modified,True,5,
+P21,PhD,5,CH1753,PostgreSQL,5,0.8743,Top-5,5,4,4,3,5,Modified,True,2,
+P21,PhD,5,CH1222,React,3,0.4686,Mid-5,5,4,3,5,4,Accepted,False,4,Good balance between precision and recall in SATD detection.
+P21,PhD,5,CH1424,Kubernetes,1,0.0829,Bottom-5,5,5,5,4,3,Deferred,False,5,Good balance between precision and recall in SATD detection.
+P21,PhD,5,CH282,TensorFlow,3,0.4886,Mid-5,5,5,5,4,4,Modified,True,1,
+P21,PhD,5,CH071,SciPy,3,0.5086,Mid-5,4,3,4,3,3,Accepted,True,5,The developer interest score captures contextual familiarity effectively.
+P21,PhD,5,CH1061,Spring Framework,3,0.5686,Mid-5,4,4,4,4,5,Accepted,False,2,The chain coherence metric would be valuable for my research on software evolution.
+P21,PhD,5,CH1028,Spring Framework,4,0.8314,Top-5,5,4,5,5,3,Accepted,False,3,
+P21,PhD,5,CH1544,Kubernetes,1,0.0829,Bottom-5,4,5,3,3,5,Rejected,True,5,
+P21,PhD,5,CH1865,Apache Commons,5,0.6943,Mid-5,4,3,5,3,4,Accepted,True,4,
+P21,PhD,5,CH1830,Apache Commons,7,1.0,Top-5,5,4,4,4,5,Accepted,False,5,
+P21,PhD,5,CH823,VS Code,5,0.8943,Top-5,5,5,4,3,5,Deferred,True,2,
+P21,PhD,5,CH408,TensorFlow,4,0.7714,Top-5,4,4,5,3,4,Deferred,True,4,
+P21,PhD,5,CH290,TensorFlow,1,0.1429,Bottom-5,4,3,3,3,3,Deferred,True,5,

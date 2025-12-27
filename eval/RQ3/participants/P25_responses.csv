@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P25,MSc,2,CH1471,Kubernetes,1,0.0829,Bottom-5,4,4,4,3,4,Accepted,False,5,I needed more context to fully understand some implicit SATD comments.
+P25,MSc,2,CH1729,PostgreSQL,2,0.2857,Bottom-5,4,4,5,2,3,Rejected,True,3,
+P25,MSc,2,CH1177,React,3,0.4486,Mid-5,4,3,4,3,5,Accepted,False,4,
+P25,MSc,2,CH032,SciPy,4,0.6114,Mid-5,5,5,5,3,3,Accepted,False,0,
+P25,MSc,2,CH828,VS Code,4,0.7714,Top-5,3,3,2,5,3,Accepted,True,2,Helpful for understanding legacy code in my thesis project.
+P25,MSc,2,CH1272,React,4,0.6514,Mid-5,5,3,5,5,3,Accepted,True,0,
+P25,MSc,2,CH1792,PostgreSQL,4,0.7114,Top-5,4,3,4,4,5,Accepted,False,0,The visualization helped me understand complex code relationships in unfamiliar projects.
+P25,MSc,2,CH195,TensorFlow,3,0.4686,Mid-5,5,5,3,3,3,Accepted,True,4,
+P25,MSc,2,CH479,TensorFlow,4,0.5714,Mid-5,4,4,4,3,3,Deferred,False,0,The color coding for dependency types was helpful for quick comprehension.
+P25,MSc,2,CH663,TensorFlow,3,0.5286,Mid-5,3,3,5,2,2,Accepted,True,1,
+P25,MSc,2,CH698,TensorFlow,5,0.8743,Top-5,4,3,3,2,4,Modified,False,5,The color coding for dependency types was helpful for quick comprehension.
+P25,MSc,2,CH1556,Kubernetes,5,0.9143,Top-5,4,4,4,4,3,Modified,False,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P25,MSc,2,CH641,TensorFlow,7,0.94,Top-5,3,5,4,2,4,Accepted,True,5,
+P25,MSc,2,CH856,VS Code,6,0.9571,Top-5,5,4,2,3,4,Modified,True,2,I needed more context to fully understand some implicit SATD comments.
+P25,MSc,2,CH873,Android,2,0.2857,Bottom-5,5,5,3,3,2,Modified,True,3,
+P25,MSc,2,CH1773,PostgreSQL,1,0.1229,Bottom-5,4,4,4,3,4,Deferred,True,1,
+P25,MSc,2,CH871,Android,1,0.1429,Bottom-5,4,4,4,3,3,Accepted,False,2,

@@ -1,0 +1,28 @@
+{
+  "generated_at": "2025-12-22T20:09:33.558340",
+  "generator": "RQ1 Evaluation Suite",
+  "repo_id": "AC",
+  "repo_name": "Apache Commons Lang",
+  "total_satd_instances": 631,
+  "total_relationships": 0,
+  "total_edges": 0,
+  "type_distribution": {
+    "call": 0,
+    "data": 0,
+    "control": 0,
+    "module": 0
+  },
+  "type_percentages": {
+    "call": 0.0,
+    "data": 0.0,
+    "control": 0.0,
+    "module": 0.0
+  },
+  "edges_sampled": 0,
+  "edges_correct_relevant": 0,
+  "edges_correct_marginal": 0,
+  "edges_incorrect": 0,
+  "edge_precision_strict": 0.0,
+  "edge_precision_lenient": 0.0,
+  "discovery_time_seconds": 0.39
+}

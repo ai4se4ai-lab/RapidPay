@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P09,Professional,5,CH1109,Firefox,4,0.8714,Top-5,5,4,4,3,3,Deferred,True,2,
+P09,Professional,5,CH205,TensorFlow,3,0.5686,Mid-5,5,5,4,3,5,Deferred,True,4,
+P09,Professional,5,CH1626,Kubernetes,3,0.5486,Mid-5,5,4,4,4,4,Accepted,True,4,
+P09,Professional,5,CH1665,PostgreSQL,5,0.8743,Top-5,4,4,4,4,2,Modified,True,5,The chain analysis revealed dependencies I hadn't considered before.
+P09,Professional,5,CH044,SciPy,3,0.4286,Mid-5,5,3,4,5,4,Rejected,True,5,
+P09,Professional,5,CH280,TensorFlow,5,0.9143,Top-5,5,5,4,3,2,Modified,True,2,Commit-time suggestions were relevant to my current work context.
+P09,Professional,5,CH1762,PostgreSQL,2,0.3457,Bottom-5,4,5,5,3,4,Accepted,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P09,Professional,5,CH1854,Apache Commons,4,0.6514,Mid-5,4,3,3,2,3,Modified,True,5,The prioritization matches what I would expect based on years of maintenance experience.
+P09,Professional,5,CH127,SciPy,7,1.0,Top-5,5,4,4,5,3,Rejected,False,1,
+P09,Professional,5,CH1881,Apache Commons,3,0.4086,Mid-5,5,5,5,2,4,Accepted,True,2,I appreciate the actionable remediation plans - they save investigation time.
+P09,Professional,5,CH594,TensorFlow,1,0.1229,Bottom-5,4,4,3,5,5,Deferred,True,2,
+P09,Professional,5,CH1745,PostgreSQL,2,0.2857,Bottom-5,4,4,4,3,3,Modified,True,1,
+P09,Professional,5,CH1378,React,6,0.9571,Top-5,5,5,4,4,4,Modified,True,0,The module-level dependencies were particularly insightful for our microservices architecture.
+P09,Professional,5,CH215,TensorFlow,5,0.8343,Top-5,5,4,4,2,3,Accepted,False,3,
+P09,Professional,5,CH1471,Kubernetes,1,0.0829,Bottom-5,4,5,4,4,4,Modified,True,3,The prioritization matches what I would expect based on years of maintenance experience.
+P09,Professional,5,CH861,VS Code,1,0.1429,Bottom-5,5,5,4,5,3,Modified,True,0,
+P09,Professional,5,CH1230,React,3,0.4286,Mid-5,5,4,5,5,5,Modified,False,2,

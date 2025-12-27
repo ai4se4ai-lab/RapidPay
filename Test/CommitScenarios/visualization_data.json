@@ -1,0 +1,3796 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario1",
+      "name": "Feature Rush - New Chain Introduction",
+      "before": {
+        "nodes": [],
+        "edges": [],
+        "chains": []
+      },
+      "after": {
+        "nodes": [
+          {
+            "id": "satd-cache_manager.py-32",
+            "label": "cache_manager.py:32",
+            "file": "cache_manager.py",
+            "line": 32,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # TODO: This lock implementation is naive. Using a single global lock\r"
+          },
+          {
+            "id": "satd-cache_manager.py-52",
+            "label": "cache_manager.py:52",
+            "file": "cache_manager.py",
+            "line": 52,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "                    # HACK: Expired entries are deleted lazily on access.\r"
+          },
+          {
+            "id": "satd-cache_manager.py-73",
+            "label": "cache_manager.py:73",
+            "file": "cache_manager.py",
+            "line": 73,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "            # FIXME: No size limit on cache! The cache will grow unbounded\r"
+          },
+          {
+            "id": "satd-cache_manager.py-110",
+            "label": "cache_manager.py:110",
+            "file": "cache_manager.py",
+            "line": 110,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # TODO: This is O(n) where n is total cache size.\r"
+          },
+          {
+            "id": "satd-cache_manager.py-138",
+            "label": "cache_manager.py:138",
+            "file": "cache_manager.py",
+            "line": 138,
+            "debtType": "Design",
+            "sirScore": 0,
+            "content": "        # NOTE: This method should be called periodically by a background task.\r"
+          },
+          {
+            "id": "satd-inventory_service.py-35",
+            "label": "inventory_service.py:35",
+            "file": "inventory_service.py",
+            "line": 35,
+            "debtType": "Other",
+            "sirScore": 0.36343981979453377,
+            "content": "        # TODO: Cache initialization is done synchronously in constructor.\r"
+          },
+          {
+            "id": "satd-inventory_service.py-60",
+            "label": "inventory_service.py:60",
+            "file": "inventory_service.py",
+            "line": 60,
+            "debtType": "Implementation",
+            "sirScore": 0.36343981979453377,
+            "content": "        # HACK: Using cache without proper invalidation strategy.\r"
+          },
+          {
+            "id": "satd-inventory_service.py-90",
+            "label": "inventory_service.py:90",
+            "file": "inventory_service.py",
+            "line": 90,
+            "debtType": "Architecture",
+            "sirScore": 0.6077202134862986,
+            "content": "            # FIXME: Not invalidating cache here! This creates a race condition\r"
+          },
+          {
+            "id": "satd-inventory_service.py-113",
+            "label": "inventory_service.py:113",
+            "file": "inventory_service.py",
+            "line": 113,
+            "debtType": "Architecture",
+            "sirScore": 0.4786390540764983,
+            "content": "            # BUG: Cache invalidation is missing here too.\r"
+          },
+          {
+            "id": "satd-inventory_service.py-141",
+            "label": "inventory_service.py:141",
+            "file": "inventory_service.py",
+            "line": 141,
+            "debtType": "Implementation",
+            "sirScore": 0.46692667266177723,
+            "content": "        # TODO: This should be a single database query or batch cache lookup.\r"
+          },
+          {
+            "id": "satd-inventory_service.py-151",
+            "label": "inventory_service.py:151",
+            "file": "inventory_service.py",
+            "line": 151,
+            "debtType": "Implementation",
+            "sirScore": 0.36343981979453377,
+            "content": "        # HACK: Iterating through entire inventory on every call.\r"
+          },
+          {
+            "id": "satd-order_service.py-44",
+            "label": "order_service.py:44",
+            "file": "order_service.py",
+            "line": 44,
+            "debtType": "Test",
+            "sirScore": 0.8766823319465333,
+            "content": "        # TODO: This direct instantiation of InventoryService creates tight coupling.\r"
+          },
+          {
+            "id": "satd-order_service.py-46",
+            "label": "order_service.py:46",
+            "file": "order_service.py",
+            "line": 46,
+            "debtType": "Test",
+            "sirScore": 0.8766823319465333,
+            "content": "        # This is design debt that will make unit testing very difficult.\r"
+          },
+          {
+            "id": "satd-order_service.py-60",
+            "label": "order_service.py:60",
+            "file": "order_service.py",
+            "line": 60,
+            "debtType": "Implementation",
+            "sirScore": 0.8766823319465333,
+            "content": "        # HACK: Quick validation added during feature rush - no proper error handling\r"
+          },
+          {
+            "id": "satd-order_service.py-93",
+            "label": "order_service.py:93",
+            "file": "order_service.py",
+            "line": 93,
+            "debtType": "Defect",
+            "sirScore": 0.8766823319465333,
+            "content": "        # FIXME: No transaction support here. If reservation partially fails,\r"
+          },
+          {
+            "id": "satd-order_service.py-118",
+            "label": "order_service.py:118",
+            "file": "order_service.py",
+            "line": 118,
+            "debtType": "Defect",
+            "sirScore": 1,
+            "content": "            # TODO: Need to handle partial cancellation scenarios where some\r"
+          },
+          {
+            "id": "satd-order_service.py-138",
+            "label": "order_service.py:138",
+            "file": "order_service.py",
+            "line": 138,
+            "debtType": "Implementation",
+            "sirScore": 0.8766823319465333,
+            "content": "        # HACK: This method iterates through ALL orders every time it's called.\r"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-0",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "call"
+            ],
+            "strength": 0.8
+          },
+          {
+            "id": "edge-1",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "data"
+            ],
+            "strength": 0.765
+          },
+          {
+            "id": "edge-2",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "data"
+            ],
+            "strength": 0.71
+          },
+          {
+            "id": "edge-3",
+            "source": "satd-order_service.py-118",
+            "target": "satd-order_service.py-138",
+            "types": [
+              "data"
+            ],
+            "strength": 0.76
+          },
+          {
+            "id": "edge-4",
+            "source": "satd-inventory_service.py-35",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-5",
+            "source": "satd-inventory_service.py-35",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-6",
+            "source": "satd-inventory_service.py-35",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-7",
+            "source": "satd-inventory_service.py-35",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-8",
+            "source": "satd-inventory_service.py-35",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-9",
+            "source": "satd-inventory_service.py-60",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-10",
+            "source": "satd-inventory_service.py-60",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-11",
+            "source": "satd-inventory_service.py-60",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-12",
+            "source": "satd-inventory_service.py-60",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-13",
+            "source": "satd-inventory_service.py-60",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-14",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-15",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-16",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-17",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-18",
+            "source": "satd-inventory_service.py-90",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-19",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-20",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-21",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-22",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-23",
+            "source": "satd-inventory_service.py-113",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-24",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-25",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-26",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-27",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-28",
+            "source": "satd-inventory_service.py-141",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-29",
+            "source": "satd-inventory_service.py-151",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-30",
+            "source": "satd-inventory_service.py-151",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-31",
+            "source": "satd-inventory_service.py-151",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-32",
+            "source": "satd-inventory_service.py-151",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-33",
+            "source": "satd-inventory_service.py-151",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-34",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-35",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-36",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-37",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-38",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-39",
+            "source": "satd-order_service.py-44",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-40",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-41",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-42",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-43",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-44",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-45",
+            "source": "satd-order_service.py-46",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-46",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-47",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-48",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-49",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-50",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-51",
+            "source": "satd-order_service.py-60",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-52",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-53",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-54",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-55",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-56",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-57",
+            "source": "satd-order_service.py-93",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-58",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-59",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-60",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-61",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-62",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-63",
+            "source": "satd-order_service.py-118",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-64",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-35",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-65",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-60",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-66",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-90",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-67",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-113",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-68",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-141",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-69",
+            "source": "satd-order_service.py-138",
+            "target": "satd-inventory_service.py-151",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-70",
+            "source": "satd-order_service.py-44",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-71",
+            "source": "satd-order_service.py-44",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-72",
+            "source": "satd-order_service.py-44",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-73",
+            "source": "satd-order_service.py-44",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-74",
+            "source": "satd-order_service.py-44",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-75",
+            "source": "satd-order_service.py-46",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-76",
+            "source": "satd-order_service.py-46",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-77",
+            "source": "satd-order_service.py-46",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-78",
+            "source": "satd-order_service.py-46",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-79",
+            "source": "satd-order_service.py-46",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-80",
+            "source": "satd-order_service.py-60",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-81",
+            "source": "satd-order_service.py-60",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-82",
+            "source": "satd-order_service.py-60",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-83",
+            "source": "satd-order_service.py-60",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-84",
+            "source": "satd-order_service.py-60",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-85",
+            "source": "satd-order_service.py-93",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-86",
+            "source": "satd-order_service.py-93",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-87",
+            "source": "satd-order_service.py-93",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-88",
+            "source": "satd-order_service.py-93",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-89",
+            "source": "satd-order_service.py-93",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-90",
+            "source": "satd-order_service.py-118",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-91",
+            "source": "satd-order_service.py-118",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-92",
+            "source": "satd-order_service.py-118",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-93",
+            "source": "satd-order_service.py-118",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-94",
+            "source": "satd-order_service.py-118",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-95",
+            "source": "satd-order_service.py-138",
+            "target": "satd-cache_manager.py-32",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-96",
+            "source": "satd-order_service.py-138",
+            "target": "satd-cache_manager.py-52",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-97",
+            "source": "satd-order_service.py-138",
+            "target": "satd-cache_manager.py-73",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-98",
+            "source": "satd-order_service.py-138",
+            "target": "satd-cache_manager.py-110",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-99",
+            "source": "satd-order_service.py-138",
+            "target": "satd-cache_manager.py-138",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          }
+        ],
+        "chains": [
+          {
+            "id": "chain-1",
+            "nodes": [
+              "satd-cache_manager.py-32",
+              "satd-inventory_service.py-35",
+              "satd-inventory_service.py-60",
+              "satd-inventory_service.py-90",
+              "satd-inventory_service.py-113",
+              "satd-inventory_service.py-141",
+              "satd-inventory_service.py-151",
+              "satd-order_service.py-44",
+              "satd-order_service.py-46",
+              "satd-order_service.py-60",
+              "satd-order_service.py-93",
+              "satd-order_service.py-118",
+              "satd-order_service.py-138",
+              "satd-cache_manager.py-52",
+              "satd-cache_manager.py-73",
+              "satd-cache_manager.py-110",
+              "satd-cache_manager.py-138"
+            ],
+            "length": 17,
+            "totalWeight": 100.38750000000005
+          }
+        ]
+      },
+      "delta": {
+        "new_satd_count": 17,
+        "chain_growth": 1,
+        "new_relationships": 100,
+        "sir_score_changes": [
+          {
+            "satd_id": "satd-order_service.py-118",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-order_service.py-44",
+            "before_sir": 0,
+            "after_sir": 0.8766823319465333,
+            "change": 0.8766823319465333
+          },
+          {
+            "satd_id": "satd-order_service.py-46",
+            "before_sir": 0,
+            "after_sir": 0.8766823319465333,
+            "change": 0.8766823319465333
+          },
+          {
+            "satd_id": "satd-order_service.py-60",
+            "before_sir": 0,
+            "after_sir": 0.8766823319465333,
+            "change": 0.8766823319465333
+          },
+          {
+            "satd_id": "satd-order_service.py-93",
+            "before_sir": 0,
+            "after_sir": 0.8766823319465333,
+            "change": 0.8766823319465333
+          },
+          {
+            "satd_id": "satd-order_service.py-138",
+            "before_sir": 0,
+            "after_sir": 0.8766823319465333,
+            "change": 0.8766823319465333
+          },
+          {
+            "satd_id": "satd-inventory_service.py-90",
+            "before_sir": 0,
+            "after_sir": 0.6077202134862986,
+            "change": 0.6077202134862986
+          },
+          {
+            "satd_id": "satd-inventory_service.py-113",
+            "before_sir": 0,
+            "after_sir": 0.4786390540764983,
+            "change": 0.4786390540764983
+          },
+          {
+            "satd_id": "satd-inventory_service.py-141",
+            "before_sir": 0,
+            "after_sir": 0.46692667266177723,
+            "change": 0.46692667266177723
+          },
+          {
+            "satd_id": "satd-inventory_service.py-35",
+            "before_sir": 0,
+            "after_sir": 0.36343981979453377,
+            "change": 0.36343981979453377
+          },
+          {
+            "satd_id": "satd-inventory_service.py-60",
+            "before_sir": 0,
+            "after_sir": 0.36343981979453377,
+            "change": 0.36343981979453377
+          },
+          {
+            "satd_id": "satd-inventory_service.py-151",
+            "before_sir": 0,
+            "after_sir": 0.36343981979453377,
+            "change": 0.36343981979453377
+          },
+          {
+            "satd_id": "satd-cache_manager.py-32",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-cache_manager.py-52",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-cache_manager.py-73",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-cache_manager.py-110",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-cache_manager.py-138",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          }
+        ]
+      },
+      "metrics": {
+        "accuracy": 0.6470588235294118,
+        "newSatd": 17,
+        "chainGrowth": 1
+      }
+    },
+    {
+      "id": "scenario2",
+      "name": "Cascading Debt - Chain Extension",
+      "before": {
+        "nodes": [
+          {
+            "id": "satd-auth_handler.py-3",
+            "label": "auth_handler.py:3",
+            "file": "auth_handler.py",
+            "line": 3,
+            "debtType": "Design",
+            "sirScore": 0,
+            "content": "# Initial implementation with existing technical debt (2 SATD instances)\r"
+          },
+          {
+            "id": "satd-auth_handler.py-48",
+            "label": "auth_handler.py:48",
+            "file": "auth_handler.py",
+            "line": 48,
+            "debtType": "Design",
+            "sirScore": 0,
+            "content": "        # TODO: Token expiration time is hardcoded to 24 hours.\r"
+          },
+          {
+            "id": "satd-auth_handler.py-69",
+            "label": "auth_handler.py:69",
+            "file": "auth_handler.py",
+            "line": 69,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Using MD5 for password hashing which is cryptographically weak.\r"
+          }
+        ],
+        "edges": [],
+        "chains": []
+      },
+      "after": {
+        "nodes": [
+          {
+            "id": "satd-audit_logger.py-45",
+            "label": "audit_logger.py:45",
+            "file": "audit_logger.py",
+            "line": 45,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Currently storing events in memory only. Need to persist to\r"
+          },
+          {
+            "id": "satd-audit_logger.py-83",
+            "label": "audit_logger.py:83",
+            "file": "audit_logger.py",
+            "line": 83,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Printing to stdout as temporary logging. This is not suitable\r"
+          },
+          {
+            "id": "satd-audit_logger.py-165",
+            "label": "audit_logger.py:165",
+            "file": "audit_logger.py",
+            "line": 165,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # FIXME: No indexing on user_id. This is O(n) scan of all events.\r"
+          },
+          {
+            "id": "satd-audit_logger.py-184",
+            "label": "audit_logger.py:184",
+            "file": "audit_logger.py",
+            "line": 184,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Should be able to filter by resource, action, time range, etc.\r"
+          },
+          {
+            "id": "satd-auth_handler.py-50",
+            "label": "auth_handler.py:50",
+            "file": "auth_handler.py",
+            "line": 50,
+            "debtType": "Design",
+            "sirScore": 1,
+            "content": "        # TODO: Token expiration time is hardcoded to 24 hours.\r"
+          },
+          {
+            "id": "satd-auth_handler.py-55",
+            "label": "auth_handler.py:55",
+            "file": "auth_handler.py",
+            "line": 55,
+            "debtType": "Other",
+            "sirScore": 1,
+            "content": "        # FIXME: SessionManager is instantiated here without configuration.\r"
+          },
+          {
+            "id": "satd-auth_handler.py-83",
+            "label": "auth_handler.py:83",
+            "file": "auth_handler.py",
+            "line": 83,
+            "debtType": "Implementation",
+            "sirScore": 1,
+            "content": "        # HACK: Using MD5 for password hashing which is cryptographically weak.\r"
+          },
+          {
+            "id": "satd-auth_handler.py-186",
+            "label": "auth_handler.py:186",
+            "file": "auth_handler.py",
+            "line": 186,
+            "debtType": "Implementation",
+            "sirScore": 1,
+            "content": "        # TODO: This is O(n) where n is number of tokens. Very slow for\r"
+          },
+          {
+            "id": "satd-permission_checker.py-39",
+            "label": "permission_checker.py:39",
+            "file": "permission_checker.py",
+            "line": 39,
+            "debtType": "Implementation",
+            "sirScore": 0.2899372277511326,
+            "content": "        # HACK: Role definitions are hardcoded here instead of in a database.\r"
+          },
+          {
+            "id": "satd-permission_checker.py-86",
+            "label": "permission_checker.py:86",
+            "file": "permission_checker.py",
+            "line": 86,
+            "debtType": "Implementation",
+            "sirScore": 0.2899372277511326,
+            "content": "        # TODO: Permission checking is O(n*m) where n is roles and m is \r"
+          },
+          {
+            "id": "satd-permission_checker.py-95",
+            "label": "permission_checker.py:95",
+            "file": "permission_checker.py",
+            "line": 95,
+            "debtType": "Other",
+            "sirScore": 0.2899372277511326,
+            "content": "        # FIXME: Denied access should be logged with more context - IP address,\r"
+          },
+          {
+            "id": "satd-permission_checker.py-145",
+            "label": "permission_checker.py:145",
+            "file": "permission_checker.py",
+            "line": 145,
+            "debtType": "Other",
+            "sirScore": 0.2899372277511326,
+            "content": "            # NOTE: Role assignment is not persisted! On restart, all custom\r"
+          },
+          {
+            "id": "satd-session_manager.py-34",
+            "label": "session_manager.py:34",
+            "file": "session_manager.py",
+            "line": 34,
+            "debtType": "Defect",
+            "sirScore": 0.5693826522235768,
+            "content": "        # TODO: Redis connection is not implemented! Currently using in-memory\r"
+          },
+          {
+            "id": "satd-session_manager.py-41",
+            "label": "session_manager.py:41",
+            "file": "session_manager.py",
+            "line": 41,
+            "debtType": "Implementation",
+            "sirScore": 0.5693826522235768,
+            "content": "        # HACK: Session timeout hardcoded to 30 minutes idle time.\r"
+          },
+          {
+            "id": "satd-session_manager.py-97",
+            "label": "session_manager.py:97",
+            "file": "session_manager.py",
+            "line": 97,
+            "debtType": "Architecture",
+            "sirScore": 0.7330892539638736,
+            "content": "        # FIXME: Timezone handling is completely missing. All times are assumed\r"
+          },
+          {
+            "id": "satd-session_manager.py-135",
+            "label": "session_manager.py:135",
+            "file": "session_manager.py",
+            "line": 135,
+            "debtType": "Defect",
+            "sirScore": 0.702865512116057,
+            "content": "            # BUG: Not removing from user_sessions index.\r"
+          },
+          {
+            "id": "satd-session_manager.py-175",
+            "label": "session_manager.py:175",
+            "file": "session_manager.py",
+            "line": 175,
+            "debtType": "Design",
+            "sirScore": 0.5693826522235768,
+            "content": "        # TODO: This should be run as a background task periodically.\r"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-0",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-session_manager.py-135",
+            "types": [
+              "call"
+            ],
+            "strength": 0.8
+          },
+          {
+            "id": "edge-1",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-session_manager.py-175",
+            "types": [
+              "data"
+            ],
+            "strength": 0.7124999999999999
+          },
+          {
+            "id": "edge-2",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-session_manager.py-34",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-3",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-session_manager.py-41",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-4",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-session_manager.py-97",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-5",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-session_manager.py-135",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-6",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-session_manager.py-175",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-7",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-session_manager.py-34",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-8",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-session_manager.py-41",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-9",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-session_manager.py-97",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-10",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-session_manager.py-135",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-11",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-session_manager.py-175",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-12",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-session_manager.py-34",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-13",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-session_manager.py-41",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-14",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-session_manager.py-97",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-15",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-session_manager.py-135",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-16",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-session_manager.py-175",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-17",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-session_manager.py-34",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-18",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-session_manager.py-41",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-19",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-session_manager.py-97",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-20",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-session_manager.py-135",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-21",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-session_manager.py-175",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-22",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-23",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-24",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-25",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-26",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-27",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-28",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-29",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-30",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-31",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-32",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-33",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-34",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-35",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-36",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-37",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-38",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-39",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-40",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-41",
+            "source": "satd-auth_handler.py-50",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-42",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-43",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-44",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-45",
+            "source": "satd-auth_handler.py-55",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-46",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-47",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-48",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-49",
+            "source": "satd-auth_handler.py-83",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-50",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-51",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-52",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-53",
+            "source": "satd-auth_handler.py-186",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.88
+          },
+          {
+            "id": "edge-54",
+            "source": "satd-permission_checker.py-39",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-55",
+            "source": "satd-permission_checker.py-39",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-56",
+            "source": "satd-permission_checker.py-39",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-57",
+            "source": "satd-permission_checker.py-39",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-58",
+            "source": "satd-permission_checker.py-86",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-59",
+            "source": "satd-permission_checker.py-86",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-60",
+            "source": "satd-permission_checker.py-86",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-61",
+            "source": "satd-permission_checker.py-86",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-62",
+            "source": "satd-permission_checker.py-95",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-63",
+            "source": "satd-permission_checker.py-95",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-64",
+            "source": "satd-permission_checker.py-95",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-65",
+            "source": "satd-permission_checker.py-95",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-66",
+            "source": "satd-permission_checker.py-145",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-67",
+            "source": "satd-permission_checker.py-145",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-68",
+            "source": "satd-permission_checker.py-145",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-69",
+            "source": "satd-permission_checker.py-145",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-70",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-71",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-72",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-73",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-74",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-75",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-76",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-77",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-78",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-79",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-80",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-81",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-82",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-83",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-84",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-85",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-86",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-permission_checker.py-39",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-87",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-permission_checker.py-86",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-88",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-permission_checker.py-95",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-89",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-permission_checker.py-145",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-90",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-91",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-92",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-93",
+            "source": "satd-session_manager.py-34",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-94",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-95",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-96",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-97",
+            "source": "satd-session_manager.py-41",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-98",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-99",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-100",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-101",
+            "source": "satd-session_manager.py-97",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-102",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-103",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-104",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-105",
+            "source": "satd-session_manager.py-135",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-106",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-audit_logger.py-45",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-107",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-audit_logger.py-83",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-108",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-audit_logger.py-165",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          },
+          {
+            "id": "edge-109",
+            "source": "satd-session_manager.py-175",
+            "target": "satd-audit_logger.py-184",
+            "types": [
+              "module"
+            ],
+            "strength": 0.92
+          }
+        ],
+        "chains": [
+          {
+            "id": "chain-1",
+            "nodes": [
+              "satd-audit_logger.py-45",
+              "satd-auth_handler.py-50",
+              "satd-auth_handler.py-55",
+              "satd-auth_handler.py-83",
+              "satd-auth_handler.py-186",
+              "satd-permission_checker.py-39",
+              "satd-permission_checker.py-86",
+              "satd-permission_checker.py-95",
+              "satd-permission_checker.py-145",
+              "satd-session_manager.py-34",
+              "satd-session_manager.py-41",
+              "satd-session_manager.py-97",
+              "satd-session_manager.py-135",
+              "satd-session_manager.py-175",
+              "satd-audit_logger.py-83",
+              "satd-audit_logger.py-165",
+              "satd-audit_logger.py-184"
+            ],
+            "length": 17,
+            "totalWeight": 106.1250000000001
+          }
+        ]
+      },
+      "delta": {
+        "new_satd_count": 14,
+        "chain_growth": 1,
+        "new_relationships": 110,
+        "sir_score_changes": [
+          {
+            "satd_id": "satd-auth_handler.py-50",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-auth_handler.py-55",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-auth_handler.py-83",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-auth_handler.py-186",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-session_manager.py-97",
+            "before_sir": 0,
+            "after_sir": 0.7330892539638736,
+            "change": 0.7330892539638736
+          },
+          {
+            "satd_id": "satd-session_manager.py-135",
+            "before_sir": 0,
+            "after_sir": 0.702865512116057,
+            "change": 0.702865512116057
+          },
+          {
+            "satd_id": "satd-session_manager.py-34",
+            "before_sir": 0,
+            "after_sir": 0.5693826522235768,
+            "change": 0.5693826522235768
+          },
+          {
+            "satd_id": "satd-session_manager.py-41",
+            "before_sir": 0,
+            "after_sir": 0.5693826522235768,
+            "change": 0.5693826522235768
+          },
+          {
+            "satd_id": "satd-session_manager.py-175",
+            "before_sir": 0,
+            "after_sir": 0.5693826522235768,
+            "change": 0.5693826522235768
+          },
+          {
+            "satd_id": "satd-permission_checker.py-39",
+            "before_sir": 0,
+            "after_sir": 0.2899372277511326,
+            "change": 0.2899372277511326
+          },
+          {
+            "satd_id": "satd-permission_checker.py-86",
+            "before_sir": 0,
+            "after_sir": 0.2899372277511326,
+            "change": 0.2899372277511326
+          },
+          {
+            "satd_id": "satd-permission_checker.py-95",
+            "before_sir": 0,
+            "after_sir": 0.2899372277511326,
+            "change": 0.2899372277511326
+          },
+          {
+            "satd_id": "satd-permission_checker.py-145",
+            "before_sir": 0,
+            "after_sir": 0.2899372277511326,
+            "change": 0.2899372277511326
+          },
+          {
+            "satd_id": "satd-audit_logger.py-45",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-audit_logger.py-83",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-audit_logger.py-165",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-audit_logger.py-184",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          }
+        ]
+      },
+      "metrics": {
+        "accuracy": 0.8235294117647058,
+        "newSatd": 14,
+        "chainGrowth": 1
+      }
+    },
+    {
+      "id": "scenario3",
+      "name": "Multi-Developer Collaboration - Chain Merge",
+      "before": {
+        "nodes": [
+          {
+            "id": "satd-log_formatter.py-29",
+            "label": "log_formatter.py:29",
+            "file": "log_formatter.py",
+            "line": 29,
+            "debtType": "Defect",
+            "sirScore": 0,
+            "content": "        # FIXME: Format configuration is not validated. Invalid timestamp format\r"
+          },
+          {
+            "id": "satd-log_formatter.py-57",
+            "label": "log_formatter.py:57",
+            "file": "log_formatter.py",
+            "line": 57,
+            "debtType": "Architecture",
+            "sirScore": 0,
+            "content": "            # TODO: No timezone handling. Logs will have inconsistent times\r"
+          },
+          {
+            "id": "satd-log_service.py-40",
+            "label": "log_service.py:40",
+            "file": "log_service.py",
+            "line": 40,
+            "debtType": "Defect",
+            "sirScore": 0,
+            "content": "        # TODO: Log storage is in-memory only. All logs are lost on restart.\r"
+          },
+          {
+            "id": "satd-log_service.py-74",
+            "label": "log_service.py:74",
+            "file": "log_service.py",
+            "line": 74,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Simple truncation when limit reached. This discards oldest logs\r"
+          },
+          {
+            "id": "satd-metrics_collector.py-40",
+            "label": "metrics_collector.py:40",
+            "file": "metrics_collector.py",
+            "line": 40,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Storing all metrics in memory indefinitely. For high-throughput\r"
+          },
+          {
+            "id": "satd-metrics_collector.py-141",
+            "label": "metrics_collector.py:141",
+            "file": "metrics_collector.py",
+            "line": 141,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: No percentile calculations (p50, p95, p99). This limits\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-28",
+            "label": "metrics_exporter.py:28",
+            "file": "metrics_exporter.py",
+            "line": 28,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Export endpoint is not configurable at runtime. Changing\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-54",
+            "label": "metrics_exporter.py:54",
+            "file": "metrics_exporter.py",
+            "line": 54,
+            "debtType": "Defect",
+            "sirScore": 1,
+            "content": "        # FIXME: Auto-flush when buffer is full is synchronous and blocks.\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-80",
+            "label": "metrics_exporter.py:80",
+            "file": "metrics_exporter.py",
+            "line": 80,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Actually send to endpoint! Currently just printing.\r"
+          }
+        ],
+        "edges": [],
+        "chains": [
+          {
+            "id": "chain-1",
+            "nodes": [
+              "satd-metrics_exporter.py-54",
+              "satd-metrics_exporter.py-80"
+            ],
+            "length": 2,
+            "totalWeight": 0.8
+          }
+        ]
+      },
+      "after": {
+        "nodes": [
+          {
+            "id": "satd-log_formatter.py-29",
+            "label": "log_formatter.py:29",
+            "file": "log_formatter.py",
+            "line": 29,
+            "debtType": "Defect",
+            "sirScore": 0,
+            "content": "        # FIXME: Format configuration is not validated. Invalid timestamp format\r"
+          },
+          {
+            "id": "satd-log_formatter.py-57",
+            "label": "log_formatter.py:57",
+            "file": "log_formatter.py",
+            "line": 57,
+            "debtType": "Architecture",
+            "sirScore": 0,
+            "content": "            # TODO: No timezone handling. Logs will have inconsistent times\r"
+          },
+          {
+            "id": "satd-log_service.py-40",
+            "label": "log_service.py:40",
+            "file": "log_service.py",
+            "line": 40,
+            "debtType": "Defect",
+            "sirScore": 0,
+            "content": "        # TODO: Log storage is in-memory only. All logs are lost on restart.\r"
+          },
+          {
+            "id": "satd-log_service.py-79",
+            "label": "log_service.py:79",
+            "file": "log_service.py",
+            "line": 79,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Simple truncation when limit reached. This discards oldest logs\r"
+          },
+          {
+            "id": "satd-log_service.py-93",
+            "label": "log_service.py:93",
+            "file": "log_service.py",
+            "line": 93,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # FIXME: Aggregator notification is synchronous. If aggregator is slow,\r"
+          },
+          {
+            "id": "satd-metrics_collector.py-40",
+            "label": "metrics_collector.py:40",
+            "file": "metrics_collector.py",
+            "line": 40,
+            "debtType": "Implementation",
+            "sirScore": 0,
+            "content": "        # HACK: Storing all metrics in memory indefinitely. For high-throughput\r"
+          },
+          {
+            "id": "satd-metrics_collector.py-56",
+            "label": "metrics_collector.py:56",
+            "file": "metrics_collector.py",
+            "line": 56,
+            "debtType": "Defect",
+            "sirScore": 0,
+            "content": "        # BUG: Aggregator notification happens before the metric is fully\r"
+          },
+          {
+            "id": "satd-metrics_collector.py-160",
+            "label": "metrics_collector.py:160",
+            "file": "metrics_collector.py",
+            "line": 160,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: No percentile calculations (p50, p95, p99). This limits\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-28",
+            "label": "metrics_exporter.py:28",
+            "file": "metrics_exporter.py",
+            "line": 28,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Export endpoint is not configurable at runtime. Changing\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-54",
+            "label": "metrics_exporter.py:54",
+            "file": "metrics_exporter.py",
+            "line": 54,
+            "debtType": "Defect",
+            "sirScore": 0.13675213675213677,
+            "content": "        # FIXME: Auto-flush when buffer is full is synchronous and blocks.\r"
+          },
+          {
+            "id": "satd-metrics_exporter.py-80",
+            "label": "metrics_exporter.py:80",
+            "file": "metrics_exporter.py",
+            "line": 80,
+            "debtType": "Other",
+            "sirScore": 0,
+            "content": "        # TODO: Actually send to endpoint! Currently just printing.\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-52",
+            "label": "observability_aggregator.py:52",
+            "file": "observability_aggregator.py",
+            "line": 52,
+            "debtType": "Design",
+            "sirScore": 0.8188034188034188,
+            "content": "        # TODO: Connecting to both logging and metrics creates tight coupling.\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-64",
+            "label": "observability_aggregator.py:64",
+            "file": "observability_aggregator.py",
+            "line": 64,
+            "debtType": "Implementation",
+            "sirScore": 0.8188034188034188,
+            "content": "        # HACK: Correlation tracking is simplistic. Using a global current_id\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-69",
+            "label": "observability_aggregator.py:69",
+            "file": "observability_aggregator.py",
+            "line": 69,
+            "debtType": "Defect",
+            "sirScore": 0.8188034188034188,
+            "content": "        # FIXME: No buffer size limit! Records grow unboundedly. Combined with\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-134",
+            "label": "observability_aggregator.py:134",
+            "file": "observability_aggregator.py",
+            "line": 134,
+            "debtType": "Defect",
+            "sirScore": 0.8188034188034188,
+            "content": "        # BUG: This creates a feedback loop! Logging an error generates a metric,\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-150",
+            "label": "observability_aggregator.py:150",
+            "file": "observability_aggregator.py",
+            "line": 150,
+            "debtType": "Implementation",
+            "sirScore": 0.8188034188034188,
+            "content": "        # TODO: This is O(n) where n is all records. For large systems with\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-190",
+            "label": "observability_aggregator.py:190",
+            "file": "observability_aggregator.py",
+            "line": 190,
+            "debtType": "Implementation",
+            "sirScore": 0.8188034188034188,
+            "content": "        # HACK: Health calculation logic is hardcoded. Thresholds should be\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-228",
+            "label": "observability_aggregator.py:228",
+            "file": "observability_aggregator.py",
+            "line": 228,
+            "debtType": "Other",
+            "sirScore": 0.8188034188034188,
+            "content": "        # NOTE: Full table scan for every query. This is acceptable for small\r"
+          },
+          {
+            "id": "satd-observability_aggregator.py-258",
+            "label": "observability_aggregator.py:258",
+            "file": "observability_aggregator.py",
+            "line": 258,
+            "debtType": "Other",
+            "sirScore": 1,
+            "content": "        # TODO: Dashboard data generation is synchronous and expensive.\r"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-0",
+            "source": "satd-metrics_exporter.py-54",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "call"
+            ],
+            "strength": 0.8
+          },
+          {
+            "id": "edge-1",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-observability_aggregator.py-190",
+            "types": [
+              "call"
+            ],
+            "strength": 0.8
+          },
+          {
+            "id": "edge-2",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-observability_aggregator.py-228",
+            "types": [
+              "call"
+            ],
+            "strength": 0.8
+          },
+          {
+            "id": "edge-3",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-4",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-5",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-6",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-7",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-8",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-9",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-10",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-11",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-12",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-13",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-14",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-15",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-16",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-17",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-18",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-19",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-20",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-21",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-22",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-23",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-24",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-log_service.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-25",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-log_service.py-79",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-26",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-log_service.py-93",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-27",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-28",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-29",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-30",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-31",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-32",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-33",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-34",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-35",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-36",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-37",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-38",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-39",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-40",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-41",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-log_formatter.py-29",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-42",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-log_formatter.py-57",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-43",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-44",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-45",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-46",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-47",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-48",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-49",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-50",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-51",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-52",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-53",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-54",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-55",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-56",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-57",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-58",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-59",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-60",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-61",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-62",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-63",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-64",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_collector.py-40",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-65",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_collector.py-56",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-66",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_collector.py-160",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-67",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-68",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-69",
+            "source": "satd-observability_aggregator.py-52",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-70",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-71",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-72",
+            "source": "satd-observability_aggregator.py-64",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-73",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-74",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-75",
+            "source": "satd-observability_aggregator.py-69",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-76",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-77",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-78",
+            "source": "satd-observability_aggregator.py-134",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-79",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-80",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-81",
+            "source": "satd-observability_aggregator.py-150",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-82",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-83",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-84",
+            "source": "satd-observability_aggregator.py-190",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-85",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-86",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-87",
+            "source": "satd-observability_aggregator.py-228",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-88",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_exporter.py-28",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-89",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_exporter.py-54",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          },
+          {
+            "id": "edge-90",
+            "source": "satd-observability_aggregator.py-258",
+            "target": "satd-metrics_exporter.py-80",
+            "types": [
+              "module"
+            ],
+            "strength": 1
+          }
+        ],
+        "chains": [
+          {
+            "id": "chain-1",
+            "nodes": [
+              "satd-log_formatter.py-29",
+              "satd-observability_aggregator.py-52",
+              "satd-observability_aggregator.py-64",
+              "satd-observability_aggregator.py-69",
+              "satd-observability_aggregator.py-134",
+              "satd-observability_aggregator.py-150",
+              "satd-observability_aggregator.py-190",
+              "satd-observability_aggregator.py-228",
+              "satd-observability_aggregator.py-258",
+              "satd-log_service.py-40",
+              "satd-log_service.py-79",
+              "satd-log_service.py-93",
+              "satd-log_formatter.py-57",
+              "satd-metrics_collector.py-40",
+              "satd-metrics_collector.py-56",
+              "satd-metrics_collector.py-160",
+              "satd-metrics_exporter.py-28",
+              "satd-metrics_exporter.py-54",
+              "satd-metrics_exporter.py-80"
+            ],
+            "length": 19,
+            "totalWeight": 90.4
+          }
+        ]
+      },
+      "delta": {
+        "new_satd_count": 10,
+        "chain_growth": 0,
+        "new_relationships": 91,
+        "sir_score_changes": [
+          {
+            "satd_id": "satd-observability_aggregator.py-258",
+            "before_sir": 0,
+            "after_sir": 1,
+            "change": 1
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-52",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-64",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-69",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-134",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-150",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-190",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-observability_aggregator.py-228",
+            "before_sir": 0,
+            "after_sir": 0.8188034188034188,
+            "change": 0.8188034188034188
+          },
+          {
+            "satd_id": "satd-metrics_exporter.py-54",
+            "before_sir": 1,
+            "after_sir": 0.13675213675213677,
+            "change": -0.8632478632478633
+          },
+          {
+            "satd_id": "satd-log_formatter.py-29",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-log_formatter.py-57",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-log_service.py-40",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-log_service.py-79",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-log_service.py-93",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-metrics_collector.py-40",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-metrics_collector.py-56",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-metrics_collector.py-160",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-metrics_exporter.py-28",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          },
+          {
+            "satd_id": "satd-metrics_exporter.py-80",
+            "before_sir": 0,
+            "after_sir": 0,
+            "change": 0
+          }
+        ]
+      },
+      "metrics": {
+        "accuracy": 0.9473684210526315,
+        "newSatd": 10,
+        "chainGrowth": 0
+      }
+    }
+  ],
+  "summary": {
+    "total_scenarios": 3,
+    "avg_detection_accuracy": 0.8059855521155831,
+    "total_satd_detected": 53,
+    "total_chains_detected": 3
+  },
+  "timestamp": "2025-11-29T06:29:35.082Z"
+}

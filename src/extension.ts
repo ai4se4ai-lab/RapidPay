@@ -71,7 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
             console.log(`Branch: ${repoInfo.branch}, Commits: ${repoInfo.commitCount}`);
             
             // Step 1: SID - SATD Instance Detection
-            progress.report({ message: "Stage 1: SATD Instance Detection (SID)..." });
+            progress.report({ message: "Stage 1: SATD Instance Detection (SID) - Lexical filtering..." });
             const confidenceThreshold = config.get<number>('confidenceThreshold') || 0.7;
             console.log(`Confidence threshold: ${confidenceThreshold}`);
             
@@ -91,14 +91,35 @@ export function activate(context: vscode.ExtensionContext) {
                 console.warn('  1. Is this folder a Git repository?');
                 console.warn('  2. Are the files committed to Git?');
                 console.warn('  3. Do files contain TODO/FIXME/HACK/etc. comments?');
+                
+                vscode.window.showWarningMessage(
+                    'No SATD patterns found in repository. Make sure files contain TODO/FIXME/HACK comments and are tracked by Git.',
+                    'Run Diagnostic'
+                ).then(selection => {
+                    if (selection === 'Run Diagnostic') {
+                        vscode.commands.executeCommand('RapidPay.diagnostic');
+                    }
+                });
             }
             
-            progress.report({ message: `Found ${debtItems.length} potential SATD instances. Enhancing with LLM...` });
+            progress.report({ message: `Found ${debtItems.length} potential SATD instances. Running LLM classification...` });
             console.log('Starting enhanceTechnicalDebtWithAI()...');
+            
+            // Enhanced progress reporting for LLM classification
+            if (debtItems.length > 0) {
+                vscode.window.setStatusBarMessage(`RapidPay: Classifying ${debtItems.length} items with LLM...`, 60000);
+            }
+            
             technicalDebtItems = await enhanceTechnicalDebtWithAI(debtItems, confidenceThreshold);
             console.log(`enhanceTechnicalDebtWithAI() returned ${technicalDebtItems.length} items`);
             
-            console.log(`SID: Detected ${technicalDebtItems.length} SATD instances`);
+            // Check for LLM errors
+            const itemsWithErrors = technicalDebtItems.filter(item => item.llmError);
+            if (itemsWithErrors.length > 0) {
+                console.warn(`${itemsWithErrors.length} items had LLM errors`);
+            }
+            
+            console.log(`SID: Detected ${technicalDebtItems.length} SATD instances (${itemsWithErrors.length} with LLM errors)`);
             
             // Step 2: IRD - Inter-SATD Relationship Discovery
             const relationshipAnalysisEnabled = config.get<boolean>('relationshipAnalysisEnabled', true);
@@ -183,11 +204,25 @@ export function activate(context: vscode.ExtensionContext) {
             }
             
             // Show results
+            const itemsWithLLMErrors = technicalDebtItems.filter(item => item.llmError).length;
+            const confirmedItems = technicalDebtItems.filter(item => item.isActualDebt === true).length;
+            
+            let resultMessage = `RapidPay Analysis Complete:\n` +
+                `• ${technicalDebtItems.length} SATD instances detected`;
+            
+            if (confirmedItems > 0) {
+                resultMessage += ` (${confirmedItems} LLM-confirmed)`;
+            }
+            
+            resultMessage += `\n• ${relationships.length} relationships discovered\n` +
+                `• ${chains.length} chains identified`;
+            
+            if (itemsWithLLMErrors > 0) {
+                resultMessage += `\n⚠ ${itemsWithLLMErrors} items had LLM classification errors`;
+            }
+            
             vscode.window.showInformationMessage(
-                `RapidPay Analysis Complete:\n` +
-                `• ${technicalDebtItems.length} SATD instances detected\n` +
-                `• ${relationships.length} relationships discovered\n` +
-                `• ${chains.length} chains identified`,
+                resultMessage,
                 'View Details',
                 'Visualize Relationships'
             ).then(selection => {

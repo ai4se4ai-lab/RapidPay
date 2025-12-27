@@ -1,0 +1,6 @@
+chain_id,nodes,length,root_node,leaf_nodes,total_weight,coherence_rating,annotator_notes,would_consider_together
+chain-81,"satd-417,satd-338",2,satd-417,satd-338,3.17,4,Chain represents related SATD items that should be considered together,True
+chain-14,"satd-405,satd-469,satd-146,satd-271",4,satd-405,satd-271,1.56,1,Chain items are structurally related but belong to independent features,False
+chain-3,"satd-429,satd-225,satd-459,satd-603",4,satd-429,satd-603,2.11,4,Chain represents related SATD items that should be considered together,True
+chain-35,"satd-15,satd-95,satd-242",3,satd-15,satd-242,1.67,4,Chain represents related SATD items that should be considered together,True
+chain-31,"satd-433,satd-420,satd-478",3,satd-433,satd-478,4.46,4,Chain represents related SATD items that should be considered together,True

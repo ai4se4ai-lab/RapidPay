@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATD Chain Evolution - Commit Scenario Visualization</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --accent-cyan: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Navigation */
+        .scenario-nav {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        
+        .scenario-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .scenario-btn:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(88, 166, 255, 0.1);
+        }
+        
+        .scenario-btn.active {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.2) 0%, rgba(163, 113, 247, 0.2) 100%);
+            border-color: var(--accent-cyan);
+        }
+        
+        /* Main Content */
+        .container {
+            padding: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        /* Scenario Info */
+        .scenario-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .scenario-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .scenario-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .commit-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .commit-badge::before {
+            content: '⚡';
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value.positive { color: var(--accent-green); }
+        .metric-value.negative { color: var(--accent-red); }
+        .metric-value.neutral { color: var(--accent-cyan); }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Comparison Section */
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .state-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .state-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .state-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .state-title.before { color: var(--text-secondary); }
+        .state-title.after { color: var(--accent-green); }
+        
+        .state-badge {
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .graph-container {
+            height: 400px;
+            background: var(--bg-primary);
+        }
+        
+        /* Arrow Separator */
+        .arrow-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Chain Details */
+        .chains-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chain-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chain-item {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chain-name {
+            font-weight: 500;
+        }
+        
+        .chain-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .chain-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chain-stat-value {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        /* SIR Ranking */
+        .ranking-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .ranking-table th,
+        .ranking-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .ranking-table th {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .ranking-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .rank-badge.top-1 { background: linear-gradient(135deg, #ffd700, #ffb800); color: #000; }
+        .rank-badge.top-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+        .rank-badge.top-3 { background: linear-gradient(135deg, #cd7f32, #b8860b); color: #fff; }
+        .rank-badge.other { background: var(--bg-tertiary); }
+        
+        .sir-bar-container {
+            width: 150px;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .sir-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .debt-type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .debt-type-badge.Design { background: rgba(88, 166, 255, 0.2); color: var(--accent-cyan); }
+        .debt-type-badge.Implementation { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+        .debt-type-badge.Defect { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+        .debt-type-badge.Architecture { background: rgba(210, 153, 34, 0.2); color: var(--accent-orange); }
+        .debt-type-badge.Test { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            color: var(--text-secondary);
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>SATD Chain Evolution Visualization</h1>
+        <p class="header-subtitle">Analyzing Technical Debt Propagation Through Developer Commits</p>
+    </header>
+    
+    <nav class="scenario-nav" id="scenarioNav">
+        <button class="scenario-btn active" data-scenario="0">Scenario 1: Feature Rush</button>
+        <button class="scenario-btn" data-scenario="1">Scenario 2: Cascading Debt</button>
+        <button class="scenario-btn" data-scenario="2">Scenario 3: Chain Merge</button>
+    </nav>
+    
+    <main class="container" id="mainContent">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading visualization data...</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                Run <code>npx ts-node run_commit_scenario.ts --all</code> to generate data
+            </p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>RapidPay SATD Chain Detection &mdash; Commit Scenario Visualization</p>
+    </footer>
+    
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <script>
+        // Debt type colors
+        const debtTypeColors = {
+            'Design': '#58a6ff',
+            'Implementation': '#a371f7',
+            'Defect': '#f85149',
+            'Architecture': '#d29922',
+            'Test': '#3fb950',
+            'Documentation': '#8b949e',
+            'Requirement': '#7ee787',
+            'Other': '#6e7681'
+        };
+        
+        // Sample data (will be replaced by actual data from visualization_data.json)
+        let vizData = null;
+        let currentScenarioIndex = 0;
+        
+        // Load visualization data
+        async function loadVisualizationData() {
+            try {
+                const response = await fetch('visualization_data.json');
+                if (response.ok) {
+                    vizData = await response.json();
+                    renderScenario(0);
+                    setupNavigation();
+                } else {
+                    showSampleData();
+                }
+            } catch (error) {
+                console.log('Using sample data:', error);
+                showSampleData();
+            }
+        }
+        
+        // Show sample data when file not available
+        function showSampleData() {
+            vizData = {
+                scenarios: [
+                    {
+                        id: 'scenario1',
+                        name: 'Feature Rush - New Chain Introduction',
+                        before: {
+                            nodes: [
+                                { id: 'clean-1', label: 'order_service.py:45', debtType: 'None', sirScore: 0 }
+                            ],
+                            edges: [],
+                            chains: []
+                        },
+                        after: {
+                            nodes: [
+                                { id: 'satd-1', label: 'order_service.py:46', debtType: 'Design', sirScore: 0.95, content: 'TODO: Direct instantiation creates tight coupling' },
+                                { id: 'satd-2', label: 'order_service.py:60', debtType: 'Implementation', sirScore: 0.82, content: 'HACK: Quick validation - no error handling' },
+                                { id: 'satd-3', label: 'order_service.py:85', debtType: 'Defect', sirScore: 0.78, content: 'FIXME: No transaction support' },
+                                { id: 'satd-4', label: 'inventory_service.py:38', debtType: 'Design', sirScore: 0.65, content: 'TODO: Cache initialization blocks startup' },
+                                { id: 'satd-5', label: 'inventory_service.py:58', debtType: 'Implementation', sirScore: 0.55, content: 'HACK: Cache without invalidation' },
+                                { id: 'satd-6', label: 'cache_manager.py:33', debtType: 'Design', sirScore: 0.45, content: 'TODO: Naive lock implementation' },
+                                { id: 'satd-7', label: 'cache_manager.py:68', debtType: 'Defect', sirScore: 0.35, content: 'FIXME: No size limit on cache' }
+                            ],
+                            edges: [
+                                { source: 'satd-1', target: 'satd-4', types: ['module'], inChain: true },
+                                { source: 'satd-2', target: 'satd-5', types: ['call'], inChain: true },
+                                { source: 'satd-4', target: 'satd-6', types: ['module'], inChain: true },
+                                { source: 'satd-5', target: 'satd-7', types: ['data'], inChain: true }
+                            ],
+                            chains: [
+                                { id: 'chain-1', nodes: ['satd-1', 'satd-4', 'satd-6', 'satd-7'], length: 4 }
+                            ]
+                        },
+                        delta: {
+                            new_satd_count: 7,
+                            chain_growth: 1,
+                            new_relationships: 4
+                        },
+                        metrics: {
+                            accuracy: 0.85,
+                            newSatd: 7,
+                            chainGrowth: 1
+                        }
+                    },
+                    {
+                        id: 'scenario2',
+                        name: 'Cascading Debt - Chain Extension',
+                        before: {
+                            nodes: [
+                                { id: 'pre-1', label: 'auth_handler.py:52', debtType: 'Design', sirScore: 0.5 },
+                                { id: 'pre-2', label: 'auth_handler.py:65', debtType: 'Defect', sirScore: 0.4 }
+                            ],
+                            edges: [
+                                { source: 'pre-1', target: 'pre-2', types: ['data'], inChain: true }
+                            ],
+                            chains: [{ id: 'chain-pre', nodes: ['pre-1', 'pre-2'], length: 2 }]
+                        },
+                        after: {
+                            nodes: [
+                                { id: 'satd-1', label: 'auth_handler.py:53', debtType: 'Design', sirScore: 0.92 },
+                                { id: 'satd-2', label: 'auth_handler.py:56', debtType: 'Design', sirScore: 0.88 },
+                                { id: 'satd-3', label: 'session_manager.py:35', debtType: 'Architecture', sirScore: 0.75 },
+                                { id: 'satd-4', label: 'session_manager.py:114', debtType: 'Defect', sirScore: 0.68 },
+                                { id: 'satd-5', label: 'permission_checker.py:33', debtType: 'Design', sirScore: 0.55 },
+                                { id: 'satd-6', label: 'audit_logger.py:37', debtType: 'Architecture', sirScore: 0.42 }
+                            ],
+                            edges: [
+                                { source: 'satd-2', target: 'satd-3', types: ['module'], inChain: true },
+                                { source: 'satd-3', target: 'satd-4', types: ['data'], inChain: true },
+                                { source: 'satd-3', target: 'satd-5', types: ['module'], inChain: true },
+                                { source: 'satd-5', target: 'satd-6', types: ['module'], inChain: true }
+                            ],
+                            chains: [{ id: 'chain-1', nodes: ['satd-2', 'satd-3', 'satd-4', 'satd-5', 'satd-6'], length: 5 }]
+                        },
+                        delta: { new_satd_count: 4, chain_growth: 0, new_relationships: 4 },
+                        metrics: { accuracy: 0.90, newSatd: 4, chainGrowth: 3 }
+                    },
+                    {
+                        id: 'scenario3',
+                        name: 'Multi-Developer - Chain Merge',
+                        before: {
+                            nodes: [
+                                { id: 'log-1', label: 'log_service.py:38', debtType: 'Architecture', sirScore: 0.6 },
+                                { id: 'log-2', label: 'log_formatter.py:27', debtType: 'Defect', sirScore: 0.4 },
+                                { id: 'met-1', label: 'metrics_collector.py:42', debtType: 'Architecture', sirScore: 0.65 },
+                                { id: 'met-2', label: 'metrics_exporter.py:24', debtType: 'Design', sirScore: 0.35 }
+                            ],
+                            edges: [
+                                { source: 'log-1', target: 'log-2', types: ['module'], inChain: true },
+                                { source: 'met-1', target: 'met-2', types: ['module'], inChain: true }
+                            ],
+                            chains: [
+                                { id: 'chain-log', nodes: ['log-1', 'log-2'], length: 2 },
+                                { id: 'chain-met', nodes: ['met-1', 'met-2'], length: 2 }
+                            ]
+                        },
+                        after: {
+                            nodes: [
+                                { id: 'agg-1', label: 'observability_aggregator.py:47', debtType: 'Architecture', sirScore: 0.98 },
+                                { id: 'agg-2', label: 'observability_aggregator.py:60', debtType: 'Defect', sirScore: 0.85 },
+                                { id: 'log-1', label: 'log_service.py:41', debtType: 'Architecture', sirScore: 0.72 },
+                                { id: 'log-2', label: 'log_service.py:75', debtType: 'Implementation', sirScore: 0.65 },
+                                { id: 'met-1', label: 'metrics_collector.py:45', debtType: 'Architecture', sirScore: 0.68 },
+                                { id: 'met-2', label: 'metrics_collector.py:55', debtType: 'Defect', sirScore: 0.55 }
+                            ],
+                            edges: [
+                                { source: 'agg-1', target: 'log-1', types: ['module'], inChain: true },
+                                { source: 'agg-1', target: 'met-1', types: ['module'], inChain: true },
+                                { source: 'log-2', target: 'agg-2', types: ['call'], inChain: true },
+                                { source: 'met-2', target: 'agg-2', types: ['data'], inChain: true }
+                            ],
+                            chains: [{ id: 'chain-merged', nodes: ['agg-1', 'agg-2', 'log-1', 'log-2', 'met-1', 'met-2'], length: 6 }]
+                        },
+                        delta: { new_satd_count: 2, chain_growth: -1, new_relationships: 4 },
+                        metrics: { accuracy: 0.88, newSatd: 2, chainGrowth: -1 }
+                    }
+                ],
+                summary: {
+                    total_scenarios: 3,
+                    avg_detection_accuracy: 0.87,
+                    total_satd_detected: 19,
+                    total_chains_detected: 3
+                }
+            };
+            renderScenario(0);
+            setupNavigation();
+        }
+        
+        // Setup navigation buttons
+        function setupNavigation() {
+            const buttons = document.querySelectorAll('.scenario-btn');
+            buttons.forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderScenario(idx);
+                });
+            });
+        }
+        
+        // Render a scenario
+        function renderScenario(index) {
+            if (!vizData || !vizData.scenarios[index]) return;
+            
+            currentScenarioIndex = index;
+            const scenario = vizData.scenarios[index];
+            
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <!-- Scenario Info -->
+                <div class="scenario-info">
+                    <h2 class="scenario-title">${scenario.name}</h2>
+                    <p class="scenario-description">Simulating developer commit that introduces or modifies technical debt chains</p>
+                    <span class="commit-badge">feat: ${scenario.id} changes</span>
+                </div>
+                
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value ${scenario.delta.new_satd_count > 0 ? 'negative' : 'positive'}">
+                            ${scenario.delta.new_satd_count > 0 ? '+' : ''}${scenario.delta.new_satd_count}
+                        </div>
+                        <div class="metric-label">New SATD Instances</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value ${scenario.delta.chain_growth > 0 ? 'negative' : scenario.delta.chain_growth < 0 ? 'positive' : 'neutral'}">
+                            ${scenario.delta.chain_growth > 0 ? '+' : ''}${scenario.delta.chain_growth}
+                        </div>
+                        <div class="metric-label">Chain Count Change</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value neutral">${scenario.delta.new_relationships}</div>
+                        <div class="metric-label">New Relationships</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value ${scenario.metrics.accuracy >= 0.8 ? 'positive' : 'negative'}">
+                            ${(scenario.metrics.accuracy * 100).toFixed(0)}%
+                        </div>
+                        <div class="metric-label">Detection Accuracy</div>
+                    </div>
+                </div>
+                
+                <!-- Before/After Comparison -->
+                <div class="comparison-section">
+                    <div class="state-panel">
+                        <div class="state-header">
+                            <span class="state-title before">BEFORE Commit</span>
+                            <span class="state-badge">${scenario.before.nodes.length} nodes</span>
+                        </div>
+                        <div class="graph-container" id="beforeGraph"></div>
+                    </div>
+                    
+                    <div class="arrow-separator">
+                        <span class="arrow">→</span>
+                    </div>
+                    
+                    <div class="state-panel">
+                        <div class="state-header">
+                            <span class="state-title after">AFTER Commit</span>
+                            <span class="state-badge">${scenario.after.nodes.length} nodes</span>
+                        </div>
+                        <div class="graph-container" id="afterGraph"></div>
+                    </div>
+                </div>
+                
+                <!-- Legend -->
+                <div class="legend">
+                    ${Object.entries(debtTypeColors).map(([type, color]) => `
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: ${color}"></div>
+                            <span>${type}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <!-- Chains Section -->
+                <div class="chains-section">
+                    <h3 class="section-title">🔗 Detected Chains After Commit</h3>
+                    <div class="chain-list">
+                        ${scenario.after.chains.length > 0 ? scenario.after.chains.map(chain => `
+                            <div class="chain-item">
+                                <span class="chain-name">${chain.id}</span>
+                                <div class="chain-stats">
+                                    <div class="chain-stat">
+                                        <span>Nodes:</span>
+                                        <span class="chain-stat-value">${chain.length || chain.nodes?.length || 0}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('') : '<p style="color: var(--text-secondary)">No chains detected in this state</p>'}
+                    </div>
+                </div>
+                
+                <!-- SIR Ranking -->
+                <div class="ranking-section">
+                    <h3 class="section-title">📊 SATD Impact Ranking (SIR Score)</h3>
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>SIR Score</th>
+                                <th>Visual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${[...scenario.after.nodes]
+                                .sort((a, b) => (b.sirScore || 0) - (a.sirScore || 0))
+                                .slice(0, 10)
+                                .map((node, idx) => `
+                                    <tr>
+                                        <td>
+                                            <span class="rank-badge ${idx === 0 ? 'top-1' : idx === 1 ? 'top-2' : idx === 2 ? 'top-3' : 'other'}">
+                                                ${idx + 1}
+                                            </span>
+                                        </td>
+                                        <td><code>${node.label}</code></td>
+                                        <td>
+                                            <span class="debt-type-badge ${node.debtType}">${node.debtType}</span>
+                                        </td>
+                                        <td>${(node.sirScore || 0).toFixed(3)}</td>
+                                        <td>
+                                            <div class="sir-bar-container">
+                                                <div class="sir-bar" style="width: ${(node.sirScore || 0) * 100}%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            // Initialize graphs
+            setTimeout(() => {
+                initGraph('beforeGraph', scenario.before);
+                initGraph('afterGraph', scenario.after);
+            }, 100);
+        }
+        
+        // Initialize Cytoscape graph
+        function initGraph(containerId, data) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const elements = {
+                nodes: data.nodes.map(n => ({
+                    data: {
+                        id: n.id,
+                        label: n.label?.split(':')[0] || n.id,
+                        debtType: n.debtType || 'Other',
+                        sirScore: n.sirScore || 0
+                    }
+                })),
+                edges: (data.edges || []).map((e, idx) => ({
+                    data: {
+                        id: `edge-${idx}`,
+                        source: e.source,
+                        target: e.target,
+                        inChain: e.inChain
+                    }
+                }))
+            };
+            
+            const cy = cytoscape({
+                container: container,
+                elements: elements,
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'label': 'data(label)',
+                            'background-color': function(ele) {
+                                return debtTypeColors[ele.data('debtType')] || '#6e7681';
+                            },
+                            'width': function(ele) {
+                                return 25 + (ele.data('sirScore') * 25);
+                            },
+                            'height': function(ele) {
+                                return 25 + (ele.data('sirScore') * 25);
+                            },
+                            'font-size': '10px',
+                            'color': '#c9d1d9',
+                            'text-outline-color': '#0d1117',
+                            'text-outline-width': 2,
+                            'text-valign': 'bottom',
+                            'text-margin-y': 5
+                        }
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'curve-style': 'bezier',
+                            'target-arrow-shape': 'triangle',
+                            'width': function(ele) {
+                                return ele.data('inChain') ? 3 : 1;
+                            },
+                            'line-color': function(ele) {
+                                return ele.data('inChain') ? '#58a6ff' : '#30363d';
+                            },
+                            'target-arrow-color': function(ele) {
+                                return ele.data('inChain') ? '#58a6ff' : '#30363d';
+                            },
+                            'opacity': 0.8
+                        }
+                    }
+                ],
+                layout: {
+                    name: 'cose',
+                    padding: 30,
+                    nodeRepulsion: 5000,
+                    idealEdgeLength: 80,
+                    animate: false
+                }
+            });
+            
+            // Add hover effects
+            cy.on('mouseover', 'node', function(e) {
+                e.target.style('border-width', '3px');
+                e.target.style('border-color', '#58a6ff');
+            });
+            
+            cy.on('mouseout', 'node', function(e) {
+                e.target.style('border-width', '0px');
+            });
+        }
+        
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadVisualizationData);
+    </script>
+</body>
+</html>
+
+
+
+
+
+

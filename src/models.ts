@@ -70,6 +70,9 @@ export interface TechnicalDebt {
     
     /** Class name containing this SATD (if applicable) */
     containingClass?: string;
+    
+    /** Error message if LLM classification failed */
+    llmError?: string;
 }
 
 /**
@@ -401,6 +404,9 @@ export interface SATDClassificationResult {
     
     /** Raw LLM response */
     rawResponse?: string;
+    
+    /** Error message if classification failed */
+    error?: string;
 }
 
 /**
