@@ -1,0 +1,6 @@
+metric,overall_mean,overall_sd,agreement_pct,professional_mean,phd_mean,msc_mean
+Chain Understanding,4.41,0.62,92.9,4.57,4.41,4.13
+Relevance,4.15,0.81,79.0,4.34,4.13,3.87
+Timeliness,3.96,0.85,71.6,4.2,3.82,3.78
+Actionability,3.67,0.97,56.7,3.82,3.62,3.5
+Usefulness,3.96,0.84,71.4,4.17,3.95,3.64

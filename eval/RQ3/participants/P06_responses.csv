@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P06,Professional,7,CH201,TensorFlow,1,0.0629,Bottom-5,3,3,3,3,4,Rejected,True,1,
+P06,Professional,7,CH756,VS Code,3,0.5886,Mid-5,5,5,4,5,4,Modified,True,3,
+P06,Professional,7,CH1921,Apache Commons,4,0.8314,Top-5,4,4,5,4,4,Accepted,True,0,This chain visualization helped me quickly identify the propagation path in production code.
+P06,Professional,7,CH1339,React,6,0.9571,Top-5,5,5,3,5,4,Accepted,False,2,I would integrate this into our CI/CD pipeline for proactive debt management.
+P06,Professional,7,CH1530,Kubernetes,4,0.7514,Top-5,4,4,4,1,5,Rejected,True,4,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P06,Professional,7,CH001,SciPy,4,0.7514,Top-5,4,4,4,5,5,Deferred,False,5,
+P06,Professional,7,CH1832,Apache Commons,4,0.6514,Mid-5,4,5,5,5,3,Accepted,True,5,
+P06,Professional,7,CH240,TensorFlow,3,0.4686,Mid-5,4,3,3,4,4,Accepted,True,5,
+P06,Professional,7,CH1116,Firefox,3,0.5486,Mid-5,4,3,4,5,3,Accepted,False,4,
+P06,Professional,7,CH829,VS Code,3,0.5086,Mid-5,4,4,5,3,5,Deferred,True,2,
+P06,Professional,7,CH275,TensorFlow,1,0.1029,Bottom-5,4,4,5,2,3,Rejected,False,1,
+P06,Professional,7,CH057,SciPy,3,0.4686,Mid-5,5,4,4,4,5,Accepted,True,1,The module-level dependencies were particularly insightful for our microservices architecture.
+P06,Professional,7,CH1103,Firefox,2,0.2657,Bottom-5,5,4,5,3,4,Deferred,True,2,The chain analysis revealed dependencies I hadn't considered before.
+P06,Professional,7,CH403,TensorFlow,4,0.7314,Top-5,5,5,5,4,5,Accepted,True,1,
+P06,Professional,7,CH869,Android,1,0.1029,Bottom-5,4,4,2,5,3,Modified,True,3,
+P06,Professional,7,CH872,Android,2,0.3257,Bottom-5,5,4,5,2,4,Accepted,True,5,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P06,Professional,7,CH1356,React,6,0.9571,Top-5,5,5,5,3,4,Deferred,True,1,

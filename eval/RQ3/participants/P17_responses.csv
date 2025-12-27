@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P17,PhD,5,CH485,TensorFlow,5,0.8143,Top-5,3,5,5,3,4,Rejected,False,3,
+P17,PhD,5,CH997,Spring Framework,3,0.5086,Mid-5,5,4,3,5,3,Rejected,True,0,
+P17,PhD,5,CH748,VS Code,3,0.5686,Mid-5,5,3,4,2,4,Modified,False,5,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P17,PhD,5,CH1450,Kubernetes,3,0.4686,Mid-5,4,3,4,3,3,Accepted,False,2,Interesting to see how call and data dependencies contribute differently to propagation.
+P17,PhD,5,CH1569,Kubernetes,5,0.8343,Top-5,5,5,3,4,4,Accepted,False,0,The developer interest score captures contextual familiarity effectively.
+P17,PhD,5,CH755,VS Code,7,1.0,Top-5,5,5,5,4,3,Modified,True,0,
+P17,PhD,5,CH605,TensorFlow,1,0.0829,Bottom-5,5,5,2,3,4,Accepted,True,5,
+P17,PhD,5,CH1060,Spring Framework,3,0.5886,Mid-5,5,5,4,3,4,Deferred,True,2,
+P17,PhD,5,CH514,TensorFlow,3,0.6286,Mid-5,4,3,4,3,4,Accepted,True,5,
+P17,PhD,5,CH1484,Kubernetes,4,0.8514,Top-5,5,4,4,4,4,Deferred,True,4,The chain coherence metric would be valuable for my research on software evolution.
+P17,PhD,5,CH293,TensorFlow,2,0.3457,Bottom-5,5,4,4,5,4,Deferred,True,1,
+P17,PhD,5,CH1087,Firefox,5,0.7543,Top-5,4,5,3,2,4,Deferred,True,0,
+P17,PhD,5,CH1851,Apache Commons,1,0.1029,Bottom-5,5,5,4,5,4,Accepted,False,2,
+P17,PhD,5,CH1721,PostgreSQL,1,0.1029,Bottom-5,5,5,5,4,4,Rejected,True,4,
+P17,PhD,5,CH708,TensorFlow,4,0.8714,Top-5,4,4,3,4,5,Accepted,True,0,The developer interest score captures contextual familiarity effectively.
+P17,PhD,5,CH1482,Kubernetes,3,0.4686,Mid-5,4,4,4,4,4,Modified,False,4,
+P17,PhD,5,CH1019,Spring Framework,1,0.0629,Bottom-5,4,4,4,5,5,Deferred,True,4,The stratified bucket approach for prioritization is methodologically sound.

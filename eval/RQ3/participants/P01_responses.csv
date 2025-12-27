@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P01,Professional,12,CH595,TensorFlow,6,0.9571,Top-5,5,4,5,5,4,Accepted,False,5,
+P01,Professional,12,CH307,TensorFlow,5,0.8543,Top-5,5,5,5,4,4,Accepted,True,3,
+P01,Professional,12,CH1524,Kubernetes,2,0.2857,Bottom-5,5,3,3,3,3,Accepted,True,2,
+P01,Professional,12,CH305,TensorFlow,1,0.1229,Bottom-5,5,4,2,3,5,Modified,False,2,
+P01,Professional,12,CH051,SciPy,4,0.7914,Top-5,4,5,3,4,4,Modified,False,2,
+P01,Professional,12,CH681,TensorFlow,6,0.9571,Top-5,5,4,4,4,4,Deferred,True,4,
+P01,Professional,12,CH106,SciPy,1,0.1229,Bottom-5,5,3,4,2,3,Rejected,True,2,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P01,Professional,12,CH1483,Kubernetes,3,0.5086,Mid-5,5,5,5,3,3,Accepted,True,4,
+P01,Professional,12,CH324,TensorFlow,1,0.1429,Bottom-5,4,5,5,2,4,Accepted,False,4,
+P01,Professional,12,CH1611,Kubernetes,4,0.5914,Mid-5,4,5,5,5,5,Accepted,True,1,
+P01,Professional,12,CH1890,Apache Commons,6,0.9571,Top-5,4,4,5,5,4,Accepted,False,3,
+P01,Professional,12,CH116,SciPy,1,0.1229,Bottom-5,4,5,3,5,4,Modified,True,1,
+P01,Professional,12,CH1643,PostgreSQL,6,0.9571,Top-5,5,4,5,5,4,Modified,False,2,
+P01,Professional,12,CH218,TensorFlow,3,0.4886,Mid-5,5,4,4,3,5,Modified,True,3,The module-level dependencies were particularly insightful for our microservices architecture.
+P01,Professional,12,CH1608,Kubernetes,3,0.5486,Mid-5,5,5,5,3,4,Rejected,True,4,
+P01,Professional,12,CH328,TensorFlow,3,0.5686,Mid-5,4,5,5,4,5,Accepted,True,2,
+P01,Professional,12,CH540,TensorFlow,3,0.5086,Mid-5,5,5,4,4,4,Deferred,True,0,

@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P08,Professional,11,CH1493,Kubernetes,1,0.0829,Bottom-5,5,5,3,4,4,Accepted,True,4,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P08,Professional,11,CH1827,Apache Commons,5,0.8743,Top-5,4,5,5,4,5,Accepted,True,4,
+P08,Professional,11,CH583,TensorFlow,5,0.7943,Top-5,4,3,4,5,3,Accepted,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P08,Professional,11,CH1473,Kubernetes,7,1.0,Top-5,4,5,3,5,5,Modified,True,0,
+P08,Professional,11,CH479,TensorFlow,4,0.5714,Mid-5,5,5,4,4,5,Accepted,False,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P08,Professional,11,CH208,TensorFlow,3,0.5486,Mid-5,5,3,3,5,4,Rejected,False,3,
+P08,Professional,11,CH1701,PostgreSQL,1,0.1429,Bottom-5,5,3,4,2,5,Modified,False,2,The chain analysis revealed dependencies I hadn't considered before.
+P08,Professional,11,CH207,TensorFlow,4,0.6514,Mid-5,5,5,5,5,5,Accepted,True,2,
+P08,Professional,11,CH1455,Kubernetes,3,0.5486,Mid-5,5,4,5,4,2,Accepted,True,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P08,Professional,11,CH985,Spring Framework,3,0.4086,Mid-5,5,4,4,3,4,Accepted,False,0,I appreciate the actionable remediation plans - they save investigation time.
+P08,Professional,11,CH1166,React,4,0.7714,Top-5,4,5,4,5,3,Accepted,True,2,
+P08,Professional,11,CH341,TensorFlow,2,0.3057,Bottom-5,5,5,4,5,4,Modified,True,4,
+P08,Professional,11,CH185,TensorFlow,1,0.0629,Bottom-5,5,3,5,4,4,Accepted,True,3,
+P08,Professional,11,CH1028,Spring Framework,4,0.8314,Top-5,5,5,4,5,5,Modified,True,3,
+P08,Professional,11,CH819,VS Code,3,0.4686,Mid-5,4,4,5,2,5,Accepted,True,4,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P08,Professional,11,CH1528,Kubernetes,1,0.1229,Bottom-5,5,5,4,3,5,Deferred,True,4,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P08,Professional,11,CH1456,Kubernetes,4,0.7514,Top-5,5,5,5,4,5,Modified,True,1,The prioritization matches what I would expect based on years of maintenance experience.
