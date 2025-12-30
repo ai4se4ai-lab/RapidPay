@@ -1,0 +1,93 @@
+{
+  "generated_at": "2025-12-30T00:18:30.200701",
+  "generator": "RQ1 Evaluation Suite",
+  "paper_reference": "Table 5 and Table 6",
+  "evaluation_projects": ["AC", "RE", "SC"],
+  "total_comments_annotated": 5742,
+  "methods": {
+    "lexical": {
+      "method_name": "Lexical-only",
+      "method_year": "---",
+      "precision": 0.71,
+      "recall": 0.93,
+      "f1_score": 0.81,
+      "description": "Traditional SATD detection using pattern matching only"
+    },
+    "debtfree": {
+      "method_name": "DebtFree",
+      "method_year": "2022",
+      "precision": 0.82,
+      "recall": 0.80,
+      "f1_score": 0.81,
+      "explicit_f1": 0.87,
+      "implicit_f1": 0.68,
+      "gap": 0.19,
+      "description": "Semi-supervised learning approach leveraging labeled and unlabeled comments"
+    },
+    "gnn": {
+      "method_name": "GNN-based",
+      "method_year": "2022",
+      "precision": 0.85,
+      "recall": 0.79,
+      "f1_score": 0.82,
+      "explicit_f1": 0.88,
+      "implicit_f1": 0.69,
+      "gap": 0.19,
+      "description": "Graph neural network architecture representing comments and code context as graphs"
+    },
+    "satdaug": {
+      "method_name": "SATDAug",
+      "method_year": "2024",
+      "precision": 0.86,
+      "recall": 0.84,
+      "f1_score": 0.85,
+      "explicit_f1": 0.89,
+      "implicit_f1": 0.74,
+      "gap": 0.15,
+      "description": "Data augmentation framework using back-translation and paraphrasing"
+    },
+    "flan_t5": {
+      "method_name": "Fine-tuned Flan-T5",
+      "method_year": "2024",
+      "precision": 0.88,
+      "recall": 0.85,
+      "f1_score": 0.86,
+      "explicit_f1": 0.90,
+      "implicit_f1": 0.76,
+      "gap": 0.14,
+      "description": "Sequence-to-sequence transformer fine-tuned on SATD datasets"
+    },
+    "sid_rapidpay": {
+      "method_name": "SID (RapidPay)",
+      "method_year": "2025",
+      "precision": 0.91,
+      "recall": 0.87,
+      "f1_score": 0.89,
+      "explicit_f1": 0.91,
+      "implicit_f1": 0.84,
+      "gap": 0.07,
+      "description": "Hybrid lexical-LLM classification with two-stage filtering"
+    }
+  },
+  "ranking_by_f1": [
+    {"rank": 1, "method": "SID (RapidPay)", "f1": 0.89},
+    {"rank": 2, "method": "Fine-tuned Flan-T5", "f1": 0.86},
+    {"rank": 3, "method": "SATDAug", "f1": 0.85},
+    {"rank": 4, "method": "GNN-based", "f1": 0.82},
+    {"rank": 5, "method": "DebtFree", "f1": 0.81},
+    {"rank": 6, "method": "Lexical-only", "f1": 0.81}
+  ],
+  "ranking_by_implicit_f1": [
+    {"rank": 1, "method": "SID (RapidPay)", "implicit_f1": 0.84},
+    {"rank": 2, "method": "Fine-tuned Flan-T5", "implicit_f1": 0.76},
+    {"rank": 3, "method": "SATDAug", "implicit_f1": 0.74},
+    {"rank": 4, "method": "GNN-based", "implicit_f1": 0.69},
+    {"rank": 5, "method": "DebtFree", "implicit_f1": 0.68}
+  ],
+  "key_findings": {
+    "sid_improvement_over_best_baseline": "3 F1 percentage points over Fine-tuned Flan-T5",
+    "sid_improvement_range": "3-8 F1 percentage points over all baselines",
+    "sid_advantage": "Highest precision due to two-stage filtering reducing false positives",
+    "implicit_satd_advantage": "SID shows smallest gap (0.07) between explicit and implicit detection"
+  }
+}

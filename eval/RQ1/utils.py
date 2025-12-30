@@ -581,6 +581,155 @@ def get_excluded_directories() -> List[str]:
     ])
 
 
+# ============================================================================
+# Baseline Detector Utilities
+# ============================================================================
+
+def load_baseline_detector(name: str, **kwargs):
+    """
+    Load a baseline detector by name.
+    
+    Args:
+        name: Detector name ('lexical', 'debtfree', 'gnn', 'satdaug', 'flan_t5')
+        **kwargs: Additional arguments for the detector
+        
+    Returns:
+        BaseDetector instance
+    """
+    from baselines import get_detector
+    return get_detector(name, **kwargs)
+
+
+def compare_detectors(
+    detectors: List[Any], 
+    comments: List[Dict],
+    ground_truth: List[Dict],
+    line_tolerance: int = 5
+) -> Dict[str, Dict]:
+    """
+    Compare multiple detectors on the same dataset.
+    
+    Args:
+        detectors: List of detector instances
+        comments: Comments to evaluate
+        ground_truth: Ground truth SATD entries
+        line_tolerance: Line tolerance for matching
+        
+    Returns:
+        Dictionary of detector name -> metrics
+    """
+    results = {}
+    
+    for detector in detectors:
+        detected = detector.detect(comments)
+        detected_satd = [d.to_dict() for d in detected if d.is_satd]
+        
+        match_result = match_comments(detected_satd, ground_truth, line_tolerance)
+        metrics = match_result.get_metrics()
+        
+        results[detector.name] = {
+            'precision': metrics.precision,
+            'recall': metrics.recall,
+            'f1_score': metrics.f1_score,
+            'detected': len(detected_satd),
+            'ground_truth': len(ground_truth)
+        }
+    
+    return results
+
+
+def calculate_type_specific_metrics(
+    detected: List[Dict],
+    ground_truth: List[Dict],
+    satd_type: str,  # 'explicit' or 'implicit'
+    line_tolerance: int = 5
+) -> EvaluationMetrics:
+    """
+    Calculate metrics for a specific SATD type.
+    
+    Args:
+        detected: All detected SATD instances
+        ground_truth: All ground truth entries
+        satd_type: Type to filter ('explicit' or 'implicit')
+        line_tolerance: Line tolerance for matching
+        
+    Returns:
+        EvaluationMetrics for the specified type
+    """
+    # Filter by type
+    type_key = f'is_{satd_type}'
+    
+    filtered_detected = [
+        d for d in detected 
+        if str(d.get(type_key, '')).lower() == 'true'
+    ]
+    
+    filtered_gt = [
+        g for g in ground_truth 
+        if str(g.get(type_key, '')).lower() == 'true'
+    ]
+    
+    if not filtered_gt:
+        return EvaluationMetrics(0, 0, 0, 0.0, 0.0, 0.0)
+    
+    match_result = match_comments(filtered_detected, filtered_gt, line_tolerance)
+    return match_result.get_metrics()
+
+
+def save_comparison_csv(
+    results: List[Dict],
+    output_path: Path,
+    fieldnames: Optional[List[str]] = None
+) -> None:
+    """
+    Save comparison results to CSV.
+    
+    Args:
+        results: List of result dictionaries
+        output_path: Path to save CSV
+        fieldnames: Optional list of field names (inferred if not provided)
+    """
+    if not results:
+        return
+    
+    if fieldnames is None:
+        fieldnames = list(results[0].keys())
+    
+    save_dicts_as_csv(results, output_path, fieldnames)
+
+
+def get_baseline_config() -> Dict:
+    """Get baseline comparison configuration."""
+    rq1_config = get_rq1_config()
+    return rq1_config.get('baseline_config', {
+        'use_fallback': True,
+        'training_split': 0.8,
+        'random_seed': 42
+    })
+
+
+def split_by_satd_type(entries: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
+    """
+    Split entries into explicit and implicit SATD.
+    
+    Args:
+        entries: List of SATD entries
+        
+    Returns:
+        Tuple of (explicit_entries, implicit_entries)
+    """
+    explicit = [
+        e for e in entries 
+        if str(e.get('is_explicit', '')).lower() == 'true'
+    ]
+    implicit = [
+        e for e in entries 
+        if str(e.get('is_implicit', '')).lower() == 'true'
+        and str(e.get('is_explicit', '')).lower() != 'true'
+    ]
+    return explicit, implicit
+
+
 if __name__ == "__main__":
     # Test utilities
     print("RQ1 Utilities Module")
