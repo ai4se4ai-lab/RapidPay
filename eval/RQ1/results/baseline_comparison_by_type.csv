@@ -1,0 +1,7 @@
+method_name,method_year,precision,recall,f1_score
+Lexical-only,---,0.71,0.93,0.81
+DebtFree,2022,0.82,0.80,0.81
+GNN-based,2022,0.85,0.79,0.82
+SATDAug,2024,0.86,0.84,0.85
+Fine-tuned Flan-T5,2024,0.88,0.85,0.86
+SID (RapidPay),2025,0.91,0.87,0.89

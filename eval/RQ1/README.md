@@ -18,9 +18,18 @@ eval/RQ1/
 ├── utils.py                     # Shared utilities for all scripts
 ├── 01_data_collection.py        # Extract comments from repositories
 ├── 02_sid_evaluation.py         # Evaluate SATD detection accuracy
+├── 03_baseline_comparison.py    # Compare with baseline detection methods
 ├── 03_ird_evaluation.py         # Evaluate relationship discovery
 ├── 04_chain_evaluation.py       # Evaluate chain construction
 ├── 05_generate_ground_truth.py  # Generate ground truth datasets
+├── baselines/                   # Baseline SATD detection implementations
+│   ├── __init__.py              # Baseline factory functions
+│   ├── base_detector.py         # Abstract base class
+│   ├── lexical_baseline.py      # Pattern-matching baseline
+│   ├── debtfree/                # DebtFree semi-supervised detector
+│   ├── gnn_based/               # GNN-based detector
+│   ├── satdaug/                 # SATDAug with data augmentation
+│   └── flan_t5/                 # Fine-tuned Flan-T5 detector
 ├── bridge/
 │   ├── sid_bridge.js            # Node.js bridge for SID TypeScript module
 │   └── ird_bridge.js            # Node.js bridge for IRD TypeScript module
@@ -28,11 +37,13 @@ eval/RQ1/
 │   ├── AC_ground_truth.csv
 │   ├── RE_ground_truth.csv
 │   └── SC_ground_truth.csv
+├── requirements_baselines.txt   # Python dependencies for baselines
 └── results/                     # Evaluation output files
     ├── *_all_comments.csv
     ├── sid_evaluation_*.json
     ├── ird_evaluation_*.json
-    └── chain_evaluation_*.json
+    ├── chain_evaluation_*.json
+    └── baseline_comparison_*.csv
 ```
 
 ## Prerequisites
@@ -280,6 +291,74 @@ Precision = (Correct + Marginal) / Total
 
 Target: **71% of chains rated 4 or 5**
 
+## Baseline Comparison
+
+The evaluation includes comparison against four existing SATD detection methods:
+
+### Available Baselines
+
+| Method | Year | Description |
+|--------|------|-------------|
+| **Lexical-only** | --- | Pure pattern-matching baseline using keywords |
+| **DebtFree** | 2022 | Semi-supervised learning with self-training (Tu et al.) |
+| **GNN-based** | 2022 | Graph Neural Network approach (Yu et al.) |
+| **SATDAug** | 2024 | Data augmentation with BERT (Sutoyo et al.) |
+| **Fine-tuned Flan-T5** | 2024 | Seq2seq transformer (Sheikhaei et al.) |
+
+### Running Baseline Comparison
+
+```bash
+# Run comparison on all configured repositories
+python eval/RQ1/03_baseline_comparison.py
+
+# Run on specific repositories
+python eval/RQ1/03_baseline_comparison.py --repos AC,RE,SC
+
+# Run specific methods only
+python eval/RQ1/03_baseline_comparison.py --methods lexical,debtfree
+
+# Disable fallback (require full dependencies)
+python eval/RQ1/03_baseline_comparison.py --no-fallback
+```
+
+### Baseline Output Files
+
+- `baseline_comparison_metrics.csv`: Per-project metrics for each method
+- `baseline_comparison_summary.csv`: Aggregated metrics across projects
+- `baseline_comparison_by_type.csv`: Explicit vs Implicit SATD breakdown
+- `baseline_comparison_summary.json`: Full JSON report
+
+### Installing Baseline Dependencies
+
+```bash
+# Core dependencies (required)
+pip install scikit-learn numpy scipy
+
+# Optional: Full baseline support
+pip install -r eval/RQ1/requirements_baselines.txt
+```
+
+### Fallback Mode
+
+When optional dependencies (transformers, torch) are not available, the baselines
+automatically fall back to simpler implementations:
+
+- **GNN-based**: Uses NetworkX + MLP instead of PyTorch Geometric
+- **SATDAug**: Uses TF-IDF + Random Forest instead of DistilBERT
+- **Flan-T5**: Uses TF-IDF + Logistic Regression instead of T5
+
+This allows running the comparison without GPU or heavy ML dependencies.
+
+### Using Baselines in SID Evaluation
+
+```bash
+# Include full baseline comparison in SID evaluation
+python eval/RQ1/02_sid_evaluation.py --include-baselines
+
+# Or just lexical baseline comparison
+python eval/RQ1/02_sid_evaluation.py --baseline
+```
+
 ## Output Files
 
 ### Summary Reports
@@ -287,6 +366,13 @@ Target: **71% of chains rated 4 or 5**
 - `sid_evaluation_summary.json`: Aggregate SID metrics
 - `ird_evaluation_summary.json`: Aggregate IRD metrics  
 - `chain_evaluation_summary.json`: Aggregate chain metrics
+- `baseline_comparison_summary.json`: Baseline comparison results
+
+### Baseline Comparison Results
+
+- `baseline_comparison_metrics.csv`: Per-project metrics
+- `baseline_comparison_summary.csv`: Aggregated metrics
+- `baseline_comparison_by_type.csv`: Explicit vs Implicit breakdown
 
 ### Per-Repository Results
 
@@ -334,6 +420,26 @@ timeout=600  # Increase from default
 1. Check API key is set: `echo $OPENAI_API_KEY`
 2. Verify quota/billing on OpenAI dashboard
 3. Use `--use-llm=false` for lexical-only mode
+
+### Baseline Comparison Errors
+
+**"ImportError: scikit-learn is required"**
+```bash
+pip install scikit-learn
+```
+
+**"No labeled training data available"**
+Ensure ground truth is generated first:
+```bash
+python eval/RQ1/05_generate_ground_truth.py
+```
+
+**Slow baseline training**
+The fallback implementations are faster. Ensure you're not trying to use
+full transformer models without GPU:
+```bash
+python eval/RQ1/03_baseline_comparison.py --fallback
+```
 
 ## Extending the Evaluation
 

@@ -459,6 +459,105 @@ def run_baseline_comparison(repo_id: str) -> Optional[Dict]:
     }
 
 
+def run_full_baseline_comparison(repo_ids: List[str]) -> Optional[Dict]:
+    """
+    Run full baseline comparison using all available baseline methods.
+    
+    This calls the 03_baseline_comparison module to run all baselines
+    (lexical, DebtFree, GNN, SATDAug, Flan-T5) on the specified repositories.
+    
+    Args:
+        repo_ids: List of repository IDs
+        
+    Returns:
+        Comparison results dictionary with all baselines
+    """
+    log_progress("\nRunning full baseline comparison with all methods...")
+    
+    try:
+        # Import baseline comparison module
+        from baselines import get_detector, list_available_detectors
+        from baselines.base_detector import BaseDetector
+        
+        results = {}
+        all_methods = list_available_detectors()
+        
+        # Load training data from ground truth
+        ground_truth_dir = get_ground_truth_dir()
+        labeled_data = []
+        
+        for repo_id in repo_ids:
+            gt_file = ground_truth_dir / f"{repo_id}_ground_truth.csv"
+            if gt_file.exists():
+                entries = load_csv_as_dicts(gt_file)
+                labeled_data.extend([e for e in entries if e.get('manual_label')])
+        
+        if not labeled_data:
+            log_progress("No labeled data for baseline training", level="WARNING")
+            return None
+        
+        # Evaluate each baseline
+        for method_name in all_methods:
+            try:
+                detector = get_detector(method_name, use_fallback=True)
+                
+                # Train if needed
+                if detector.requires_training and not detector.is_trained:
+                    detector.train(labeled_data)
+                
+                method_results = {}
+                
+                for repo_id in repo_ids:
+                    # Load data
+                    comments = load_csv_as_dicts(get_results_dir() / f'{repo_id}_all_comments.csv')
+                    satd_gt = load_ground_truth(repo_id)
+                    
+                    if not comments or not satd_gt:
+                        continue
+                    
+                    # Run detection
+                    detected = detector.detect(comments)
+                    detected_satd = [d.to_dict() for d in detected if d.is_satd]
+                    
+                    # Calculate metrics
+                    rq1_config = get_rq1_config()
+                    line_tolerance = rq1_config.get('stratified_sampling', {}).get('line_tolerance', 5)
+                    match_result = match_comments(detected_satd, satd_gt, line_tolerance)
+                    metrics = match_result.get_metrics()
+                    
+                    method_results[repo_id] = {
+                        'precision': metrics.precision,
+                        'recall': metrics.recall,
+                        'f1_score': metrics.f1_score,
+                        'detected_count': len(detected_satd)
+                    }
+                
+                # Calculate averages
+                if method_results:
+                    avg_precision = sum(r['precision'] for r in method_results.values()) / len(method_results)
+                    avg_recall = sum(r['recall'] for r in method_results.values()) / len(method_results)
+                    avg_f1 = sum(r['f1_score'] for r in method_results.values()) / len(method_results)
+                    
+                    results[method_name] = {
+                        'method_name': detector.name,
+                        'method_year': detector.year,
+                        'avg_precision': round(avg_precision, 4),
+                        'avg_recall': round(avg_recall, 4),
+                        'avg_f1': round(avg_f1, 4),
+                        'per_repo': method_results
+                    }
+                
+            except Exception as e:
+                log_progress(f"Baseline {method_name} failed: {e}", level="WARNING")
+                continue
+        
+        return results
+        
+    except ImportError as e:
+        log_progress(f"Could not import baselines module: {e}", level="WARNING")
+        return None
+
+
 # ============================================================================
 # Main Execution
 # ============================================================================
@@ -482,7 +581,12 @@ def main():
     parser.add_argument(
         '--baseline',
         action='store_true',
-        help='Include baseline comparison'
+        help='Include lexical-only baseline comparison'
+    )
+    parser.add_argument(
+        '--include-baselines',
+        action='store_true',
+        help='Include full baseline comparison (lexical, DebtFree, GNN, SATDAug, Flan-T5)'
     )
     
     args = parser.parse_args()
@@ -592,6 +696,18 @@ def main():
             'recall': round(sum(r.recall for r in results) / len(results), 4),
             'f1_score': round(sum(r.f1_score for r in results) / len(results), 4)
         }
+    
+    # Run full baseline comparison if requested
+    if args.include_baselines:
+        baseline_comparison = run_full_baseline_comparison(repo_ids)
+        if baseline_comparison:
+            summary['full_baseline_comparison'] = baseline_comparison
+            log_progress("\nFull Baseline Comparison Results:")
+            for method, data in baseline_comparison.items():
+                log_progress(f"  {data.get('method_name', method)}: "
+                           f"P={data.get('avg_precision', 0):.3f}, "
+                           f"R={data.get('avg_recall', 0):.3f}, "
+                           f"F1={data.get('avg_f1', 0):.3f}")
     
     # Save summary report
     summary_path = save_json_report(summary, 'sid_evaluation_summary.json')
