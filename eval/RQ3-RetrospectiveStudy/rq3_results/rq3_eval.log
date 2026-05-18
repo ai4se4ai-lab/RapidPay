@@ -1,0 +1,3 @@
+[2026-05-18 16:01:48,480] INFO rq3_eval: Will evaluate 10 project(s): AC, SF, TF, RE, VS, AN, SC, PO, KU, FI
+[2026-05-18 16:01:48,480] INFO rq3_eval: === Replaying project AC (Apache Commons Lang) ===
+[2026-05-18 16:01:48,625] INFO rq3_eval: [AC] Detecting SATD instances at snapshot 08d28f59 ...
