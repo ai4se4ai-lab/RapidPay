@@ -10,14 +10,15 @@ try {
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { 
-    TechnicalDebt, 
-    SatdRelationship, 
+import {
+    TechnicalDebt,
+    SatdRelationship,
     RelationshipType,
     WeightedEdge,
     Chain,
     SATDGraph,
-    MAX_DEPENDENCY_HOPS
+    MAX_DEPENDENCY_HOPS,
+    DEFAULT_RELATIONSHIP_WEIGHTS
 } from './models';
 import { CallGraphAnalyzer } from './analyzers/callGraphAnalyzer';
 import { DataDependencyAnalyzer } from './analyzers/dataDependencyAnalyzer';
@@ -86,10 +87,18 @@ export class SatdRelationshipAnalyzer {
         
         // Collect file content for all files with technical debt
         const fileContentMap = await this.collectFileContent(debtItems);
-        
+
         console.log(`IRD: Analyzing ${debtItems.length} SATD instances across ${fileContentMap.size} files`);
         console.log(`IRD: Max hop limit set to k=${this.maxHops}`);
-        
+
+        // Compute project-specific weights via rho_r ratios (paper Algorithm 2, weight phase).
+        const dynamicWeights = this.computeDynamicWeights(fileContentMap);
+        console.log(`IRD: Dynamic weights — call:${dynamicWeights.call.toFixed(3)} data:${dynamicWeights.data.toFixed(3)} control:${dynamicWeights.control.toFixed(3)} module:${dynamicWeights.module.toFixed(3)}`);
+        this.callGraphAnalyzer.setDynamicWeight(dynamicWeights.call);
+        this.dataDependencyAnalyzer.setDynamicWeight(dynamicWeights.data);
+        this.controlFlowAnalyzer.setDynamicWeight(dynamicWeights.control);
+        this.moduleDependencyAnalyzer.setDynamicWeight(dynamicWeights.module);
+
         // Run all analyzers in parallel
         // Each analyzer checks DependencyExists(t_i, t_j, r, k) for their respective dependency type
         const [callRelationships, dataRelationships, controlFlowRelationships, moduleRelationships] = await Promise.all([
@@ -299,6 +308,84 @@ export class SatdRelationshipAnalyzer {
         return graph.nodes.filter(node => connectedIds.has(node.id));
     }
     
+    /**
+     * Compute project-level coupling ratios (rho_r) and derive dynamic edge weights.
+     *
+     * Paper Section 3.2:
+     *   w_r = w_r_min + (w_r_max − w_r_min) · rho_r
+     *
+     * Ratios:
+     *   rho_call    = cross-module imports / total call-like tokens
+     *   rho_data    = (shared vars + 2·globals) / total var definitions
+     *   rho_control = min(1, avgCC / CC_ref=10)   (cyclomatic complexity)
+     *   rho_module  = inter-module import lines / (modules*(modules-1))
+     */
+    private computeDynamicWeights(
+        fileContentMap: Map<string, string>
+    ): { call: number; data: number; control: number; module: number } {
+        const W = DEFAULT_RELATIONSHIP_WEIGHTS;
+        const numModules = Math.max(1, fileContentMap.size);
+
+        let totalCallTokens = 0;
+        let importLines = 0;
+        let totalVarDefs = 0;
+        let globalVars = 0;
+        let totalBranches = 0;
+        let entityCount = 0;
+
+        for (const content of fileContentMap.values()) {
+            const lines = content.split('\n');
+            for (const line of lines) {
+                // Call-like tokens (any `word(`)
+                const callTokens = line.match(/\b\w+\s*\(/g);
+                if (callTokens) totalCallTokens += callTokens.length;
+
+                // Import/require lines
+                if (/^\s*(?:import\b|from\s+\S+\s+import\b|require\s*\()/.test(line)) importLines++;
+
+                // Variable definitions
+                if (/(?:\bvar\b|\blet\b|\bconst\b|\bdef\b|\bself\.\w|\b[A-Z_]{2,}\s*=)/.test(line)) {
+                    totalVarDefs++;
+                    if (/(?:\bglobal\b|\bself\.\w|[A-Z_]{2,}\s*=)/.test(line)) globalVars++;
+                }
+
+                // Branch keywords for cyclomatic complexity
+                if (/\b(?:if|elif|else|for|while|case|catch|except|and|or|\?)\b/.test(line)) totalBranches++;
+            }
+
+            // Count function/method entities
+            const funcMatches = content.match(/\b(?:def\s+\w+|function\s+\w+|\w+\s*=\s*(?:async\s*)?\()/g);
+            if (funcMatches) entityCount += funcMatches.length;
+        }
+
+        // rho_call: fraction of call tokens that are imports (cross-module proxy)
+        const rho_call = totalCallTokens > 0
+            ? Math.min(1, importLines / totalCallTokens)
+            : 0.5;
+
+        // rho_data: shared/global variable density
+        const rho_data = totalVarDefs > 0
+            ? Math.min(1, (Math.floor(totalVarDefs * 0.1) + 2 * globalVars) / totalVarDefs)
+            : 0.5;
+
+        // rho_control: average CC / CC_ref=10
+        const avgCC = entityCount > 0 ? totalBranches / entityCount : 1;
+        const rho_control = Math.min(1, avgCC / 10);
+
+        // rho_module: inter-module dependency density
+        const maxPossibleDeps = numModules * (numModules - 1) || 1;
+        const rho_module = Math.min(1, importLines / maxPossibleDeps);
+
+        const lerp = (min: number, max: number, rho: number) => min + (max - min) * rho;
+
+        return {
+            call:    lerp(W[RelationshipType.CALL].min,    W[RelationshipType.CALL].max,    rho_call),
+            data:    lerp(W[RelationshipType.DATA].min,    W[RelationshipType.DATA].max,    rho_data),
+            control: lerp(W[RelationshipType.CONTROL].min, W[RelationshipType.CONTROL].max, rho_control),
+            module:  lerp(W[RelationshipType.MODULE].min,  W[RelationshipType.MODULE].max,  rho_module),
+        };
+    }
+
     /**
      * Collect content of all files with technical debt
      */

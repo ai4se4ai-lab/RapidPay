@@ -15,9 +15,10 @@ Self-Admitted Technical Debt (SATD) refers to instances where developers explici
    npm install && npm run compile
    ```
 
-2. **Set OpenAI API Key**: 
-   - Add to VS Code settings: `RapidPay.openaiApiKey`
+2. **Set LLM API Key** (OpenAI is the default provider):
+   - Add to VS Code settings: `RapidPay.openaiApiKey` (or `anthropicApiKey` / `geminiApiKey`)
    - Or set environment variable: `OPENAI_API_KEY=your-key-here`
+   - To switch provider: set `RapidPay.llmProvider` to `anthropic` or `gemini`
 
 3. **Press F5** to launch extension in debug mode
 
@@ -442,11 +443,10 @@ Discovers relationships between different SATD instances through:
 2. **Data Dependency Analysis**: Tracks data flow between debt-affected code entities
 3. **Control Flow Analysis**: Examines execution paths influenced by debt
 4. **Module/File Dependency Analysis**: Determines high-level dependencies between files/modules
-5. **Dependency Weighting**: Assigns weights to relationships based on type:
-   - Call: 0.7-0.9 (default: 0.8)
-   - Data: 0.6-0.8 (default: 0.7)
-   - Control: 0.5-0.7 (default: 0.6)
-   - Module: 0.8-1.0 (default: 0.9)
+5. **Dependency Weighting**: Assigns weights using a two-step process grounded in the paper (Section 3.2):
+   - **Static ranges** encode propagation strength per type: Call and Module `[0.5, 1.0]`; Data and Control `[0.3, 0.9]`
+   - **Dynamic calibration** computes a project-level coupling ratio ρ_r from the codebase and derives a project-specific base weight via linear interpolation: `w_r = w_r_min + (w_r_max − w_r_min) · ρ_r`
+   - **Structural fine-tuning** then adjusts each edge within its range based on local characteristics (hop distance, nesting depth, def-use proximity)
 6. **Hop Limit**: Analyzes dependencies up to k=5 hops (configurable)
 7. **Graph Construction**: Builds a directed weighted graph G = (T, E) where T is SATD nodes and E is weighted edges
 
@@ -495,12 +495,31 @@ Provides contextual recommendations based on recent commits:
 
 ## ⚙️ Configuration
 
-You can customize the extension's behavior through VS Code settings:
+### LLM Provider
+
+RapidPay supports three LLM backends for Prompts 1–3 (SID classification, fix-potential assessment, remediation plans). The default is OpenAI (`gpt-4o`); Anthropic Claude and Google Gemini are also supported.
+
+Set the provider via the VS Code setting `RapidPay.llmProvider` or the environment variable `RAPIDPAY_LLM_PROVIDER`:
+
+| Provider | Setting value | Default model | API key setting / env var |
+|---|---|---|---|
+| OpenAI (default) | `openai` | `gpt-4o` | `RapidPay.openaiApiKey` / `OPENAI_API_KEY` |
+| Anthropic Claude | `anthropic` | `claude-opus-4-7` | `RapidPay.anthropicApiKey` / `ANTHROPIC_API_KEY` |
+| Google Gemini | `gemini` | `gemini-2.0-flash` | `RapidPay.geminiApiKey` / `GEMINI_API_KEY` |
+
+> **Note:** The paper uses `gpt-4o` (snapshot `gpt-4o-2024-05-13`, temperature = 0) for all classification calls. Temperature is fixed to 0 for Prompt 1 (SATD detection) to ensure reproducibility; Prompt 3 (remediation plans) uses 0.3.
+
+### Full Settings Reference
 
 ```json
 {
-  "RapidPay.openaiApiKey": "your-api-key",
+  "RapidPay.llmProvider": "openai",
+  "RapidPay.openaiApiKey": "your-openai-key",
   "RapidPay.modelName": "gpt-4o",
+  "RapidPay.anthropicApiKey": "your-anthropic-key",
+  "RapidPay.anthropicModel": "claude-opus-4-7",
+  "RapidPay.geminiApiKey": "your-gemini-key",
+  "RapidPay.geminiModel": "gemini-2.0-flash",
   "RapidPay.autoScanOnStartup": false,
   "RapidPay.relationshipAnalysisEnabled": true,
   "RapidPay.confidenceThreshold": 0.7,
@@ -522,12 +541,13 @@ You can customize the extension's behavior through VS Code settings:
 
 ### Configuration Parameters
 
-- **openaiApiKey**: OpenAI API key for LLM features
-- **modelName**: OpenAI model to use (`gpt-4o`, `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`)
+- **llmProvider**: LLM backend to use — `openai` (default), `anthropic`, or `gemini`
+- **openaiApiKey / anthropicApiKey / geminiApiKey**: API key for the chosen provider
+- **modelName / anthropicModel / geminiModel**: Model override for the respective provider
 - **autoScanOnStartup**: Automatically scan repository when extension activates
 - **relationshipAnalysisEnabled**: Enable IRD phase (relationship discovery)
-- **confidenceThreshold**: LLM confidence threshold τ for SATD classification (0-1, default: 0.7)
-- **maxDependencyHops**: Maximum hop count k for dependency analysis (1-10, default: 5)
+- **confidenceThreshold**: LLM confidence threshold τ for SATD classification (0–1, default: 0.7)
+- **maxDependencyHops**: Maximum hop count k for dependency analysis (1–10, default: 5)
 - **sirWeights**: SIR score weights (α,β,γ) for Fanout_w, ChainLen_w, Reachability_w
 - **caigWeights**: CAIG ranking weights (η1,η2,η3,η4) for SIR, CommitRel, Effort, FixPotential
 - **commitWindowSize**: Sliding window size W for commit analysis (default: 50)
@@ -597,7 +617,11 @@ RapidPay/
 │   │   ├── debtScanner.ts     # Technical debt scanning
 │   │   ├── effortScorer.ts   # Historical effort scoring
 │   │   ├── gitUtils.ts        # Git utilities
-│   │   ├── openaiClient.ts    # OpenAI API client
+│   │   ├── llmProvider.ts    # LLMProvider interface + shared prompt builders/parsers
+│   │   ├── llmFactory.ts     # Factory that creates the correct LLM backend
+│   │   ├── openaiClient.ts   # OpenAI backend (OpenAIProvider + legacy helpers)
+│   │   ├── anthropicClient.ts # Anthropic Claude backend
+│   │   ├── geminiClient.ts   # Google Gemini backend
 │   │   ├── uiUtils.ts         # UI utilities
 │   │   └── visualizationUtils.ts # Visualization utilities
 │   ├── visualization/        # Visualization components

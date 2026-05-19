@@ -31,6 +31,10 @@ import * as t from '@babel/types';
 export class DataDependencyAnalyzer {
     private workspaceRoot: string | null = null;
     private maxHops: number = MAX_DEPENDENCY_HOPS;
+    private dynamicBaseWeight: number = -1;
+
+    /** Set the project-specific base weight derived from rho_data (paper Algorithm 2). */
+    public setDynamicWeight(w: number): void { this.dynamicBaseWeight = w; }
     
     /**
      * Initialize the analyzer with workspace root
@@ -129,17 +133,16 @@ export class DataDependencyAnalyzer {
      */
     private calculateEdgeWeight(defLine: number, useLine: number): number {
         const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.DATA];
+        // Use dynamic (rho_r-derived) weight when set; otherwise fall back to static default.
+        const baseWeight = this.dynamicBaseWeight >= 0 ? this.dynamicBaseWeight : weights.default;
         const distance = Math.abs(useLine - defLine);
-        
-        // Weight decreases with distance
-        // Within 10 lines: max weight
-        // Within 50 lines: mid weight
-        // Beyond: min weight
+
+        // Weight decreases with distance; baseWeight is the midpoint reference.
         if (distance <= 10) {
             return weights.max;
         } else if (distance <= 50) {
             const ratio = (distance - 10) / 40;
-            return weights.max - (ratio * (weights.max - weights.default));
+            return weights.max - (ratio * (weights.max - baseWeight));
         } else {
             return weights.min;
         }

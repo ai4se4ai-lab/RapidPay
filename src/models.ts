@@ -202,8 +202,13 @@ export enum RelationshipType {
 }
 
 /**
- * Relationship type weights from paper
- * Call: 0.7-0.9, Data: 0.6-0.8, Control: 0.5-0.7, Module: 0.8-1.0
+ * Relationship type weights from paper (Section 3.2, IRD).
+ * Call/Module tend to propagate change more strongly: [0.5, 1.0].
+ * Data/Control use a narrower range: [0.3, 0.9].
+ * The actual weight w_r is computed via linear interpolation:
+ *   w_r = w_r_min + (w_r_max - w_r_min) * rho_r
+ * where rho_r is the project-level coupling ratio for dependency type r.
+ * The default is the midpoint, used when rho_r cannot be computed.
  */
 export interface RelationshipTypeWeights {
     [RelationshipType.CALL]: { min: number; max: number; default: number };
@@ -213,13 +218,13 @@ export interface RelationshipTypeWeights {
 }
 
 /**
- * Default relationship type weights from paper
+ * Default relationship type weights from paper (Section 3.2)
  */
 export const DEFAULT_RELATIONSHIP_WEIGHTS: RelationshipTypeWeights = {
-    [RelationshipType.CALL]: { min: 0.7, max: 0.9, default: 0.8 },
-    [RelationshipType.DATA]: { min: 0.6, max: 0.8, default: 0.7 },
-    [RelationshipType.CONTROL]: { min: 0.5, max: 0.7, default: 0.6 },
-    [RelationshipType.MODULE]: { min: 0.8, max: 1.0, default: 0.9 }
+    [RelationshipType.CALL]: { min: 0.5, max: 1.0, default: 0.75 },
+    [RelationshipType.DATA]: { min: 0.3, max: 0.9, default: 0.6 },
+    [RelationshipType.CONTROL]: { min: 0.3, max: 0.9, default: 0.6 },
+    [RelationshipType.MODULE]: { min: 0.5, max: 1.0, default: 0.75 }
 };
 
 /**
