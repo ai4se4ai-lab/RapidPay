@@ -15,9 +15,10 @@ Self-Admitted Technical Debt (SATD) refers to instances where developers explici
    npm install && npm run compile
    ```
 
-2. **Set OpenAI API Key**: 
-   - Add to VS Code settings: `RapidPay.openaiApiKey`
+2. **Set LLM API Key** (OpenAI is the default provider):
+   - Add to VS Code settings: `RapidPay.openaiApiKey` (or `anthropicApiKey` / `geminiApiKey`)
    - Or set environment variable: `OPENAI_API_KEY=your-key-here`
+   - To switch provider: set `RapidPay.llmProvider` to `anthropic` or `gemini`
 
 3. **Press F5** to launch extension in debug mode
 
@@ -442,11 +443,10 @@ Discovers relationships between different SATD instances through:
 2. **Data Dependency Analysis**: Tracks data flow between debt-affected code entities
 3. **Control Flow Analysis**: Examines execution paths influenced by debt
 4. **Module/File Dependency Analysis**: Determines high-level dependencies between files/modules
-5. **Dependency Weighting**: Assigns weights to relationships based on type:
-   - Call: 0.7-0.9 (default: 0.8)
-   - Data: 0.6-0.8 (default: 0.7)
-   - Control: 0.5-0.7 (default: 0.6)
-   - Module: 0.8-1.0 (default: 0.9)
+5. **Dependency Weighting**: Assigns weights using a two-step process grounded in the paper (Section 3.2):
+   - **Static ranges** encode propagation strength per type: Call and Module `[0.5, 1.0]`; Data and Control `[0.3, 0.9]`
+   - **Dynamic calibration** computes a project-level coupling ratio ρ_r from the codebase and derives a project-specific base weight via linear interpolation: `w_r = w_r_min + (w_r_max − w_r_min) · ρ_r`
+   - **Structural fine-tuning** then adjusts each edge within its range based on local characteristics (hop distance, nesting depth, def-use proximity)
 6. **Hop Limit**: Analyzes dependencies up to k=5 hops (configurable)
 7. **Graph Construction**: Builds a directed weighted graph G = (T, E) where T is SATD nodes and E is weighted edges
 
@@ -490,47 +490,6 @@ Provides contextual recommendations based on recent commits:
    - **f_i**: Fix potential value (1.0, 0.5, or 0.0)
    - **Weights (η1,η2,η3,η4)**: Default (0.4, 0.3, 0.15, 0.15), configurable
 7. **Remediation Plans**: AI-generated step-by-step plans for addressing debt
-
----
-
-## ⚙️ Configuration
-
-You can customize the extension's behavior through VS Code settings:
-
-```json
-{
-  "RapidPay.openaiApiKey": "your-api-key",
-  "RapidPay.modelName": "gpt-4o",
-  "RapidPay.autoScanOnStartup": false,
-  "RapidPay.relationshipAnalysisEnabled": true,
-  "RapidPay.confidenceThreshold": 0.7,
-  "RapidPay.maxDependencyHops": 5,
-  "RapidPay.sirWeights": {
-    "alpha": 0.4,
-    "beta": 0.3,
-    "gamma": 0.3
-  },
-  "RapidPay.caigWeights": {
-    "eta1": 0.4,
-    "eta2": 0.3,
-    "eta3": 0.15,
-    "eta4": 0.15
-  },
-  "RapidPay.commitWindowSize": 50
-}
-```
-
-### Configuration Parameters
-
-- **openaiApiKey**: OpenAI API key for LLM features
-- **modelName**: OpenAI model to use (`gpt-4o`, `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`)
-- **autoScanOnStartup**: Automatically scan repository when extension activates
-- **relationshipAnalysisEnabled**: Enable IRD phase (relationship discovery)
-- **confidenceThreshold**: LLM confidence threshold τ for SATD classification (0-1, default: 0.7)
-- **maxDependencyHops**: Maximum hop count k for dependency analysis (1-10, default: 5)
-- **sirWeights**: SIR score weights (α,β,γ) for Fanout_w, ChainLen_w, Reachability_w
-- **caigWeights**: CAIG ranking weights (η1,η2,η3,η4) for SIR, CommitRel, Effort, FixPotential
-- **commitWindowSize**: Sliding window size W for commit analysis (default: 50)
 
 ---
 
@@ -597,7 +556,11 @@ RapidPay/
 │   │   ├── debtScanner.ts     # Technical debt scanning
 │   │   ├── effortScorer.ts   # Historical effort scoring
 │   │   ├── gitUtils.ts        # Git utilities
-│   │   ├── openaiClient.ts    # OpenAI API client
+│   │   ├── llmProvider.ts    # LLMProvider interface + shared prompt builders/parsers
+│   │   ├── llmFactory.ts     # Factory that creates the correct LLM backend
+│   │   ├── openaiClient.ts   # OpenAI backend (OpenAIProvider + legacy helpers)
+│   │   ├── anthropicClient.ts # Anthropic Claude backend
+│   │   ├── geminiClient.ts   # Google Gemini backend
 │   │   ├── uiUtils.ts         # UI utilities
 │   │   └── visualizationUtils.ts # Visualization utilities
 │   ├── visualization/        # Visualization components
@@ -783,22 +746,35 @@ docker-compose up -d
 
 ## 📊 Evaluation
 
-RapidPay includes a comprehensive evaluation suite for research purposes:
+RapidPay includes a comprehensive evaluation suite for research purposes. All three RQs share the same set of 10 open-source subject systems (Apache Commons, Spring Framework, TensorFlow, React, VS Code, Android AOSP, SciPy, PostgreSQL, Kubernetes, Firefox) and an 18-month retrospective replay of post-snapshot commit history.
 
 ### RQ1: SATD Detection and Chain Construction
 - **Location**: `eval/RQ1/`
-- **Purpose**: Evaluate SID accuracy, IRD relationship discovery, and chain construction
-- **Metrics**: Precision, Recall, F1-score for detection; accuracy for relationships
+- **Purpose**: Evaluate SID detection accuracy (explicit and implicit SATD) and IRD relationship/chain quality via manual annotation
+- **Metrics**: Precision, Recall, F1-score for SATD detection; edge-correctness precision and 5-point chain-coherence ratings for relationship discovery
+- **Key results**: Average F1 = **0.90** across all 10 projects; 742 distinct SATD chains discovered; 87 % of sampled edges rated correct-and-relevant; 71 % of sampled chains rated coherent (≥ 4/5) by independent annotators
 
-### RQ2: Developer Validation
+### RQ2: SIR Scores and Propagation Chains as Predictors of Maintenance Outcomes
 - **Location**: `eval/RQ2/`
-- **Purpose**: Validate SATD chains and dependencies with developer ratings
-- **Metrics**: Developer agreement scores, chain coherence ratings
+- **Purpose**: Validate whether the two structural signals computed at the snapshot — the SIR score (RQ2a) and chain membership (RQ2b) — predict observable maintenance behaviour during the 18-month replay
+- **Sub-questions**:
+  - **RQ2a (SIR prediction)** — Does ranking SATD by SIR alone (`SIROnly`) outperform recency-based (`Recency`) and effort-based (`EffortOnly`) baselines in identifying which instances developers address next?
+  - **RQ2b (Chain co-removal)** — Are SATD instances grouped into the same chain at the snapshot co-addressed within 30 days more often than random non-chain pairs?
+- **Metrics**: Hit@k (k ∈ {1, 3, 5, 10}), MRR, 30-day co-removal rate, Fisher's exact test p-values
+- **Key results**:
+  - `SIROnly` achieves **Hit@5 = 0.48**, **MRR = 0.33** — roughly double the Hit@5 of `Recency` (0.29) and `EffortOnly` (0.26)
+  - Intra-chain pairs are co-addressed within 30 days at **3.2× the rate** of random non-chain pairs (14.7 % vs 4.6 %), consistently across all 10 projects (p < 0.05 in every project)
 
-### RQ3: Distribution Analysis
+### RQ3: CAIG Prioritization Quality and Timeliness
 - **Location**: `eval/RQ3/`
-- **Purpose**: Analyze SATD distribution patterns across repositories
-- **Metrics**: Statistical distributions, pattern analysis
+- **Purpose**: Measure whether adding commit context, historical effort, and fix-potential on top of SIR (the full `CAIG` ranking) improves accuracy over `SIROnly`, and how far in advance `CAIG` surfaces SATD before developers actually address it
+- **Sub-questions**:
+  - **RQ3a (Ranking improvement)** — Does `CAIG` achieve higher Hit@k and MRR than `SIROnly` across all 10 projects?
+  - **RQ3b (Timeliness)** — For SATD that developers eventually address, how early was it already in `CAIG`'s top-5?
+- **Metrics**: Hit@k (k ∈ {1, 3, 5, 10}), MRR (aggregate and per-project), lead-time CDF (commits before fix)
+- **Key results**:
+  - `CAIG` achieves **Hit@5 = 0.61**, **MRR = 0.42** — a **+13 Hit@5 / +9 MRR point** lift over `SIROnly`, significant in all 10 projects (p < 0.001, paired bootstrap)
+  - **63 %** of eventually-resolved SATD instances enter `CAIG`'s top-5 at least **5 commits before** the actual fix (median lead time: 14 commits); `Recency` achieves only 31 % at the same threshold
 
 See `eval/RQ1/README.md` for detailed evaluation instructions.
 
@@ -831,15 +807,20 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 RapidPay implements the research methodology described in:
 
-> **RapidPay: A Four-Phase Framework for Self-Admitted Technical Debt Management**
-> 
-> The framework consists of:
-> 1. **SID (SATD Instance Detection)**: Lexical filtering + LLM classification
-> 2. **IRD (Inter-SATD Relationship Discovery)**: Multi-type dependency analysis
-> 3. **SIR (SATD Impact Ripple Scoring)**: Quantitative impact assessment
-> 4. **CAIG (Commit-Aware Insight Generation)**: Contextual recommendations
+> **RapidPay: Identifying and Prioritizing Self-Admitted Technical Debt Chains for Effective Debt Management in Software Systems**
+>
+> The framework makes three core contributions:
+> 1. An approach for identifying **chains** of interconnected SATD instances through multi-dimensional dependency analysis (call, data, control, module)
+> 2. The **SATD Impact Ripple (SIR)** score — a graph-based metric that quantifies each SATD instance's potential system-wide impact via weighted fanout, chain length, and reachability
+> 3. **Commit-Aware Insight Generation (CAIG)** — integrates SIR with live commit context, historical effort, and LLM-assessed fix potential to surface actionable debt recommendations during development
+>
+> The four pipeline stages are:
+> - **SID** (SATD Instance Detection): Hybrid lexical filtering + zero-shot LLM classification (`gpt-4o`, τ = 0.7); avg. F1 = 0.90 across 10 projects
+> - **IRD** (Inter-SATD Relationship Discovery): Lightweight static analysis extracting call, data, control, and module dependencies within k = 5 hops; 742 chains discovered across 10 projects
+> - **SIR** scoring: `SIR(tᵢ) = α·Fanout_w + β·ChainLen_w + γ·Reachability_w`; `SIROnly` achieves Hit@5 = 0.48, MRR = 0.33 in retrospective replay
+> - **CAIG** ranking: `Rank(tᵢ) = η₁·SIR + η₂·CommitRel + η₃·(1−Sᵗ) + η₄·fᵢ`; achieves Hit@5 = 0.61, MRR = 0.42; surfaces 63 % of resolved SATD ≥ 5 commits ahead of the actual fix
 
-For more details, see the evaluation documentation in `eval/` directory.
+For more details, see the evaluation documentation in `eval/` directory and the replication package at <https://github.com/ai4se4ai-lab/RapidPay/tree/main/eval>.
 
 ---
 

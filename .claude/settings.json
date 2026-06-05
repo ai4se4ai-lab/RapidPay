@@ -1,0 +1,13 @@
+{
+    "permissions": {
+      "allow": [
+        "Edit",
+        "Read",
+        "Write",
+        "MultiEdit",
+        "Bash",
+        "WebFetch"
+      ]
+    }
+  }
+  

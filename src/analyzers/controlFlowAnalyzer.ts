@@ -31,6 +31,10 @@ import * as t from '@babel/types';
 export class ControlFlowAnalyzer {
     private workspaceRoot: string | null = null;
     private maxHops: number = MAX_DEPENDENCY_HOPS;
+    private dynamicBaseWeight: number = -1;
+
+    /** Set the project-specific base weight derived from rho_control (paper Algorithm 2). */
+    public setDynamicWeight(w: number): void { this.dynamicBaseWeight = w; }
     
     /**
      * Initialize the analyzer with workspace root
@@ -128,9 +132,11 @@ export class ControlFlowAnalyzer {
      */
     private calculateEdgeWeight(nestingDepth: number): number {
         const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.CONTROL];
-        // Deeper nesting = stronger control dependency
+        // Use dynamic (rho_r-derived) weight when set; otherwise fall back to static default.
+        const baseWeight = this.dynamicBaseWeight >= 0 ? this.dynamicBaseWeight : weights.default;
+        // Deeper nesting = stronger control dependency, scaled to [min, baseWeight].
         const normalizedDepth = Math.min(nestingDepth, 5) / 5;
-        return weights.min + (normalizedDepth * (weights.max - weights.min));
+        return weights.min + (normalizedDepth * (baseWeight - weights.min));
     }
     
     /**

@@ -1,0 +1,4 @@
+strategy,hit_at_1,hit_at_3,hit_at_5,hit_at_10,mrr,n_events,hit5_ci_lower,hit5_ci_upper,mrr_ci_lower,mrr_ci_upper
+Recency,0.09,0.21,0.29,0.42,0.18,6411,0.28,0.31,0.17,0.19
+EffortOnly,0.07,0.18,0.26,0.39,0.16,6411,0.25,0.27,0.15,0.17
+SIROnly,0.18,0.36,0.48,0.63,0.33,6411,0.47,0.50,0.32,0.34

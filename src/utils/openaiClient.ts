@@ -19,7 +19,7 @@ import {
 } from '../models';
 
 let openaiClient: OpenAI | null = null;
-let modelName: string = 'gpt-4o';
+let modelName: string = 'gpt-4o-2024-05-13';
 
 /**
  * Initialize the OpenAI client with API key from VS Code settings or environment
@@ -33,7 +33,7 @@ export function initializeOpenAI(): boolean {
     if (vscode) {
       const config = vscode.workspace.getConfiguration('RapidPay');
       apiKey = config.get<string>('openaiApiKey');
-      modelName = config.get<string>('modelName') || 'gpt-4o';
+      modelName = config.get<string>('modelName') || 'gpt-4o-2024-05-13';
     }
     
     // If no API key in settings, check for environment variable
@@ -78,7 +78,7 @@ export function initializeOpenAI(): boolean {
  * @param apiKey OpenAI API key
  * @param model Model name (default: gpt-4o)
  */
-export function initializeOpenAICLI(apiKey: string, model: string = 'gpt-4o'): boolean {
+export function initializeOpenAICLI(apiKey: string, model: string = 'gpt-4o-2024-05-13'): boolean {
   try {
     openaiClient = new OpenAI({ apiKey });
     modelName = model;
@@ -184,7 +184,7 @@ CONFIDENCE: <number from 0 to 100>`;
           }
         ],
         max_tokens: 100,
-        temperature: 0.1
+        temperature: 0   // paper specifies temperature=0 for reproducibility
       });
     });
 
@@ -274,7 +274,7 @@ JUSTIFICATION: <brief explanation>`;
         }
       ],
       max_tokens: 200,
-      temperature: 0.1
+      temperature: 0   // paper Section 4.1: temperature=0 for all prompts
     });
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
@@ -367,11 +367,11 @@ PRIORITY: HIGH, MEDIUM, or LOW`;
         }
       ],
       max_tokens: 800,
-      temperature: 0.3
+      temperature: 0   // paper Section 4.1: temperature=0 for all prompts
     });
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
-    
+
     // Parse structured response
     const whyNowMatch = responseText.match(/WHY_NOW:\s*(.+?)(?=STEPS:|$)/is);
     const stepsMatch = responseText.match(/STEPS:\s*([\s\S]+?)(?=BENEFITS:|$)/i);
@@ -596,4 +596,153 @@ export function summarizeChanges(diff: string, maxLength: number = 500): string 
  */
 export function resetOpenAIClient(): void {
   openaiClient = null;
+}
+
+// ---------------------------------------------------------------------------
+// LLMProvider class-based API (Prompt 1/2/3 via the pluggable interface)
+// ---------------------------------------------------------------------------
+
+import {
+  LLMProvider,
+  LLMClassification,
+  LLMFixPotential,
+  PROMPT1_SYSTEM,
+  PROMPT2_SYSTEM,
+  PROMPT3_SYSTEM,
+  buildPrompt1,
+  buildPrompt2,
+  buildPrompt3,
+  parseClassificationResponse,
+  parseFixPotentialResponse,
+  parseRemediationResponse,
+  summarizeChangesDiff,
+} from './llmProvider';
+
+const DEFAULT_OPENAI_MODEL = 'gpt-4o-2024-05-13';
+
+/**
+ * OpenAI backend implementation of LLMProvider.
+ * Uses temperature=0 for reproducibility (paper Section 3.1).
+ */
+export class OpenAIProvider implements LLMProvider {
+  private client: OpenAI;
+  private model: string;
+
+  constructor(apiKey: string, model = DEFAULT_OPENAI_MODEL) {
+    this.client = new OpenAI({ apiKey });
+    this.model = model;
+  }
+
+  async classifySATD(comment: string, context = ''): Promise<LLMClassification> {
+    try {
+      const response = await retryWithBackoff(() =>
+        this.client.chat.completions.create({
+          model: this.model,
+          messages: [
+            { role: 'system', content: PROMPT1_SYSTEM },
+            { role: 'user',   content: buildPrompt1(comment, context) },
+          ],
+          max_tokens: 100,
+          temperature: 0,
+        })
+      );
+      const text = response.choices[0]?.message.content?.trim() ?? '';
+      return parseClassificationResponse(text);
+    } catch (err: any) {
+      console.error(`[OpenAIProvider] classifySATD failed: ${err?.message}`);
+      return { isSATD: false, confidence: 0, error: String(err?.message) };
+    }
+  }
+
+  async assessFixPotential(
+    satdComment: string,
+    commitSummary: string,
+    sirScore: number,
+    effortScore: number
+  ): Promise<LLMFixPotential> {
+    try {
+      const response = await this.client.chat.completions.create({
+        model: this.model,
+        messages: [
+          { role: 'system', content: PROMPT2_SYSTEM },
+          { role: 'user',   content: buildPrompt2(satdComment, commitSummary, sirScore, effortScore) },
+        ],
+        max_tokens: 200,
+        temperature: 0,
+      });
+      const text = response.choices[0]?.message.content?.trim() ?? '';
+      return parseFixPotentialResponse(text);
+    } catch (err: any) {
+      console.error(`[OpenAIProvider] assessFixPotential failed: ${err?.message}`);
+      return { level: 'LOW', numericScore: 0.0 };
+    }
+  }
+
+  async generateRemediationPlan(
+    satd: TechnicalDebt,
+    connectedItems: Array<{ id: string; content: string; file: string; line: number }>
+  ): Promise<RemediationPlan | null> {
+    try {
+      const response = await this.client.chat.completions.create({
+        model: this.model,
+        messages: [
+          { role: 'system', content: PROMPT3_SYSTEM },
+          {
+            role: 'user',
+            content: buildPrompt3(
+              satd.content,
+              satd.sirScore ?? 0,
+              satd.fixPotential ?? 'LOW',
+              this.summarizeChanges(satd.extendedContent ?? ''),
+              connectedItems
+            ),
+          },
+        ],
+        max_tokens: 800,
+        temperature: 0,   // paper Section 4.1: temperature=0 for all prompts
+      });
+      const text = response.choices[0]?.message.content?.trim() ?? '';
+      return parseRemediationResponse(text);
+    } catch (err: any) {
+      console.error(`[OpenAIProvider] generateRemediationPlan failed: ${err?.message}`);
+      return null;
+    }
+  }
+
+  summarizeChanges(diff: string, maxLength = 500): string {
+    return summarizeChangesDiff(diff, maxLength);
+  }
+}
+
+/**
+ * Resolve the OpenAI API key from config → VS Code settings → env var.
+ */
+export function resolveOpenAIApiKey(configKey?: string): string {
+  if (configKey) return configKey;
+
+  if (vscode) {
+    const cfg = vscode.workspace.getConfiguration('RapidPay');
+    const key = cfg.get<string>('openaiApiKey');
+    if (key) return key;
+  }
+
+  const envKey = process.env.OPENAI_API_KEY;
+  if (envKey) return envKey;
+
+  throw new Error(
+    'OpenAI API key not found. Set RapidPay.openaiApiKey in VS Code settings or ' +
+    'export OPENAI_API_KEY as an environment variable.'
+  );
+}
+
+/**
+ * Resolve the OpenAI model from config → VS Code settings → default.
+ */
+export function resolveOpenAIModel(configModel?: string): string {
+  if (configModel) return configModel;
+  if (vscode) {
+    const cfg = vscode.workspace.getConfiguration('RapidPay');
+    return cfg.get<string>('modelName') || DEFAULT_OPENAI_MODEL;
+  }
+  return DEFAULT_OPENAI_MODEL;
 }
