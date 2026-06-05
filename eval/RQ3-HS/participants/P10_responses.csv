@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P10,Professional,14,CH1359,React,7,0.96,Top-5,5,5,5,3,5,Deferred,True,2,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P10,Professional,14,CH1315,React,3,0.5286,Mid-5,5,5,5,3,5,Deferred,True,0,I would integrate this into our CI/CD pipeline for proactive debt management.
+P10,Professional,14,CH1920,Apache Commons,1,0.0829,Bottom-5,4,4,4,5,3,Rejected,True,1,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH724,TensorFlow,4,0.7114,Top-5,4,5,5,5,4,Deferred,False,0,
+P10,Professional,14,CH736,VS Code,3,0.4486,Mid-5,5,5,4,5,3,Rejected,True,1,I appreciate the actionable remediation plans - they save investigation time.
+P10,Professional,14,CH1617,Kubernetes,3,0.4486,Mid-5,4,5,5,3,4,Accepted,True,1,I appreciate the actionable remediation plans - they save investigation time.
+P10,Professional,14,CH1864,Apache Commons,5,0.9143,Top-5,4,4,4,4,4,Accepted,False,0,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH118,SciPy,3,0.4286,Mid-5,5,4,4,5,3,Accepted,False,2,
+P10,Professional,14,CH135,SciPy,3,0.5086,Mid-5,3,5,5,5,5,Accepted,False,5,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P10,Professional,14,CH1478,Kubernetes,4,0.7114,Top-5,5,4,5,3,3,Rejected,True,0,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P10,Professional,14,CH1730,PostgreSQL,1,0.1029,Bottom-5,4,5,4,3,4,Accepted,True,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH130,SciPy,3,0.5286,Mid-5,4,5,4,5,5,Deferred,False,1,
+P10,Professional,14,CH518,TensorFlow,5,0.8343,Top-5,5,5,5,3,5,Accepted,True,4,The chain analysis revealed dependencies I hadn't considered before.
+P10,Professional,14,CH562,TensorFlow,2,0.3257,Bottom-5,5,5,4,5,4,Accepted,True,5,Commit-time suggestions were relevant to my current work context.
+P10,Professional,14,CH1824,Apache Commons,1,0.1029,Bottom-5,5,4,4,2,5,Deferred,True,0,
+P10,Professional,14,CH151,TensorFlow,5,0.9143,Top-5,5,3,4,2,3,Modified,True,1,The module-level dependencies were particularly insightful for our microservices architecture.
+P10,Professional,14,CH197,TensorFlow,2,0.3057,Bottom-5,5,5,5,4,4,Accepted,True,1,The chain analysis revealed dependencies I hadn't considered before.

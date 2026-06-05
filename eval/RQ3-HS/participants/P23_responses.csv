@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P23,PhD,6,CH1473,Kubernetes,7,1.0,Top-5,4,4,4,2,4,Accepted,True,2,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P23,PhD,6,CH060,SciPy,5,0.9143,Top-5,5,5,4,4,4,Accepted,True,0,
+P23,PhD,6,CH878,Android,2,0.2257,Bottom-5,4,4,5,4,3,Deferred,True,5,
+P23,PhD,6,CH491,TensorFlow,3,0.5286,Mid-5,5,3,5,3,5,Accepted,False,1,
+P23,PhD,6,CH146,SciPy,2,0.2457,Bottom-5,4,5,5,4,4,Accepted,True,1,
+P23,PhD,6,CH773,VS Code,6,0.8771,Top-5,5,3,4,4,5,Accepted,False,3,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P23,PhD,6,CH918,Android,3,0.5886,Mid-5,5,4,4,3,4,Modified,True,0,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P23,PhD,6,CH868,Android,4,0.6314,Mid-5,5,4,4,4,3,Accepted,True,0,Good balance between precision and recall in SATD detection.
+P23,PhD,6,CH303,TensorFlow,5,0.7743,Top-5,4,5,3,4,5,Accepted,False,4,
+P23,PhD,6,CH424,TensorFlow,1,0.1229,Bottom-5,3,4,4,4,3,Rejected,False,1,The methodology for computing SIR scores seems well-grounded in graph theory.
+P23,PhD,6,CH1086,Firefox,1,0.1429,Bottom-5,5,4,3,4,5,Accepted,True,2,
+P23,PhD,6,CH1558,Kubernetes,3,0.5486,Mid-5,4,5,5,4,3,Deferred,True,5,
+P23,PhD,6,CH1484,Kubernetes,4,0.8514,Top-5,4,4,3,4,5,Deferred,True,0,
+P23,PhD,6,CH1749,PostgreSQL,5,0.9143,Top-5,4,4,3,4,4,Modified,True,4,Good balance between precision and recall in SATD detection.
+P23,PhD,6,CH175,TensorFlow,3,0.5086,Mid-5,4,4,5,4,3,Accepted,False,3,
+P23,PhD,6,CH354,TensorFlow,2,0.2857,Bottom-5,5,4,4,4,5,Accepted,False,0,
+P23,PhD,6,CH1337,React,3,0.4886,Mid-5,4,5,2,5,3,Accepted,True,1,

@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P28,MSc,3,CH960,Android,3,0.5286,Mid-5,4,3,5,3,3,Accepted,False,3,
+P28,MSc,3,CH1658,PostgreSQL,3,0.4886,Mid-5,4,3,4,4,3,Deferred,True,2,I needed more context to fully understand some implicit SATD comments.
+P28,MSc,3,CH1376,React,2,0.2857,Bottom-5,5,5,4,4,3,Accepted,False,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P28,MSc,3,CH1699,PostgreSQL,3,0.5086,Mid-5,4,4,3,3,4,Accepted,True,3,
+P28,MSc,3,CH1379,React,3,0.5886,Mid-5,4,3,4,5,4,Deferred,True,2,
+P28,MSc,3,CH1413,Kubernetes,7,1.0,Top-5,4,4,4,3,3,Accepted,True,4,
+P28,MSc,3,CH249,TensorFlow,5,0.8343,Top-5,3,4,4,3,4,Deferred,True,0,
+P28,MSc,3,CH1354,React,3,0.4086,Mid-5,5,4,3,4,4,Accepted,False,4,I learned a lot about technical debt propagation through this tool.
+P28,MSc,3,CH602,TensorFlow,5,0.8943,Top-5,4,3,4,5,3,Deferred,True,2,Helpful for understanding legacy code in my thesis project.
+P28,MSc,3,CH755,VS Code,7,1.0,Top-5,4,4,4,3,4,Accepted,False,1,
+P28,MSc,3,CH815,VS Code,2,0.2657,Bottom-5,5,3,4,5,4,Accepted,True,5,Helpful for understanding legacy code in my thesis project.
+P28,MSc,3,CH1436,Kubernetes,5,0.9143,Top-5,5,5,5,5,4,Modified,False,3,
+P28,MSc,3,CH1638,Kubernetes,2,0.2257,Bottom-5,5,5,3,2,3,Deferred,True,5,The tool's suggestions sometimes felt too aggressive for my experience level.
+P28,MSc,3,CH1601,Kubernetes,3,0.3886,Bottom-5,4,2,4,4,3,Modified,False,4,I needed more context to fully understand some implicit SATD comments.
+P28,MSc,3,CH321,TensorFlow,7,1.0,Top-5,4,5,5,4,4,Accepted,True,5,
+P28,MSc,3,CH1884,Apache Commons,1,0.0829,Bottom-5,5,4,5,5,3,Deferred,True,0,
+P28,MSc,3,CH1341,React,4,0.6514,Mid-5,4,3,4,3,5,Deferred,True,3,

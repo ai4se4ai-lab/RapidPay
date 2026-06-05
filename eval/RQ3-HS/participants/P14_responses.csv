@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P14,PhD,4,CH1608,Kubernetes,3,0.5486,Mid-5,5,4,4,4,4,Deferred,True,3,
+P14,PhD,4,CH387,TensorFlow,5,0.8743,Top-5,4,3,2,4,3,Modified,True,3,The stratified bucket approach for prioritization is methodologically sound.
+P14,PhD,4,CH451,TensorFlow,3,0.5086,Mid-5,3,5,4,4,4,Deferred,False,1,
+P14,PhD,4,CH769,VS Code,3,0.5286,Mid-5,4,4,5,3,4,Deferred,True,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P14,PhD,4,CH946,Android,3,0.4486,Mid-5,5,4,4,2,4,Deferred,True,5,
+P14,PhD,4,CH1604,Kubernetes,6,0.9571,Top-5,4,4,5,4,4,Modified,True,1,The developer interest score captures contextual familiarity effectively.
+P14,PhD,4,CH568,TensorFlow,3,0.3286,Bottom-5,5,3,4,1,4,Accepted,True,5,
+P14,PhD,4,CH1685,PostgreSQL,3,0.5486,Mid-5,4,4,4,4,4,Accepted,False,3,
+P14,PhD,4,CH404,TensorFlow,4,0.8714,Top-5,5,2,4,4,3,Accepted,True,0,Interesting to see how call and data dependencies contribute differently to propagation.
+P14,PhD,4,CH430,TensorFlow,5,0.9143,Top-5,5,5,4,5,4,Rejected,False,4,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P14,PhD,4,CH958,Android,1,0.1429,Bottom-5,4,3,3,3,3,Accepted,True,1,The chain coherence metric would be valuable for my research on software evolution.
+P14,PhD,4,CH376,TensorFlow,1,0.0829,Bottom-5,4,4,4,3,4,Accepted,False,3,The developer interest score captures contextual familiarity effectively.
+P14,PhD,4,CH572,TensorFlow,6,0.9571,Top-5,5,5,5,3,4,Deferred,True,4,
+P14,PhD,4,CH068,SciPy,3,0.4286,Mid-5,3,4,3,2,4,Deferred,True,4,
+P14,PhD,4,CH899,Android,1,0.1029,Bottom-5,5,4,4,3,4,Accepted,False,2,The stratified bucket approach for prioritization is methodologically sound.
+P14,PhD,4,CH1898,Apache Commons,5,0.8743,Top-5,4,4,3,4,4,Accepted,False,1,Good balance between precision and recall in SATD detection.
+P14,PhD,4,CH1495,Kubernetes,2,0.2857,Bottom-5,5,2,5,2,4,Accepted,True,0,"Chain length correlates with complexity, as expected from dependency analysis literature."

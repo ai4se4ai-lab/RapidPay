@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P07,Professional,9,CH1027,Spring Framework,3,0.6086,Mid-5,5,5,4,4,4,Accepted,True,1,
+P07,Professional,9,CH995,Spring Framework,3,0.5086,Mid-5,4,5,5,4,5,Deferred,True,4,
+P07,Professional,9,CH253,TensorFlow,3,0.4486,Mid-5,4,3,4,4,5,Deferred,True,1,
+P07,Professional,9,CH081,SciPy,1,0.0629,Bottom-5,4,5,5,2,4,Accepted,True,4,Commit-time suggestions were relevant to my current work context.
+P07,Professional,9,CH837,VS Code,2,0.2457,Bottom-5,3,5,5,4,4,Modified,True,1,
+P07,Professional,9,CH1177,React,3,0.4486,Mid-5,4,4,4,5,5,Rejected,True,0,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P07,Professional,9,CH1657,PostgreSQL,5,0.8343,Top-5,4,5,5,5,5,Rejected,True,1,The chain analysis revealed dependencies I hadn't considered before.
+P07,Professional,9,CH1215,React,3,0.3886,Bottom-5,4,4,5,5,5,Accepted,True,0,
+P07,Professional,9,CH911,Android,4,0.7514,Top-5,5,4,3,2,5,Accepted,True,4,
+P07,Professional,9,CH226,TensorFlow,1,0.0629,Bottom-5,5,5,3,2,4,Accepted,False,3,
+P07,Professional,9,CH764,VS Code,4,0.7314,Top-5,4,4,2,4,4,Modified,True,4,
+P07,Professional,9,CH1731,PostgreSQL,4,0.7514,Top-5,5,4,5,3,4,Rejected,True,1,
+P07,Professional,9,CH794,VS Code,1,0.1029,Bottom-5,5,4,4,4,4,Accepted,True,5,
+P07,Professional,9,CH588,TensorFlow,4,0.6714,Mid-5,5,5,3,5,2,Accepted,True,0,
+P07,Professional,9,CH549,TensorFlow,3,0.5086,Mid-5,5,3,4,4,3,Modified,False,3,
+P07,Professional,9,CH1001,Spring Framework,4,0.8314,Top-5,4,4,4,4,4,Modified,False,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P07,Professional,9,CH1804,PostgreSQL,7,1.0,Top-5,5,3,4,5,3,Accepted,True,2,The chain analysis revealed dependencies I hadn't considered before.

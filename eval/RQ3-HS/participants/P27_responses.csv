@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P27,MSc,2,CH1538,Kubernetes,3,0.4486,Mid-5,4,3,3,3,5,Accepted,False,2,
+P27,MSc,2,CH357,TensorFlow,1,0.0829,Bottom-5,4,4,3,3,3,Rejected,False,2,I needed more context to fully understand some implicit SATD comments.
+P27,MSc,2,CH1418,Kubernetes,3,0.5286,Mid-5,5,5,2,1,5,Deferred,True,3,
+P27,MSc,2,CH1706,PostgreSQL,1,0.1429,Bottom-5,4,4,2,4,3,Deferred,True,2,
+P27,MSc,2,CH1631,Kubernetes,4,0.6914,Mid-5,3,4,3,4,3,Deferred,False,0,
+P27,MSc,2,CH1780,PostgreSQL,1,0.0829,Bottom-5,4,3,2,3,4,Modified,True,4,Some chains were overwhelming to analyze due to their length.
+P27,MSc,2,CH681,TensorFlow,6,0.9571,Top-5,4,4,5,2,5,Accepted,True,1,
+P27,MSc,2,CH1271,React,3,0.4686,Mid-5,5,5,4,4,4,Modified,True,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P27,MSc,2,CH279,TensorFlow,4,0.6914,Mid-5,5,3,2,3,3,Modified,True,1,The tool's suggestions sometimes felt too aggressive for my experience level.
+P27,MSc,2,CH1355,React,4,0.7114,Top-5,4,4,4,4,4,Accepted,True,4,
+P27,MSc,2,CH694,TensorFlow,3,0.4886,Mid-5,4,4,5,3,2,Accepted,True,1,
+P27,MSc,2,CH112,SciPy,4,0.7114,Top-5,5,3,2,3,3,Modified,True,2,
+P27,MSc,2,CH1804,PostgreSQL,7,1.0,Top-5,5,5,4,2,4,Deferred,True,0,
+P27,MSc,2,CH335,TensorFlow,7,1.0,Top-5,4,4,5,5,4,Deferred,True,5,
+P27,MSc,2,CH140,SciPy,4,0.7514,Top-5,4,5,4,3,5,Accepted,True,3,
+P27,MSc,2,CH046,SciPy,2,0.2457,Bottom-5,4,4,3,4,4,Deferred,True,5,I learned a lot about technical debt propagation through this tool.
+P27,MSc,2,CH1020,Spring Framework,2,0.3257,Bottom-5,5,5,4,4,3,Modified,True,4,

@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P02,Professional,8,CH952,Android,2,0.2857,Bottom-5,4,2,4,3,4,Accepted,False,0,
+P02,Professional,8,CH153,TensorFlow,2,0.3057,Bottom-5,4,5,5,4,4,Rejected,True,5,
+P02,Professional,8,CH218,TensorFlow,3,0.4886,Mid-5,5,4,3,3,3,Accepted,True,5,
+P02,Professional,8,CH1672,PostgreSQL,2,0.2657,Bottom-5,5,5,4,4,4,Rejected,False,2,
+P02,Professional,8,CH205,TensorFlow,3,0.5686,Mid-5,4,5,3,3,5,Modified,True,3,
+P02,Professional,8,CH436,TensorFlow,1,0.0829,Bottom-5,5,3,5,5,3,Accepted,False,1,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P02,Professional,8,CH825,VS Code,4,0.7514,Top-5,4,5,5,4,4,Accepted,True,4,
+P02,Professional,8,CH689,TensorFlow,5,0.9143,Top-5,4,5,3,5,4,Deferred,False,2,The prioritization matches what I would expect based on years of maintenance experience.
+P02,Professional,8,CH504,TensorFlow,5,0.9143,Top-5,4,4,5,5,5,Modified,True,2,The chain analysis revealed dependencies I hadn't considered before.
+P02,Professional,8,CH1871,Apache Commons,4,0.5914,Mid-5,4,5,4,5,3,Modified,False,4,
+P02,Professional,8,CH817,VS Code,5,0.8343,Top-5,4,5,5,4,5,Accepted,False,3,The prioritization matches what I would expect based on years of maintenance experience.
+P02,Professional,8,CH208,TensorFlow,3,0.5486,Mid-5,5,4,5,4,3,Modified,False,4,
+P02,Professional,8,CH826,VS Code,3,0.4686,Mid-5,5,4,3,5,5,Deferred,True,2,
+P02,Professional,8,CH1921,Apache Commons,4,0.8314,Top-5,5,5,4,3,3,Rejected,False,1,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P02,Professional,8,CH877,Android,3,0.5886,Mid-5,4,5,4,5,5,Modified,True,0,
+P02,Professional,8,CH387,TensorFlow,5,0.8743,Top-5,5,5,5,3,3,Deferred,False,5,The module-level dependencies were particularly insightful for our microservices architecture.
+P02,Professional,8,CH1238,React,1,0.0629,Bottom-5,5,4,5,3,5,Accepted,True,5,

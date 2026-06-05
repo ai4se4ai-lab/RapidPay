@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P26,MSc,4,CH557,TensorFlow,3,0.4286,Mid-5,5,5,3,4,4,Deferred,False,4,
+P26,MSc,4,CH1072,Firefox,6,0.9571,Top-5,4,5,3,4,4,Deferred,True,1,
+P26,MSc,4,CH648,TensorFlow,3,0.4886,Mid-5,4,3,3,5,4,Deferred,True,1,The tool's suggestions sometimes felt too aggressive for my experience level.
+P26,MSc,4,CH1792,PostgreSQL,4,0.7114,Top-5,4,4,4,4,4,Accepted,True,0,
+P26,MSc,4,CH677,TensorFlow,2,0.2657,Bottom-5,5,5,4,4,5,Accepted,True,3,The visualization helped me understand complex code relationships in unfamiliar projects.
+P26,MSc,4,CH1142,Firefox,2,0.3457,Bottom-5,5,4,5,5,3,Rejected,True,0,
+P26,MSc,4,CH1384,React,5,0.7943,Top-5,3,5,4,5,3,Accepted,True,5,The visualization helped me understand complex code relationships in unfamiliar projects.
+P26,MSc,4,CH805,VS Code,5,0.9143,Top-5,4,5,5,3,3,Modified,False,3,I learned a lot about technical debt propagation through this tool.
+P26,MSc,4,CH1898,Apache Commons,5,0.8743,Top-5,5,4,4,4,4,Accepted,True,0,
+P26,MSc,4,CH421,TensorFlow,2,0.3457,Bottom-5,4,5,3,4,4,Accepted,True,2,
+P26,MSc,4,CH679,TensorFlow,1,0.0629,Bottom-5,4,4,3,4,4,Deferred,True,5,
+P26,MSc,4,CH720,TensorFlow,3,0.4486,Mid-5,4,3,3,3,5,Modified,True,5,I learned a lot about technical debt propagation through this tool.
+P26,MSc,4,CH607,TensorFlow,3,0.4286,Mid-5,5,5,3,3,5,Rejected,True,5,
+P26,MSc,4,CH253,TensorFlow,3,0.4486,Mid-5,4,4,4,1,4,Modified,True,2,
+P26,MSc,4,CH854,VS Code,7,1.0,Top-5,4,3,4,4,5,Deferred,True,4,
+P26,MSc,4,CH656,TensorFlow,2,0.2057,Bottom-5,5,4,5,2,4,Accepted,False,3,Some chains were overwhelming to analyze due to their length.
+P26,MSc,4,CH1036,Spring Framework,3,0.4886,Mid-5,4,3,5,4,5,Accepted,False,5,

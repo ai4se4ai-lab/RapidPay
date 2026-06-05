@@ -1,0 +1,511 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P01,Professional,12,CH595,TensorFlow,6,0.9571,Top-5,5,4,5,5,4,Accepted,False,5,
+P01,Professional,12,CH307,TensorFlow,5,0.8543,Top-5,5,5,5,4,4,Accepted,True,3,
+P01,Professional,12,CH1524,Kubernetes,2,0.2857,Bottom-5,5,3,3,3,3,Accepted,True,2,
+P01,Professional,12,CH305,TensorFlow,1,0.1229,Bottom-5,5,4,2,3,5,Modified,False,2,
+P01,Professional,12,CH051,SciPy,4,0.7914,Top-5,4,5,3,4,4,Modified,False,2,
+P01,Professional,12,CH681,TensorFlow,6,0.9571,Top-5,5,4,4,4,4,Deferred,True,4,
+P01,Professional,12,CH106,SciPy,1,0.1229,Bottom-5,5,3,4,2,3,Rejected,True,2,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P01,Professional,12,CH1483,Kubernetes,3,0.5086,Mid-5,5,5,5,3,3,Accepted,True,4,
+P01,Professional,12,CH324,TensorFlow,1,0.1429,Bottom-5,4,5,5,2,4,Accepted,False,4,
+P01,Professional,12,CH1611,Kubernetes,4,0.5914,Mid-5,4,5,5,5,5,Accepted,True,1,
+P01,Professional,12,CH1890,Apache Commons,6,0.9571,Top-5,4,4,5,5,4,Accepted,False,3,
+P01,Professional,12,CH116,SciPy,1,0.1229,Bottom-5,4,5,3,5,4,Modified,True,1,
+P01,Professional,12,CH1643,PostgreSQL,6,0.9571,Top-5,5,4,5,5,4,Modified,False,2,
+P01,Professional,12,CH218,TensorFlow,3,0.4886,Mid-5,5,4,4,3,5,Modified,True,3,The module-level dependencies were particularly insightful for our microservices architecture.
+P01,Professional,12,CH1608,Kubernetes,3,0.5486,Mid-5,5,5,5,3,4,Rejected,True,4,
+P01,Professional,12,CH328,TensorFlow,3,0.5686,Mid-5,4,5,5,4,5,Accepted,True,2,
+P01,Professional,12,CH540,TensorFlow,3,0.5086,Mid-5,5,5,4,4,4,Deferred,True,0,
+P02,Professional,8,CH952,Android,2,0.2857,Bottom-5,4,2,4,3,4,Accepted,False,0,
+P02,Professional,8,CH153,TensorFlow,2,0.3057,Bottom-5,4,5,5,4,4,Rejected,True,5,
+P02,Professional,8,CH218,TensorFlow,3,0.4886,Mid-5,5,4,3,3,3,Accepted,True,5,
+P02,Professional,8,CH1672,PostgreSQL,2,0.2657,Bottom-5,5,5,4,4,4,Rejected,False,2,
+P02,Professional,8,CH205,TensorFlow,3,0.5686,Mid-5,4,5,3,3,5,Modified,True,3,
+P02,Professional,8,CH436,TensorFlow,1,0.0829,Bottom-5,5,3,5,5,3,Accepted,False,1,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P02,Professional,8,CH825,VS Code,4,0.7514,Top-5,4,5,5,4,4,Accepted,True,4,
+P02,Professional,8,CH689,TensorFlow,5,0.9143,Top-5,4,5,3,5,4,Deferred,False,2,The prioritization matches what I would expect based on years of maintenance experience.
+P02,Professional,8,CH504,TensorFlow,5,0.9143,Top-5,4,4,5,5,5,Modified,True,2,The chain analysis revealed dependencies I hadn't considered before.
+P02,Professional,8,CH1871,Apache Commons,4,0.5914,Mid-5,4,5,4,5,3,Modified,False,4,
+P02,Professional,8,CH817,VS Code,5,0.8343,Top-5,4,5,5,4,5,Accepted,False,3,The prioritization matches what I would expect based on years of maintenance experience.
+P02,Professional,8,CH208,TensorFlow,3,0.5486,Mid-5,5,4,5,4,3,Modified,False,4,
+P02,Professional,8,CH826,VS Code,3,0.4686,Mid-5,5,4,3,5,5,Deferred,True,2,
+P02,Professional,8,CH1921,Apache Commons,4,0.8314,Top-5,5,5,4,3,3,Rejected,False,1,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P02,Professional,8,CH877,Android,3,0.5886,Mid-5,4,5,4,5,5,Modified,True,0,
+P02,Professional,8,CH387,TensorFlow,5,0.8743,Top-5,5,5,5,3,3,Deferred,False,5,The module-level dependencies were particularly insightful for our microservices architecture.
+P02,Professional,8,CH1238,React,1,0.0629,Bottom-5,5,4,5,3,5,Accepted,True,5,
+P03,Professional,15,CH585,TensorFlow,1,0.1229,Bottom-5,4,5,5,3,4,Modified,True,0,
+P03,Professional,15,CH501,TensorFlow,3,0.5286,Mid-5,5,5,4,5,4,Modified,True,4,
+P03,Professional,15,CH921,Android,4,0.7714,Top-5,5,5,3,3,5,Deferred,True,3,
+P03,Professional,15,CH851,VS Code,3,0.4686,Mid-5,5,5,5,5,4,Modified,True,3,
+P03,Professional,15,CH689,TensorFlow,5,0.9143,Top-5,5,5,4,5,4,Modified,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P03,Professional,15,CH886,Android,1,0.1429,Bottom-5,5,4,4,2,5,Modified,False,2,
+P03,Professional,15,CH397,TensorFlow,3,0.5686,Mid-5,4,5,4,3,4,Modified,False,2,
+P03,Professional,15,CH609,TensorFlow,1,0.1429,Bottom-5,5,5,5,5,5,Rejected,False,5,
+P03,Professional,15,CH295,TensorFlow,4,0.7114,Top-5,3,5,4,5,4,Accepted,True,0,The module-level dependencies were particularly insightful for our microservices architecture.
+P03,Professional,15,CH881,Android,5,0.8543,Top-5,5,4,5,4,4,Accepted,True,2,
+P03,Professional,15,CH1128,Firefox,5,0.8143,Top-5,5,5,3,5,5,Accepted,True,3,
+P03,Professional,15,CH819,VS Code,3,0.4686,Mid-5,5,4,3,4,5,Accepted,True,5,
+P03,Professional,15,CH645,TensorFlow,3,0.4086,Mid-5,3,4,4,3,5,Modified,True,5,
+P03,Professional,15,CH1476,Kubernetes,3,0.4886,Mid-5,4,4,4,4,5,Deferred,True,0,
+P03,Professional,15,CH1635,Kubernetes,5,0.9143,Top-5,4,5,5,4,5,Rejected,True,2,Commit-time suggestions were relevant to my current work context.
+P03,Professional,15,CH255,TensorFlow,1,0.1029,Bottom-5,4,3,5,3,5,Modified,False,1,
+P03,Professional,15,CH1930,Apache Commons,1,0.0829,Bottom-5,5,5,5,3,4,Deferred,True,1,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P04,Professional,6,CH1235,React,5,0.9143,Top-5,4,4,4,5,5,Deferred,True,3,
+P04,Professional,6,CH636,TensorFlow,3,0.5286,Mid-5,5,5,3,3,5,Rejected,True,4,The module-level dependencies were particularly insightful for our microservices architecture.
+P04,Professional,6,CH1544,Kubernetes,1,0.0829,Bottom-5,5,3,3,3,5,Rejected,False,2,This chain visualization helped me quickly identify the propagation path in production code.
+P04,Professional,6,CH947,Android,1,0.0629,Bottom-5,4,5,5,5,5,Accepted,True,3,
+P04,Professional,6,CH776,VS Code,5,0.9143,Top-5,5,4,5,4,4,Rejected,True,1,
+P04,Professional,6,CH328,TensorFlow,3,0.5686,Mid-5,5,5,3,5,3,Modified,True,2,
+P04,Professional,6,CH1443,Kubernetes,2,0.2857,Bottom-5,4,5,5,3,4,Modified,True,3,
+P04,Professional,6,CH915,Android,3,0.4886,Mid-5,5,4,3,3,4,Modified,True,2,
+P04,Professional,6,CH356,TensorFlow,3,0.4086,Mid-5,4,4,4,4,5,Accepted,True,3,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P04,Professional,6,CH1810,PostgreSQL,5,0.9143,Top-5,4,3,3,4,4,Accepted,True,2,
+P04,Professional,6,CH894,Android,1,0.1429,Bottom-5,5,4,4,3,4,Accepted,True,2,
+P04,Professional,6,CH488,TensorFlow,4,0.7714,Top-5,5,4,5,5,4,Accepted,False,5,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P04,Professional,6,CH1436,Kubernetes,5,0.9143,Top-5,5,4,5,4,5,Rejected,True,5,
+P04,Professional,6,CH1303,React,2,0.3457,Bottom-5,5,4,4,4,5,Accepted,False,5,
+P04,Professional,6,CH1049,Spring Framework,3,0.4486,Mid-5,5,5,5,4,5,Modified,True,2,
+P04,Professional,6,CH1670,PostgreSQL,7,1.0,Top-5,4,4,2,3,3,Rejected,True,2,
+P04,Professional,6,CH1426,Kubernetes,3,0.5486,Mid-5,5,3,4,4,5,Accepted,True,4,
+P05,Professional,10,CH645,TensorFlow,3,0.4086,Mid-5,4,5,5,3,3,Rejected,True,5,
+P05,Professional,10,CH021,SciPy,6,0.9571,Top-5,5,5,5,2,4,Accepted,True,5,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P05,Professional,10,CH1577,Kubernetes,2,0.3257,Bottom-5,5,4,4,5,3,Rejected,True,0,
+P05,Professional,10,CH1621,Kubernetes,3,0.5686,Mid-5,5,3,5,5,5,Accepted,True,0,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P05,Professional,10,CH1491,Kubernetes,3,0.5086,Mid-5,5,4,5,4,5,Modified,True,1,The prioritization matches what I would expect based on years of maintenance experience.
+P05,Professional,10,CH1825,Apache Commons,6,0.9571,Top-5,5,5,4,3,4,Accepted,True,2,
+P05,Professional,10,CH244,TensorFlow,3,0.4486,Mid-5,5,5,3,5,5,Accepted,False,2,
+P05,Professional,10,CH1225,React,1,0.0629,Bottom-5,3,5,4,4,2,Deferred,True,2,
+P05,Professional,10,CH603,TensorFlow,6,0.9571,Top-5,5,3,3,4,5,Accepted,True,3,I would integrate this into our CI/CD pipeline for proactive debt management.
+P05,Professional,10,CH393,TensorFlow,1,0.0629,Bottom-5,4,5,3,4,4,Accepted,False,5,
+P05,Professional,10,CH1389,React,5,0.9143,Top-5,5,4,4,3,4,Modified,True,4,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P05,Professional,10,CH1228,React,3,0.5086,Mid-5,5,4,4,3,4,Accepted,True,0,
+P05,Professional,10,CH1753,PostgreSQL,5,0.8743,Top-5,5,4,4,3,5,Accepted,True,3,
+P05,Professional,10,CH564,TensorFlow,2,0.3457,Bottom-5,5,5,5,5,4,Modified,True,5,
+P05,Professional,10,CH1666,PostgreSQL,3,0.4286,Mid-5,4,4,4,2,3,Accepted,True,5,I would integrate this into our CI/CD pipeline for proactive debt management.
+P05,Professional,10,CH1335,React,5,0.9143,Top-5,5,5,3,4,5,Accepted,True,3,
+P05,Professional,10,CH1054,Spring Framework,1,0.1229,Bottom-5,4,3,3,4,3,Accepted,True,4,
+P06,Professional,7,CH201,TensorFlow,1,0.0629,Bottom-5,3,3,3,3,4,Rejected,True,1,
+P06,Professional,7,CH756,VS Code,3,0.5886,Mid-5,5,5,4,5,4,Modified,True,3,
+P06,Professional,7,CH1921,Apache Commons,4,0.8314,Top-5,4,4,5,4,4,Accepted,True,0,This chain visualization helped me quickly identify the propagation path in production code.
+P06,Professional,7,CH1339,React,6,0.9571,Top-5,5,5,3,5,4,Accepted,False,2,I would integrate this into our CI/CD pipeline for proactive debt management.
+P06,Professional,7,CH1530,Kubernetes,4,0.7514,Top-5,4,4,4,1,5,Rejected,True,4,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P06,Professional,7,CH001,SciPy,4,0.7514,Top-5,4,4,4,5,5,Deferred,False,5,
+P06,Professional,7,CH1832,Apache Commons,4,0.6514,Mid-5,4,5,5,5,3,Accepted,True,5,
+P06,Professional,7,CH240,TensorFlow,3,0.4686,Mid-5,4,3,3,4,4,Accepted,True,5,
+P06,Professional,7,CH1116,Firefox,3,0.5486,Mid-5,4,3,4,5,3,Accepted,False,4,
+P06,Professional,7,CH829,VS Code,3,0.5086,Mid-5,4,4,5,3,5,Deferred,True,2,
+P06,Professional,7,CH275,TensorFlow,1,0.1029,Bottom-5,4,4,5,2,3,Rejected,False,1,
+P06,Professional,7,CH057,SciPy,3,0.4686,Mid-5,5,4,4,4,5,Accepted,True,1,The module-level dependencies were particularly insightful for our microservices architecture.
+P06,Professional,7,CH1103,Firefox,2,0.2657,Bottom-5,5,4,5,3,4,Deferred,True,2,The chain analysis revealed dependencies I hadn't considered before.
+P06,Professional,7,CH403,TensorFlow,4,0.7314,Top-5,5,5,5,4,5,Accepted,True,1,
+P06,Professional,7,CH869,Android,1,0.1029,Bottom-5,4,4,2,5,3,Modified,True,3,
+P06,Professional,7,CH872,Android,2,0.3257,Bottom-5,5,4,5,2,4,Accepted,True,5,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P06,Professional,7,CH1356,React,6,0.9571,Top-5,5,5,5,3,4,Deferred,True,1,
+P07,Professional,9,CH1027,Spring Framework,3,0.6086,Mid-5,5,5,4,4,4,Accepted,True,1,
+P07,Professional,9,CH995,Spring Framework,3,0.5086,Mid-5,4,5,5,4,5,Deferred,True,4,
+P07,Professional,9,CH253,TensorFlow,3,0.4486,Mid-5,4,3,4,4,5,Deferred,True,1,
+P07,Professional,9,CH081,SciPy,1,0.0629,Bottom-5,4,5,5,2,4,Accepted,True,4,Commit-time suggestions were relevant to my current work context.
+P07,Professional,9,CH837,VS Code,2,0.2457,Bottom-5,3,5,5,4,4,Modified,True,1,
+P07,Professional,9,CH1177,React,3,0.4486,Mid-5,4,4,4,5,5,Rejected,True,0,Having technical debt chains visualized alongside the code editor enabled me to navigate directly from the graph to the relevant code locations.
+P07,Professional,9,CH1657,PostgreSQL,5,0.8343,Top-5,4,5,5,5,5,Rejected,True,1,The chain analysis revealed dependencies I hadn't considered before.
+P07,Professional,9,CH1215,React,3,0.3886,Bottom-5,4,4,5,5,5,Accepted,True,0,
+P07,Professional,9,CH911,Android,4,0.7514,Top-5,5,4,3,2,5,Accepted,True,4,
+P07,Professional,9,CH226,TensorFlow,1,0.0629,Bottom-5,5,5,3,2,4,Accepted,False,3,
+P07,Professional,9,CH764,VS Code,4,0.7314,Top-5,4,4,2,4,4,Modified,True,4,
+P07,Professional,9,CH1731,PostgreSQL,4,0.7514,Top-5,5,4,5,3,4,Rejected,True,1,
+P07,Professional,9,CH794,VS Code,1,0.1029,Bottom-5,5,4,4,4,4,Accepted,True,5,
+P07,Professional,9,CH588,TensorFlow,4,0.6714,Mid-5,5,5,3,5,2,Accepted,True,0,
+P07,Professional,9,CH549,TensorFlow,3,0.5086,Mid-5,5,3,4,4,3,Modified,False,3,
+P07,Professional,9,CH1001,Spring Framework,4,0.8314,Top-5,4,4,4,4,4,Modified,False,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P07,Professional,9,CH1804,PostgreSQL,7,1.0,Top-5,5,3,4,5,3,Accepted,True,2,The chain analysis revealed dependencies I hadn't considered before.
+P08,Professional,11,CH1493,Kubernetes,1,0.0829,Bottom-5,5,5,3,4,4,Accepted,True,4,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P08,Professional,11,CH1827,Apache Commons,5,0.8743,Top-5,4,5,5,4,5,Accepted,True,4,
+P08,Professional,11,CH583,TensorFlow,5,0.7943,Top-5,4,3,4,5,3,Accepted,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P08,Professional,11,CH1473,Kubernetes,7,1.0,Top-5,4,5,3,5,5,Modified,True,0,
+P08,Professional,11,CH479,TensorFlow,4,0.5714,Mid-5,5,5,4,4,5,Accepted,False,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P08,Professional,11,CH208,TensorFlow,3,0.5486,Mid-5,5,3,3,5,4,Rejected,False,3,
+P08,Professional,11,CH1701,PostgreSQL,1,0.1429,Bottom-5,5,3,4,2,5,Modified,False,2,The chain analysis revealed dependencies I hadn't considered before.
+P08,Professional,11,CH207,TensorFlow,4,0.6514,Mid-5,5,5,5,5,5,Accepted,True,2,
+P08,Professional,11,CH1455,Kubernetes,3,0.5486,Mid-5,5,4,5,4,2,Accepted,True,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P08,Professional,11,CH985,Spring Framework,3,0.4086,Mid-5,5,4,4,3,4,Accepted,False,0,I appreciate the actionable remediation plans - they save investigation time.
+P08,Professional,11,CH1166,React,4,0.7714,Top-5,4,5,4,5,3,Accepted,True,2,
+P08,Professional,11,CH341,TensorFlow,2,0.3057,Bottom-5,5,5,4,5,4,Modified,True,4,
+P08,Professional,11,CH185,TensorFlow,1,0.0629,Bottom-5,5,3,5,4,4,Accepted,True,3,
+P08,Professional,11,CH1028,Spring Framework,4,0.8314,Top-5,5,5,4,5,5,Modified,True,3,
+P08,Professional,11,CH819,VS Code,3,0.4686,Mid-5,4,4,5,2,5,Accepted,True,4,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P08,Professional,11,CH1528,Kubernetes,1,0.1229,Bottom-5,5,5,4,3,5,Deferred,True,4,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P08,Professional,11,CH1456,Kubernetes,4,0.7514,Top-5,5,5,5,4,5,Modified,True,1,The prioritization matches what I would expect based on years of maintenance experience.
+P09,Professional,5,CH1109,Firefox,4,0.8714,Top-5,5,4,4,3,3,Deferred,True,2,
+P09,Professional,5,CH205,TensorFlow,3,0.5686,Mid-5,5,5,4,3,5,Deferred,True,4,
+P09,Professional,5,CH1626,Kubernetes,3,0.5486,Mid-5,5,4,4,4,4,Accepted,True,4,
+P09,Professional,5,CH1665,PostgreSQL,5,0.8743,Top-5,4,4,4,4,2,Modified,True,5,The chain analysis revealed dependencies I hadn't considered before.
+P09,Professional,5,CH044,SciPy,3,0.4286,Mid-5,5,3,4,5,4,Rejected,True,5,
+P09,Professional,5,CH280,TensorFlow,5,0.9143,Top-5,5,5,4,3,2,Modified,True,2,Commit-time suggestions were relevant to my current work context.
+P09,Professional,5,CH1762,PostgreSQL,2,0.3457,Bottom-5,4,5,5,3,4,Accepted,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P09,Professional,5,CH1854,Apache Commons,4,0.6514,Mid-5,4,3,3,2,3,Modified,True,5,The prioritization matches what I would expect based on years of maintenance experience.
+P09,Professional,5,CH127,SciPy,7,1.0,Top-5,5,4,4,5,3,Rejected,False,1,
+P09,Professional,5,CH1881,Apache Commons,3,0.4086,Mid-5,5,5,5,2,4,Accepted,True,2,I appreciate the actionable remediation plans - they save investigation time.
+P09,Professional,5,CH594,TensorFlow,1,0.1229,Bottom-5,4,4,3,5,5,Deferred,True,2,
+P09,Professional,5,CH1745,PostgreSQL,2,0.2857,Bottom-5,4,4,4,3,3,Modified,True,1,
+P09,Professional,5,CH1378,React,6,0.9571,Top-5,5,5,4,4,4,Modified,True,0,The module-level dependencies were particularly insightful for our microservices architecture.
+P09,Professional,5,CH215,TensorFlow,5,0.8343,Top-5,5,4,4,2,3,Accepted,False,3,
+P09,Professional,5,CH1471,Kubernetes,1,0.0829,Bottom-5,4,5,4,4,4,Modified,True,3,The prioritization matches what I would expect based on years of maintenance experience.
+P09,Professional,5,CH861,VS Code,1,0.1429,Bottom-5,5,5,4,5,3,Modified,True,0,
+P09,Professional,5,CH1230,React,3,0.4286,Mid-5,5,4,5,5,5,Modified,False,2,
+P10,Professional,14,CH1359,React,7,0.96,Top-5,5,5,5,3,5,Deferred,True,2,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P10,Professional,14,CH1315,React,3,0.5286,Mid-5,5,5,5,3,5,Deferred,True,0,I would integrate this into our CI/CD pipeline for proactive debt management.
+P10,Professional,14,CH1920,Apache Commons,1,0.0829,Bottom-5,4,4,4,5,3,Rejected,True,1,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH724,TensorFlow,4,0.7114,Top-5,4,5,5,5,4,Deferred,False,0,
+P10,Professional,14,CH736,VS Code,3,0.4486,Mid-5,5,5,4,5,3,Rejected,True,1,I appreciate the actionable remediation plans - they save investigation time.
+P10,Professional,14,CH1617,Kubernetes,3,0.4486,Mid-5,4,5,5,3,4,Accepted,True,1,I appreciate the actionable remediation plans - they save investigation time.
+P10,Professional,14,CH1864,Apache Commons,5,0.9143,Top-5,4,4,4,4,4,Accepted,False,0,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH118,SciPy,3,0.4286,Mid-5,5,4,4,5,3,Accepted,False,2,
+P10,Professional,14,CH135,SciPy,3,0.5086,Mid-5,3,5,5,5,5,Accepted,False,5,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P10,Professional,14,CH1478,Kubernetes,4,0.7114,Top-5,5,4,5,3,3,Rejected,True,0,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P10,Professional,14,CH1730,PostgreSQL,1,0.1029,Bottom-5,4,5,4,3,4,Accepted,True,3,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P10,Professional,14,CH130,SciPy,3,0.5286,Mid-5,4,5,4,5,5,Deferred,False,1,
+P10,Professional,14,CH518,TensorFlow,5,0.8343,Top-5,5,5,5,3,5,Accepted,True,4,The chain analysis revealed dependencies I hadn't considered before.
+P10,Professional,14,CH562,TensorFlow,2,0.3257,Bottom-5,5,5,4,5,4,Accepted,True,5,Commit-time suggestions were relevant to my current work context.
+P10,Professional,14,CH1824,Apache Commons,1,0.1029,Bottom-5,5,4,4,2,5,Deferred,True,0,
+P10,Professional,14,CH151,TensorFlow,5,0.9143,Top-5,5,3,4,2,3,Modified,True,1,The module-level dependencies were particularly insightful for our microservices architecture.
+P10,Professional,14,CH197,TensorFlow,2,0.3057,Bottom-5,5,5,5,4,4,Accepted,True,1,The chain analysis revealed dependencies I hadn't considered before.
+P11,Professional,8,CH626,TensorFlow,4,0.6914,Mid-5,5,3,5,5,4,Accepted,True,1,
+P11,Professional,8,CH1430,Kubernetes,1,0.0829,Bottom-5,4,4,4,4,4,Accepted,True,5,The module-level dependencies were particularly insightful for our microservices architecture.
+P11,Professional,8,CH460,TensorFlow,2,0.2657,Bottom-5,4,4,5,4,4,Accepted,False,3,
+P11,Professional,8,CH776,VS Code,5,0.9143,Top-5,5,5,4,5,5,Deferred,False,4,
+P11,Professional,8,CH574,TensorFlow,4,0.6114,Mid-5,5,5,5,3,5,Accepted,True,4,
+P11,Professional,8,CH1080,Firefox,1,0.0629,Bottom-5,5,5,5,3,4,Accepted,True,5,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P11,Professional,8,CH1316,React,6,0.9571,Top-5,4,4,4,4,5,Modified,False,3,
+P11,Professional,8,CH1431,Kubernetes,5,0.8543,Top-5,4,5,4,3,5,Rejected,True,2,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P11,Professional,8,CH1468,Kubernetes,3,0.4686,Mid-5,5,4,5,3,4,Deferred,False,2,
+P11,Professional,8,CH1663,PostgreSQL,1,0.1229,Bottom-5,3,5,5,2,3,Accepted,True,0,
+P11,Professional,8,CH1678,PostgreSQL,7,1.0,Top-5,5,5,5,4,5,Deferred,True,0,
+P11,Professional,8,CH954,Android,2,0.3257,Bottom-5,5,3,4,5,4,Accepted,False,4,
+P11,Professional,8,CH1558,Kubernetes,3,0.5486,Mid-5,5,5,4,4,5,Accepted,True,4,
+P11,Professional,8,CH494,TensorFlow,3,0.4286,Mid-5,5,5,4,2,4,Deferred,True,4,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P11,Professional,8,CH1047,Spring Framework,5,0.8743,Top-5,5,2,5,2,4,Rejected,True,4,
+P11,Professional,8,CH1486,Kubernetes,5,0.8343,Top-5,4,5,3,5,4,Accepted,True,3,
+P11,Professional,8,CH736,VS Code,3,0.4486,Mid-5,5,5,4,3,5,Accepted,True,2,
+P12,Professional,13,CH706,TensorFlow,3,0.5286,Mid-5,4,5,3,3,5,Accepted,True,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P12,Professional,13,CH1751,PostgreSQL,3,0.4686,Mid-5,5,5,5,4,5,Accepted,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P12,Professional,13,CH700,TensorFlow,5,0.7743,Top-5,5,4,4,4,4,Deferred,False,3,
+P12,Professional,13,CH1079,Firefox,2,0.2657,Bottom-5,5,4,4,2,5,Accepted,True,5,
+P12,Professional,13,CH1203,React,3,0.4486,Mid-5,5,3,5,3,5,Accepted,True,5,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P12,Professional,13,CH893,Android,4,0.8114,Top-5,5,4,5,3,4,Deferred,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P12,Professional,13,CH391,TensorFlow,7,1.0,Top-5,5,5,4,4,5,Modified,True,5,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P12,Professional,13,CH1363,React,3,0.5686,Mid-5,5,5,5,5,5,Accepted,True,5,
+P12,Professional,13,CH360,TensorFlow,1,0.1229,Bottom-5,4,4,5,5,4,Deferred,False,2,I appreciate the actionable remediation plans - they save investigation time.
+P12,Professional,13,CH017,SciPy,3,0.4286,Mid-5,5,5,4,5,5,Deferred,True,0,
+P12,Professional,13,CH1791,PostgreSQL,5,0.7143,Top-5,4,5,5,5,4,Accepted,True,5,
+P12,Professional,13,CH406,TensorFlow,2,0.3057,Bottom-5,5,4,3,3,5,Accepted,True,5,
+P12,Professional,13,CH1444,Kubernetes,3,0.4486,Mid-5,4,3,4,3,4,Accepted,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P12,Professional,13,CH481,TensorFlow,1,0.1429,Bottom-5,5,5,4,5,5,Modified,True,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P12,Professional,13,CH952,Android,2,0.2857,Bottom-5,4,4,4,3,3,Accepted,True,1,
+P12,Professional,13,CH1365,React,7,1.0,Top-5,5,5,5,5,5,Rejected,True,1,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P12,Professional,13,CH1104,Firefox,7,1.0,Top-5,5,4,5,4,5,Accepted,True,4,
+P13,PhD,5,CH129,SciPy,1,0.0829,Bottom-5,3,4,3,2,4,Accepted,True,4,
+P13,PhD,5,CH267,TensorFlow,2,0.2657,Bottom-5,5,5,5,3,2,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P13,PhD,5,CH997,Spring Framework,3,0.5086,Mid-5,5,3,4,2,3,Modified,False,1,The stratified bucket approach for prioritization is methodologically sound.
+P13,PhD,5,CH394,TensorFlow,2,0.2457,Bottom-5,5,5,4,3,4,Modified,True,5,
+P13,PhD,5,CH1549,Kubernetes,3,0.5086,Mid-5,4,5,4,4,3,Modified,True,4,
+P13,PhD,5,CH805,VS Code,5,0.9143,Top-5,4,5,4,4,5,Accepted,True,3,
+P13,PhD,5,CH1262,React,4,0.6314,Mid-5,4,5,4,5,3,Modified,False,2,
+P13,PhD,5,CH1637,Kubernetes,4,0.7314,Top-5,5,5,3,4,3,Deferred,True,1,
+P13,PhD,5,CH983,Spring Framework,3,0.5886,Mid-5,4,4,4,4,5,Accepted,False,4,
+P13,PhD,5,CH035,SciPy,2,0.3457,Bottom-5,5,5,2,4,4,Accepted,False,2,
+P13,PhD,5,CH403,TensorFlow,4,0.7314,Top-5,4,5,5,3,5,Accepted,True,3,
+P13,PhD,5,CH535,TensorFlow,2,0.2857,Bottom-5,5,3,3,3,4,Modified,True,4,
+P13,PhD,5,CH007,SciPy,7,1.0,Top-5,5,3,4,5,2,Accepted,False,0,
+P13,PhD,5,CH339,TensorFlow,4,0.7914,Top-5,5,5,5,4,5,Accepted,True,4,
+P13,PhD,5,CH1611,Kubernetes,4,0.5914,Mid-5,5,4,4,3,4,Accepted,True,4,Interesting to see how call and data dependencies contribute differently to propagation.
+P13,PhD,5,CH650,TensorFlow,6,0.9571,Top-5,4,5,4,5,3,Deferred,False,2,
+P13,PhD,5,CH1282,React,3,0.4286,Mid-5,4,4,5,4,5,Accepted,False,1,The chain coherence metric would be valuable for my research on software evolution.
+P14,PhD,4,CH1608,Kubernetes,3,0.5486,Mid-5,5,4,4,4,4,Deferred,True,3,
+P14,PhD,4,CH387,TensorFlow,5,0.8743,Top-5,4,3,2,4,3,Modified,True,3,The stratified bucket approach for prioritization is methodologically sound.
+P14,PhD,4,CH451,TensorFlow,3,0.5086,Mid-5,3,5,4,4,4,Deferred,False,1,
+P14,PhD,4,CH769,VS Code,3,0.5286,Mid-5,4,4,5,3,4,Deferred,True,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P14,PhD,4,CH946,Android,3,0.4486,Mid-5,5,4,4,2,4,Deferred,True,5,
+P14,PhD,4,CH1604,Kubernetes,6,0.9571,Top-5,4,4,5,4,4,Modified,True,1,The developer interest score captures contextual familiarity effectively.
+P14,PhD,4,CH568,TensorFlow,3,0.3286,Bottom-5,5,3,4,1,4,Accepted,True,5,
+P14,PhD,4,CH1685,PostgreSQL,3,0.5486,Mid-5,4,4,4,4,4,Accepted,False,3,
+P14,PhD,4,CH404,TensorFlow,4,0.8714,Top-5,5,2,4,4,3,Accepted,True,0,Interesting to see how call and data dependencies contribute differently to propagation.
+P14,PhD,4,CH430,TensorFlow,5,0.9143,Top-5,5,5,4,5,4,Rejected,False,4,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P14,PhD,4,CH958,Android,1,0.1429,Bottom-5,4,3,3,3,3,Accepted,True,1,The chain coherence metric would be valuable for my research on software evolution.
+P14,PhD,4,CH376,TensorFlow,1,0.0829,Bottom-5,4,4,4,3,4,Accepted,False,3,The developer interest score captures contextual familiarity effectively.
+P14,PhD,4,CH572,TensorFlow,6,0.9571,Top-5,5,5,5,3,4,Deferred,True,4,
+P14,PhD,4,CH068,SciPy,3,0.4286,Mid-5,3,4,3,2,4,Deferred,True,4,
+P14,PhD,4,CH899,Android,1,0.1029,Bottom-5,5,4,4,3,4,Accepted,False,2,The stratified bucket approach for prioritization is methodologically sound.
+P14,PhD,4,CH1898,Apache Commons,5,0.8743,Top-5,4,4,3,4,4,Accepted,False,1,Good balance between precision and recall in SATD detection.
+P14,PhD,4,CH1495,Kubernetes,2,0.2857,Bottom-5,5,2,5,2,4,Accepted,True,0,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P15,PhD,6,CH1645,PostgreSQL,4,0.7914,Top-5,4,5,3,2,5,Deferred,True,4,The developer interest score captures contextual familiarity effectively.
+P15,PhD,6,CH378,TensorFlow,1,0.1429,Bottom-5,4,5,3,2,4,Deferred,False,0,
+P15,PhD,6,CH1865,Apache Commons,5,0.6943,Mid-5,5,4,5,4,5,Accepted,True,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P15,PhD,6,CH200,TensorFlow,4,0.7314,Top-5,5,3,4,4,5,Modified,True,2,
+P15,PhD,6,CH846,VS Code,4,0.8714,Top-5,4,4,3,3,5,Modified,True,5,
+P15,PhD,6,CH072,SciPy,4,0.6114,Mid-5,4,4,4,4,3,Deferred,True,5,The stratified bucket approach for prioritization is methodologically sound.
+P15,PhD,6,CH1260,React,5,0.9143,Top-5,5,4,3,5,4,Modified,True,4,
+P15,PhD,6,CH954,Android,2,0.3257,Bottom-5,4,5,5,3,4,Rejected,False,1,
+P15,PhD,6,CH689,TensorFlow,5,0.9143,Top-5,4,5,4,4,5,Deferred,True,3,
+P15,PhD,6,CH1228,React,3,0.5086,Mid-5,5,4,4,4,4,Accepted,False,0,The chain coherence metric would be valuable for my research on software evolution.
+P15,PhD,6,CH768,VS Code,4,0.6914,Mid-5,4,3,5,3,4,Deferred,True,0,
+P15,PhD,6,CH1487,Kubernetes,3,0.4086,Mid-5,4,3,5,4,4,Deferred,True,2,
+P15,PhD,6,CH1001,Spring Framework,4,0.8314,Top-5,4,5,4,5,5,Deferred,False,4,Good balance between precision and recall in SATD detection.
+P15,PhD,6,CH941,Android,1,0.1029,Bottom-5,5,3,4,4,4,Rejected,True,1,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P15,PhD,6,CH137,SciPy,1,0.0629,Bottom-5,5,4,4,4,5,Deferred,True,5,The stratified bucket approach for prioritization is methodologically sound.
+P15,PhD,6,CH245,TensorFlow,3,0.5086,Mid-5,5,5,5,2,4,Modified,False,3,
+P15,PhD,6,CH633,TensorFlow,2,0.2857,Bottom-5,5,5,5,4,4,Accepted,True,3,
+P16,PhD,3,CH1476,Kubernetes,3,0.4886,Mid-5,3,5,3,5,3,Accepted,False,3,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P16,PhD,3,CH001,SciPy,4,0.7514,Top-5,5,4,3,4,5,Modified,True,2,
+P16,PhD,3,CH1190,React,2,0.2857,Bottom-5,4,3,3,3,3,Rejected,False,0,
+P16,PhD,3,CH1839,Apache Commons,1,0.1429,Bottom-5,5,4,4,4,2,Deferred,True,1,The methodology for computing SIR scores seems well-grounded in graph theory.
+P16,PhD,3,CH1316,React,6,0.9571,Top-5,3,5,3,4,3,Modified,True,2,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P16,PhD,3,CH985,Spring Framework,3,0.4086,Mid-5,4,4,5,5,5,Deferred,False,5,The developer interest score captures contextual familiarity effectively.
+P16,PhD,3,CH436,TensorFlow,1,0.0829,Bottom-5,5,3,4,3,5,Accepted,False,2,The stratified bucket approach for prioritization is methodologically sound.
+P16,PhD,3,CH1084,Firefox,2,0.2857,Bottom-5,4,4,4,4,4,Modified,False,4,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P16,PhD,3,CH1766,PostgreSQL,5,0.8743,Top-5,5,4,3,3,4,Accepted,False,0,Good balance between precision and recall in SATD detection.
+P16,PhD,3,CH1356,React,6,0.9571,Top-5,5,5,3,5,5,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P16,PhD,3,CH483,TensorFlow,3,0.5286,Mid-5,5,5,4,5,2,Modified,False,5,The methodology for computing SIR scores seems well-grounded in graph theory.
+P16,PhD,3,CH1825,Apache Commons,6,0.9571,Top-5,4,3,4,2,4,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P16,PhD,3,CH164,TensorFlow,4,0.6914,Mid-5,4,5,4,3,4,Deferred,True,0,
+P16,PhD,3,CH1608,Kubernetes,3,0.5486,Mid-5,3,1,4,5,5,Deferred,True,2,
+P16,PhD,3,CH1891,Apache Commons,4,0.8714,Top-5,4,4,3,4,3,Modified,True,0,
+P16,PhD,3,CH1132,Firefox,2,0.2057,Bottom-5,4,4,3,3,4,Accepted,True,3,
+P16,PhD,3,CH835,VS Code,3,0.4286,Mid-5,4,4,5,3,4,Accepted,True,1,Interesting to see how call and data dependencies contribute differently to propagation.
+P17,PhD,5,CH485,TensorFlow,5,0.8143,Top-5,3,5,5,3,4,Rejected,False,3,
+P17,PhD,5,CH997,Spring Framework,3,0.5086,Mid-5,5,4,3,5,3,Rejected,True,0,
+P17,PhD,5,CH748,VS Code,3,0.5686,Mid-5,5,3,4,2,4,Modified,False,5,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P17,PhD,5,CH1450,Kubernetes,3,0.4686,Mid-5,4,3,4,3,3,Accepted,False,2,Interesting to see how call and data dependencies contribute differently to propagation.
+P17,PhD,5,CH1569,Kubernetes,5,0.8343,Top-5,5,5,3,4,4,Accepted,False,0,The developer interest score captures contextual familiarity effectively.
+P17,PhD,5,CH755,VS Code,7,1.0,Top-5,5,5,5,4,3,Modified,True,0,
+P17,PhD,5,CH605,TensorFlow,1,0.0829,Bottom-5,5,5,2,3,4,Accepted,True,5,
+P17,PhD,5,CH1060,Spring Framework,3,0.5886,Mid-5,5,5,4,3,4,Deferred,True,2,
+P17,PhD,5,CH514,TensorFlow,3,0.6286,Mid-5,4,3,4,3,4,Accepted,True,5,
+P17,PhD,5,CH1484,Kubernetes,4,0.8514,Top-5,5,4,4,4,4,Deferred,True,4,The chain coherence metric would be valuable for my research on software evolution.
+P17,PhD,5,CH293,TensorFlow,2,0.3457,Bottom-5,5,4,4,5,4,Deferred,True,1,
+P17,PhD,5,CH1087,Firefox,5,0.7543,Top-5,4,5,3,2,4,Deferred,True,0,
+P17,PhD,5,CH1851,Apache Commons,1,0.1029,Bottom-5,5,5,4,5,4,Accepted,False,2,
+P17,PhD,5,CH1721,PostgreSQL,1,0.1029,Bottom-5,5,5,5,4,4,Rejected,True,4,
+P17,PhD,5,CH708,TensorFlow,4,0.8714,Top-5,4,4,3,4,5,Accepted,True,0,The developer interest score captures contextual familiarity effectively.
+P17,PhD,5,CH1482,Kubernetes,3,0.4686,Mid-5,4,4,4,4,4,Modified,False,4,
+P17,PhD,5,CH1019,Spring Framework,1,0.0629,Bottom-5,4,4,4,5,5,Deferred,True,4,The stratified bucket approach for prioritization is methodologically sound.
+P18,PhD,4,CH787,VS Code,2,0.3057,Bottom-5,5,3,4,4,4,Modified,True,5,
+P18,PhD,4,CH365,TensorFlow,3,0.4686,Mid-5,4,5,5,3,2,Modified,True,5,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P18,PhD,4,CH919,Android,3,0.4686,Mid-5,4,4,5,4,3,Deferred,True,5,
+P18,PhD,4,CH370,TensorFlow,1,0.0829,Bottom-5,4,4,3,3,5,Deferred,False,1,
+P18,PhD,4,CH462,TensorFlow,5,0.7543,Top-5,4,3,5,4,5,Rejected,True,0,
+P18,PhD,4,CH023,SciPy,2,0.2857,Bottom-5,4,4,3,5,3,Accepted,True,2,The chain coherence metric would be valuable for my research on software evolution.
+P18,PhD,4,CH1537,Kubernetes,3,0.4886,Mid-5,4,4,4,3,5,Modified,True,2,
+P18,PhD,4,CH1815,PostgreSQL,4,0.7914,Top-5,4,5,3,3,4,Deferred,True,2,
+P18,PhD,4,CH584,TensorFlow,3,0.4686,Mid-5,4,5,4,2,5,Rejected,True,4,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P18,PhD,4,CH1628,Kubernetes,5,0.8543,Top-5,5,5,4,3,5,Modified,True,4,
+P18,PhD,4,CH888,Android,3,0.5886,Mid-5,4,4,4,3,3,Accepted,True,1,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P18,PhD,4,CH1046,Spring Framework,7,1.0,Top-5,5,4,5,3,4,Deferred,True,5,
+P18,PhD,4,CH1473,Kubernetes,7,1.0,Top-5,4,5,3,4,4,Accepted,True,4,
+P18,PhD,4,CH1129,Firefox,3,0.5086,Mid-5,5,5,4,3,4,Accepted,True,0,Good balance between precision and recall in SATD detection.
+P18,PhD,4,CH1133,Firefox,7,1.0,Top-5,4,3,5,5,3,Accepted,True,4,
+P18,PhD,4,CH1532,Kubernetes,1,0.1429,Bottom-5,5,5,4,3,4,Accepted,False,4,
+P18,PhD,4,CH621,TensorFlow,1,0.1229,Bottom-5,5,4,5,4,4,Deferred,False,0,
+P19,PhD,6,CH1865,Apache Commons,5,0.6943,Mid-5,5,5,2,5,4,Deferred,True,4,
+P19,PhD,6,CH1684,PostgreSQL,3,0.4086,Mid-5,3,5,4,5,3,Modified,False,2,Good balance between precision and recall in SATD detection.
+P19,PhD,6,CH399,TensorFlow,5,0.8943,Top-5,5,5,4,2,4,Modified,True,3,
+P19,PhD,6,CH1760,PostgreSQL,2,0.3657,Bottom-5,4,5,4,5,5,Modified,True,5,Would be interesting to compare SIR rankings with historical bug-fix data.
+P19,PhD,6,CH588,TensorFlow,4,0.6714,Mid-5,4,4,3,3,4,Accepted,False,3,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P19,PhD,6,CH867,Android,2,0.2457,Bottom-5,4,4,2,4,3,Accepted,True,1,
+P19,PhD,6,CH989,Spring Framework,1,0.1029,Bottom-5,4,3,4,3,4,Modified,True,2,
+P19,PhD,6,CH1666,PostgreSQL,3,0.4286,Mid-5,5,5,4,3,4,Modified,True,1,
+P19,PhD,6,CH1595,Kubernetes,2,0.2657,Bottom-5,4,4,5,4,5,Rejected,True,0,The methodology for computing SIR scores seems well-grounded in graph theory.
+P19,PhD,6,CH1894,Apache Commons,5,0.9143,Top-5,5,4,4,3,3,Accepted,False,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P19,PhD,6,CH1418,Kubernetes,3,0.5286,Mid-5,5,5,3,5,4,Accepted,True,0,
+P19,PhD,6,CH1880,Apache Commons,1,0.0629,Bottom-5,5,4,4,3,4,Modified,False,4,Interesting to see how call and data dependencies contribute differently to propagation.
+P19,PhD,6,CH1901,Apache Commons,5,0.7943,Top-5,3,4,4,3,4,Accepted,True,2,Interesting to see how call and data dependencies contribute differently to propagation.
+P19,PhD,6,CH641,TensorFlow,7,0.94,Top-5,5,5,4,5,5,Accepted,False,3,
+P19,PhD,6,CH1127,Firefox,6,0.9571,Top-5,5,4,5,4,5,Modified,False,2,Would be interesting to compare SIR rankings with historical bug-fix data.
+P19,PhD,6,CH663,TensorFlow,3,0.5286,Mid-5,5,4,3,2,4,Modified,False,4,
+P19,PhD,6,CH1174,React,4,0.7914,Top-5,4,4,4,3,5,Modified,True,1,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P20,PhD,3,CH170,TensorFlow,7,1.0,Top-5,4,4,5,5,3,Accepted,False,3,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P20,PhD,3,CH025,SciPy,2,0.3057,Bottom-5,5,3,5,3,4,Rejected,False,0,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P20,PhD,3,CH1031,Spring Framework,6,0.9571,Top-5,5,3,3,2,5,Modified,True,5,
+P20,PhD,3,CH1046,Spring Framework,7,1.0,Top-5,5,5,3,3,3,Deferred,True,2,
+P20,PhD,3,CH1674,PostgreSQL,4,0.6714,Mid-5,4,3,3,4,4,Modified,True,4,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P20,PhD,3,CH1365,React,7,1.0,Top-5,4,4,2,3,5,Accepted,False,0,
+P20,PhD,3,CH805,VS Code,5,0.9143,Top-5,5,5,3,4,3,Accepted,True,4,
+P20,PhD,3,CH1850,Apache Commons,3,0.4686,Mid-5,5,4,3,3,4,Accepted,True,4,The methodology for computing SIR scores seems well-grounded in graph theory.
+P20,PhD,3,CH1151,Firefox,4,0.8514,Top-5,4,3,4,4,4,Deferred,True,3,
+P20,PhD,3,CH1265,React,1,0.0829,Bottom-5,5,4,4,4,2,Modified,True,2,
+P20,PhD,3,CH1315,React,3,0.5286,Mid-5,3,4,3,5,4,Deferred,False,1,
+P20,PhD,3,CH971,Spring Framework,4,0.6314,Mid-5,3,4,3,3,4,Accepted,True,0,The stratified bucket approach for prioritization is methodologically sound.
+P20,PhD,3,CH495,TensorFlow,3,0.4686,Mid-5,4,4,4,5,2,Accepted,False,3,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P20,PhD,3,CH1730,PostgreSQL,1,0.1029,Bottom-5,5,3,1,3,5,Modified,True,1,
+P20,PhD,3,CH1376,React,2,0.2857,Bottom-5,5,4,3,3,3,Modified,True,2,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P20,PhD,3,CH070,SciPy,2,0.3057,Bottom-5,4,4,5,4,4,Accepted,True,5,
+P20,PhD,3,CH905,Android,3,0.4886,Mid-5,4,3,5,3,3,Rejected,False,4,
+P21,PhD,5,CH099,SciPy,2,0.2657,Bottom-5,5,4,2,5,3,Deferred,False,2,
+P21,PhD,5,CH487,TensorFlow,1,0.1029,Bottom-5,4,4,2,5,4,Rejected,True,2,
+P21,PhD,5,CH1731,PostgreSQL,4,0.7514,Top-5,4,4,5,4,5,Accepted,True,3,
+P21,PhD,5,CH1383,React,3,0.4486,Mid-5,4,5,4,4,5,Modified,True,5,
+P21,PhD,5,CH1753,PostgreSQL,5,0.8743,Top-5,5,4,4,3,5,Modified,True,2,
+P21,PhD,5,CH1222,React,3,0.4686,Mid-5,5,4,3,5,4,Accepted,False,4,Good balance between precision and recall in SATD detection.
+P21,PhD,5,CH1424,Kubernetes,1,0.0829,Bottom-5,5,5,5,4,3,Deferred,False,5,Good balance between precision and recall in SATD detection.
+P21,PhD,5,CH282,TensorFlow,3,0.4886,Mid-5,5,5,5,4,4,Modified,True,1,
+P21,PhD,5,CH071,SciPy,3,0.5086,Mid-5,4,3,4,3,3,Accepted,True,5,The developer interest score captures contextual familiarity effectively.
+P21,PhD,5,CH1061,Spring Framework,3,0.5686,Mid-5,4,4,4,4,5,Accepted,False,2,The chain coherence metric would be valuable for my research on software evolution.
+P21,PhD,5,CH1028,Spring Framework,4,0.8314,Top-5,5,4,5,5,3,Accepted,False,3,
+P21,PhD,5,CH1544,Kubernetes,1,0.0829,Bottom-5,4,5,3,3,5,Rejected,True,5,
+P21,PhD,5,CH1865,Apache Commons,5,0.6943,Mid-5,4,3,5,3,4,Accepted,True,4,
+P21,PhD,5,CH1830,Apache Commons,7,1.0,Top-5,5,4,4,4,5,Accepted,False,5,
+P21,PhD,5,CH823,VS Code,5,0.8943,Top-5,5,5,4,3,5,Deferred,True,2,
+P21,PhD,5,CH408,TensorFlow,4,0.7714,Top-5,4,4,5,3,4,Deferred,True,4,
+P21,PhD,5,CH290,TensorFlow,1,0.1429,Bottom-5,4,3,3,3,3,Deferred,True,5,
+P22,PhD,4,CH1899,Apache Commons,4,0.7514,Top-5,5,4,4,5,3,Accepted,True,1,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P22,PhD,4,CH540,TensorFlow,3,0.5086,Mid-5,5,3,3,3,3,Deferred,True,1,
+P22,PhD,4,CH896,Android,2,0.2257,Bottom-5,4,5,3,3,5,Rejected,True,5,
+P22,PhD,4,CH1157,React,7,1.0,Top-5,5,4,4,3,2,Modified,True,3,
+P22,PhD,4,CH088,SciPy,3,0.5486,Mid-5,4,5,3,4,4,Deferred,True,4,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P22,PhD,4,CH164,TensorFlow,4,0.6914,Mid-5,4,4,3,3,5,Accepted,False,5,
+P22,PhD,4,CH109,SciPy,2,0.3057,Bottom-5,5,4,4,1,4,Modified,True,3,
+P22,PhD,4,CH852,VS Code,6,0.9571,Top-5,4,3,4,4,4,Deferred,True,1,The methodology for computing SIR scores seems well-grounded in graph theory.
+P22,PhD,4,CH077,SciPy,1,0.0829,Bottom-5,5,4,4,3,5,Rejected,False,2,
+P22,PhD,4,CH712,TensorFlow,1,0.1429,Bottom-5,5,3,2,4,4,Deferred,False,5,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P22,PhD,4,CH1359,React,7,0.96,Top-5,4,5,3,5,3,Accepted,True,2,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P22,PhD,4,CH1685,PostgreSQL,3,0.5486,Mid-5,4,5,3,3,4,Accepted,True,5,Good balance between precision and recall in SATD detection.
+P22,PhD,4,CH037,SciPy,5,0.9143,Top-5,4,3,3,4,2,Accepted,True,4,
+P22,PhD,4,CH1441,Kubernetes,3,0.6086,Mid-5,5,5,4,3,4,Modified,True,0,
+P22,PhD,4,CH544,TensorFlow,1,0.1429,Bottom-5,5,5,3,4,5,Rejected,False,5,Interesting to see how call and data dependencies contribute differently to propagation.
+P22,PhD,4,CH139,SciPy,5,0.9143,Top-5,5,5,4,3,4,Accepted,True,0,
+P22,PhD,4,CH1440,Kubernetes,4,0.6914,Mid-5,5,5,3,4,5,Modified,False,3,
+P23,PhD,6,CH1473,Kubernetes,7,1.0,Top-5,4,4,4,2,4,Accepted,True,2,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P23,PhD,6,CH060,SciPy,5,0.9143,Top-5,5,5,4,4,4,Accepted,True,0,
+P23,PhD,6,CH878,Android,2,0.2257,Bottom-5,4,4,5,4,3,Deferred,True,5,
+P23,PhD,6,CH491,TensorFlow,3,0.5286,Mid-5,5,3,5,3,5,Accepted,False,1,
+P23,PhD,6,CH146,SciPy,2,0.2457,Bottom-5,4,5,5,4,4,Accepted,True,1,
+P23,PhD,6,CH773,VS Code,6,0.8771,Top-5,5,3,4,4,5,Accepted,False,3,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P23,PhD,6,CH918,Android,3,0.5886,Mid-5,5,4,4,3,4,Modified,True,0,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P23,PhD,6,CH868,Android,4,0.6314,Mid-5,5,4,4,4,3,Accepted,True,0,Good balance between precision and recall in SATD detection.
+P23,PhD,6,CH303,TensorFlow,5,0.7743,Top-5,4,5,3,4,5,Accepted,False,4,
+P23,PhD,6,CH424,TensorFlow,1,0.1229,Bottom-5,3,4,4,4,3,Rejected,False,1,The methodology for computing SIR scores seems well-grounded in graph theory.
+P23,PhD,6,CH1086,Firefox,1,0.1429,Bottom-5,5,4,3,4,5,Accepted,True,2,
+P23,PhD,6,CH1558,Kubernetes,3,0.5486,Mid-5,4,5,5,4,3,Deferred,True,5,
+P23,PhD,6,CH1484,Kubernetes,4,0.8514,Top-5,4,4,3,4,5,Deferred,True,0,
+P23,PhD,6,CH1749,PostgreSQL,5,0.9143,Top-5,4,4,3,4,4,Modified,True,4,Good balance between precision and recall in SATD detection.
+P23,PhD,6,CH175,TensorFlow,3,0.5086,Mid-5,4,4,5,4,3,Accepted,False,3,
+P23,PhD,6,CH354,TensorFlow,2,0.2857,Bottom-5,5,4,4,4,5,Accepted,False,0,
+P23,PhD,6,CH1337,React,3,0.4886,Mid-5,4,5,2,5,3,Accepted,True,1,
+P24,MSc,3,CH1581,Kubernetes,1,0.0629,Bottom-5,5,3,4,4,4,Accepted,True,1,I learned a lot about technical debt propagation through this tool.
+P24,MSc,3,CH1375,React,3,0.5086,Mid-5,4,4,5,2,5,Accepted,True,3,
+P24,MSc,3,CH1679,PostgreSQL,3,0.4886,Mid-5,4,5,4,5,3,Modified,True,2,Some chains were overwhelming to analyze due to their length.
+P24,MSc,3,CH384,TensorFlow,7,1.0,Top-5,3,4,3,4,5,Accepted,True,5,The visualization helped me understand complex code relationships in unfamiliar projects.
+P24,MSc,3,CH966,Android,1,0.1229,Bottom-5,4,4,4,5,3,Rejected,True,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P24,MSc,3,CH1758,PostgreSQL,2,0.2457,Bottom-5,5,3,4,5,2,Modified,True,4,
+P24,MSc,3,CH1802,PostgreSQL,4,0.7514,Top-5,4,5,2,3,3,Accepted,True,5,I learned a lot about technical debt propagation through this tool.
+P24,MSc,3,CH1322,React,6,0.9571,Top-5,5,3,4,4,2,Accepted,True,1,
+P24,MSc,3,CH1441,Kubernetes,3,0.6086,Mid-5,4,5,4,3,3,Rejected,True,3,
+P24,MSc,3,CH1229,React,4,0.6314,Mid-5,4,5,5,5,4,Deferred,False,4,
+P24,MSc,3,CH1755,PostgreSQL,3,0.4886,Mid-5,4,4,3,4,4,Accepted,True,5,
+P24,MSc,3,CH1694,PostgreSQL,1,0.0629,Bottom-5,5,3,5,2,3,Modified,True,5,
+P24,MSc,3,CH430,TensorFlow,5,0.9143,Top-5,4,2,4,5,5,Modified,True,4,I needed more context to fully understand some implicit SATD comments.
+P24,MSc,3,CH1165,React,1,0.1029,Bottom-5,4,4,4,4,4,Accepted,True,0,
+P24,MSc,3,CH1870,Apache Commons,7,0.96,Top-5,4,3,3,5,5,Modified,True,4,
+P24,MSc,3,CH1100,Firefox,4,0.8114,Top-5,4,5,3,3,4,Modified,True,1,I needed more context to fully understand some implicit SATD comments.
+P24,MSc,3,CH648,TensorFlow,3,0.4886,Mid-5,5,4,4,4,3,Deferred,True,3,
+P25,MSc,2,CH1471,Kubernetes,1,0.0829,Bottom-5,4,4,4,3,4,Accepted,False,5,I needed more context to fully understand some implicit SATD comments.
+P25,MSc,2,CH1729,PostgreSQL,2,0.2857,Bottom-5,4,4,5,2,3,Rejected,True,3,
+P25,MSc,2,CH1177,React,3,0.4486,Mid-5,4,3,4,3,5,Accepted,False,4,
+P25,MSc,2,CH032,SciPy,4,0.6114,Mid-5,5,5,5,3,3,Accepted,False,0,
+P25,MSc,2,CH828,VS Code,4,0.7714,Top-5,3,3,2,5,3,Accepted,True,2,Helpful for understanding legacy code in my thesis project.
+P25,MSc,2,CH1272,React,4,0.6514,Mid-5,5,3,5,5,3,Accepted,True,0,
+P25,MSc,2,CH1792,PostgreSQL,4,0.7114,Top-5,4,3,4,4,5,Accepted,False,0,The visualization helped me understand complex code relationships in unfamiliar projects.
+P25,MSc,2,CH195,TensorFlow,3,0.4686,Mid-5,5,5,3,3,3,Accepted,True,4,
+P25,MSc,2,CH479,TensorFlow,4,0.5714,Mid-5,4,4,4,3,3,Deferred,False,0,The color coding for dependency types was helpful for quick comprehension.
+P25,MSc,2,CH663,TensorFlow,3,0.5286,Mid-5,3,3,5,2,2,Accepted,True,1,
+P25,MSc,2,CH698,TensorFlow,5,0.8743,Top-5,4,3,3,2,4,Modified,False,5,The color coding for dependency types was helpful for quick comprehension.
+P25,MSc,2,CH1556,Kubernetes,5,0.9143,Top-5,4,4,4,4,3,Modified,False,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P25,MSc,2,CH641,TensorFlow,7,0.94,Top-5,3,5,4,2,4,Accepted,True,5,
+P25,MSc,2,CH856,VS Code,6,0.9571,Top-5,5,4,2,3,4,Modified,True,2,I needed more context to fully understand some implicit SATD comments.
+P25,MSc,2,CH873,Android,2,0.2857,Bottom-5,5,5,3,3,2,Modified,True,3,
+P25,MSc,2,CH1773,PostgreSQL,1,0.1229,Bottom-5,4,4,4,3,4,Deferred,True,1,
+P25,MSc,2,CH871,Android,1,0.1429,Bottom-5,4,4,4,3,3,Accepted,False,2,
+P26,MSc,4,CH557,TensorFlow,3,0.4286,Mid-5,5,5,3,4,4,Deferred,False,4,
+P26,MSc,4,CH1072,Firefox,6,0.9571,Top-5,4,5,3,4,4,Deferred,True,1,
+P26,MSc,4,CH648,TensorFlow,3,0.4886,Mid-5,4,3,3,5,4,Deferred,True,1,The tool's suggestions sometimes felt too aggressive for my experience level.
+P26,MSc,4,CH1792,PostgreSQL,4,0.7114,Top-5,4,4,4,4,4,Accepted,True,0,
+P26,MSc,4,CH677,TensorFlow,2,0.2657,Bottom-5,5,5,4,4,5,Accepted,True,3,The visualization helped me understand complex code relationships in unfamiliar projects.
+P26,MSc,4,CH1142,Firefox,2,0.3457,Bottom-5,5,4,5,5,3,Rejected,True,0,
+P26,MSc,4,CH1384,React,5,0.7943,Top-5,3,5,4,5,3,Accepted,True,5,The visualization helped me understand complex code relationships in unfamiliar projects.
+P26,MSc,4,CH805,VS Code,5,0.9143,Top-5,4,5,5,3,3,Modified,False,3,I learned a lot about technical debt propagation through this tool.
+P26,MSc,4,CH1898,Apache Commons,5,0.8743,Top-5,5,4,4,4,4,Accepted,True,0,
+P26,MSc,4,CH421,TensorFlow,2,0.3457,Bottom-5,4,5,3,4,4,Accepted,True,2,
+P26,MSc,4,CH679,TensorFlow,1,0.0629,Bottom-5,4,4,3,4,4,Deferred,True,5,
+P26,MSc,4,CH720,TensorFlow,3,0.4486,Mid-5,4,3,3,3,5,Modified,True,5,I learned a lot about technical debt propagation through this tool.
+P26,MSc,4,CH607,TensorFlow,3,0.4286,Mid-5,5,5,3,3,5,Rejected,True,5,
+P26,MSc,4,CH253,TensorFlow,3,0.4486,Mid-5,4,4,4,1,4,Modified,True,2,
+P26,MSc,4,CH854,VS Code,7,1.0,Top-5,4,3,4,4,5,Deferred,True,4,
+P26,MSc,4,CH656,TensorFlow,2,0.2057,Bottom-5,5,4,5,2,4,Accepted,False,3,Some chains were overwhelming to analyze due to their length.
+P26,MSc,4,CH1036,Spring Framework,3,0.4886,Mid-5,4,3,5,4,5,Accepted,False,5,
+P27,MSc,2,CH1538,Kubernetes,3,0.4486,Mid-5,4,3,3,3,5,Accepted,False,2,
+P27,MSc,2,CH357,TensorFlow,1,0.0829,Bottom-5,4,4,3,3,3,Rejected,False,2,I needed more context to fully understand some implicit SATD comments.
+P27,MSc,2,CH1418,Kubernetes,3,0.5286,Mid-5,5,5,2,1,5,Deferred,True,3,
+P27,MSc,2,CH1706,PostgreSQL,1,0.1429,Bottom-5,4,4,2,4,3,Deferred,True,2,
+P27,MSc,2,CH1631,Kubernetes,4,0.6914,Mid-5,3,4,3,4,3,Deferred,False,0,
+P27,MSc,2,CH1780,PostgreSQL,1,0.0829,Bottom-5,4,3,2,3,4,Modified,True,4,Some chains were overwhelming to analyze due to their length.
+P27,MSc,2,CH681,TensorFlow,6,0.9571,Top-5,4,4,5,2,5,Accepted,True,1,
+P27,MSc,2,CH1271,React,3,0.4686,Mid-5,5,5,4,4,4,Modified,True,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P27,MSc,2,CH279,TensorFlow,4,0.6914,Mid-5,5,3,2,3,3,Modified,True,1,The tool's suggestions sometimes felt too aggressive for my experience level.
+P27,MSc,2,CH1355,React,4,0.7114,Top-5,4,4,4,4,4,Accepted,True,4,
+P27,MSc,2,CH694,TensorFlow,3,0.4886,Mid-5,4,4,5,3,2,Accepted,True,1,
+P27,MSc,2,CH112,SciPy,4,0.7114,Top-5,5,3,2,3,3,Modified,True,2,
+P27,MSc,2,CH1804,PostgreSQL,7,1.0,Top-5,5,5,4,2,4,Deferred,True,0,
+P27,MSc,2,CH335,TensorFlow,7,1.0,Top-5,4,4,5,5,4,Deferred,True,5,
+P27,MSc,2,CH140,SciPy,4,0.7514,Top-5,4,5,4,3,5,Accepted,True,3,
+P27,MSc,2,CH046,SciPy,2,0.2457,Bottom-5,4,4,3,4,4,Deferred,True,5,I learned a lot about technical debt propagation through this tool.
+P27,MSc,2,CH1020,Spring Framework,2,0.3257,Bottom-5,5,5,4,4,3,Modified,True,4,
+P28,MSc,3,CH960,Android,3,0.5286,Mid-5,4,3,5,3,3,Accepted,False,3,
+P28,MSc,3,CH1658,PostgreSQL,3,0.4886,Mid-5,4,3,4,4,3,Deferred,True,2,I needed more context to fully understand some implicit SATD comments.
+P28,MSc,3,CH1376,React,2,0.2857,Bottom-5,5,5,4,4,3,Accepted,False,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P28,MSc,3,CH1699,PostgreSQL,3,0.5086,Mid-5,4,4,3,3,4,Accepted,True,3,
+P28,MSc,3,CH1379,React,3,0.5886,Mid-5,4,3,4,5,4,Deferred,True,2,
+P28,MSc,3,CH1413,Kubernetes,7,1.0,Top-5,4,4,4,3,3,Accepted,True,4,
+P28,MSc,3,CH249,TensorFlow,5,0.8343,Top-5,3,4,4,3,4,Deferred,True,0,
+P28,MSc,3,CH1354,React,3,0.4086,Mid-5,5,4,3,4,4,Accepted,False,4,I learned a lot about technical debt propagation through this tool.
+P28,MSc,3,CH602,TensorFlow,5,0.8943,Top-5,4,3,4,5,3,Deferred,True,2,Helpful for understanding legacy code in my thesis project.
+P28,MSc,3,CH755,VS Code,7,1.0,Top-5,4,4,4,3,4,Accepted,False,1,
+P28,MSc,3,CH815,VS Code,2,0.2657,Bottom-5,5,3,4,5,4,Accepted,True,5,Helpful for understanding legacy code in my thesis project.
+P28,MSc,3,CH1436,Kubernetes,5,0.9143,Top-5,5,5,5,5,4,Modified,False,3,
+P28,MSc,3,CH1638,Kubernetes,2,0.2257,Bottom-5,5,5,3,2,3,Deferred,True,5,The tool's suggestions sometimes felt too aggressive for my experience level.
+P28,MSc,3,CH1601,Kubernetes,3,0.3886,Bottom-5,4,2,4,4,3,Modified,False,4,I needed more context to fully understand some implicit SATD comments.
+P28,MSc,3,CH321,TensorFlow,7,1.0,Top-5,4,5,5,4,4,Accepted,True,5,
+P28,MSc,3,CH1884,Apache Commons,1,0.0829,Bottom-5,5,4,5,5,3,Deferred,True,0,
+P28,MSc,3,CH1341,React,4,0.6514,Mid-5,4,3,4,3,5,Deferred,True,3,
+P29,MSc,2,CH1128,Firefox,5,0.8143,Top-5,4,4,5,4,4,Rejected,True,1,
+P29,MSc,2,CH1034,Spring Framework,2,0.2657,Bottom-5,4,3,5,2,3,Modified,True,0,
+P29,MSc,2,CH557,TensorFlow,3,0.4286,Mid-5,4,4,5,5,3,Accepted,True,2,
+P29,MSc,2,CH1338,React,3,0.5486,Mid-5,4,3,3,4,4,Rejected,False,5,
+P29,MSc,2,CH1016,Spring Framework,1,0.1429,Bottom-5,3,4,4,2,4,Rejected,True,0,
+P29,MSc,2,CH1652,PostgreSQL,1,0.0829,Bottom-5,3,4,4,4,3,Accepted,True,3,The tool's suggestions sometimes felt too aggressive for my experience level.
+P29,MSc,2,CH1390,React,5,0.8343,Top-5,4,4,3,3,3,Accepted,True,2,Helpful for understanding legacy code in my thesis project.
+P29,MSc,2,CH694,TensorFlow,3,0.4886,Mid-5,3,2,3,3,5,Accepted,False,5,
+P29,MSc,2,CH1037,Spring Framework,4,0.7514,Top-5,4,3,3,2,3,Accepted,True,1,
+P29,MSc,2,CH391,TensorFlow,7,1.0,Top-5,4,4,4,4,3,Accepted,True,4,I needed more context to fully understand some implicit SATD comments.
+P29,MSc,2,CH075,SciPy,3,0.5486,Mid-5,4,3,4,2,3,Modified,True,4,
+P29,MSc,2,CH007,SciPy,7,1.0,Top-5,4,3,4,2,4,Modified,False,2,The color coding for dependency types was helpful for quick comprehension.
+P29,MSc,2,CH847,VS Code,2,0.2657,Bottom-5,4,3,4,3,3,Modified,True,3,
+P29,MSc,2,CH215,TensorFlow,5,0.8343,Top-5,4,4,5,5,4,Deferred,True,1,
+P29,MSc,2,CH252,TensorFlow,1,0.0829,Bottom-5,4,2,3,4,3,Deferred,True,0,The color coding for dependency types was helpful for quick comprehension.
+P29,MSc,2,CH1503,Kubernetes,3,0.4086,Mid-5,3,1,2,3,4,Rejected,False,3,The visualization helped me understand complex code relationships in unfamiliar projects.
+P29,MSc,2,CH1062,Spring Framework,3,0.4486,Mid-5,3,3,5,3,3,Rejected,True,5,Helpful for understanding legacy code in my thesis project.
+P30,MSc,4,CH1792,PostgreSQL,4,0.7114,Top-5,4,4,3,3,5,Deferred,True,3,
+P30,MSc,4,CH331,TensorFlow,4,0.7314,Top-5,5,3,5,2,4,Accepted,True,0,Helpful for understanding legacy code in my thesis project.
+P30,MSc,4,CH1141,Firefox,4,0.6714,Mid-5,4,3,3,4,3,Accepted,False,5,The visualization helped me understand complex code relationships in unfamiliar projects.
+P30,MSc,4,CH651,TensorFlow,3,0.5286,Mid-5,3,4,5,3,3,Modified,True,5,
+P30,MSc,4,CH924,Android,3,0.5086,Mid-5,4,4,4,4,3,Accepted,True,4,Helpful for understanding legacy code in my thesis project.
+P30,MSc,4,CH995,Spring Framework,3,0.5086,Mid-5,5,4,3,3,4,Deferred,True,2,
+P30,MSc,4,CH1564,Kubernetes,1,0.0829,Bottom-5,5,4,3,3,4,Modified,True,4,
+P30,MSc,4,CH1165,React,1,0.1029,Bottom-5,3,3,4,3,2,Deferred,False,5,
+P30,MSc,4,CH143,SciPy,1,0.1029,Bottom-5,3,4,3,5,2,Rejected,True,2,
+P30,MSc,4,CH755,VS Code,7,1.0,Top-5,4,5,4,4,4,Modified,False,4,
+P30,MSc,4,CH903,Android,1,0.1029,Bottom-5,3,4,5,3,4,Accepted,True,4,The tool's suggestions sometimes felt too aggressive for my experience level.
+P30,MSc,4,CH281,TensorFlow,2,0.2657,Bottom-5,3,5,4,4,4,Accepted,True,1,
+P30,MSc,4,CH1230,React,3,0.4286,Mid-5,4,4,3,3,3,Modified,True,2,I learned a lot about technical debt propagation through this tool.
+P30,MSc,4,CH1125,Firefox,3,0.4686,Mid-5,4,5,3,4,3,Deferred,True,0,
+P30,MSc,4,CH1776,PostgreSQL,5,0.8943,Top-5,5,5,4,3,4,Accepted,False,4,
+P30,MSc,4,CH1157,React,7,1.0,Top-5,4,5,3,4,4,Rejected,True,2,
+P30,MSc,4,CH1109,Firefox,4,0.8714,Top-5,4,4,4,4,3,Deferred,False,3,I needed more context to fully understand some implicit SATD comments.

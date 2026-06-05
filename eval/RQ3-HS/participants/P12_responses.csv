@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P12,Professional,13,CH706,TensorFlow,3,0.5286,Mid-5,4,5,3,3,5,Accepted,True,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P12,Professional,13,CH1751,PostgreSQL,3,0.4686,Mid-5,5,5,5,4,5,Accepted,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P12,Professional,13,CH700,TensorFlow,5,0.7743,Top-5,5,4,4,4,4,Deferred,False,3,
+P12,Professional,13,CH1079,Firefox,2,0.2657,Bottom-5,5,4,4,2,5,Accepted,True,5,
+P12,Professional,13,CH1203,React,3,0.4486,Mid-5,5,3,5,3,5,Accepted,True,5,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P12,Professional,13,CH893,Android,4,0.8114,Top-5,5,4,5,3,4,Deferred,False,4,I appreciate the actionable remediation plans - they save investigation time.
+P12,Professional,13,CH391,TensorFlow,7,1.0,Top-5,5,5,4,4,5,Modified,True,5,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P12,Professional,13,CH1363,React,3,0.5686,Mid-5,5,5,5,5,5,Accepted,True,5,
+P12,Professional,13,CH360,TensorFlow,1,0.1229,Bottom-5,4,4,5,5,4,Deferred,False,2,I appreciate the actionable remediation plans - they save investigation time.
+P12,Professional,13,CH017,SciPy,3,0.4286,Mid-5,5,5,4,5,5,Deferred,True,0,
+P12,Professional,13,CH1791,PostgreSQL,5,0.7143,Top-5,4,5,5,5,4,Accepted,True,5,
+P12,Professional,13,CH406,TensorFlow,2,0.3057,Bottom-5,5,4,3,3,5,Accepted,True,5,
+P12,Professional,13,CH1444,Kubernetes,3,0.4486,Mid-5,4,3,4,3,4,Accepted,True,3,The chain analysis revealed dependencies I hadn't considered before.
+P12,Professional,13,CH481,TensorFlow,1,0.1429,Bottom-5,5,5,4,5,5,Modified,True,1,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P12,Professional,13,CH952,Android,2,0.2857,Bottom-5,4,4,4,3,3,Accepted,True,1,
+P12,Professional,13,CH1365,React,7,1.0,Top-5,5,5,5,5,5,Rejected,True,1,The SIR score aligned well with my experience-based assessment of technical debt priority.
+P12,Professional,13,CH1104,Firefox,7,1.0,Top-5,5,4,5,4,5,Accepted,True,4,

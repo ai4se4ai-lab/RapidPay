@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P05,Professional,10,CH645,TensorFlow,3,0.4086,Mid-5,4,5,5,3,3,Rejected,True,5,
+P05,Professional,10,CH021,SciPy,6,0.9571,Top-5,5,5,5,2,4,Accepted,True,5,This chain affects both the core logic and user-facing components. That is the kind of ripple we should catch early.
+P05,Professional,10,CH1577,Kubernetes,2,0.3257,Bottom-5,5,4,4,5,3,Rejected,True,0,
+P05,Professional,10,CH1621,Kubernetes,3,0.5686,Mid-5,5,3,5,5,5,Accepted,True,0,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P05,Professional,10,CH1491,Kubernetes,3,0.5086,Mid-5,5,4,5,4,5,Modified,True,1,The prioritization matches what I would expect based on years of maintenance experience.
+P05,Professional,10,CH1825,Apache Commons,6,0.9571,Top-5,5,5,4,3,4,Accepted,True,2,
+P05,Professional,10,CH244,TensorFlow,3,0.4486,Mid-5,5,5,3,5,5,Accepted,False,2,
+P05,Professional,10,CH1225,React,1,0.0629,Bottom-5,3,5,4,4,2,Deferred,True,2,
+P05,Professional,10,CH603,TensorFlow,6,0.9571,Top-5,5,3,3,4,5,Accepted,True,3,I would integrate this into our CI/CD pipeline for proactive debt management.
+P05,Professional,10,CH393,TensorFlow,1,0.0629,Bottom-5,4,5,3,4,4,Accepted,False,5,
+P05,Professional,10,CH1389,React,5,0.9143,Top-5,5,4,4,3,4,Modified,True,4,"When RapidPay suggests debt in code I recently worked on, I can quickly assess whether it's worth fixing because I already understand the context and potential impact."
+P05,Professional,10,CH1228,React,3,0.5086,Mid-5,5,4,4,3,4,Accepted,True,0,
+P05,Professional,10,CH1753,PostgreSQL,5,0.8743,Top-5,5,4,4,3,5,Accepted,True,3,
+P05,Professional,10,CH564,TensorFlow,2,0.3457,Bottom-5,5,5,5,5,4,Modified,True,5,
+P05,Professional,10,CH1666,PostgreSQL,3,0.4286,Mid-5,4,4,4,2,3,Accepted,True,5,I would integrate this into our CI/CD pipeline for proactive debt management.
+P05,Professional,10,CH1335,React,5,0.9143,Top-5,5,5,3,4,5,Accepted,True,3,
+P05,Professional,10,CH1054,Spring Framework,1,0.1229,Bottom-5,4,3,3,4,3,Accepted,True,4,

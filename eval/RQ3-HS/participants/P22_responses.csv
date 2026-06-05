@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P22,PhD,4,CH1899,Apache Commons,4,0.7514,Top-5,5,4,4,5,3,Accepted,True,1,"I noticed the tool handles implicit SATD comments well, not just TODO/FIXME markers."
+P22,PhD,4,CH540,TensorFlow,3,0.5086,Mid-5,5,3,3,3,3,Deferred,True,1,
+P22,PhD,4,CH896,Android,2,0.2257,Bottom-5,4,5,3,3,5,Rejected,True,5,
+P22,PhD,4,CH1157,React,7,1.0,Top-5,5,4,4,3,2,Modified,True,3,
+P22,PhD,4,CH088,SciPy,3,0.5486,Mid-5,4,5,3,4,4,Deferred,True,4,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P22,PhD,4,CH164,TensorFlow,4,0.6914,Mid-5,4,4,3,3,5,Accepted,False,5,
+P22,PhD,4,CH109,SciPy,2,0.3057,Bottom-5,5,4,4,1,4,Modified,True,3,
+P22,PhD,4,CH852,VS Code,6,0.9571,Top-5,4,3,4,4,4,Deferred,True,1,The methodology for computing SIR scores seems well-grounded in graph theory.
+P22,PhD,4,CH077,SciPy,1,0.0829,Bottom-5,5,4,4,3,5,Rejected,False,2,
+P22,PhD,4,CH712,TensorFlow,1,0.1429,Bottom-5,5,3,2,4,4,Deferred,False,5,"Chain length correlates with complexity, as expected from dependency analysis literature."
+P22,PhD,4,CH1359,React,7,0.96,Top-5,4,5,3,5,3,Accepted,True,2,The control flow dependencies could be enhanced with more sophisticated static analysis.
+P22,PhD,4,CH1685,PostgreSQL,3,0.5486,Mid-5,4,5,3,3,4,Accepted,True,5,Good balance between precision and recall in SATD detection.
+P22,PhD,4,CH037,SciPy,5,0.9143,Top-5,4,3,3,4,2,Accepted,True,4,
+P22,PhD,4,CH1441,Kubernetes,3,0.6086,Mid-5,5,5,4,3,4,Modified,True,0,
+P22,PhD,4,CH544,TensorFlow,1,0.1429,Bottom-5,5,5,3,4,5,Rejected,False,5,Interesting to see how call and data dependencies contribute differently to propagation.
+P22,PhD,4,CH139,SciPy,5,0.9143,Top-5,5,5,4,3,4,Accepted,True,0,
+P22,PhD,4,CH1440,Kubernetes,4,0.6914,Mid-5,5,5,3,4,5,Modified,False,3,

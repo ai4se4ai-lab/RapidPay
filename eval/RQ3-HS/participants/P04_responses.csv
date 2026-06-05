@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P04,Professional,6,CH1235,React,5,0.9143,Top-5,4,4,4,5,5,Deferred,True,3,
+P04,Professional,6,CH636,TensorFlow,3,0.5286,Mid-5,5,5,3,3,5,Rejected,True,4,The module-level dependencies were particularly insightful for our microservices architecture.
+P04,Professional,6,CH1544,Kubernetes,1,0.0829,Bottom-5,5,3,3,3,5,Rejected,False,2,This chain visualization helped me quickly identify the propagation path in production code.
+P04,Professional,6,CH947,Android,1,0.0629,Bottom-5,4,5,5,5,5,Accepted,True,3,
+P04,Professional,6,CH776,VS Code,5,0.9143,Top-5,5,4,5,4,4,Rejected,True,1,
+P04,Professional,6,CH328,TensorFlow,3,0.5686,Mid-5,5,5,3,5,3,Modified,True,2,
+P04,Professional,6,CH1443,Kubernetes,2,0.2857,Bottom-5,4,5,5,3,4,Modified,True,3,
+P04,Professional,6,CH915,Android,3,0.4886,Mid-5,5,4,3,3,4,Modified,True,2,
+P04,Professional,6,CH356,TensorFlow,3,0.4086,Mid-5,4,4,4,4,5,Accepted,True,3,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P04,Professional,6,CH1810,PostgreSQL,5,0.9143,Top-5,4,3,3,4,4,Accepted,True,2,
+P04,Professional,6,CH894,Android,1,0.1429,Bottom-5,5,4,4,3,4,Accepted,True,2,
+P04,Professional,6,CH488,TensorFlow,4,0.7714,Top-5,5,4,5,5,4,Accepted,False,5,Useful for sprint planning - helps justify tech debt tickets to stakeholders.
+P04,Professional,6,CH1436,Kubernetes,5,0.9143,Top-5,5,4,5,4,5,Rejected,True,5,
+P04,Professional,6,CH1303,React,2,0.3457,Bottom-5,5,4,4,4,5,Accepted,False,5,
+P04,Professional,6,CH1049,Spring Framework,3,0.4486,Mid-5,5,5,5,4,5,Modified,True,2,
+P04,Professional,6,CH1670,PostgreSQL,7,1.0,Top-5,4,4,2,3,3,Rejected,True,2,
+P04,Professional,6,CH1426,Kubernetes,3,0.5486,Mid-5,5,3,4,4,5,Accepted,True,4,

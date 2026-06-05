@@ -1,0 +1,18 @@
+participant_id,role,years_experience,chain_id,project,num_satd_instances,sir_score,sir_bucket,chain_understanding_rating,relevance_rating,timeliness_rating,actionability_rating,usefulness_rating,suggestion_outcome,commit_context_present,developer_interest_score,qualitative_feedback
+P15,PhD,6,CH1645,PostgreSQL,4,0.7914,Top-5,4,5,3,2,5,Deferred,True,4,The developer interest score captures contextual familiarity effectively.
+P15,PhD,6,CH378,TensorFlow,1,0.1429,Bottom-5,4,5,3,2,4,Deferred,False,0,
+P15,PhD,6,CH1865,Apache Commons,5,0.6943,Mid-5,5,4,5,4,5,Accepted,True,2,The methodology for computing SIR scores seems well-grounded in graph theory.
+P15,PhD,6,CH200,TensorFlow,4,0.7314,Top-5,5,3,4,4,5,Modified,True,2,
+P15,PhD,6,CH846,VS Code,4,0.8714,Top-5,4,4,3,3,5,Modified,True,5,
+P15,PhD,6,CH072,SciPy,4,0.6114,Mid-5,4,4,4,4,3,Deferred,True,5,The stratified bucket approach for prioritization is methodologically sound.
+P15,PhD,6,CH1260,React,5,0.9143,Top-5,5,4,3,5,4,Modified,True,4,
+P15,PhD,6,CH954,Android,2,0.3257,Bottom-5,4,5,5,3,4,Rejected,False,1,
+P15,PhD,6,CH689,TensorFlow,5,0.9143,Top-5,4,5,4,4,5,Deferred,True,3,
+P15,PhD,6,CH1228,React,3,0.5086,Mid-5,5,4,4,4,4,Accepted,False,0,The chain coherence metric would be valuable for my research on software evolution.
+P15,PhD,6,CH768,VS Code,4,0.6914,Mid-5,4,3,5,3,4,Deferred,True,0,
+P15,PhD,6,CH1487,Kubernetes,3,0.4086,Mid-5,4,3,5,4,4,Deferred,True,2,
+P15,PhD,6,CH1001,Spring Framework,4,0.8314,Top-5,4,5,4,5,5,Deferred,False,4,Good balance between precision and recall in SATD detection.
+P15,PhD,6,CH941,Android,1,0.1029,Bottom-5,5,3,4,4,4,Rejected,True,1,Visualizing technical debt relationships significantly enhanced my understanding of how debt propagates. It was eye-opening to see the entire chain.
+P15,PhD,6,CH137,SciPy,1,0.0629,Bottom-5,5,4,4,4,5,Deferred,True,5,The stratified bucket approach for prioritization is methodologically sound.
+P15,PhD,6,CH245,TensorFlow,3,0.5086,Mid-5,5,5,5,2,4,Modified,False,3,
+P15,PhD,6,CH633,TensorFlow,2,0.2857,Bottom-5,5,5,5,4,4,Accepted,True,3,
