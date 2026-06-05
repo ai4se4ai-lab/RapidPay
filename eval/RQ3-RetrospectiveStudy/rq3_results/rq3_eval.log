@@ -1,3 +1,36 @@
 [2026-05-18 16:01:48,480] INFO rq3_eval: Will evaluate 10 project(s): AC, SF, TF, RE, VS, AN, SC, PO, KU, FI
 [2026-05-18 16:01:48,480] INFO rq3_eval: === Replaying project AC (Apache Commons Lang) ===
 [2026-05-18 16:01:48,625] INFO rq3_eval: [AC] Detecting SATD instances at snapshot 08d28f59 ...
+[2026-05-18 16:11:37,254] INFO rq3_eval: [AC] Scanned 503 files, found 409 SATD candidate lines (lexical only).
+[2026-05-18 16:11:37,264] INFO rq3_eval: [AC] Built 2796 edges, 122 chains.
+[2026-05-18 16:12:12,732] INFO rq3_eval: [AC] Replaying 1164 post-snapshot commits.
+[2026-05-18 16:38:28,267] INFO rq3_eval: Wrote rq3_results\rq3_raw_replay_AC.csv (52 rows)
+[2026-05-18 16:38:28,268] INFO rq3_eval: === Replaying project SF (Spring Framework) ===
+[2026-05-18 16:38:28,427] INFO rq3_eval: [SF] Detecting SATD instances at snapshot e57464da ...
+[2026-05-18 19:29:04,608] INFO rq3_eval: [SF] Scanned 7921 files, found 2385 SATD candidate lines (lexical only).
+[2026-05-18 19:29:04,684] INFO rq3_eval: [SF] Built 34958 edges, 874 chains.
+[2026-05-18 19:36:38,356] INFO rq3_eval: [SF] Replaying 3476 post-snapshot commits.
+[2026-05-18 21:33:21,452] INFO rq3_eval: Wrote rq3_results\rq3_raw_replay_SF.csv (172 rows)
+[2026-05-18 21:33:21,452] INFO rq3_eval: === Replaying project TF (TensorFlow) ===
+[2026-05-18 21:33:21,605] INFO rq3_eval: [TF] Detecting SATD instances at snapshot e4baa4c1 ...
+[2026-05-19 02:18:58,165] INFO rq3_eval: [TF] Scanned 18617 files, found 16673 SATD candidate lines (lexical only).
+[2026-05-19 02:18:58,596] INFO rq3_eval: [TF] Built 286582 edges, 4974 chains.
+[2026-05-19 04:06:25,452] INFO rq3_eval: [TF] Replaying 21682 post-snapshot commits.
+[2026-05-19 16:47:20,039] INFO rq3_eval: Wrote rq3_results\rq3_raw_replay_TF.csv (1604 rows)
+[2026-05-19 16:47:20,042] INFO rq3_eval: === Replaying project RE (React) ===
+[2026-05-19 16:47:20,150] INFO rq3_eval: [RE] Detecting SATD instances at snapshot 92c0f5f8 ...
+[2026-05-19 17:20:10,304] INFO rq3_eval: [RE] Scanned 3830 files, found 2048 SATD candidate lines (lexical only).
+[2026-05-19 17:20:10,379] INFO rq3_eval: [RE] Built 44962 edges, 452 chains.
+[2026-05-19 17:23:01,567] INFO rq3_eval: [RE] Replaying 1799 post-snapshot commits.
+[2026-05-19 18:36:32,115] INFO rq3_eval: Wrote rq3_results\rq3_raw_replay_RE.csv (316 rows)
+[2026-05-19 18:36:32,116] INFO rq3_eval: === Replaying project VS (VS Code) ===
+[2026-05-19 18:36:32,245] INFO rq3_eval: [VS] Detecting SATD instances at snapshot e3549961 ...
+[2026-05-19 20:07:58,848] INFO rq3_eval: [VS] Scanned 5419 files, found 2396 SATD candidate lines (lexical only).
+[2026-05-19 20:07:59,308] INFO rq3_eval: [VS] Built 302410 edges, 767 chains.
+[2026-05-19 20:32:11,131] INFO rq3_eval: [VS] Replaying 30284 post-snapshot commits.
+[2026-05-20 02:53:16,301] INFO rq3_eval: Wrote rq3_results\rq3_raw_replay_VS.csv (488 rows)
+[2026-05-20 02:53:16,302] INFO rq3_eval: === Replaying project AN (Android (AOSP kernel_common)) ===
+[2026-05-20 02:53:16,427] INFO rq3_eval: [AN] Detecting SATD instances at snapshot 0b08a5a1 ...
+[2026-05-21 10:45:09,134] INFO rq3_eval: [AN] Scanned 60316 files, found 43790 SATD candidate lines (lexical only).
+[2026-05-21 10:45:10,505] INFO rq3_eval: [AN] Built 804250 edges, 10046 chains.
+[2026-05-21 15:28:31,107] INFO rq3_eval: [AN] Replaying 74308 post-snapshot commits.

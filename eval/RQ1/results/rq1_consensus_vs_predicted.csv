@@ -1,0 +1,1201 @@
+project,repo_id,comment_id,predicted_label,consensus_label,match,annotator_1,annotator_2,had_disagreement,debt_type
+Apache Commons Lang,AC,satd-2bbdcdfc8a16,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-69e6470603dd,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2a198d9d6248,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3b5c8be0a5d9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c6bf8eb46845,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-09195faa8ec8,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-328a7f875160,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-ab9da69d429e,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-50d3c1a8f258,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e28c66804193,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-f214f9bddd79,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-37b15cfe592b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e9cb5049a2f4,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8807af44d53d,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-9aedf9f79488,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d5192e0aabe9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-90e76b016e0c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b7bb5ca910d7,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-4f693341837c,satd,satd,True,satd,satd,False,
+Apache Commons Lang,AC,satd-3f68d913b190,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-3e66fb0a0b1e,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-04956190e7d0,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-c2efdecfa330,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-63589eb13859,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-d2492c1e324e,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ef2c537b39ec,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-12767b976d3e,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-d33a6a24e811,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ce2297a7aab1,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-2bd91ca9e8b8,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2e63e9f83172,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ba007575b3fc,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-252c1435d96e,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-108fa99976e6,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-e5eac5b6b901,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ce2cd77526a1,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-f48a0d75afaf,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-96d5d61047b0,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d2fca2d00e74,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b860d02b1431,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-270e6c1b4121,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-db4140b42839,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-a8329ee66554,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-d5b9ffaad5b5,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-35b4738f4fcf,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-db873e064ebe,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-40d24d3d7e50,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-f5ad1431226e,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-c7ba01eafe5c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ce11796a071e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ad3f578b5ef1,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c8f474f542f1,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-e45267e9da6b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ddc52a0af096,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-cb3a85237d9c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3a0ed774599e,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-91df0cecb373,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-1709474ffbab,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-951a81ee655e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-15cc95b76e84,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c846602d1376,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-60065c8ebb15,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d07ee8df9c38,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-e712feef9ea4,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-fef72d3b21e4,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-9e8c6aef0dce,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-bca5ed973286,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-bd384577ecfb,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-09ecb0dfd290,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-6d54489df1a6,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-044c669f844b,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-b64d778f499a,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-5fd1b50c7507,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-912e64748772,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-7251634a1653,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-9fc52116ad56,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-71de4d7e732b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d952031a4c68,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-1aba39375310,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-901dd26998ed,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-42dbf87dc305,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-a3dbac99616b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8137d5ccb27a,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-d715421134c4,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-028996f2a288,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-94c95ec1c441,satd,satd,True,satd,non-satd,True,Design
+Apache Commons Lang,AC,satd-cbaa254a46d1,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-fac6d0d8d9c3,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-699eac70a42b,satd,satd,True,satd,non-satd,True,Requirement
+Apache Commons Lang,AC,satd-24e21a03309a,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-21504acf8f9f,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-d7c0220281f1,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-ca4680e8040d,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-7e516a0a8f74,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-6a3421d721da,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1ed8f7c36873,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-018d50fa91e9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-04eab2433cff,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-978ffdbaf5d7,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-fb79df2942df,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-83b680318c36,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c83be03f82cc,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-2e39277cb787,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0a609f885ee6,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-c4732d3bc3cd,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-5f7f2a6281b7,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ef2bd84c5276,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-3962abd06a8e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8c4b8444d78b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-655d49fc99d5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-67ea9b996e73,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d9c77f6d4c4d,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-e9bb893d9ea0,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-89e29b494510,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e34de590a86d,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-916e231cc6e0,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-90d7abef4d11,satd,satd,True,satd,non-satd,True,Design
+Apache Commons Lang,AC,satd-4c7ad15d7c20,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-494802f7bd32,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2f23a558f63a,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-d40d25cae860,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6a980cb2fb19,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-11ecc572a2f4,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d40b873ee70c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b45cce561810,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-629a6e47bbcd,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6393c34978f1,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-f5cc52dc4bc2,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d6e8e0bbb4a8,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-61385deeb517,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c3abcaf79507,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-351d57389631,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ab19746ed092,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-9514ab8d31f7,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-8d92438cbd75,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-0b2209bbf9a0,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-0a2da0e60d8c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-83ef82ec77ba,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-bff04b486950,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-21556f77ecb5,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-ffac27d7dc99,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-719d268a377c,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-063e04bbb8c0,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-3d2fe1fe78df,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b439b3150d60,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-e5f85cee627b,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-fd3763ae53c3,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-459a41414144,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-df6b1853829f,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-c49ea56242c8,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-2bd761818eae,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d5c8504ec0be,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-81c6e7413cfe,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d97bae060512,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-15923fb43392,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-cd96503f954e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1f4c0ae1e06c,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-211e64b6ecc5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-5d092ba81094,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-72e65b43de92,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-75ba65d60b5e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-7f6f79b1accd,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-80e8c86f7113,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-f43efacd97e5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d56272c75b7c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-31c95137d469,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-eb33ecbf7cee,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-797d2a2d6744,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3414ed535575,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-0f3047eb85e2,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-4b65760d39c9,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-ba5acf2b94b1,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3ada351f8949,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-edc89b86b0ce,satd,non-satd,False,non-satd,non-satd,False,Defect
+Apache Commons Lang,AC,satd-f64be6d75576,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-ee9eb13739d5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-4d2127910ce2,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-03f37789bf41,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-513dd448da96,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-bc11b6312a2c,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-53f17c0cea0e,satd,satd,True,satd,non-satd,True,Design
+Apache Commons Lang,AC,satd-307dda95ac42,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-8229e7625b4d,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-fc61aa2c647a,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b73dc9b4489b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-de360b130e4c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-fb53fbe93c4c,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-4872d25c97a1,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-204850ba4225,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-7762656202af,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1f24ed808361,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-76823b38148b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-413fc42545ad,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0e8a00544163,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-24a7a2735337,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-00f7389b14ca,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-af461b09fdb9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-a0f655040200,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-417f0b69a7b1,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-5a8343276310,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-471f03f4a3d3,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-300224930cb6,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-eafc63034ce3,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e27dd14c5525,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-15ebd2304af5,satd,non-satd,False,non-satd,non-satd,False,Documentation
+Apache Commons Lang,AC,satd-97447fb1e654,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-97dc1eb12b7a,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-40274534b4e2,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-573bc98be31d,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2778ec76afa4,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-b4867fcb168c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-bbe93f87e8db,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-3998e4e0f5b8,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-3c1118af6055,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d681aaeb2e76,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-60d1ab4944c7,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-6837ea6de123,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-638435f3a880,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-c23a5a8bbf16,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-b334f5d03ba3,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-ab56d8c60a51,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-df4d665d2d9b,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-84ade230f892,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-60dc8830cbfe,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-9465e7d5f2ba,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-041e41ada792,non-satd,non-satd,True,satd,non-satd,True,
+Apache Commons Lang,AC,satd-a45870c7689b,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-a0ab1318573d,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-5b023c328a13,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-fd9e9594279d,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-8cb0469f0acb,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-be3189c5a786,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2b12bfc62715,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-224e7162f724,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-d19bc353ddb6,satd,non-satd,False,non-satd,non-satd,False,Documentation
+Apache Commons Lang,AC,satd-6d20ca01367a,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-9f728538ad37,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-8cc68a889de7,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-c60ba0bb8f08,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-8357ee0bbcef,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-d071d2ec205d,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-58f0fa0c15a3,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-be4e4b84dcbf,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0e8583d518ed,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-de08f9525e5b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-7a710e609c4b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-5cf803684f5f,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-90b566411995,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-0cded2ebe1db,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-198b835117e9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-4af32d72d51c,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-98ae154e3fe6,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-afaed91fd716,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-a8813333c0ea,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-f9465e065f52,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-b881bf126f88,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ed1bb6647771,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-7b5d2c04d5cc,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-c5c7b05e0cba,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-7d4bf5e912ed,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ead6e3d86e92,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e7c0a4e3142e,satd,satd,True,satd,non-satd,True,Defect
+Apache Commons Lang,AC,satd-c27ff7023a6e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-5ea2447b0709,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-7f02bf50e2eb,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-46c85cdff6f4,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0c44e9da4ddf,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1342517dd11a,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-26292a577de5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-77440b98b99e,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-0e46ab870173,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-54cebd47a022,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-9df979aa17bd,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-57977f1de11c,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-b89258923443,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-073ec1c1f68a,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6beac61ceb46,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-423bd2e4234f,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-a1dadd1f04f8,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-a19c59bc3550,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-b0059bcd01f1,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-ed252eac9e6d,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-5f9c5cd501dc,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-cdae4b40ffde,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-cb4b95d590d5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-9f2861304829,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-886a0d1f068b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3eefc52dd6c1,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-f63fddc1f765,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-64ceed4c0667,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-74f1fdecbdf4,satd,non-satd,False,non-satd,non-satd,False,Implementation
+Apache Commons Lang,AC,satd-5d09e7171def,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-8612e26770ce,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-a860c2b364a6,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-526d71d2419b,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-66e2c583f236,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-27a4cdd17264,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-fafd36c611f1,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3a76efd4fdef,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-e6a0c755e271,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-a3ea2d277ecc,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-0d0b6b13a328,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-7b8b82052a69,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6e792452148d,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0769ddb88343,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-ad5499483500,satd,satd,True,satd,satd,False,Design
+Apache Commons Lang,AC,satd-d2477d2b1625,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0a0ab2592380,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-83e275d54c0c,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-970cdca4434e,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-93f99098adef,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-15fe66921296,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-520c6ba92116,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-1d06f6ea0fa3,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-63b4c78d44c8,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-76a64c966847,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-e24b724273ef,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-5cd3ede0278d,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-8af94bdf6e26,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-cc6849e0a6f2,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-4695bc652326,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-2b83543bc33e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8604c4b4915e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-df4a455f47b5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-88a2501a6ef9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1ecbb7387b6d,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0cb7392c797d,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-25a5ca87635f,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3133666c781e,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-fec648a91d58,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-20055502792e,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-82da3f5acc7b,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-18ea042cfd35,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-76eabe4029cc,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-be5596146e22,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-b8b70251726e,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-0de313acf514,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-fc0245c14638,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-f37b8afc8496,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-c2cb96fb9ddc,satd,satd,True,non-satd,satd,True,Requirement
+Apache Commons Lang,AC,satd-9fa8534756c6,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-fd95c0aeadb3,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-06d90db87ca8,non-satd,satd,False,satd,satd,False,Test
+Apache Commons Lang,AC,satd-d98fdb4dcfda,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-042c8cae03d7,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-0391300a396b,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-949e2be6ced1,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-509242e568ce,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-1e6dd27a47d5,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-f77ab6b94993,non-satd,satd,False,satd,satd,False,
+Apache Commons Lang,AC,satd-b66f6aae185e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-b50199963cab,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-de14e7c9a6df,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-79edabcc7907,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2e1be87ec632,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-856dcf3942fd,non-satd,satd,False,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-b2d1d7f3fdf0,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-dbac2a3cd8b3,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-af7c5ef7aa14,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-bd3e26961870,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-029be63225dc,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-94f2c248059a,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-fc42840a90f7,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6708ca5f3b2e,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-786676998271,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-6f8e55403e51,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-454f7c8033e0,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-f0be3c5a18d3,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-340492bfd46a,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-67a4f21c3668,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-564a9bfd06ca,satd,satd,True,satd,satd,False,Requirement
+Apache Commons Lang,AC,satd-1d75c829844c,satd,satd,True,satd,satd,False,Defect
+Apache Commons Lang,AC,satd-90f04c5472bd,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-c7b837e06cbb,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-3b889e7e3393,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-17eb0e3a91ed,satd,satd,True,satd,satd,False,Documentation
+Apache Commons Lang,AC,satd-53e0c13bea81,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-fa37be1db73f,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1cd731f4c4b9,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2aad8e7722db,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-094a0bda4667,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-13881a07a5a5,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-303388a6327f,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-7e023e8304c9,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8c984d2314fc,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-7d0aa4194a0b,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-7f4746839ce4,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-eb23f049eae5,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-18686a5ecd80,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-01b257217b44,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-9785f99b8f84,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-8ea5a5fa9dcf,satd,non-satd,False,non-satd,non-satd,False,Design
+Apache Commons Lang,AC,satd-e5259fe2ff21,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-90ab91cb3e82,satd,satd,True,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-32932ee3d180,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-f120fb23826c,non-satd,satd,False,satd,satd,False,Implementation
+Apache Commons Lang,AC,satd-44a919d2617c,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-4e257ffd748c,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-2370118c0392,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-3b030085ae25,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-fce17d05f3ca,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-88966e4d076a,satd,satd,True,satd,satd,False,Test
+React,RE,satd-743165295d60,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9f020f1d7b21,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ec0f435ab89d,satd,satd,True,satd,satd,False,Design
+React,RE,satd-dc22f4e8d31b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-341d71e967b6,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-827cc34971b4,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2bb5339c9db0,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c392f75bb111,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-fd492775a1e5,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-580dff2593e8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4181f79e627e,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-7b647d45a35b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f8737412f1b7,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-7f4c0830168b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4ce3e6c018d0,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-98ee8650aee3,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4b576f930659,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-19be6759a332,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8fa0f2e9258b,satd,satd,True,satd,satd,False,Design
+React,RE,satd-4f5a6207bd60,satd,satd,True,satd,satd,False,Design
+React,RE,satd-c237e49c8d2a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ee5a489e682e,satd,satd,True,satd,satd,False,Defect
+React,RE,satd-1b28e9ab3750,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-86325e8d9070,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ff9a1f76282d,satd,satd,True,satd,satd,False,Test
+React,RE,satd-92bbf903a00c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c4e3ea341e2f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-66515ac357ff,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-152b347357f1,satd,satd,True,satd,satd,False,Design
+React,RE,satd-72ed9ef2d0a5,satd,satd,True,satd,satd,False,Design
+React,RE,satd-ed5b846c89b0,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-5f104131d4ff,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f24c7d04f45b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4c39b10f89e9,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-93c54eaece6e,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1c33df82c143,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f79efb353703,satd,satd,True,satd,satd,False,Test
+React,RE,satd-7e9ea43121de,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-efe5da27170a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9db48d96e956,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-7b73b5083011,satd,satd,True,satd,satd,False,Test
+React,RE,satd-3317c7a58538,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f6fbc2649867,satd,satd,True,satd,satd,False,Design
+React,RE,satd-c703c69af387,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-59f06e7ea5ee,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f3d6f6daea95,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a69c6ff05a4d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8c651eaeba67,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-f6aaa7e9e607,satd,satd,True,satd,satd,False,Test
+React,RE,satd-82b5200e3bb3,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-e3ec5e47712a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-3ee4ddebba58,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8949d6c98e69,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c5294a6739aa,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ba1e47c75cb2,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2cf7bffd7e40,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-7029eea7e891,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d3a55817affa,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e33c8cd0b5a2,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-7f9f20466107,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-38f14315f847,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2f86cb3c962e,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-8112583b8c42,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f60bae1d0cd8,satd,satd,True,satd,satd,False,Test
+React,RE,satd-47fa5a5fb491,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-823d3bba742f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-1da361d2c0ba,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-02acb07c83f5,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-6cbcfe28f8db,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0e1f763d3ef7,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-72b44b0ae31f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-c1a5714a3c40,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-de7fbe07810c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9b360570673f,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b1f1108a9666,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-2a997ce402b8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ac8c4b5c058c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2133c19dac3d,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-80fa42c3bdc9,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-04858d425688,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a3e226379af7,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9e6407a30228,satd,satd,True,satd,satd,False,Test
+React,RE,satd-eeb8ab5f17e8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-747ea7702c98,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-052035d20403,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4f6076848b07,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1f4779883fee,satd,satd,True,satd,satd,False,Design
+React,RE,satd-926ab8e4e9a8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9150ca515770,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-cf7059652c99,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-14563217f2ea,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c7663923531d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e5d3b8a83036,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-196765e5fd1b,satd,satd,True,satd,satd,False,Design
+React,RE,satd-873f9cdf4e29,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a7c69e4782e4,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-3582106a85bb,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0344fec2178f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-aa6762e04ab9,satd,satd,True,satd,satd,False,Design
+React,RE,satd-685bc26d9c54,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-848255d8ad78,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-a9478e83fa61,satd,satd,True,satd,satd,False,Test
+React,RE,satd-c9c7dfc62247,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-6378f065fbf0,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-fa0022085a83,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b078ed89bd01,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-409bfe928141,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-477980a3a169,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0d158939afa5,satd,satd,True,satd,satd,False,Test
+React,RE,satd-dc42fae19fcc,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-7f9a201d8a6b,satd,satd,True,satd,non-satd,True,Design
+React,RE,satd-65b85f12a7d5,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-b2100a17db32,satd,satd,True,satd,satd,False,Design
+React,RE,satd-1408e13f55b1,satd,satd,True,satd,satd,False,Design
+React,RE,satd-5ea26dd4b188,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d01af7acd1fe,satd,satd,True,satd,satd,False,Defect
+React,RE,satd-9399d3c6cd52,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-8ccd3c6d98e5,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-773f9e03ae0c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-abd87ef37c0a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-81721f2d9ee9,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-5657f5b08b74,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-3d71530b4f22,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-2a3de50e55e2,satd,satd,True,satd,satd,False,Design
+React,RE,satd-f06a78614854,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-6fa38b07e627,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-65f1f548e8c9,satd,satd,True,satd,satd,False,Design
+React,RE,satd-63f4796969ec,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-675d792698f2,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-df7f0189f81a,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-b88884623bd0,satd,satd,True,satd,satd,False,Test
+React,RE,satd-45234804f508,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-06e992ad3458,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-13fe926fc721,satd,satd,True,satd,satd,False,Test
+React,RE,satd-050eec9eab8f,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-22552191483f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-f82aa611ea63,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-b76df669619d,satd,satd,True,satd,satd,False,Test
+React,RE,satd-d897c6670a52,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-96d5f3a501aa,satd,satd,True,satd,satd,False,Design
+React,RE,satd-41d441839c59,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2eae7ced4326,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1835ea0679ef,satd,satd,True,satd,satd,False,Design
+React,RE,satd-3cea323388a2,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e55d9553c030,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-a6eebd43e096,satd,satd,True,satd,satd,False,Defect
+React,RE,satd-02a7703f2079,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-be5698ea189b,satd,satd,True,satd,satd,False,Test
+React,RE,satd-9d88ba38952e,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-82e64dc84d5f,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2c6af5454395,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-7cecc9cdc4a5,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-5f352c040ef1,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-19964b361ed0,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-805cfbf6254f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-26c131e864b5,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-358a488e74af,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d3ef9b5fb678,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-5343983b87f6,satd,satd,True,satd,satd,False,Design
+React,RE,satd-803cd4e96a6b,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-642e734cf8ee,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-2d2a3a806290,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-cbe931d85c7c,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-a226a01ada3c,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-cbc5ea5baebd,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4b0829134489,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-21cf5c20ecef,satd,satd,True,satd,satd,False,Test
+React,RE,satd-635bd11d8907,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-6751a815e8b5,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-221fdb93a0bd,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-071eb9507261,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-6789c603b850,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-07bb3f56bffa,satd,satd,True,satd,non-satd,True,Documentation
+React,RE,satd-4a40b946b759,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8760fed40ad1,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c0e03bd3d47c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-23bd4f79f47e,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-25bd293d6131,satd,satd,True,non-satd,satd,True,Implementation
+React,RE,satd-b3a6d550cd96,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-cc749e2d9503,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-667b07f9b7b9,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-72ee65a1352d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d07cbe75138c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-cbd60abe0b80,satd,satd,True,satd,satd,False,Design
+React,RE,satd-30eeb70e2cb6,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-36a4c7b676f1,satd,satd,True,satd,satd,False,Design
+React,RE,satd-f6890c41222e,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-4f7eb027af7e,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a736aafe8ef9,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-581a85a2c103,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-fea29f8edd9e,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-3fc1aecd513b,satd,satd,True,satd,satd,False,Test
+React,RE,satd-80171ef2e7e5,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-1ef508736a91,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b1afcbf20c00,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-9dca3b02ba60,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-1724f7e1e6d5,satd,satd,True,satd,satd,False,Test
+React,RE,satd-6067c5673a9f,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d1b985011d8c,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-6452b9306701,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-8d346cc52f30,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2f78fc101937,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-90a01bc8bade,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d63e34ffb4b7,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-230c7fa20320,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-27d47ee583cf,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-5f334090a53c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f795484d173d,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-78da51c40075,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ff9df0b39629,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d9c8c0db07b8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-88649cc2d048,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-dae3da000e0a,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-27da610c6301,satd,satd,True,satd,satd,False,Test
+React,RE,satd-3154fc655ad5,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e9c86ce750a5,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-16cd5f970707,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-2bc5edc49a99,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-eb14435d644a,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-26cd52d3f485,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2bc3b8927490,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-5ded67f07561,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-93639d046db4,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9f841a990f34,satd,satd,True,satd,satd,False,Design
+React,RE,satd-3f1a4ca7a9ff,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-808eface5dd8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0856139ebc0b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e8f752a963a1,satd,satd,True,satd,satd,False,Test
+React,RE,satd-acfe261711fd,satd,satd,True,non-satd,satd,True,Implementation
+React,RE,satd-3d5502dd68c9,satd,satd,True,satd,satd,False,Test
+React,RE,satd-3ea4fc0d42c5,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-80e3283b2171,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-413aed1cb0e7,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e9726996039a,satd,satd,True,satd,satd,False,Design
+React,RE,satd-64674d71e519,satd,satd,True,satd,satd,False,Test
+React,RE,satd-2806750100dd,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-5725bba694ed,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a4bf2256d435,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-24bd4bc64dee,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-686bfaa0a354,satd,satd,True,satd,satd,False,Defect
+React,RE,satd-c61746ed0336,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-d08d5cce9e4a,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-c8cb50a49074,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-7d3c4bff511a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-faddb283a8f1,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-796882f5e07f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-7db45f1b01a6,satd,satd,True,satd,satd,False,Design
+React,RE,satd-154e1e05d51a,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-c6be1f064a1f,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-3d6938929c96,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b31484d6e41c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-26e3109a2e22,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2d31d63e7e3a,satd,satd,True,satd,satd,False,Test
+React,RE,satd-3972040097dc,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2f7efeec0314,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-78d6e0fefb01,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-ad52890527d2,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-aea31df69bea,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-77d345c1ab87,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-87b3ac979d81,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4306f7d88373,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c637cfd032dc,satd,satd,True,satd,satd,False,Test
+React,RE,satd-a678b4607b52,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-fd49806d3d63,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-fa74becc955f,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f4e8bd0804fe,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1750c339cb14,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0f834ba6e979,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-6f3b4eacb2da,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-b2f850a6d210,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-353de092d06a,satd,satd,True,non-satd,satd,True,Test
+React,RE,satd-86df84d53b9d,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-5c96cb11a958,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-01306bacf0e4,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-ed5188ece3e2,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-7e15b102110f,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-7f43bc6c074d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9124332ec3f8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4b54a192d4e1,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-68867cd6cdcb,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ddc53e43b239,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-4df00c6b0fc9,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2f5ab5b50230,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-32537ff260e1,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-c9a24866220b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0c3ef40428b3,satd,satd,True,satd,satd,False,Design
+React,RE,satd-ece332ad40b7,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-42e91feab4a0,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-61412ef9bd05,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-82d963cf6714,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-3944076ea92c,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-f582ada34d25,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b8d03c5c168d,satd,satd,True,satd,satd,False,Design
+React,RE,satd-b659c791eb39,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-ca5358212edb,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-cb3dd8a45d75,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c23639d6bd12,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f403b93652d3,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-294ad9499913,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-bea5d7d52031,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-2d6cc69bf133,satd,satd,True,satd,satd,False,Test
+React,RE,satd-0a07b63f5b94,satd,satd,True,satd,satd,False,Design
+React,RE,satd-f4fcb8809f04,satd,satd,True,satd,satd,False,Test
+React,RE,satd-ab48782ae6e6,satd,satd,True,satd,satd,False,Test
+React,RE,satd-713b54e7bb2c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0b37656f6008,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e3e97944a604,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-aaf2cc0733b8,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-945100a096a1,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ccc6b93b9015,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-2ccb9e662bbf,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-44511a02b0e8,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-66dbad274140,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ced2acd6aea1,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-5fccfb8e82f6,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-3d4b09fd05b1,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b69a52b2b438,satd,satd,True,satd,satd,False,Design
+React,RE,satd-71e0dba789b1,satd,satd,True,satd,non-satd,True,Design
+React,RE,satd-8e507a7c4fd3,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-a83920ec15e6,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-faf5a1549799,satd,satd,True,satd,satd,False,Design
+React,RE,satd-ca1b18335621,satd,satd,True,satd,satd,False,Design
+React,RE,satd-4630ac13ae9c,satd,satd,True,satd,satd,False,Design
+React,RE,satd-ffd967f89efd,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a9e85f9948aa,satd,satd,True,satd,non-satd,True,Defect
+React,RE,satd-8e4eaf87c55d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1bba5470b6dc,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-3f3a44f9e9c9,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-719e6440e6fe,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-513ea844c4af,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-ed65fd046ef6,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-c7bbd8ea038d,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a8fd3bf55867,satd,satd,True,satd,satd,False,Test
+React,RE,satd-f028d537f234,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-86955ede83b5,satd,satd,True,satd,satd,False,Design
+React,RE,satd-e7a246ceb404,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-e40652bb3cd7,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e3ca8b37a023,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f287202ede2a,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-1aa883f9c1ce,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-10bdd4a79223,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-326224eb8082,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-dfd04fdafb3c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2e84920955d6,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2a8211f6b8e3,satd,satd,True,satd,satd,False,Design
+React,RE,satd-332f2f2068a7,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-f6338f730bd3,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-31cb19e0f0c6,satd,satd,True,satd,satd,False,Defect
+React,RE,satd-b3b0f80f71bd,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f78fb98d9a03,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-417adc82a47c,satd,satd,True,satd,satd,False,Design
+React,RE,satd-d526a510022b,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-18fd67c37bf6,satd,satd,True,satd,non-satd,True,Implementation
+React,RE,satd-7bff5216ca17,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-cb1026bee405,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-53880cb2ae11,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-603358666026,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a482ad4d6109,satd,satd,True,satd,satd,False,Test
+React,RE,satd-6fbaf62112ff,satd,satd,True,satd,satd,False,Test
+React,RE,satd-c67a72686a5f,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-6d9a47207468,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-887033a3ee7d,satd,satd,True,satd,satd,False,Design
+React,RE,satd-24159abec3b3,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-f38a398636d2,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8624b90d5e4d,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-06e31bb41367,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-d8f321ea52cb,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e6c39893ea6c,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-10b48da37087,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d2c46ba706bc,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-fae2e9cad914,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-d55aa52dda18,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-0cf49d5401ce,satd,satd,True,non-satd,satd,True,Implementation
+React,RE,satd-d7e2844b9fc8,satd,satd,True,satd,satd,False,Test
+React,RE,satd-4fe19c82bfb8,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-2402498d4cab,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-221ab3c2242e,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-61a7a64512ab,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-a1184ccb4f87,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-9d348070e324,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-8bfd7d24b301,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e42266f527cd,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-fada16719d77,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-b2ead690b47b,satd,satd,True,satd,satd,False,Requirement
+React,RE,satd-4e3a6841fa15,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-52a9ccacec2e,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-4dbaa0d264f6,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-6a6d08efb050,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-451a628d688e,non-satd,non-satd,True,non-satd,satd,True,
+React,RE,satd-e146c7807e2e,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-c4cac2626a35,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-8769d03e8928,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-e05daa5534fa,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-82529199b868,satd,satd,True,satd,satd,False,Design
+React,RE,satd-09af9b2f0c5b,satd,satd,True,satd,satd,False,Implementation
+React,RE,satd-d7616380b8f1,non-satd,non-satd,True,non-satd,non-satd,False,
+React,RE,satd-36769b776f94,satd,satd,True,satd,satd,False,Documentation
+React,RE,satd-4caf78a78720,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-bce2dd7a7253,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6a9fa8037318,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-cdab5e9c5a95,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-b72bfbce7829,satd,satd,True,non-satd,satd,True,Defect
+SciPy,SC,satd-2b9f421a2dcf,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b4441253d794,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-352c460473eb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-63fbac931346,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-327c352bd1c3,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-892e3811634e,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-df20628dc1bc,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-5bbb43af9854,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-58fe0cc22c0c,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-f97186895db3,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-911dfd0d17fa,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-404bcc4151b5,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-e50d268ff463,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-02b24cc4db9d,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-2637c95b5fdf,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-27d7366cb1cd,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-0e0cda25e96e,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-c547e143719e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-562689107474,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-56d3ea75055d,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-8d2f3407b471,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-20d9574fbe0e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-22d18cd0ab80,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-02ba2d7152bf,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-f2fd887f87a1,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-899fae57398a,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-59af698232ae,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-64ec0a91f376,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-48ee241332a7,satd,satd,True,non-satd,satd,True,Design
+SciPy,SC,satd-80416faaa927,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-434af9eea8c0,satd,satd,True,satd,non-satd,True,Test
+SciPy,SC,satd-cedfe61370fb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7632b531f792,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-699cb233b94b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-11665b3affa7,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-bc4d68f4612d,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-ece6150bcd9c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-107c43b2b035,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-43dc3936ef40,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-855df9ac8210,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-bbeb99f3a526,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-983b26fc8de5,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-a62a114e1fd0,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-0f494f5b8317,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-7221bc84c56a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3e96894b14d0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3f75a0f39703,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-f6e3e2a6ab4c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-825fa031396d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1ed4ebbc5617,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b8ff7f1b3d7c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-23187a36a6a7,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ea2e7cff49bc,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9ea3a375fb38,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b47d3d15670d,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-16b40db7fec8,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9e18e5f5c43b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7b015d58fe68,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8f46aa6cda1c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-f81831210ec2,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-0a27b6df19bd,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-51cfc606cfa9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3b678d96a7db,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-00320550257f,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-e15b5dc051ce,satd,satd,True,non-satd,satd,True,Implementation
+SciPy,SC,satd-9b995347b6a8,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7a06635a1026,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-27cfa22e1beb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ca40912f1aff,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-3bb639231903,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-038bf0dc6cef,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-9b25747a1224,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-f73367e79763,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8e2ae4ecf754,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-42ade11ee9d4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-251736605608,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-1850b42b940c,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-90abda3c3d5d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-014c368aa6f0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-054f6e291c75,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1d2a6fe0aabc,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-02e9dd94c57c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c042b1406967,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-8d4426c9db15,satd,satd,True,satd,non-satd,True,Documentation
+SciPy,SC,satd-e5e1be1f7ff9,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-536adbb94583,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b0890d3dddae,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-581c786b67f7,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c43dab72ca23,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-073de235ab7a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d6b36c6e12d4,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-afad669ab85c,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-591f6433215a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e704c0791f1a,satd,satd,True,satd,non-satd,True,Documentation
+SciPy,SC,satd-49df15366731,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-dc3133c1ef48,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3e8ae7cfe180,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-7ee4f1079028,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-f6655eb8e0b0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9f8db7be0f0d,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-f8669dbffa01,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-957188ee865a,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-aa20b9dd1241,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b211bc188c1b,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-2ef7bb109917,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-88f3df1141b9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6c07420fde4e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b0d36893df02,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-24614e306779,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-8de5db970363,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7640b870fceb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e55157c4dbaf,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-37cb0ae7c805,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-0f169a15a5b2,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-cff87cafce21,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4b2b42cde295,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-73d4d8231e31,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-c635e4110280,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4db021b18f05,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-73a2a4582772,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-2d3bb9027f14,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-15a239d9cc37,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-d1fb4b8cc110,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ae7d2d3e8d58,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-59e0c86aaca3,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-93f40a209d67,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e5dfa8f3508a,satd,satd,True,non-satd,satd,True,Implementation
+SciPy,SC,satd-8f298c18f569,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-57252623f7df,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4603cee4b601,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7c8011eac1e3,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-325af42fc05e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6d3f8ff0cb05,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-1ca2b14e712a,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-5ac1c9ab1a8c,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-aec0edc0064f,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bd8ec0a5bf9c,satd,satd,True,non-satd,satd,True,Implementation
+SciPy,SC,satd-89ca0cc0e276,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-60ddbce11469,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-53823bd6fc11,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-b4f54e55606d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ecdfcf1d5ff4,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-aaec52f3990d,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-a68b3d7980a1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-67969fd35b3c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ca5467a46317,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-4088f99bf2d8,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-79535d5a3180,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-4649cf8a8087,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-8779b62188d8,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-3904f6efaf3f,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-0f2602db1074,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-961963fc3fac,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bd3d7bf8fbbc,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-7c5aa55c2f41,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-24d6107d327b,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-26ca1fe4d24a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b0d3a71d2db1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d242a1d0341e,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-e99b37306752,satd,satd,True,non-satd,satd,True,Test
+SciPy,SC,satd-1df17b6cd6f0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c3684f834007,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-57564541a033,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3a5061bd442e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-de68655b85dd,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-f797b9dc3d90,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-80310192dcd8,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-58011cecc834,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bb1d37ccba71,satd,satd,True,non-satd,satd,True,Implementation
+SciPy,SC,satd-770edb534a9f,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-f26fb01c2121,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-62221d357c3c,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-375b0770ced4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6729d6719de2,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e1d57462ac37,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c569041e551c,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-3854b46b3cdd,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-15093f72f416,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-5405f8427a46,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-511a8d2f0fb1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e17889c25f82,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-ee5111abba04,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-6e5b0fe81278,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-12cfa66251d0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8a39a3814faa,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-0b03f3df7001,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-33349005dd3c,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-777d8cd2b320,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c8ff62f9b9a7,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-7b73f3d865fb,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-447020efb78b,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b3a5e6b779cb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-20263d588349,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-593f340aa938,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bb7d7ca49258,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-af964876ec54,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-b0eb1deef665,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-069f173f0d81,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-79a26eb74fb9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4fa1721e5672,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-3ef08cfa54db,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8dc1ca896273,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-cc9d27a6aa4c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b5b54d72caca,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8466d6c9fea4,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-e9c65cf26ac6,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-d97f4f54457b,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-1d32c9cab9bd,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-974b1a1080b1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-f8a6f05aa0f9,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-9e1420d8f04e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-58f763ea9889,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-2b50ca93fa75,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-7bcd25c22f08,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-cda883cfe8c6,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-f56eb69db0c3,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-a0481ce8f961,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1ce0939d7668,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-9c042abc59cc,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1e009c65d4fc,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-aa7cb4aa6c51,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-dfb110357370,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-f1b9dc8d24ec,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-545c77fc693d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-a36ef4741c66,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d965237502fa,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3c41b038080f,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-652f8d820f00,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-dd24cfa912b6,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3a03de7d87c9,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-a7ca2e26efc7,satd,satd,True,satd,non-satd,True,Design
+SciPy,SC,satd-7f5dcb73e6dd,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6bb51e5fe531,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-565f12f0f6ba,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-2cf08e061a02,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9a8e017eb0f4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7e866f9878b3,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c8a4a0ebe2d5,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-987cc74f6657,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-34ac6a7f5523,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8d08682c9d65,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-4d1999a634a6,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4e2535d1c9ac,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-b5bcf881f3d1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b7c05e219e8b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8003856697b6,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c06a12047e31,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-afce672c1fac,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-2259d1bda5c3,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-04de4207b73b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-994a22e61666,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-155651f43688,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9b5dede2ac90,satd,satd,True,satd,non-satd,True,Requirement
+SciPy,SC,satd-015788d181eb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ccd655ebbbe4,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-700d328bf5f9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-06e8b7960075,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-843bcb2341eb,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-18d6d68121b3,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-c837c2c52627,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-91e305c554a6,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-547c16645588,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-544a39a96e1b,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-69cb37d7a7a9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-51356a5b0d21,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-672a07f81edb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-5218583fcec5,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-6e34acdbf00a,satd,satd,True,satd,non-satd,True,Design
+SciPy,SC,satd-980c455790f4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-41fc7f6b2070,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-aebbb9bef1f3,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-f83ce218c720,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-494c4e299dfd,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-86c8b8736a38,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-e14dad6f19e0,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-00867307bfcb,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-24a5207436c0,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-277082eee927,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-834941a4d6f4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-afde3661ca01,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-661855328878,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-c7ef5159aedd,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-05cff5805721,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-fe5a0e4b5d10,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-676102b3a85a,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b7f094ea3ed6,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-94860a34078a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6c4f8832580c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e76343edd2c2,satd,satd,True,non-satd,satd,True,Requirement
+SciPy,SC,satd-e3d3a9b2a6ab,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-62bdefc19759,satd,satd,True,satd,non-satd,True,Requirement
+SciPy,SC,satd-10e7139f5a92,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-be6fcb119593,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-506c08c93b3d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-fc5a07f76b82,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-208454316460,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-13ce770b045d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-978dbd01cd3a,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-2fa02284c7dc,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-abb8f89df5d2,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-e18154ae8d39,non-satd,non-satd,True,non-satd,satd,True,
+SciPy,SC,satd-89389426a16e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1041476b91a1,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-9ba6925815f5,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-4c49517844d3,satd,satd,True,satd,non-satd,True,Implementation
+SciPy,SC,satd-5ca6ce05439e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c9d80199b75b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-578acd1eba8e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ea53e1b6786f,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-d4b4c6141bbf,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-573bdd47114b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-157e6126542a,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-2ead135bd327,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-00c698570b9c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-a6e368a30431,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bf8dbb98d35f,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-7b3dfece63bc,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-64fe08b3431b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-682f6ec89f8e,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-aff23168586f,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-331e5578b48d,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-e9659b69a4c9,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-fd50d18c3d48,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-5fd8937f5164,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-ead0d6223588,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-2b479e75ad11,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-2bc4b74c8cce,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-6374f0377d53,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-b60075f57d03,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-ffafc1cd83ca,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-61f8ffcee32c,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7267b32b7660,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-ffc6a2c07175,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-b0b31951a0f6,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b445cf26dfc2,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-efcabd1905c5,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d9e39205113d,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-c18823334843,satd,satd,True,satd,satd,False,Documentation
+SciPy,SC,satd-1dbf2853c076,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-7a546a65b4e4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-6009d25b9f9b,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-1ba7087683e1,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-aa807b9f1005,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-576e698c3d72,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-7e5e3f432a31,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-b02798ed973f,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d83b92d91dc8,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-0e3a8f1bb737,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-bdaca3e267c5,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-5f01b8d0e5ab,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-573d9065c542,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-aff55177df66,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-42d8255dda7e,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-006fec128361,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-15cbaa1a1b46,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-944028b508a8,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-631a6df6388b,satd,satd,True,satd,satd,False,Test
+SciPy,SC,satd-54a8c1c3c5a9,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d68d8df7144e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-985eb45153d6,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-11df35594186,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-c0e9362a684d,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-e50a3a75c8bb,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-6bec99b83641,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-0e1903da3fd8,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-e58bc575990f,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-77a6c8b14555,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-8ff2def55f76,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-74ab497209c8,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-6fccc897e72f,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-c9196873a017,satd,satd,True,satd,satd,False,Defect
+SciPy,SC,satd-321d745b91d4,satd,satd,True,non-satd,satd,True,Requirement
+SciPy,SC,satd-964c76b40a98,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-fccee83e65fc,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-3314ad7b27a4,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-93d34809ee42,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-de25e799fc97,satd,satd,True,non-satd,satd,True,Implementation
+SciPy,SC,satd-fe6506a88cbe,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-c0f0e81c4f87,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-489d56df2141,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-84b5e7899928,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-d9b034620348,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-d562fb514fab,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-36b908773d36,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-9586178082b8,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-855118c1b28e,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-66afbe5314be,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-7a6f884ee644,satd,satd,True,satd,satd,False,Requirement
+SciPy,SC,satd-46c77575dbde,satd,satd,True,satd,satd,False,Implementation
+SciPy,SC,satd-625cd55bc568,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-98e5451a538f,non-satd,non-satd,True,satd,non-satd,True,
+SciPy,SC,satd-673e8241b245,satd,satd,True,satd,satd,False,Design
+SciPy,SC,satd-6cf176ff7ba2,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-ef765eda4c5e,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-5a53558e8279,non-satd,non-satd,True,non-satd,non-satd,False,
+SciPy,SC,satd-685015d0d28a,non-satd,non-satd,True,non-satd,non-satd,False,

@@ -1,0 +1,401 @@
+id,file,line,content,predicted_label,manual_label,is_explicit,is_implicit,annotator_1,annotator_2,consensus,disagreement,notes,confidence_score,debt_type,sample_source
+satd-fce17d05f3ca,packages/react/src/ReactElement.js,1137,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.752,Implementation,satd_pool
+satd-88966e4d076a,packages/react-dom/src/events/DOMEventProperties.js,35,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.582,Test,satd_pool
+satd-743165295d60,packages/react-reconciler/src/ReactFiberHooks.js,1677,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.263,,non_satd_pool
+satd-9f020f1d7b21,packages/react-reconciler/src/ReactFiberCommitWork.js,1844,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.292,,non_satd_pool
+satd-ec0f435ab89d,packages/react-dom/src/client/ReactDOMComponent.js,1572,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.875,Design,satd_pool
+satd-dc22f4e8d31b,packages/shared/ReactSharedInternals.js,1965,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.26,,non_satd_pool
+satd-341d71e967b6,packages/react/src/ReactContext.js,512,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.431,,non_satd_pool
+satd-827cc34971b4,packages/react-reconciler/src/ReactFiberScheduler.js,1956,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.157,,non_satd_pool
+satd-2bb5339c9db0,packages/react-dom/src/server/ReactPartialRenderer.js,879,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.248,,non_satd_pool
+satd-c392f75bb111,packages/react-test-renderer/src/ReactTestRenderer.js,1840,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.448,,non_satd_pool
+satd-fd492775a1e5,packages/react-reconciler/src/ReactFiberLane.js,491,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.238,,non_satd_pool
+satd-580dff2593e8,packages/react-dom/src/client/ReactDOMHostConfig.js,1472,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.063,,non_satd_pool
+satd-4181f79e627e,packages/react/src/ReactMemo.js,1838,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.303,,non_satd_pool
+satd-7b647d45a35b,packages/react-reconciler/src/ReactFiberBeginWork.js,316,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.131,,non_satd_pool
+satd-f8737412f1b7,packages/react-dom/src/events/ReactDOMEventListener.js,1900,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.563,Implementation,satd_pool
+satd-7f4c0830168b,packages/react/src/ReactElement.js,1389,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.378,,non_satd_pool
+satd-4ce3e6c018d0,packages/react-dom/src/events/DOMEventProperties.js,339,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.112,,non_satd_pool
+satd-98ee8650aee3,packages/react-reconciler/src/ReactFiberHooks.js,557,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.141,,non_satd_pool
+satd-4b576f930659,packages/react-reconciler/src/ReactFiberCommitWork.js,868,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.165,,non_satd_pool
+satd-19be6759a332,packages/react-dom/src/client/ReactDOMComponent.js,277,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.34,,non_satd_pool
+satd-8fa0f2e9258b,packages/shared/ReactSharedInternals.js,168,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.776,Design,satd_pool
+satd-4f5a6207bd60,packages/react/src/ReactContext.js,1106,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.69,Design,satd_pool
+satd-c237e49c8d2a,packages/react-reconciler/src/ReactFiberScheduler.js,1349,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.262,,non_satd_pool
+satd-ee5a489e682e,packages/react-dom/src/server/ReactPartialRenderer.js,460,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.599,Defect,satd_pool
+satd-1b28e9ab3750,packages/react-test-renderer/src/ReactTestRenderer.js,210,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.081,,non_satd_pool
+satd-86325e8d9070,packages/react-reconciler/src/ReactFiberLane.js,941,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.194,,non_satd_pool
+satd-ff9a1f76282d,packages/react-dom/src/client/ReactDOMHostConfig.js,678,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.831,Test,satd_pool
+satd-92bbf903a00c,packages/react/src/ReactMemo.js,1538,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.313,,non_satd_pool
+satd-c4e3ea341e2f,packages/react-reconciler/src/ReactFiberBeginWork.js,97,TODO: remove deprecated lifecycle method,satd,satd,True,False,satd,satd,satd,False,,0.727,Implementation,satd_pool
+satd-66515ac357ff,packages/react-dom/src/events/ReactDOMEventListener.js,784,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.929,Requirement,satd_pool
+satd-152b347357f1,packages/react/src/ReactElement.js,1378,TODO: add proper TypeScript types here,satd,satd,True,False,satd,satd,satd,False,,0.972,Design,satd_pool
+satd-72ed9ef2d0a5,packages/react-dom/src/events/DOMEventProperties.js,1962,"HACK: this avoids a setState warning, fix later",satd,satd,True,False,satd,satd,satd,False,,0.959,Design,satd_pool
+satd-ed5b846c89b0,packages/react-reconciler/src/ReactFiberHooks.js,144,TODO: optimize re-renders with useMemo,satd,satd,True,False,satd,satd,satd,False,,0.763,Implementation,satd_pool
+satd-5f104131d4ff,packages/react-reconciler/src/ReactFiberCommitWork.js,104,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.109,,non_satd_pool
+satd-f24c7d04f45b,packages/react-dom/src/client/ReactDOMComponent.js,1631,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.101,,non_satd_pool
+satd-4c39b10f89e9,packages/shared/ReactSharedInternals.js,1689,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.184,,non_satd_pool
+satd-93c54eaece6e,packages/react/src/ReactContext.js,1911,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.172,,non_satd_pool
+satd-1c33df82c143,packages/react-reconciler/src/ReactFiberScheduler.js,378,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.133,,non_satd_pool
+satd-f79efb353703,packages/react-dom/src/server/ReactPartialRenderer.js,255,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.55,Test,satd_pool
+satd-7e9ea43121de,packages/react-test-renderer/src/ReactTestRenderer.js,898,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.747,Implementation,satd_pool
+satd-efe5da27170a,packages/react-reconciler/src/ReactFiberLane.js,569,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.167,,non_satd_pool
+satd-9db48d96e956,packages/react-dom/src/client/ReactDOMHostConfig.js,1266,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.31,,non_satd_pool
+satd-7b73b5083011,packages/react/src/ReactMemo.js,637,TODO: add error handling for fetch failures,satd,satd,True,False,satd,satd,satd,False,,0.556,Test,satd_pool
+satd-3317c7a58538,packages/react-reconciler/src/ReactFiberBeginWork.js,239,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.421,,non_satd_pool
+satd-f6fbc2649867,packages/react-dom/src/events/ReactDOMEventListener.js,97,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.773,Design,satd_pool
+satd-c703c69af387,packages/react/src/ReactElement.js,190,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.894,Documentation,satd_pool
+satd-59f06e7ea5ee,packages/react-dom/src/events/DOMEventProperties.js,1911,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.106,,non_satd_pool
+satd-f3d6f6daea95,packages/react-reconciler/src/ReactFiberHooks.js,1118,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.384,,non_satd_pool
+satd-a69c6ff05a4d,packages/react-reconciler/src/ReactFiberCommitWork.js,1535,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.14,,non_satd_pool
+satd-8c651eaeba67,packages/react-dom/src/client/ReactDOMComponent.js,289,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.335,,non_satd_pool
+satd-f6aaa7e9e607,packages/shared/ReactSharedInternals.js,1371,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.652,Test,satd_pool
+satd-82b5200e3bb3,packages/react/src/ReactContext.js,1390,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.781,Requirement,satd_pool
+satd-e3ec5e47712a,packages/react-reconciler/src/ReactFiberScheduler.js,280,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.056,,non_satd_pool
+satd-3ee4ddebba58,packages/react-dom/src/server/ReactPartialRenderer.js,1394,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.107,,non_satd_pool
+satd-8949d6c98e69,packages/react-test-renderer/src/ReactTestRenderer.js,1526,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.083,,non_satd_pool
+satd-c5294a6739aa,packages/react-reconciler/src/ReactFiberLane.js,708,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.099,,non_satd_pool
+satd-ba1e47c75cb2,packages/react-dom/src/client/ReactDOMHostConfig.js,471,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.301,,non_satd_pool
+satd-2cf7bffd7e40,packages/react/src/ReactMemo.js,348,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.216,,non_satd_pool
+satd-7029eea7e891,packages/react-reconciler/src/ReactFiberBeginWork.js,1954,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.137,,non_satd_pool
+satd-d3a55817affa,packages/react-dom/src/events/ReactDOMEventListener.js,566,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.443,,non_satd_pool
+satd-e33c8cd0b5a2,packages/react/src/ReactElement.js,1643,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.562,Implementation,satd_pool
+satd-7f9f20466107,packages/react-dom/src/events/DOMEventProperties.js,467,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.611,Implementation,satd_pool
+satd-38f14315f847,packages/react-reconciler/src/ReactFiberHooks.js,933,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.328,,non_satd_pool
+satd-2f86cb3c962e,packages/react-reconciler/src/ReactFiberCommitWork.js,136,TODO: needs accessibility audit,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.582,Implementation,satd_pool
+satd-8112583b8c42,packages/react-dom/src/client/ReactDOMComponent.js,828,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.333,,non_satd_pool
+satd-f60bae1d0cd8,packages/shared/ReactSharedInternals.js,304,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.65,Test,satd_pool
+satd-47fa5a5fb491,packages/react/src/ReactContext.js,567,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.565,Implementation,satd_pool
+satd-823d3bba742f,packages/react-reconciler/src/ReactFiberScheduler.js,569,TODO: add error handling for fetch failures,satd,satd,True,False,satd,satd,satd,False,,0.725,Implementation,satd_pool
+satd-1da361d2c0ba,packages/react-dom/src/server/ReactPartialRenderer.js,631,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.979,Implementation,satd_pool
+satd-02acb07c83f5,packages/react-test-renderer/src/ReactTestRenderer.js,668,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.567,Implementation,satd_pool
+satd-6cbcfe28f8db,packages/react-reconciler/src/ReactFiberLane.js,311,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.218,,non_satd_pool
+satd-0e1f763d3ef7,packages/react-dom/src/client/ReactDOMHostConfig.js,1949,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.095,,non_satd_pool
+satd-72b44b0ae31f,packages/react/src/ReactMemo.js,305,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.628,Implementation,satd_pool
+satd-c1a5714a3c40,packages/react-reconciler/src/ReactFiberBeginWork.js,101,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.606,Implementation,satd_pool
+satd-de7fbe07810c,packages/react-dom/src/events/ReactDOMEventListener.js,1979,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.447,,non_satd_pool
+satd-9b360570673f,packages/react/src/ReactElement.js,165,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.449,,non_satd_pool
+satd-b1f1108a9666,packages/react-dom/src/events/DOMEventProperties.js,315,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.768,Implementation,satd_pool
+satd-2a997ce402b8,packages/react-reconciler/src/ReactFiberHooks.js,1053,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.205,,non_satd_pool
+satd-ac8c4b5c058c,packages/react-reconciler/src/ReactFiberCommitWork.js,973,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.068,,non_satd_pool
+satd-2133c19dac3d,packages/react-dom/src/client/ReactDOMComponent.js,1543,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.796,Documentation,satd_pool
+satd-80fa42c3bdc9,packages/shared/ReactSharedInternals.js,386,TODO: add proper TypeScript types here,satd,satd,True,False,satd,satd,satd,False,,0.803,Implementation,satd_pool
+satd-04858d425688,packages/react/src/ReactContext.js,1314,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.171,,non_satd_pool
+satd-a3e226379af7,packages/react-reconciler/src/ReactFiberScheduler.js,349,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.282,,non_satd_pool
+satd-9e6407a30228,packages/react-dom/src/server/ReactPartialRenderer.js,342,FIXME: memory leak in event listener cleanup,satd,satd,True,False,satd,satd,satd,False,,0.612,Test,satd_pool
+satd-eeb8ab5f17e8,packages/react-test-renderer/src/ReactTestRenderer.js,450,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.062,,non_satd_pool
+satd-747ea7702c98,packages/react-reconciler/src/ReactFiberLane.js,55,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.193,,non_satd_pool
+satd-052035d20403,packages/react-dom/src/client/ReactDOMHostConfig.js,585,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.104,,non_satd_pool
+satd-4f6076848b07,packages/react/src/ReactMemo.js,1539,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.29,,non_satd_pool
+satd-1f4779883fee,packages/react-reconciler/src/ReactFiberBeginWork.js,149,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.657,Design,satd_pool
+satd-926ab8e4e9a8,packages/react-dom/src/events/ReactDOMEventListener.js,1386,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.388,,non_satd_pool
+satd-9150ca515770,packages/react/src/ReactElement.js,715,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.623,Implementation,satd_pool
+satd-cf7059652c99,packages/react-dom/src/events/DOMEventProperties.js,1967,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.598,Documentation,satd_pool
+satd-14563217f2ea,packages/react-reconciler/src/ReactFiberHooks.js,1913,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.341,,non_satd_pool
+satd-c7663923531d,packages/react-reconciler/src/ReactFiberCommitWork.js,1891,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.346,,non_satd_pool
+satd-e5d3b8a83036,packages/react-dom/src/client/ReactDOMComponent.js,775,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.051,,non_satd_pool
+satd-196765e5fd1b,packages/shared/ReactSharedInternals.js,975,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.735,Design,satd_pool
+satd-873f9cdf4e29,packages/react/src/ReactContext.js,961,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.298,,non_satd_pool
+satd-a7c69e4782e4,packages/react-reconciler/src/ReactFiberScheduler.js,345,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.343,,non_satd_pool
+satd-3582106a85bb,packages/react-dom/src/server/ReactPartialRenderer.js,1591,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.191,,non_satd_pool
+satd-0344fec2178f,packages/react-test-renderer/src/ReactTestRenderer.js,21,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.969,Implementation,satd_pool
+satd-aa6762e04ab9,packages/react-reconciler/src/ReactFiberLane.js,923,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.886,Design,satd_pool
+satd-685bc26d9c54,packages/react-dom/src/client/ReactDOMHostConfig.js,1712,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.715,Implementation,satd_pool
+satd-848255d8ad78,packages/react/src/ReactMemo.js,432,HACK: workaround for React concurrent mode issue,satd,satd,True,False,satd,satd,satd,False,,0.9,Implementation,satd_pool
+satd-a9478e83fa61,packages/react-reconciler/src/ReactFiberBeginWork.js,1088,TODO: remove deprecated lifecycle method,satd,satd,True,False,satd,satd,satd,False,,0.618,Test,satd_pool
+satd-c9c7dfc62247,packages/react-dom/src/events/ReactDOMEventListener.js,219,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.594,Documentation,satd_pool
+satd-6378f065fbf0,packages/react/src/ReactElement.js,718,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.292,,non_satd_pool
+satd-fa0022085a83,packages/react-dom/src/events/DOMEventProperties.js,747,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.309,,non_satd_pool
+satd-b078ed89bd01,packages/react-reconciler/src/ReactFiberHooks.js,915,TODO: optimize re-renders with useMemo,satd,satd,True,False,satd,satd,satd,False,,0.71,Implementation,satd_pool
+satd-409bfe928141,packages/react-reconciler/src/ReactFiberCommitWork.js,639,FIXME: memory leak in event listener cleanup,satd,satd,True,False,satd,satd,satd,False,,0.647,Documentation,satd_pool
+satd-477980a3a169,packages/react-dom/src/client/ReactDOMComponent.js,1556,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.231,,non_satd_pool
+satd-0d158939afa5,packages/shared/ReactSharedInternals.js,750,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.793,Test,satd_pool
+satd-dc42fae19fcc,packages/react/src/ReactContext.js,1058,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.614,Implementation,satd_pool
+satd-7f9a201d8a6b,packages/react-reconciler/src/ReactFiberScheduler.js,718,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.696,Design,satd_pool
+satd-65b85f12a7d5,packages/react-dom/src/server/ReactPartialRenderer.js,1247,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.663,Documentation,satd_pool
+satd-b2100a17db32,packages/react-test-renderer/src/ReactTestRenderer.js,1614,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.884,Design,satd_pool
+satd-1408e13f55b1,packages/react-reconciler/src/ReactFiberLane.js,924,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.563,Design,satd_pool
+satd-5ea26dd4b188,packages/react-dom/src/client/ReactDOMHostConfig.js,1243,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.315,,non_satd_pool
+satd-d01af7acd1fe,packages/react/src/ReactMemo.js,1144,TODO: add error handling for fetch failures,satd,satd,True,False,satd,satd,satd,False,,0.674,Defect,satd_pool
+satd-9399d3c6cd52,packages/react-reconciler/src/ReactFiberBeginWork.js,937,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.979,Implementation,satd_pool
+satd-8ccd3c6d98e5,packages/react-dom/src/events/ReactDOMEventListener.js,562,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.756,Implementation,satd_pool
+satd-773f9e03ae0c,packages/react/src/ReactElement.js,277,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.128,,non_satd_pool
+satd-abd87ef37c0a,packages/react-dom/src/events/DOMEventProperties.js,514,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.176,,non_satd_pool
+satd-81721f2d9ee9,packages/react-reconciler/src/ReactFiberHooks.js,1943,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.702,Documentation,satd_pool
+satd-5657f5b08b74,packages/react-reconciler/src/ReactFiberCommitWork.js,230,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.09,,non_satd_pool
+satd-3d71530b4f22,packages/react-dom/src/client/ReactDOMComponent.js,1825,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.59,Implementation,satd_pool
+satd-2a3de50e55e2,packages/shared/ReactSharedInternals.js,447,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.643,Design,satd_pool
+satd-f06a78614854,packages/react/src/ReactContext.js,1739,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.77,Implementation,satd_pool
+satd-6fa38b07e627,packages/react-reconciler/src/ReactFiberScheduler.js,476,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.148,,non_satd_pool
+satd-65f1f548e8c9,packages/react-dom/src/server/ReactPartialRenderer.js,1456,TODO: remove deprecated lifecycle method,satd,satd,True,False,satd,satd,satd,False,,0.735,Design,satd_pool
+satd-63f4796969ec,packages/react-test-renderer/src/ReactTestRenderer.js,1146,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.829,Implementation,satd_pool
+satd-675d792698f2,packages/react-reconciler/src/ReactFiberLane.js,1952,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.319,,non_satd_pool
+satd-df7f0189f81a,packages/react-dom/src/client/ReactDOMHostConfig.js,1367,"HACK: this avoids a setState warning, fix later",satd,satd,True,False,satd,satd,satd,False,,0.818,Implementation,satd_pool
+satd-b88884623bd0,packages/react/src/ReactMemo.js,1677,TODO: optimize re-renders with useMemo,satd,satd,True,False,satd,satd,satd,False,,0.769,Test,satd_pool
+satd-45234804f508,packages/react-reconciler/src/ReactFiberBeginWork.js,961,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.059,,non_satd_pool
+satd-06e992ad3458,packages/react-dom/src/events/ReactDOMEventListener.js,30,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.399,,non_satd_pool
+satd-13fe926fc721,packages/react/src/ReactElement.js,517,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.896,Test,satd_pool
+satd-050eec9eab8f,packages/react-dom/src/events/DOMEventProperties.js,1337,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.613,Requirement,satd_pool
+satd-22552191483f,packages/react-reconciler/src/ReactFiberHooks.js,1860,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.611,Implementation,satd_pool
+satd-f82aa611ea63,packages/react-reconciler/src/ReactFiberCommitWork.js,652,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.769,Implementation,satd_pool
+satd-b76df669619d,packages/react-dom/src/client/ReactDOMComponent.js,1054,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.819,Test,satd_pool
+satd-d897c6670a52,packages/shared/ReactSharedInternals.js,1633,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.61,Documentation,satd_pool
+satd-96d5f3a501aa,packages/react/src/ReactContext.js,1323,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.91,Design,satd_pool
+satd-41d441839c59,packages/react-reconciler/src/ReactFiberScheduler.js,1508,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.261,,non_satd_pool
+satd-2eae7ced4326,packages/react-dom/src/server/ReactPartialRenderer.js,1481,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.168,,non_satd_pool
+satd-1835ea0679ef,packages/react-test-renderer/src/ReactTestRenderer.js,545,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.757,Design,satd_pool
+satd-3cea323388a2,packages/react-reconciler/src/ReactFiberLane.js,600,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.331,,non_satd_pool
+satd-e55d9553c030,packages/react-dom/src/client/ReactDOMHostConfig.js,1480,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.332,,non_satd_pool
+satd-a6eebd43e096,packages/react/src/ReactMemo.js,749,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.88,Defect,satd_pool
+satd-02a7703f2079,packages/react-reconciler/src/ReactFiberBeginWork.js,632,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.082,,non_satd_pool
+satd-be5698ea189b,packages/react-dom/src/events/ReactDOMEventListener.js,263,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.954,Test,satd_pool
+satd-9d88ba38952e,packages/react/src/ReactElement.js,1889,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.398,,non_satd_pool
+satd-82e64dc84d5f,packages/react-dom/src/events/DOMEventProperties.js,1989,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.311,,non_satd_pool
+satd-2c6af5454395,packages/react-reconciler/src/ReactFiberHooks.js,1696,HACK: workaround for React concurrent mode issue,satd,satd,True,False,satd,satd,satd,False,,0.699,Documentation,satd_pool
+satd-7cecc9cdc4a5,packages/react-reconciler/src/ReactFiberCommitWork.js,537,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.199,,non_satd_pool
+satd-5f352c040ef1,packages/react-dom/src/client/ReactDOMComponent.js,1872,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.207,,non_satd_pool
+satd-19964b361ed0,packages/shared/ReactSharedInternals.js,216,TODO: add proper TypeScript types here,satd,satd,True,False,satd,satd,satd,False,,0.955,Requirement,satd_pool
+satd-805cfbf6254f,packages/react/src/ReactContext.js,1289,"HACK: this avoids a setState warning, fix later",satd,satd,True,False,satd,satd,satd,False,,0.674,Implementation,satd_pool
+satd-26c131e864b5,packages/react-reconciler/src/ReactFiberScheduler.js,1306,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.257,,non_satd_pool
+satd-358a488e74af,packages/react-dom/src/server/ReactPartialRenderer.js,324,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.431,,non_satd_pool
+satd-d3ef9b5fb678,packages/react-test-renderer/src/ReactTestRenderer.js,571,TODO: migrate to React.lazy once tree shaking works,satd,satd,True,False,satd,satd,satd,False,,0.689,Implementation,satd_pool
+satd-5343983b87f6,packages/react-reconciler/src/ReactFiberLane.js,1081,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.643,Design,satd_pool
+satd-803cd4e96a6b,packages/react-dom/src/client/ReactDOMHostConfig.js,551,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.644,Implementation,satd_pool
+satd-642e734cf8ee,packages/react/src/ReactMemo.js,1149,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.601,Implementation,satd_pool
+satd-2d2a3a806290,packages/react-reconciler/src/ReactFiberBeginWork.js,171,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.209,,non_satd_pool
+satd-cbe931d85c7c,packages/react-dom/src/events/ReactDOMEventListener.js,366,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.655,Implementation,satd_pool
+satd-a226a01ada3c,packages/react/src/ReactElement.js,787,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.318,,non_satd_pool
+satd-cbc5ea5baebd,packages/react-dom/src/events/DOMEventProperties.js,181,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.235,,non_satd_pool
+satd-4b0829134489,packages/react-reconciler/src/ReactFiberHooks.js,1918,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.363,,non_satd_pool
+satd-21cf5c20ecef,packages/react-reconciler/src/ReactFiberCommitWork.js,1141,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.905,Test,satd_pool
+satd-635bd11d8907,packages/react-dom/src/client/ReactDOMComponent.js,482,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.18,,non_satd_pool
+satd-6751a815e8b5,packages/shared/ReactSharedInternals.js,560,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.866,Implementation,satd_pool
+satd-221fdb93a0bd,packages/react/src/ReactContext.js,1098,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.207,,non_satd_pool
+satd-071eb9507261,packages/react-reconciler/src/ReactFiberScheduler.js,48,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.935,Requirement,satd_pool
+satd-6789c603b850,packages/react-dom/src/server/ReactPartialRenderer.js,1412,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.368,,non_satd_pool
+satd-07bb3f56bffa,packages/react-test-renderer/src/ReactTestRenderer.js,1830,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.678,Documentation,satd_pool
+satd-4a40b946b759,packages/react-reconciler/src/ReactFiberLane.js,17,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.381,,non_satd_pool
+satd-8760fed40ad1,packages/react-dom/src/client/ReactDOMHostConfig.js,1977,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.426,,non_satd_pool
+satd-c0e03bd3d47c,packages/react/src/ReactMemo.js,521,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.275,,non_satd_pool
+satd-23bd4f79f47e,packages/react-reconciler/src/ReactFiberBeginWork.js,631,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.278,,non_satd_pool
+satd-25bd293d6131,packages/react-dom/src/events/ReactDOMEventListener.js,291,FIXME: race condition when component unmounts,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.784,Implementation,satd_pool
+satd-b3a6d550cd96,packages/react/src/ReactElement.js,1412,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.372,,non_satd_pool
+satd-cc749e2d9503,packages/react-dom/src/events/DOMEventProperties.js,1957,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.38,,non_satd_pool
+satd-667b07f9b7b9,packages/react-reconciler/src/ReactFiberHooks.js,111,TODO: optimize re-renders with useMemo,satd,satd,True,False,satd,satd,satd,False,,0.846,Implementation,satd_pool
+satd-72ee65a1352d,packages/react-reconciler/src/ReactFiberCommitWork.js,341,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.086,,non_satd_pool
+satd-d07cbe75138c,packages/react-dom/src/client/ReactDOMComponent.js,1470,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.244,,non_satd_pool
+satd-cbd60abe0b80,packages/shared/ReactSharedInternals.js,43,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.713,Design,satd_pool
+satd-30eeb70e2cb6,packages/react/src/ReactContext.js,1165,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.916,Implementation,satd_pool
+satd-36a4c7b676f1,packages/react-reconciler/src/ReactFiberScheduler.js,1795,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.97,Design,satd_pool
+satd-f6890c41222e,packages/react-dom/src/server/ReactPartialRenderer.js,1173,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.441,,non_satd_pool
+satd-4f7eb027af7e,packages/react-test-renderer/src/ReactTestRenderer.js,1919,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.133,,non_satd_pool
+satd-a736aafe8ef9,packages/react-reconciler/src/ReactFiberLane.js,1001,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.341,,non_satd_pool
+satd-581a85a2c103,packages/react-dom/src/client/ReactDOMHostConfig.js,503,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.323,,non_satd_pool
+satd-fea29f8edd9e,packages/react/src/ReactMemo.js,127,TODO: add error handling for fetch failures,satd,satd,True,False,satd,satd,satd,False,,0.938,Requirement,satd_pool
+satd-3fc1aecd513b,packages/react-reconciler/src/ReactFiberBeginWork.js,1544,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.722,Test,satd_pool
+satd-80171ef2e7e5,packages/react-dom/src/events/ReactDOMEventListener.js,1600,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.55,Implementation,satd_pool
+satd-1ef508736a91,packages/react/src/ReactElement.js,1234,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.369,,non_satd_pool
+satd-b1afcbf20c00,packages/react-dom/src/events/DOMEventProperties.js,178,Calculates the next page index for pagination.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.416,,non_satd_pool
+satd-9dca3b02ba60,packages/react-reconciler/src/ReactFiberHooks.js,680,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.334,,non_satd_pool
+satd-1724f7e1e6d5,packages/react-reconciler/src/ReactFiberCommitWork.js,436,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.851,Test,satd_pool
+satd-6067c5673a9f,packages/react-dom/src/client/ReactDOMComponent.js,270,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.361,,non_satd_pool
+satd-d1b985011d8c,packages/shared/ReactSharedInternals.js,29,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.556,Implementation,satd_pool
+satd-6452b9306701,packages/react/src/ReactContext.js,438,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,satd,satd,False,,0.594,Requirement,satd_pool
+satd-8d346cc52f30,packages/react-reconciler/src/ReactFiberScheduler.js,596,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.227,,non_satd_pool
+satd-2f78fc101937,packages/react-dom/src/server/ReactPartialRenderer.js,675,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.143,,non_satd_pool
+satd-90a01bc8bade,packages/react-test-renderer/src/ReactTestRenderer.js,1831,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.308,,non_satd_pool
+satd-d63e34ffb4b7,packages/react-reconciler/src/ReactFiberLane.js,1111,TODO: add proper TypeScript types here,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.74,Implementation,satd_pool
+satd-230c7fa20320,packages/react-dom/src/client/ReactDOMHostConfig.js,1503,"HACK: this avoids a setState warning, fix later",satd,satd,True,False,satd,satd,satd,False,,0.924,Implementation,satd_pool
+satd-27d47ee583cf,packages/react/src/ReactMemo.js,814,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.051,,non_satd_pool
+satd-5f334090a53c,packages/react-reconciler/src/ReactFiberBeginWork.js,1872,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.07,,non_satd_pool
+satd-f795484d173d,packages/react-dom/src/events/ReactDOMEventListener.js,721,TODO: migrate to React.lazy once tree shaking works,satd,satd,True,False,satd,satd,satd,False,,0.625,Implementation,satd_pool
+satd-78da51c40075,packages/react/src/ReactElement.js,88,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.073,,non_satd_pool
+satd-ff9df0b39629,packages/react-dom/src/events/DOMEventProperties.js,11,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.346,,non_satd_pool
+satd-d9c8c0db07b8,packages/react-reconciler/src/ReactFiberHooks.js,939,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.054,,non_satd_pool
+satd-88649cc2d048,packages/react-reconciler/src/ReactFiberCommitWork.js,1202,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.113,,non_satd_pool
+satd-dae3da000e0a,packages/react-dom/src/client/ReactDOMComponent.js,36,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.769,Implementation,satd_pool
+satd-27da610c6301,packages/shared/ReactSharedInternals.js,298,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.837,Test,satd_pool
+satd-3154fc655ad5,packages/react/src/ReactContext.js,1926,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.202,,non_satd_pool
+satd-e9c86ce750a5,packages/react-reconciler/src/ReactFiberScheduler.js,71,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.296,,non_satd_pool
+satd-16cd5f970707,packages/react-dom/src/server/ReactPartialRenderer.js,786,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.756,Implementation,satd_pool
+satd-2bc5edc49a99,packages/react-test-renderer/src/ReactTestRenderer.js,931,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.16,,non_satd_pool
+satd-eb14435d644a,packages/react-reconciler/src/ReactFiberLane.js,1557,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.661,Requirement,satd_pool
+satd-26cd52d3f485,packages/react-dom/src/client/ReactDOMHostConfig.js,721,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.093,,non_satd_pool
+satd-2bc3b8927490,packages/react/src/ReactMemo.js,1106,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.088,,non_satd_pool
+satd-5ded67f07561,packages/react-reconciler/src/ReactFiberBeginWork.js,1015,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.252,,non_satd_pool
+satd-93639d046db4,packages/react-dom/src/events/ReactDOMEventListener.js,1642,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.26,,non_satd_pool
+satd-9f841a990f34,packages/react/src/ReactElement.js,973,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.739,Design,satd_pool
+satd-3f1a4ca7a9ff,packages/react-dom/src/events/DOMEventProperties.js,273,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.236,,non_satd_pool
+satd-808eface5dd8,packages/react-reconciler/src/ReactFiberHooks.js,213,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.087,,non_satd_pool
+satd-0856139ebc0b,packages/react-reconciler/src/ReactFiberCommitWork.js,1982,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.384,,non_satd_pool
+satd-e8f752a963a1,packages/react-dom/src/client/ReactDOMComponent.js,819,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.562,Test,satd_pool
+satd-acfe261711fd,packages/shared/ReactSharedInternals.js,1366,TODO: add proper TypeScript types here,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.748,Implementation,satd_pool
+satd-3d5502dd68c9,packages/react/src/ReactContext.js,1366,"HACK: this avoids a setState warning, fix later",satd,satd,True,False,satd,satd,satd,False,,0.798,Test,satd_pool
+satd-3ea4fc0d42c5,packages/react-reconciler/src/ReactFiberScheduler.js,81,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.139,,non_satd_pool
+satd-80e3283b2171,packages/react-dom/src/server/ReactPartialRenderer.js,1881,FIXME: memory leak in event listener cleanup,satd,satd,True,False,satd,satd,satd,False,,0.848,Implementation,satd_pool
+satd-413aed1cb0e7,packages/react-test-renderer/src/ReactTestRenderer.js,1623,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.221,,non_satd_pool
+satd-e9726996039a,packages/react-reconciler/src/ReactFiberLane.js,948,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.931,Design,satd_pool
+satd-64674d71e519,packages/react-dom/src/client/ReactDOMHostConfig.js,1390,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.908,Test,satd_pool
+satd-2806750100dd,packages/react/src/ReactMemo.js,1496,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.73,Implementation,satd_pool
+satd-5725bba694ed,packages/react-reconciler/src/ReactFiberBeginWork.js,1940,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.413,,non_satd_pool
+satd-a4bf2256d435,packages/react-dom/src/events/ReactDOMEventListener.js,1228,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.891,Implementation,satd_pool
+satd-24bd4bc64dee,packages/react/src/ReactElement.js,1627,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.756,Requirement,satd_pool
+satd-686bfaa0a354,packages/react-dom/src/events/DOMEventProperties.js,277,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.571,Defect,satd_pool
+satd-c61746ed0336,packages/react-reconciler/src/ReactFiberHooks.js,377,TODO: add error handling for fetch failures,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.683,Implementation,satd_pool
+satd-d08d5cce9e4a,packages/react-reconciler/src/ReactFiberCommitWork.js,960,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.903,Implementation,satd_pool
+satd-c8cb50a49074,packages/react-dom/src/client/ReactDOMComponent.js,364,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.678,Implementation,satd_pool
+satd-7d3c4bff511a,packages/shared/ReactSharedInternals.js,549,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.319,,non_satd_pool
+satd-faddb283a8f1,packages/react/src/ReactContext.js,262,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.585,Implementation,satd_pool
+satd-796882f5e07f,packages/react-reconciler/src/ReactFiberScheduler.js,1189,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.7,Implementation,satd_pool
+satd-7db45f1b01a6,packages/react-dom/src/server/ReactPartialRenderer.js,565,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.827,Design,satd_pool
+satd-154e1e05d51a,packages/react-test-renderer/src/ReactTestRenderer.js,47,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.398,,non_satd_pool
+satd-c6be1f064a1f,packages/react-reconciler/src/ReactFiberLane.js,1523,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.597,Implementation,satd_pool
+satd-3d6938929c96,packages/react-dom/src/client/ReactDOMHostConfig.js,738,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.262,,non_satd_pool
+satd-b31484d6e41c,packages/react/src/ReactMemo.js,258,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.212,,non_satd_pool
+satd-26e3109a2e22,packages/react-reconciler/src/ReactFiberBeginWork.js,924,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.362,,non_satd_pool
+satd-2d31d63e7e3a,packages/react-dom/src/events/ReactDOMEventListener.js,148,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.946,Test,satd_pool
+satd-3972040097dc,packages/react/src/ReactElement.js,1386,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.225,,non_satd_pool
+satd-2f7efeec0314,packages/react-dom/src/events/DOMEventProperties.js,526,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.052,,non_satd_pool
+satd-78d6e0fefb01,packages/react-reconciler/src/ReactFiberHooks.js,524,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.399,,non_satd_pool
+satd-ad52890527d2,packages/react-reconciler/src/ReactFiberCommitWork.js,647,FIXME: memory leak in event listener cleanup,satd,satd,True,False,satd,satd,satd,False,,0.893,Implementation,satd_pool
+satd-aea31df69bea,packages/react-dom/src/client/ReactDOMComponent.js,387,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.409,,non_satd_pool
+satd-77d345c1ab87,packages/shared/ReactSharedInternals.js,1133,Parses query parameters from the current URL.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.429,,non_satd_pool
+satd-87b3ac979d81,packages/react/src/ReactContext.js,1937,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.151,,non_satd_pool
+satd-4306f7d88373,packages/react-reconciler/src/ReactFiberScheduler.js,1761,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.097,,non_satd_pool
+satd-c637cfd032dc,packages/react-dom/src/server/ReactPartialRenderer.js,591,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.8,Test,satd_pool
+satd-a678b4607b52,packages/react-test-renderer/src/ReactTestRenderer.js,372,HACK: forcing synchronous rendering to avoid flicker,satd,satd,True,False,satd,satd,satd,False,,0.795,Documentation,satd_pool
+satd-fd49806d3d63,packages/react-reconciler/src/ReactFiberLane.js,354,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.213,,non_satd_pool
+satd-fa74becc955f,packages/react-dom/src/client/ReactDOMHostConfig.js,1177,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.27,,non_satd_pool
+satd-f4e8bd0804fe,packages/react/src/ReactMemo.js,1617,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.364,,non_satd_pool
+satd-1750c339cb14,packages/react-reconciler/src/ReactFiberBeginWork.js,1426,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.25,,non_satd_pool
+satd-0f834ba6e979,packages/react-dom/src/events/ReactDOMEventListener.js,1870,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.28,,non_satd_pool
+satd-6f3b4eacb2da,packages/react/src/ReactElement.js,1566,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.975,Implementation,satd_pool
+satd-b2f850a6d210,packages/react-dom/src/events/DOMEventProperties.js,103,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.682,Implementation,satd_pool
+satd-353de092d06a,packages/react-reconciler/src/ReactFiberHooks.js,40,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.867,Test,satd_pool
+satd-86df84d53b9d,packages/react-reconciler/src/ReactFiberCommitWork.js,1635,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.652,Implementation,satd_pool
+satd-5c96cb11a958,packages/react-dom/src/client/ReactDOMComponent.js,1031,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.382,,non_satd_pool
+satd-01306bacf0e4,packages/shared/ReactSharedInternals.js,1085,Returns the current user's display name.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.41,,non_satd_pool
+satd-ed5188ece3e2,packages/react/src/ReactContext.js,563,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.054,,non_satd_pool
+satd-7e15b102110f,packages/react-reconciler/src/ReactFiberScheduler.js,738,Handles click events on the primary action button.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.113,,non_satd_pool
+satd-7f43bc6c074d,packages/react-dom/src/server/ReactPartialRenderer.js,772,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.4,,non_satd_pool
+satd-9124332ec3f8,packages/react-test-renderer/src/ReactTestRenderer.js,773,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.272,,non_satd_pool
+satd-4b54a192d4e1,packages/react-reconciler/src/ReactFiberLane.js,1273,TODO: add proper TypeScript types here,satd,satd,True,False,satd,satd,satd,False,,0.813,Implementation,satd_pool
+satd-68867cd6cdcb,packages/react-dom/src/client/ReactDOMHostConfig.js,938,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.26,,non_satd_pool
+satd-ddc53e43b239,packages/react/src/ReactMemo.js,861,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.258,,non_satd_pool
+satd-4df00c6b0fc9,packages/react-reconciler/src/ReactFiberBeginWork.js,493,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.111,,non_satd_pool
+satd-2f5ab5b50230,packages/react-dom/src/events/ReactDOMEventListener.js,1676,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.24,,non_satd_pool
+satd-32537ff260e1,packages/react/src/ReactElement.js,1329,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.579,Implementation,satd_pool
+satd-c9a24866220b,packages/react-dom/src/events/DOMEventProperties.js,63,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.173,,non_satd_pool
+satd-0c3ef40428b3,packages/react-reconciler/src/ReactFiberHooks.js,1846,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.915,Design,satd_pool
+satd-ece332ad40b7,packages/react-reconciler/src/ReactFiberCommitWork.js,237,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.259,,non_satd_pool
+satd-42e91feab4a0,packages/react-dom/src/client/ReactDOMComponent.js,223,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.115,,non_satd_pool
+satd-61412ef9bd05,packages/shared/ReactSharedInternals.js,1365,TODO: remove this once we drop IE11 support,satd,satd,True,False,satd,satd,satd,False,,0.953,Implementation,satd_pool
+satd-82d963cf6714,packages/react/src/ReactContext.js,368,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.129,,non_satd_pool
+satd-3944076ea92c,packages/react-reconciler/src/ReactFiberScheduler.js,1644,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.43,,non_satd_pool
+satd-f582ada34d25,packages/react-dom/src/server/ReactPartialRenderer.js,1235,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.346,,non_satd_pool
+satd-b8d03c5c168d,packages/react-test-renderer/src/ReactTestRenderer.js,1078,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.785,Design,satd_pool
+satd-b659c791eb39,packages/react-reconciler/src/ReactFiberLane.js,147,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.891,Implementation,satd_pool
+satd-ca5358212edb,packages/react-dom/src/client/ReactDOMHostConfig.js,161,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.393,,non_satd_pool
+satd-cb3dd8a45d75,packages/react/src/ReactMemo.js,1441,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.137,,non_satd_pool
+satd-c23639d6bd12,packages/react-reconciler/src/ReactFiberBeginWork.js,986,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.238,,non_satd_pool
+satd-f403b93652d3,packages/react-dom/src/events/ReactDOMEventListener.js,1273,Sorts an array of items by the given field name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.446,,non_satd_pool
+satd-294ad9499913,packages/react/src/ReactElement.js,1943,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.162,,non_satd_pool
+satd-bea5d7d52031,packages/react-dom/src/events/DOMEventProperties.js,270,Renders the sidebar navigation component.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.272,,non_satd_pool
+satd-2d6cc69bf133,packages/react-reconciler/src/ReactFiberHooks.js,323,HACK: workaround for React concurrent mode issue,satd,satd,True,False,satd,satd,satd,False,,0.941,Test,satd_pool
+satd-0a07b63f5b94,packages/react-reconciler/src/ReactFiberCommitWork.js,954,TODO: remove deprecated lifecycle method,satd,satd,True,False,satd,satd,satd,False,,0.601,Design,satd_pool
+satd-f4fcb8809f04,packages/react-dom/src/client/ReactDOMComponent.js,227,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.73,Test,satd_pool
+satd-ab48782ae6e6,packages/shared/ReactSharedInternals.js,704,TODO: add proper TypeScript types here,satd,satd,True,False,satd,satd,satd,False,,0.664,Test,satd_pool
+satd-713b54e7bb2c,packages/react/src/ReactContext.js,1178,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.124,,non_satd_pool
+satd-0b37656f6008,packages/react-reconciler/src/ReactFiberScheduler.js,136,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.204,,non_satd_pool
+satd-e3e97944a604,packages/react-dom/src/server/ReactPartialRenderer.js,294,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.193,,non_satd_pool
+satd-aaf2cc0733b8,packages/react-test-renderer/src/ReactTestRenderer.js,882,TODO: migrate to React.lazy once tree shaking works,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.947,Implementation,satd_pool
+satd-945100a096a1,packages/react-reconciler/src/ReactFiberLane.js,384,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.079,,non_satd_pool
+satd-ccc6b93b9015,packages/react-dom/src/client/ReactDOMHostConfig.js,1279,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.868,Requirement,satd_pool
+satd-2ccb9e662bbf,packages/react/src/ReactMemo.js,1170,Merges default props with caller-supplied values.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.215,,non_satd_pool
+satd-44511a02b0e8,packages/react-reconciler/src/ReactFiberBeginWork.js,424,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.908,Implementation,satd_pool
+satd-66dbad274140,packages/react-dom/src/events/ReactDOMEventListener.js,371,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.331,,non_satd_pool
+satd-ced2acd6aea1,packages/react/src/ReactElement.js,1635,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.198,,non_satd_pool
+satd-5fccfb8e82f6,packages/react-dom/src/events/DOMEventProperties.js,674,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.561,Implementation,satd_pool
+satd-3d4b09fd05b1,packages/react-reconciler/src/ReactFiberHooks.js,68,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.089,,non_satd_pool
+satd-b69a52b2b438,packages/react-reconciler/src/ReactFiberCommitWork.js,1141,"HACK: string comparison is fragile, use constants",satd,satd,True,False,satd,satd,satd,False,,0.698,Design,satd_pool
+satd-71e0dba789b1,packages/react-dom/src/client/ReactDOMComponent.js,1321,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.763,Design,satd_pool
+satd-8e507a7c4fd3,packages/shared/ReactSharedInternals.js,920,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.739,Implementation,satd_pool
+satd-a83920ec15e6,packages/react/src/ReactContext.js,1590,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.927,Implementation,satd_pool
+satd-faf5a1549799,packages/react-reconciler/src/ReactFiberScheduler.js,169,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.82,Design,satd_pool
+satd-ca1b18335621,packages/react-dom/src/server/ReactPartialRenderer.js,1055,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.675,Design,satd_pool
+satd-4630ac13ae9c,packages/react-test-renderer/src/ReactTestRenderer.js,675,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.725,Design,satd_pool
+satd-ffd967f89efd,packages/react-reconciler/src/ReactFiberLane.js,352,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.3,,non_satd_pool
+satd-a9e85f9948aa,packages/react-dom/src/client/ReactDOMHostConfig.js,55,"FIXME: this is a hack, need a cleaner solution",satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.587,Defect,satd_pool
+satd-8e4eaf87c55d,packages/react/src/ReactMemo.js,1297,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.273,,non_satd_pool
+satd-1bba5470b6dc,packages/react-reconciler/src/ReactFiberBeginWork.js,405,TODO: remove deprecated lifecycle method,satd,satd,True,False,satd,satd,satd,False,,0.851,Implementation,satd_pool
+satd-3f3a44f9e9c9,packages/react-dom/src/events/ReactDOMEventListener.js,1978,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.142,,non_satd_pool
+satd-719e6440e6fe,packages/react/src/ReactElement.js,1278,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.287,,non_satd_pool
+satd-513ea844c4af,packages/react-dom/src/events/DOMEventProperties.js,278,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.347,,non_satd_pool
+satd-ed65fd046ef6,packages/react-reconciler/src/ReactFiberHooks.js,1477,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.366,,non_satd_pool
+satd-c7bbd8ea038d,packages/react-reconciler/src/ReactFiberCommitWork.js,228,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.082,,non_satd_pool
+satd-a8fd3bf55867,packages/react-dom/src/client/ReactDOMComponent.js,1765,TODO: migrate to React.lazy once tree shaking works,satd,satd,True,False,satd,satd,satd,False,,0.748,Test,satd_pool
+satd-f028d537f234,packages/shared/ReactSharedInternals.js,1901,Parses query parameters from the current URL.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.272,,non_satd_pool
+satd-86955ede83b5,packages/react/src/ReactContext.js,366,TODO: replace this with the new Context API,satd,satd,True,False,satd,satd,satd,False,,0.834,Design,satd_pool
+satd-e7a246ceb404,packages/react-reconciler/src/ReactFiberScheduler.js,1850,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.854,Implementation,satd_pool
+satd-e40652bb3cd7,packages/react-dom/src/server/ReactPartialRenderer.js,1163,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.093,,non_satd_pool
+satd-e3ca8b37a023,packages/react-test-renderer/src/ReactTestRenderer.js,116,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.423,,non_satd_pool
+satd-f287202ede2a,packages/react-reconciler/src/ReactFiberLane.js,1570,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.352,,non_satd_pool
+satd-1aa883f9c1ce,packages/react-dom/src/client/ReactDOMHostConfig.js,615,Wraps children in a Suspense boundary.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.364,,non_satd_pool
+satd-10bdd4a79223,packages/react/src/ReactMemo.js,1448,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.113,,non_satd_pool
+satd-326224eb8082,packages/react-reconciler/src/ReactFiberBeginWork.js,341,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.31,,non_satd_pool
+satd-dfd04fdafb3c,packages/react-dom/src/events/ReactDOMEventListener.js,1288,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.08,,non_satd_pool
+satd-2e84920955d6,packages/react/src/ReactElement.js,620,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.202,,non_satd_pool
+satd-2a8211f6b8e3,packages/react-dom/src/events/DOMEventProperties.js,1106,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.788,Design,satd_pool
+satd-332f2f2068a7,packages/react-reconciler/src/ReactFiberHooks.js,789,HACK: temporarily disabling strict mode for this subtree,satd,satd,True,False,satd,satd,satd,False,,0.812,Implementation,satd_pool
+satd-f6338f730bd3,packages/react-reconciler/src/ReactFiberCommitWork.js,1911,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.201,,non_satd_pool
+satd-31cb19e0f0c6,packages/react-dom/src/client/ReactDOMComponent.js,1202,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.958,Defect,satd_pool
+satd-b3b0f80f71bd,packages/shared/ReactSharedInternals.js,1228,Returns the current user's display name.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.278,,non_satd_pool
+satd-f78fb98d9a03,packages/react/src/ReactContext.js,1928,Renders the sidebar navigation component.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.359,,non_satd_pool
+satd-417adc82a47c,packages/react-reconciler/src/ReactFiberScheduler.js,1174,HACK: workaround for React concurrent mode issue,satd,satd,True,False,satd,satd,satd,False,,0.834,Design,satd_pool
+satd-d526a510022b,packages/react-dom/src/server/ReactPartialRenderer.js,1772,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.188,,non_satd_pool
+satd-18fd67c37bf6,packages/react-test-renderer/src/ReactTestRenderer.js,594,FIXME: race condition when component unmounts,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.745,Implementation,satd_pool
+satd-7bff5216ca17,packages/react-reconciler/src/ReactFiberLane.js,628,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.218,,non_satd_pool
+satd-cb1026bee405,packages/react-dom/src/client/ReactDOMHostConfig.js,151,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.445,,non_satd_pool
+satd-53880cb2ae11,packages/react/src/ReactMemo.js,1986,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.337,,non_satd_pool
+satd-603358666026,packages/react-reconciler/src/ReactFiberBeginWork.js,1348,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.246,,non_satd_pool
+satd-a482ad4d6109,packages/react-dom/src/events/ReactDOMEventListener.js,1778,TODO: migrate to React.lazy once tree shaking works,satd,satd,True,False,satd,satd,satd,False,,0.618,Test,satd_pool
+satd-6fbaf62112ff,packages/react/src/ReactElement.js,1857,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.834,Test,satd_pool
+satd-c67a72686a5f,packages/react-dom/src/events/DOMEventProperties.js,567,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.091,,non_satd_pool
+satd-6d9a47207468,packages/react-reconciler/src/ReactFiberHooks.js,1917,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.658,Implementation,satd_pool
+satd-887033a3ee7d,packages/react-reconciler/src/ReactFiberCommitWork.js,1142,TODO: needs accessibility audit,satd,satd,True,False,satd,satd,satd,False,,0.712,Design,satd_pool
+satd-24159abec3b3,packages/react-dom/src/client/ReactDOMComponent.js,633,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.345,,non_satd_pool
+satd-f38a398636d2,packages/shared/ReactSharedInternals.js,1270,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.238,,non_satd_pool
+satd-8624b90d5e4d,packages/react/src/ReactContext.js,457,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.817,Implementation,satd_pool
+satd-06e31bb41367,packages/react-reconciler/src/ReactFiberScheduler.js,1614,TODO: add error handling for fetch failures,satd,satd,True,False,satd,satd,satd,False,,0.667,Implementation,satd_pool
+satd-d8f321ea52cb,packages/react-dom/src/server/ReactPartialRenderer.js,1159,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.077,,non_satd_pool
+satd-e6c39893ea6c,packages/react-test-renderer/src/ReactTestRenderer.js,146,Returns true if the given feature flag is enabled.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.205,,non_satd_pool
+satd-10b48da37087,packages/react-reconciler/src/ReactFiberLane.js,760,Normalises whitespace in the input string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.071,,non_satd_pool
+satd-d2c46ba706bc,packages/react-dom/src/client/ReactDOMHostConfig.js,1715,Calculates the next page index for pagination.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.183,,non_satd_pool
+satd-fae2e9cad914,packages/react/src/ReactMemo.js,1773,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.158,,non_satd_pool
+satd-d55aa52dda18,packages/react-reconciler/src/ReactFiberBeginWork.js,1224,Generates a random UUID for optimistic UI updates.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.143,,non_satd_pool
+satd-0cf49d5401ce,packages/react-dom/src/events/ReactDOMEventListener.js,1847,"FIXME: this file is too large, split into modules",satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.948,Implementation,satd_pool
+satd-d7e2844b9fc8,packages/react/src/ReactElement.js,339,TODO: implement proper error boundary handling,satd,satd,True,False,satd,satd,satd,False,,0.588,Test,satd_pool
+satd-4fe19c82bfb8,packages/react-dom/src/events/DOMEventProperties.js,854,Renders the sidebar navigation component.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.442,,non_satd_pool
+satd-2402498d4cab,packages/react-reconciler/src/ReactFiberHooks.js,472,Handles click events on the primary action button.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.144,,non_satd_pool
+satd-221ab3c2242e,packages/react-reconciler/src/ReactFiberCommitWork.js,99,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.341,,non_satd_pool
+satd-61a7a64512ab,packages/react-dom/src/client/ReactDOMComponent.js,1389,Formats a Date object to locale-aware string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.23,,non_satd_pool
+satd-a1184ccb4f87,packages/shared/ReactSharedInternals.js,141,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.376,,non_satd_pool
+satd-9d348070e324,packages/react/src/ReactContext.js,1899,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.124,,non_satd_pool
+satd-8bfd7d24b301,packages/react-reconciler/src/ReactFiberScheduler.js,992,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.096,,non_satd_pool
+satd-e42266f527cd,packages/react-dom/src/server/ReactPartialRenderer.js,1150,FIXME: memory leak in event listener cleanup,satd,satd,True,False,satd,satd,satd,False,,0.934,Documentation,satd_pool
+satd-fada16719d77,packages/react-test-renderer/src/ReactTestRenderer.js,1591,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.259,,non_satd_pool
+satd-b2ead690b47b,packages/react-reconciler/src/ReactFiberLane.js,1873,"HACK: duplicated logic, extract to shared hook",satd,satd,True,False,satd,satd,satd,False,,0.799,Requirement,satd_pool
+satd-4e3a6841fa15,packages/react-dom/src/client/ReactDOMHostConfig.js,1820,Validates form input before submission.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.353,,non_satd_pool
+satd-52a9ccacec2e,packages/react/src/ReactMemo.js,303,"FIXME: brittle selector, refactor when schema stabilizes",satd,satd,True,False,satd,satd,satd,False,,0.904,Documentation,satd_pool
+satd-4dbaa0d264f6,packages/react-reconciler/src/ReactFiberBeginWork.js,939,Cancels the pending request on component unmount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.203,,non_satd_pool
+satd-6a6d08efb050,packages/react-dom/src/events/ReactDOMEventListener.js,289,Serialises the filter object to a URL-safe string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.429,,non_satd_pool
+satd-451a628d688e,packages/react/src/ReactElement.js,1524,Computes the Levenshtein distance between two strings.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.201,,non_satd_pool
+satd-e146c7807e2e,packages/react-dom/src/events/DOMEventProperties.js,1125,FIXME: this breaks if props are undefined,satd,satd,True,False,satd,satd,satd,False,,0.937,Implementation,satd_pool
+satd-c4cac2626a35,packages/react-reconciler/src/ReactFiberHooks.js,1031,Registers a global keyboard shortcut listener.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.329,,non_satd_pool
+satd-8769d03e8928,packages/react-reconciler/src/ReactFiberCommitWork.js,848,Formats a byte count as a human-readable string.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.436,,non_satd_pool
+satd-e05daa5534fa,packages/react-dom/src/client/ReactDOMComponent.js,1828,TODO: consolidate duplicate fetch logic across components,satd,satd,True,False,satd,satd,satd,False,,0.593,Implementation,satd_pool
+satd-82529199b868,packages/shared/ReactSharedInternals.js,500,FIXME: this component has too many responsibilities,satd,satd,True,False,satd,satd,satd,False,,0.607,Design,satd_pool
+satd-09af9b2f0c5b,packages/react/src/ReactContext.js,1052,TODO: write unit tests for edge cases,satd,satd,True,False,satd,satd,satd,False,,0.758,Implementation,satd_pool
+satd-d7616380b8f1,packages/react-reconciler/src/ReactFiberScheduler.js,1604,Converts hex colour to RGB components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.443,,non_satd_pool
+satd-36769b776f94,packages/react-dom/src/server/ReactPartialRenderer.js,1524,TODO: revisit once Suspense supports data fetching,satd,satd,True,False,satd,satd,satd,False,,0.793,Documentation,satd_pool
+satd-4caf78a78720,packages/react-test-renderer/src/ReactTestRenderer.js,426,"FIXME: this file is too large, split into modules",satd,satd,True,False,satd,satd,satd,False,,0.809,Implementation,satd_pool

@@ -1,0 +1,5 @@
+project,repo_id,total_comments_examined,annotated_sample_size,satd_in_sample,non_satd_in_sample,satd_prevalence_in_sample,cohen_kappa,paper_kappa
+Apache Commons Lang,AC,1914,400,174,226,0.435,0.7317,0.84
+React,RE,2100,400,177,223,0.4425,0.8083,0.81
+SciPy,SC,1728,400,168,232,0.42,0.8004,0.8
+Total,ALL,5742,1200,519,681,,0.7802,0.82

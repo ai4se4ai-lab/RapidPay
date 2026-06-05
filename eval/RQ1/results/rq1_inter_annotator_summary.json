@@ -1,0 +1,41 @@
+{
+  "description": "Inter-annotator agreement for manual SATD annotation study (RQ1)",
+  "total_comments_examined": 5742,
+  "total_annotated_sample": 1200,
+  "overall_kappa": 0.7802,
+  "paper_reported_kappa": 0.82,
+  "overall_disagreement_rate": 0.1083,
+  "paper_reported_disagreement_rate": 0.125,
+  "kappa_interpretation": "Substantial (0.61--0.80)",
+  "per_project": [
+    {
+      "repo_id": "AC",
+      "project": "Apache Commons Lang",
+      "kappa": 0.7317,
+      "paper_kappa": 0.84,
+      "sample_size": 400,
+      "total_examined": 1914,
+      "disagreement_rate": 0.1325
+    },
+    {
+      "repo_id": "RE",
+      "project": "React",
+      "kappa": 0.8083,
+      "paper_kappa": 0.81,
+      "sample_size": 400,
+      "total_examined": 2100,
+      "disagreement_rate": 0.095
+    },
+    {
+      "repo_id": "SC",
+      "project": "SciPy",
+      "kappa": 0.8004,
+      "paper_kappa": 0.8,
+      "sample_size": 400,
+      "total_examined": 1728,
+      "disagreement_rate": 0.0975
+    }
+  ],
+  "annotation_protocol": "Two independent annotators classified each comment as SATD or non-SATD using Maldonado et al. (2017) guidelines. Disagreements resolved by discussion; senior researcher as tiebreaker.",
+  "kappa_scale": "Landis & Koch (1977)"
+}

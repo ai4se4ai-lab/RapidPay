@@ -1,0 +1,401 @@
+id,file,line,content,predicted_label,manual_label,is_explicit,is_implicit,annotator_1,annotator_2,consensus,disagreement,notes,confidence_score,debt_type,sample_source
+satd-bce2dd7a7253,scipy/linalg/_decomp.py,692,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.169,,non_satd_pool
+satd-6a9fa8037318,scipy/signal/_signaltools.py,1004,"# FIXME: this is slow for large arrays, needs vectorization",satd,satd,True,False,satd,satd,satd,False,,0.587,Documentation,satd_pool
+satd-cdab5e9c5a95,scipy/optimize/_minimize.py,529,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.361,,non_satd_pool
+satd-b72bfbce7829,scipy/stats/_stats_py.py,593,# TODO: add support for sparse matrix input,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.698,Defect,satd_pool
+satd-2b9f421a2dcf,scipy/integrate/_quadpack_py.py,615,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.643,Implementation,satd_pool
+satd-b4441253d794,scipy/interpolate/_interpolate.py,439,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.385,,non_satd_pool
+satd-352c460473eb,scipy/sparse/linalg/_dsolve/linsolve.py,647,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.333,,non_satd_pool
+satd-63fbac931346,scipy/fft/_pocketfft/helper.py,667,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.668,Defect,satd_pool
+satd-327c352bd1c3,scipy/ndimage/_filters.py,1516,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.649,Implementation,satd_pool
+satd-892e3811634e,scipy/spatial/_kdtree.py,45,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.623,Implementation,satd_pool
+satd-df20628dc1bc,scipy/cluster/vq.py,1344,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.612,Defect,satd_pool
+satd-5bbb43af9854,scipy/io/matlab/_mio5.py,1649,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.199,,non_satd_pool
+satd-58fe0cc22c0c,scipy/special/_ufuncs.pyx,570,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,satd,satd,False,,0.726,Defect,satd_pool
+satd-f97186895db3,scipy/linalg/_blas.py,985,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.087,,non_satd_pool
+satd-911dfd0d17fa,scipy/optimize/_root.py,1306,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.315,,non_satd_pool
+satd-404bcc4151b5,scipy/linalg/_decomp.py,1867,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,satd,satd,satd,False,,0.641,Test,satd_pool
+satd-e50d268ff463,scipy/signal/_signaltools.py,24,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.764,Implementation,satd_pool
+satd-02b24cc4db9d,scipy/optimize/_minimize.py,707,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.953,Implementation,satd_pool
+satd-2637c95b5fdf,scipy/stats/_stats_py.py,1326,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,satd,satd,satd,False,,0.936,Implementation,satd_pool
+satd-27d7366cb1cd,scipy/integrate/_quadpack_py.py,291,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.682,Implementation,satd_pool
+satd-0e0cda25e96e,scipy/interpolate/_interpolate.py,981,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.904,Implementation,satd_pool
+satd-c547e143719e,scipy/sparse/linalg/_dsolve/linsolve.py,1443,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.159,,non_satd_pool
+satd-562689107474,scipy/fft/_pocketfft/helper.py,264,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.276,,non_satd_pool
+satd-56d3ea75055d,scipy/ndimage/_filters.py,1199,# TODO: generalize to N-dimensional input,satd,satd,True,False,satd,satd,satd,False,,0.95,Requirement,satd_pool
+satd-8d2f3407b471,scipy/spatial/_kdtree.py,1220,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.86,Defect,satd_pool
+satd-20d9574fbe0e,scipy/cluster/vq.py,1723,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.418,,non_satd_pool
+satd-22d18cd0ab80,scipy/io/matlab/_mio5.py,780,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.393,,non_satd_pool
+satd-02ba2d7152bf,scipy/special/_ufuncs.pyx,1997,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.691,Implementation,satd_pool
+satd-f2fd887f87a1,scipy/linalg/_blas.py,1945,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.893,Design,satd_pool
+satd-899fae57398a,scipy/optimize/_root.py,945,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.233,,non_satd_pool
+satd-59af698232ae,scipy/linalg/_decomp.py,92,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.256,,non_satd_pool
+satd-64ec0a91f376,scipy/signal/_signaltools.py,843,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.287,,non_satd_pool
+satd-48ee241332a7,scipy/optimize/_minimize.py,1079,# TODO: optimize memory usage for large datasets,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.719,Design,satd_pool
+satd-80416faaa927,scipy/stats/_stats_py.py,535,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.642,Requirement,satd_pool
+satd-434af9eea8c0,scipy/integrate/_quadpack_py.py,1722,# TODO: add input validation for negative values,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.833,Test,satd_pool
+satd-cedfe61370fb,scipy/interpolate/_interpolate.py,22,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.207,,non_satd_pool
+satd-7632b531f792,scipy/sparse/linalg/_dsolve/linsolve.py,853,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.325,,non_satd_pool
+satd-699cb233b94b,scipy/fft/_pocketfft/helper.py,1223,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.214,,non_satd_pool
+satd-11665b3affa7,scipy/ndimage/_filters.py,1138,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.882,Documentation,satd_pool
+satd-bc4d68f4612d,scipy/spatial/_kdtree.py,478,"# HACK: magic constant derived empirically, needs proof",satd,satd,True,False,satd,satd,satd,False,,0.901,Documentation,satd_pool
+satd-ece6150bcd9c,scipy/cluster/vq.py,781,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.118,,non_satd_pool
+satd-107c43b2b035,scipy/io/matlab/_mio5.py,1048,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.641,Test,satd_pool
+satd-43dc3936ef40,scipy/special/_ufuncs.pyx,1319,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.631,Implementation,satd_pool
+satd-855df9ac8210,scipy/linalg/_blas.py,601,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,satd,satd,satd,False,,0.747,Defect,satd_pool
+satd-bbeb99f3a526,scipy/optimize/_root.py,464,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.419,,non_satd_pool
+satd-983b26fc8de5,scipy/linalg/_decomp.py,1096,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.131,,non_satd_pool
+satd-a62a114e1fd0,scipy/signal/_signaltools.py,303,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.587,Implementation,satd_pool
+satd-0f494f5b8317,scipy/optimize/_minimize.py,955,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.31,,non_satd_pool
+satd-7221bc84c56a,scipy/stats/_stats_py.py,939,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.119,,non_satd_pool
+satd-3e96894b14d0,scipy/integrate/_quadpack_py.py,1907,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.223,,non_satd_pool
+satd-3f75a0f39703,scipy/interpolate/_interpolate.py,1857,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.085,,non_satd_pool
+satd-f6e3e2a6ab4c,scipy/sparse/linalg/_dsolve/linsolve.py,859,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.106,,non_satd_pool
+satd-825fa031396d,scipy/fft/_pocketfft/helper.py,312,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.362,,non_satd_pool
+satd-1ed4ebbc5617,scipy/ndimage/_filters.py,249,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.179,,non_satd_pool
+satd-b8ff7f1b3d7c,scipy/spatial/_kdtree.py,261,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.271,,non_satd_pool
+satd-23187a36a6a7,scipy/cluster/vq.py,1137,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.421,,non_satd_pool
+satd-ea2e7cff49bc,scipy/io/matlab/_mio5.py,1372,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.09,,non_satd_pool
+satd-9ea3a375fb38,scipy/special/_ufuncs.pyx,722,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.372,,non_satd_pool
+satd-b47d3d15670d,scipy/linalg/_blas.py,1898,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.652,Requirement,satd_pool
+satd-16b40db7fec8,scipy/optimize/_root.py,931,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.386,,non_satd_pool
+satd-9e18e5f5c43b,scipy/linalg/_decomp.py,209,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.331,,non_satd_pool
+satd-7b015d58fe68,scipy/signal/_signaltools.py,1990,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.175,,non_satd_pool
+satd-8f46aa6cda1c,scipy/optimize/_minimize.py,331,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.23,,non_satd_pool
+satd-f81831210ec2,scipy/stats/_stats_py.py,1300,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.225,,non_satd_pool
+satd-0a27b6df19bd,scipy/integrate/_quadpack_py.py,19,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.186,,non_satd_pool
+satd-51cfc606cfa9,scipy/interpolate/_interpolate.py,101,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.366,,non_satd_pool
+satd-3b678d96a7db,scipy/sparse/linalg/_dsolve/linsolve.py,446,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.109,,non_satd_pool
+satd-00320550257f,scipy/fft/_pocketfft/helper.py,256,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.599,Requirement,satd_pool
+satd-e15b5dc051ce,scipy/ndimage/_filters.py,425,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.95,Implementation,satd_pool
+satd-9b995347b6a8,scipy/spatial/_kdtree.py,1279,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.33,,non_satd_pool
+satd-7a06635a1026,scipy/cluster/vq.py,1465,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.569,Requirement,satd_pool
+satd-27cfa22e1beb,scipy/io/matlab/_mio5.py,771,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.135,,non_satd_pool
+satd-ca40912f1aff,scipy/special/_ufuncs.pyx,1755,# HACK: avoiding fftpack due to license concern,satd,satd,True,False,satd,satd,satd,False,,0.605,Test,satd_pool
+satd-3bb639231903,scipy/linalg/_blas.py,213,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.155,,non_satd_pool
+satd-038bf0dc6cef,scipy/optimize/_root.py,194,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.935,Implementation,satd_pool
+satd-9b25747a1224,scipy/linalg/_decomp.py,1152,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.133,,non_satd_pool
+satd-f73367e79763,scipy/signal/_signaltools.py,179,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.373,,non_satd_pool
+satd-8e2ae4ecf754,scipy/optimize/_minimize.py,1905,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.122,,non_satd_pool
+satd-42ade11ee9d4,scipy/stats/_stats_py.py,1070,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.086,,non_satd_pool
+satd-251736605608,scipy/integrate/_quadpack_py.py,1461,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.646,Implementation,satd_pool
+satd-1850b42b940c,scipy/interpolate/_interpolate.py,24,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.384,,non_satd_pool
+satd-90abda3c3d5d,scipy/sparse/linalg/_dsolve/linsolve.py,1672,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.432,,non_satd_pool
+satd-014c368aa6f0,scipy/fft/_pocketfft/helper.py,94,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.22,,non_satd_pool
+satd-054f6e291c75,scipy/ndimage/_filters.py,269,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.157,,non_satd_pool
+satd-1d2a6fe0aabc,scipy/spatial/_kdtree.py,886,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.608,Test,satd_pool
+satd-02e9dd94c57c,scipy/cluster/vq.py,1636,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.126,,non_satd_pool
+satd-c042b1406967,scipy/io/matlab/_mio5.py,1618,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.742,Requirement,satd_pool
+satd-8d4426c9db15,scipy/special/_ufuncs.pyx,1111,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.786,Documentation,satd_pool
+satd-e5e1be1f7ff9,scipy/linalg/_blas.py,919,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.89,Test,satd_pool
+satd-536adbb94583,scipy/optimize/_root.py,1253,"# HACK: magic constant derived empirically, needs proof",satd,satd,True,False,satd,satd,satd,False,,0.581,Implementation,satd_pool
+satd-b0890d3dddae,scipy/linalg/_decomp.py,373,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.118,,non_satd_pool
+satd-581c786b67f7,scipy/signal/_signaltools.py,1323,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.248,,non_satd_pool
+satd-c43dab72ca23,scipy/optimize/_minimize.py,784,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.325,,non_satd_pool
+satd-073de235ab7a,scipy/stats/_stats_py.py,1696,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.081,,non_satd_pool
+satd-d6b36c6e12d4,scipy/integrate/_quadpack_py.py,1625,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.71,Test,satd_pool
+satd-afad669ab85c,scipy/interpolate/_interpolate.py,957,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.69,Implementation,satd_pool
+satd-591f6433215a,scipy/sparse/linalg/_dsolve/linsolve.py,445,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.303,,non_satd_pool
+satd-e704c0791f1a,scipy/fft/_pocketfft/helper.py,436,# HACK: avoiding fftpack due to license concern,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.666,Documentation,satd_pool
+satd-49df15366731,scipy/ndimage/_filters.py,1116,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.194,,non_satd_pool
+satd-dc3133c1ef48,scipy/spatial/_kdtree.py,1992,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.327,,non_satd_pool
+satd-3e8ae7cfe180,scipy/cluster/vq.py,1868,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.672,Implementation,satd_pool
+satd-7ee4f1079028,scipy/io/matlab/_mio5.py,713,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.389,,non_satd_pool
+satd-f6655eb8e0b0,scipy/special/_ufuncs.pyx,1658,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.449,,non_satd_pool
+satd-9f8db7be0f0d,scipy/linalg/_blas.py,670,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.579,Requirement,satd_pool
+satd-f8669dbffa01,scipy/optimize/_root.py,1573,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.83,Implementation,satd_pool
+satd-957188ee865a,scipy/linalg/_decomp.py,921,# TODO: replace loop with vectorized implementation,satd,satd,True,False,satd,satd,satd,False,,0.851,Implementation,satd_pool
+satd-aa20b9dd1241,scipy/signal/_signaltools.py,413,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.37,,non_satd_pool
+satd-b211bc188c1b,scipy/optimize/_minimize.py,326,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.621,Defect,satd_pool
+satd-2ef7bb109917,scipy/stats/_stats_py.py,60,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.201,,non_satd_pool
+satd-88f3df1141b9,scipy/integrate/_quadpack_py.py,621,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.185,,non_satd_pool
+satd-6c07420fde4e,scipy/interpolate/_interpolate.py,1471,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.202,,non_satd_pool
+satd-b0d36893df02,scipy/sparse/linalg/_dsolve/linsolve.py,1778,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.858,Defect,satd_pool
+satd-24614e306779,scipy/fft/_pocketfft/helper.py,1938,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,satd,satd,False,,0.661,Implementation,satd_pool
+satd-8de5db970363,scipy/ndimage/_filters.py,1960,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.247,,non_satd_pool
+satd-7640b870fceb,scipy/spatial/_kdtree.py,588,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.089,,non_satd_pool
+satd-e55157c4dbaf,scipy/cluster/vq.py,1066,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.231,,non_satd_pool
+satd-37cb0ae7c805,scipy/io/matlab/_mio5.py,738,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.68,Test,satd_pool
+satd-0f169a15a5b2,scipy/special/_ufuncs.pyx,1963,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.27,,non_satd_pool
+satd-cff87cafce21,scipy/linalg/_blas.py,1969,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.434,,non_satd_pool
+satd-4b2b42cde295,scipy/optimize/_root.py,1501,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.428,,non_satd_pool
+satd-73d4d8231e31,scipy/linalg/_decomp.py,89,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.88,Implementation,satd_pool
+satd-c635e4110280,scipy/signal/_signaltools.py,842,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.122,,non_satd_pool
+satd-4db021b18f05,scipy/optimize/_minimize.py,201,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.431,,non_satd_pool
+satd-73a2a4582772,scipy/stats/_stats_py.py,11,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.31,,non_satd_pool
+satd-2d3bb9027f14,scipy/integrate/_quadpack_py.py,713,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.956,Test,satd_pool
+satd-15a239d9cc37,scipy/interpolate/_interpolate.py,1206,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.953,Requirement,satd_pool
+satd-d1fb4b8cc110,scipy/sparse/linalg/_dsolve/linsolve.py,1637,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.425,,non_satd_pool
+satd-ae7d2d3e8d58,scipy/fft/_pocketfft/helper.py,1703,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.773,Implementation,satd_pool
+satd-59e0c86aaca3,scipy/ndimage/_filters.py,1503,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.774,Implementation,satd_pool
+satd-93f40a209d67,scipy/spatial/_kdtree.py,1407,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.425,,non_satd_pool
+satd-e5dfa8f3508a,scipy/cluster/vq.py,1208,# TODO: replace loop with vectorized implementation,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.863,Implementation,satd_pool
+satd-8f298c18f569,scipy/io/matlab/_mio5.py,1477,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.58,Test,satd_pool
+satd-57252623f7df,scipy/special/_ufuncs.pyx,562,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.2,,non_satd_pool
+satd-4603cee4b601,scipy/linalg/_blas.py,1638,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.294,,non_satd_pool
+satd-7c8011eac1e3,scipy/optimize/_root.py,174,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.259,,non_satd_pool
+satd-325af42fc05e,scipy/linalg/_decomp.py,652,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.29,,non_satd_pool
+satd-6d3f8ff0cb05,scipy/signal/_signaltools.py,837,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.872,Implementation,satd_pool
+satd-1ca2b14e712a,scipy/optimize/_minimize.py,921,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,satd,satd,False,,0.837,Implementation,satd_pool
+satd-5ac1c9ab1a8c,scipy/stats/_stats_py.py,606,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.673,Implementation,satd_pool
+satd-aec0edc0064f,scipy/integrate/_quadpack_py.py,1161,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.283,,non_satd_pool
+satd-bd8ec0a5bf9c,scipy/interpolate/_interpolate.py,1790,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.874,Implementation,satd_pool
+satd-89ca0cc0e276,scipy/sparse/linalg/_dsolve/linsolve.py,717,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.595,Implementation,satd_pool
+satd-60ddbce11469,scipy/fft/_pocketfft/helper.py,1750,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.551,Implementation,satd_pool
+satd-53823bd6fc11,scipy/ndimage/_filters.py,999,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.238,,non_satd_pool
+satd-b4f54e55606d,scipy/spatial/_kdtree.py,98,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.138,,non_satd_pool
+satd-ecdfcf1d5ff4,scipy/cluster/vq.py,1833,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.172,,non_satd_pool
+satd-aaec52f3990d,scipy/io/matlab/_mio5.py,300,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.632,Documentation,satd_pool
+satd-a68b3d7980a1,scipy/special/_ufuncs.pyx,1179,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.255,,non_satd_pool
+satd-67969fd35b3c,scipy/linalg/_blas.py,690,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.233,,non_satd_pool
+satd-ca5467a46317,scipy/optimize/_root.py,495,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.916,Implementation,satd_pool
+satd-4088f99bf2d8,scipy/linalg/_decomp.py,1577,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.314,,non_satd_pool
+satd-79535d5a3180,scipy/signal/_signaltools.py,86,"# FIXME: this is slow for large arrays, needs vectorization",satd,satd,True,False,satd,satd,satd,False,,0.969,Implementation,satd_pool
+satd-4649cf8a8087,scipy/optimize/_minimize.py,662,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.552,Implementation,satd_pool
+satd-8779b62188d8,scipy/stats/_stats_py.py,1825,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.691,Requirement,satd_pool
+satd-3904f6efaf3f,scipy/integrate/_quadpack_py.py,1695,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.245,,non_satd_pool
+satd-0f2602db1074,scipy/interpolate/_interpolate.py,1168,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.35,,non_satd_pool
+satd-961963fc3fac,scipy/sparse/linalg/_dsolve/linsolve.py,436,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.201,,non_satd_pool
+satd-bd3d7bf8fbbc,scipy/fft/_pocketfft/helper.py,382,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.897,Test,satd_pool
+satd-7c5aa55c2f41,scipy/ndimage/_filters.py,1914,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.228,,non_satd_pool
+satd-24d6107d327b,scipy/spatial/_kdtree.py,384,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.83,Implementation,satd_pool
+satd-26ca1fe4d24a,scipy/cluster/vq.py,1054,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.248,,non_satd_pool
+satd-b0d3a71d2db1,scipy/io/matlab/_mio5.py,1854,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.361,,non_satd_pool
+satd-d242a1d0341e,scipy/special/_ufuncs.pyx,1575,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,satd,satd,False,,0.586,Defect,satd_pool
+satd-e99b37306752,scipy/linalg/_blas.py,1738,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.805,Test,satd_pool
+satd-1df17b6cd6f0,scipy/optimize/_root.py,811,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.096,,non_satd_pool
+satd-c3684f834007,scipy/linalg/_decomp.py,1535,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.276,,non_satd_pool
+satd-57564541a033,scipy/signal/_signaltools.py,539,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.124,,non_satd_pool
+satd-3a5061bd442e,scipy/optimize/_minimize.py,1188,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.343,,non_satd_pool
+satd-de68655b85dd,scipy/stats/_stats_py.py,1090,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.205,,non_satd_pool
+satd-f797b9dc3d90,scipy/integrate/_quadpack_py.py,130,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.226,,non_satd_pool
+satd-80310192dcd8,scipy/interpolate/_interpolate.py,245,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.116,,non_satd_pool
+satd-58011cecc834,scipy/sparse/linalg/_dsolve/linsolve.py,482,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.403,,non_satd_pool
+satd-bb1d37ccba71,scipy/fft/_pocketfft/helper.py,63,# HACK: avoiding fftpack due to license concern,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.576,Implementation,satd_pool
+satd-770edb534a9f,scipy/ndimage/_filters.py,575,# TODO: generalize to N-dimensional input,satd,satd,True,False,satd,satd,satd,False,,0.782,Test,satd_pool
+satd-f26fb01c2121,scipy/spatial/_kdtree.py,113,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.316,,non_satd_pool
+satd-62221d357c3c,scipy/cluster/vq.py,77,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.558,Implementation,satd_pool
+satd-375b0770ced4,scipy/io/matlab/_mio5.py,355,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.161,,non_satd_pool
+satd-6729d6719de2,scipy/special/_ufuncs.pyx,1868,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.065,,non_satd_pool
+satd-e1d57462ac37,scipy/linalg/_blas.py,1916,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.282,,non_satd_pool
+satd-c569041e551c,scipy/optimize/_root.py,545,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.908,Requirement,satd_pool
+satd-3854b46b3cdd,scipy/linalg/_decomp.py,1442,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.325,,non_satd_pool
+satd-15093f72f416,scipy/signal/_signaltools.py,1192,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.147,,non_satd_pool
+satd-5405f8427a46,scipy/optimize/_minimize.py,1986,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.815,Requirement,satd_pool
+satd-511a8d2f0fb1,scipy/stats/_stats_py.py,803,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.184,,non_satd_pool
+satd-e17889c25f82,scipy/integrate/_quadpack_py.py,1820,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.757,Test,satd_pool
+satd-ee5111abba04,scipy/interpolate/_interpolate.py,1307,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.592,Implementation,satd_pool
+satd-6e5b0fe81278,scipy/sparse/linalg/_dsolve/linsolve.py,896,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.2,,non_satd_pool
+satd-12cfa66251d0,scipy/fft/_pocketfft/helper.py,1783,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.116,,non_satd_pool
+satd-8a39a3814faa,scipy/ndimage/_filters.py,228,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.646,Requirement,satd_pool
+satd-0b03f3df7001,scipy/spatial/_kdtree.py,954,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.087,,non_satd_pool
+satd-33349005dd3c,scipy/cluster/vq.py,966,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,satd,satd,satd,False,,0.781,Defect,satd_pool
+satd-777d8cd2b320,scipy/io/matlab/_mio5.py,284,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.39,,non_satd_pool
+satd-c8ff62f9b9a7,scipy/special/_ufuncs.pyx,1084,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.857,Implementation,satd_pool
+satd-7b73f3d865fb,scipy/linalg/_blas.py,1332,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,satd,satd,satd,False,,0.979,Implementation,satd_pool
+satd-447020efb78b,scipy/optimize/_root.py,864,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.918,Implementation,satd_pool
+satd-b3a5e6b779cb,scipy/linalg/_decomp.py,84,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.37,,non_satd_pool
+satd-20263d588349,scipy/signal/_signaltools.py,481,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.595,Design,satd_pool
+satd-593f340aa938,scipy/optimize/_minimize.py,677,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.094,,non_satd_pool
+satd-bb7d7ca49258,scipy/stats/_stats_py.py,519,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.311,,non_satd_pool
+satd-af964876ec54,scipy/integrate/_quadpack_py.py,1696,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.569,Test,satd_pool
+satd-b0eb1deef665,scipy/interpolate/_interpolate.py,375,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.89,Test,satd_pool
+satd-069f173f0d81,scipy/sparse/linalg/_dsolve/linsolve.py,932,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.155,,non_satd_pool
+satd-79a26eb74fb9,scipy/fft/_pocketfft/helper.py,40,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.188,,non_satd_pool
+satd-4fa1721e5672,scipy/ndimage/_filters.py,641,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.925,Implementation,satd_pool
+satd-3ef08cfa54db,scipy/spatial/_kdtree.py,663,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.185,,non_satd_pool
+satd-8dc1ca896273,scipy/cluster/vq.py,1404,# TODO: replace loop with vectorized implementation,satd,satd,True,False,satd,satd,satd,False,,0.733,Implementation,satd_pool
+satd-cc9d27a6aa4c,scipy/io/matlab/_mio5.py,1741,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.27,,non_satd_pool
+satd-b5b54d72caca,scipy/special/_ufuncs.pyx,1411,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.407,,non_satd_pool
+satd-8466d6c9fea4,scipy/linalg/_blas.py,1247,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.928,Requirement,satd_pool
+satd-e9c65cf26ac6,scipy/optimize/_root.py,527,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.868,Requirement,satd_pool
+satd-d97f4f54457b,scipy/linalg/_decomp.py,936,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.883,Implementation,satd_pool
+satd-1d32c9cab9bd,scipy/signal/_signaltools.py,715,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.648,Defect,satd_pool
+satd-974b1a1080b1,scipy/optimize/_minimize.py,533,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.131,,non_satd_pool
+satd-f8a6f05aa0f9,scipy/stats/_stats_py.py,1948,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.907,Requirement,satd_pool
+satd-9e1420d8f04e,scipy/integrate/_quadpack_py.py,898,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.408,,non_satd_pool
+satd-58f763ea9889,scipy/interpolate/_interpolate.py,63,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.441,,non_satd_pool
+satd-2b50ca93fa75,scipy/sparse/linalg/_dsolve/linsolve.py,1777,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.138,,non_satd_pool
+satd-7bcd25c22f08,scipy/fft/_pocketfft/helper.py,471,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.221,,non_satd_pool
+satd-cda883cfe8c6,scipy/ndimage/_filters.py,1177,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,satd,satd,satd,False,,0.664,Implementation,satd_pool
+satd-f56eb69db0c3,scipy/spatial/_kdtree.py,1892,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.237,,non_satd_pool
+satd-a0481ce8f961,scipy/cluster/vq.py,1147,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.217,,non_satd_pool
+satd-1ce0939d7668,scipy/io/matlab/_mio5.py,1573,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.918,Implementation,satd_pool
+satd-9c042abc59cc,scipy/special/_ufuncs.pyx,10,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.414,,non_satd_pool
+satd-1e009c65d4fc,scipy/linalg/_blas.py,413,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.133,,non_satd_pool
+satd-aa7cb4aa6c51,scipy/optimize/_root.py,1080,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.177,,non_satd_pool
+satd-dfb110357370,scipy/linalg/_decomp.py,1063,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.561,Test,satd_pool
+satd-f1b9dc8d24ec,scipy/signal/_signaltools.py,1358,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.303,,non_satd_pool
+satd-545c77fc693d,scipy/optimize/_minimize.py,240,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.438,,non_satd_pool
+satd-a36ef4741c66,scipy/stats/_stats_py.py,799,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.191,,non_satd_pool
+satd-d965237502fa,scipy/integrate/_quadpack_py.py,1084,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.303,,non_satd_pool
+satd-3c41b038080f,scipy/interpolate/_interpolate.py,1437,# TODO: replace loop with vectorized implementation,satd,satd,True,False,satd,satd,satd,False,,0.662,Test,satd_pool
+satd-652f8d820f00,scipy/sparse/linalg/_dsolve/linsolve.py,349,Fits a polynomial of degree n to the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.376,,non_satd_pool
+satd-dd24cfa912b6,scipy/fft/_pocketfft/helper.py,840,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.309,,non_satd_pool
+satd-3a03de7d87c9,scipy/ndimage/_filters.py,95,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.968,Requirement,satd_pool
+satd-a7ca2e26efc7,scipy/spatial/_kdtree.py,1401,# TODO: add input validation for negative values,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.865,Design,satd_pool
+satd-7f5dcb73e6dd,scipy/cluster/vq.py,301,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.115,,non_satd_pool
+satd-6bb51e5fe531,scipy/io/matlab/_mio5.py,225,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.127,,non_satd_pool
+satd-565f12f0f6ba,scipy/special/_ufuncs.pyx,1659,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.164,,non_satd_pool
+satd-2cf08e061a02,scipy/linalg/_blas.py,1399,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.236,,non_satd_pool
+satd-9a8e017eb0f4,scipy/optimize/_root.py,379,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.226,,non_satd_pool
+satd-7e866f9878b3,scipy/linalg/_decomp.py,765,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.445,,non_satd_pool
+satd-c8a4a0ebe2d5,scipy/signal/_signaltools.py,991,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.127,,non_satd_pool
+satd-987cc74f6657,scipy/optimize/_minimize.py,1902,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.277,,non_satd_pool
+satd-34ac6a7f5523,scipy/stats/_stats_py.py,1700,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.362,,non_satd_pool
+satd-8d08682c9d65,scipy/integrate/_quadpack_py.py,1837,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.78,Requirement,satd_pool
+satd-4d1999a634a6,scipy/interpolate/_interpolate.py,1043,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.327,,non_satd_pool
+satd-4e2535d1c9ac,scipy/sparse/linalg/_dsolve/linsolve.py,669,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.726,Test,satd_pool
+satd-b5bcf881f3d1,scipy/fft/_pocketfft/helper.py,1254,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.124,,non_satd_pool
+satd-b7c05e219e8b,scipy/ndimage/_filters.py,981,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.265,,non_satd_pool
+satd-8003856697b6,scipy/spatial/_kdtree.py,1549,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.07,,non_satd_pool
+satd-c06a12047e31,scipy/cluster/vq.py,873,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.675,Implementation,satd_pool
+satd-afce672c1fac,scipy/io/matlab/_mio5.py,808,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.315,,non_satd_pool
+satd-2259d1bda5c3,scipy/special/_ufuncs.pyx,1544,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.1,,non_satd_pool
+satd-04de4207b73b,scipy/linalg/_blas.py,1641,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.085,,non_satd_pool
+satd-994a22e61666,scipy/optimize/_root.py,1344,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.668,Implementation,satd_pool
+satd-155651f43688,scipy/linalg/_decomp.py,1363,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.162,,non_satd_pool
+satd-9b5dede2ac90,scipy/signal/_signaltools.py,349,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.69,Requirement,satd_pool
+satd-015788d181eb,scipy/optimize/_minimize.py,310,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.076,,non_satd_pool
+satd-ccd655ebbbe4,scipy/stats/_stats_py.py,288,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,satd,satd,False,,0.776,Defect,satd_pool
+satd-700d328bf5f9,scipy/integrate/_quadpack_py.py,303,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.276,,non_satd_pool
+satd-06e8b7960075,scipy/interpolate/_interpolate.py,86,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.355,,non_satd_pool
+satd-843bcb2341eb,scipy/sparse/linalg/_dsolve/linsolve.py,563,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.704,Defect,satd_pool
+satd-18d6d68121b3,scipy/fft/_pocketfft/helper.py,102,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.355,,non_satd_pool
+satd-c837c2c52627,scipy/ndimage/_filters.py,1408,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.225,,non_satd_pool
+satd-91e305c554a6,scipy/spatial/_kdtree.py,1727,"# HACK: magic constant derived empirically, needs proof",satd,satd,True,False,satd,satd,satd,False,,0.701,Design,satd_pool
+satd-547c16645588,scipy/cluster/vq.py,1496,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.237,,non_satd_pool
+satd-544a39a96e1b,scipy/io/matlab/_mio5.py,1042,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.89,Requirement,satd_pool
+satd-69cb37d7a7a9,scipy/special/_ufuncs.pyx,753,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.235,,non_satd_pool
+satd-51356a5b0d21,scipy/linalg/_blas.py,1432,"# HACK: tolerance chosen conservatively, may miss convergence",satd,satd,True,False,satd,satd,satd,False,,0.578,Defect,satd_pool
+satd-672a07f81edb,scipy/optimize/_root.py,949,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.269,,non_satd_pool
+satd-5218583fcec5,scipy/linalg/_decomp.py,792,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.838,Test,satd_pool
+satd-6e34acdbf00a,scipy/signal/_signaltools.py,710,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.609,Design,satd_pool
+satd-980c455790f4,scipy/optimize/_minimize.py,1781,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.385,,non_satd_pool
+satd-41fc7f6b2070,scipy/stats/_stats_py.py,1900,# TODO: generalize to N-dimensional input,satd,satd,True,False,satd,satd,satd,False,,0.947,Implementation,satd_pool
+satd-aebbb9bef1f3,scipy/integrate/_quadpack_py.py,154,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.739,Requirement,satd_pool
+satd-f83ce218c720,scipy/interpolate/_interpolate.py,1982,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.575,Design,satd_pool
+satd-494c4e299dfd,scipy/sparse/linalg/_dsolve/linsolve.py,794,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.063,,non_satd_pool
+satd-86c8b8736a38,scipy/fft/_pocketfft/helper.py,768,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.588,Requirement,satd_pool
+satd-e14dad6f19e0,scipy/ndimage/_filters.py,1616,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.363,,non_satd_pool
+satd-00867307bfcb,scipy/spatial/_kdtree.py,1968,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.266,,non_satd_pool
+satd-24a5207436c0,scipy/cluster/vq.py,1633,# TODO: replace loop with vectorized implementation,satd,satd,True,False,satd,satd,satd,False,,0.75,Implementation,satd_pool
+satd-277082eee927,scipy/io/matlab/_mio5.py,1693,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.928,Test,satd_pool
+satd-834941a4d6f4,scipy/special/_ufuncs.pyx,576,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.36,,non_satd_pool
+satd-afde3661ca01,scipy/linalg/_blas.py,1053,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.104,,non_satd_pool
+satd-661855328878,scipy/optimize/_root.py,287,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.739,Requirement,satd_pool
+satd-c7ef5159aedd,scipy/linalg/_decomp.py,536,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.314,,non_satd_pool
+satd-05cff5805721,scipy/signal/_signaltools.py,1594,# TODO: deprecate this function in favour of new API,satd,satd,True,False,satd,satd,satd,False,,0.7,Defect,satd_pool
+satd-fe5a0e4b5d10,scipy/optimize/_minimize.py,1698,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.082,,non_satd_pool
+satd-676102b3a85a,scipy/stats/_stats_py.py,1012,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.811,Implementation,satd_pool
+satd-b7f094ea3ed6,scipy/integrate/_quadpack_py.py,1747,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.215,,non_satd_pool
+satd-94860a34078a,scipy/interpolate/_interpolate.py,37,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.065,,non_satd_pool
+satd-6c4f8832580c,scipy/sparse/linalg/_dsolve/linsolve.py,965,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.392,,non_satd_pool
+satd-e76343edd2c2,scipy/fft/_pocketfft/helper.py,1555,# TODO: add parallel execution path using joblib,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.834,Requirement,satd_pool
+satd-e3d3a9b2a6ab,scipy/ndimage/_filters.py,840,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.217,,non_satd_pool
+satd-62bdefc19759,scipy/spatial/_kdtree.py,1179,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.847,Requirement,satd_pool
+satd-10e7139f5a92,scipy/cluster/vq.py,644,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.441,,non_satd_pool
+satd-be6fcb119593,scipy/io/matlab/_mio5.py,488,# TODO: add benchmarks for regression testing,satd,satd,True,False,satd,satd,satd,False,,0.888,Implementation,satd_pool
+satd-506c08c93b3d,scipy/special/_ufuncs.pyx,1362,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.167,,non_satd_pool
+satd-fc5a07f76b82,scipy/linalg/_blas.py,1551,# TODO: generalize to N-dimensional input,satd,satd,True,False,satd,satd,satd,False,,0.924,Implementation,satd_pool
+satd-208454316460,scipy/optimize/_root.py,324,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.096,,non_satd_pool
+satd-13ce770b045d,scipy/linalg/_decomp.py,382,Computes the discrete Fourier transform of a 1D array.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.395,,non_satd_pool
+satd-978dbd01cd3a,scipy/signal/_signaltools.py,1818,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.105,,non_satd_pool
+satd-2fa02284c7dc,scipy/optimize/_minimize.py,1293,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.936,Defect,satd_pool
+satd-abb8f89df5d2,scipy/stats/_stats_py.py,1338,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.733,Test,satd_pool
+satd-e18154ae8d39,scipy/integrate/_quadpack_py.py,716,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Tiebreak by third reviewer,0.146,,non_satd_pool
+satd-89389426a16e,scipy/interpolate/_interpolate.py,831,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.062,,non_satd_pool
+satd-1041476b91a1,scipy/sparse/linalg/_dsolve/linsolve.py,158,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.789,Defect,satd_pool
+satd-9ba6925815f5,scipy/fft/_pocketfft/helper.py,189,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.085,,non_satd_pool
+satd-4c49517844d3,scipy/ndimage/_filters.py,464,"# FIXME: this algorithm is O(n^3), should be O(n log n)",satd,satd,True,False,satd,non-satd,satd,True,Tiebreak by third reviewer,0.847,Implementation,satd_pool
+satd-5ca6ce05439e,scipy/spatial/_kdtree.py,842,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.281,,non_satd_pool
+satd-c9d80199b75b,scipy/cluster/vq.py,1328,Applies a Butterworth low-pass filter to the signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.224,,non_satd_pool
+satd-578acd1eba8e,scipy/io/matlab/_mio5.py,1320,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.421,,non_satd_pool
+satd-ea53e1b6786f,scipy/special/_ufuncs.pyx,1259,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.295,,non_satd_pool
+satd-d4b4c6141bbf,scipy/linalg/_blas.py,753,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.277,,non_satd_pool
+satd-573bdd47114b,scipy/optimize/_root.py,157,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.073,,non_satd_pool
+satd-157e6126542a,scipy/linalg/_decomp.py,222,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,satd,satd,satd,False,,0.578,Requirement,satd_pool
+satd-2ead135bd327,scipy/signal/_signaltools.py,960,Returns the beta cumulative distribution function.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.219,,non_satd_pool
+satd-00c698570b9c,scipy/optimize/_minimize.py,1534,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.083,,non_satd_pool
+satd-a6e368a30431,scipy/stats/_stats_py.py,1098,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.42,,non_satd_pool
+satd-bf8dbb98d35f,scipy/integrate/_quadpack_py.py,181,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.976,Defect,satd_pool
+satd-7b3dfece63bc,scipy/interpolate/_interpolate.py,297,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.21,,non_satd_pool
+satd-64fe08b3431b,scipy/sparse/linalg/_dsolve/linsolve.py,888,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.209,,non_satd_pool
+satd-682f6ec89f8e,scipy/fft/_pocketfft/helper.py,1241,# HACK: avoiding fftpack due to license concern,satd,satd,True,False,satd,satd,satd,False,,0.744,Implementation,satd_pool
+satd-aff23168586f,scipy/ndimage/_filters.py,1072,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.163,,non_satd_pool
+satd-331e5578b48d,scipy/spatial/_kdtree.py,134,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.839,Requirement,satd_pool
+satd-e9659b69a4c9,scipy/cluster/vq.py,1754,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.618,Design,satd_pool
+satd-fd50d18c3d48,scipy/io/matlab/_mio5.py,1536,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.177,,non_satd_pool
+satd-5fd8937f5164,scipy/special/_ufuncs.pyx,405,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.687,Requirement,satd_pool
+satd-ead0d6223588,scipy/linalg/_blas.py,816,# TODO: add support for sparse matrix input,satd,satd,True,False,satd,satd,satd,False,,0.77,Defect,satd_pool
+satd-2b479e75ad11,scipy/optimize/_root.py,284,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.226,,non_satd_pool
+satd-2bc4b74c8cce,scipy/linalg/_decomp.py,1695,# TODO: replace loop with vectorized implementation,satd,satd,True,False,satd,satd,satd,False,,0.707,Documentation,satd_pool
+satd-6374f0377d53,scipy/signal/_signaltools.py,1935,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.939,Test,satd_pool
+satd-b60075f57d03,scipy/optimize/_minimize.py,1548,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.635,Test,satd_pool
+satd-ffafc1cd83ca,scipy/stats/_stats_py.py,1801,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.073,,non_satd_pool
+satd-61f8ffcee32c,scipy/integrate/_quadpack_py.py,1037,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.3,,non_satd_pool
+satd-7267b32b7660,scipy/interpolate/_interpolate.py,1679,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.705,Implementation,satd_pool
+satd-ffc6a2c07175,scipy/sparse/linalg/_dsolve/linsolve.py,312,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.211,,non_satd_pool
+satd-b0b31951a0f6,scipy/fft/_pocketfft/helper.py,1418,# FIXME: precision loss when values exceed 1e15,satd,satd,True,False,satd,satd,satd,False,,0.666,Implementation,satd_pool
+satd-b445cf26dfc2,scipy/ndimage/_filters.py,1701,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.743,Implementation,satd_pool
+satd-efcabd1905c5,scipy/spatial/_kdtree.py,1405,Applies the Gram-Schmidt orthonormalisation procedure.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.415,,non_satd_pool
+satd-d9e39205113d,scipy/cluster/vq.py,467,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,satd,satd,satd,False,,0.636,Defect,satd_pool
+satd-c18823334843,scipy/io/matlab/_mio5.py,898,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.828,Documentation,satd_pool
+satd-1dbf2853c076,scipy/special/_ufuncs.pyx,1958,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.806,Requirement,satd_pool
+satd-7a546a65b4e4,scipy/linalg/_blas.py,729,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.315,,non_satd_pool
+satd-6009d25b9f9b,scipy/optimize/_root.py,945,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.295,,non_satd_pool
+satd-1ba7087683e1,scipy/linalg/_decomp.py,336,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.101,,non_satd_pool
+satd-aa807b9f1005,scipy/signal/_signaltools.py,779,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.442,,non_satd_pool
+satd-576e698c3d72,scipy/optimize/_minimize.py,1345,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.066,,non_satd_pool
+satd-7e5e3f432a31,scipy/stats/_stats_py.py,1744,# TODO: generalize to N-dimensional input,satd,satd,True,False,satd,satd,satd,False,,0.683,Implementation,satd_pool
+satd-b02798ed973f,scipy/integrate/_quadpack_py.py,365,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.161,,non_satd_pool
+satd-d83b92d91dc8,scipy/interpolate/_interpolate.py,1815,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,satd,satd,satd,False,,0.901,Implementation,satd_pool
+satd-0e3a8f1bb737,scipy/sparse/linalg/_dsolve/linsolve.py,1759,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.273,,non_satd_pool
+satd-bdaca3e267c5,scipy/fft/_pocketfft/helper.py,256,# HACK: workaround for NumPy broadcasting bug #12345,satd,satd,True,False,satd,satd,satd,False,,0.636,Test,satd_pool
+satd-5f01b8d0e5ab,scipy/ndimage/_filters.py,1293,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.144,,non_satd_pool
+satd-573d9065c542,scipy/spatial/_kdtree.py,1590,Returns the eigenvalues of a symmetric real matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.35,,non_satd_pool
+satd-aff55177df66,scipy/cluster/vq.py,1839,Integrates f(x) from a to b using Gaussian quadrature.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.434,,non_satd_pool
+satd-42d8255dda7e,scipy/io/matlab/_mio5.py,538,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.697,Implementation,satd_pool
+satd-006fec128361,scipy/special/_ufuncs.pyx,1516,# TODO: optimize memory usage for large datasets,satd,satd,True,False,satd,satd,satd,False,,0.776,Implementation,satd_pool
+satd-15cbaa1a1b46,scipy/linalg/_blas.py,1112,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.106,,non_satd_pool
+satd-944028b508a8,scipy/optimize/_root.py,1474,# TODO: add input validation for negative values,satd,satd,True,False,satd,satd,satd,False,,0.973,Implementation,satd_pool
+satd-631a6df6388b,scipy/linalg/_decomp.py,81,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.676,Test,satd_pool
+satd-54a8c1c3c5a9,scipy/signal/_signaltools.py,128,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.226,,non_satd_pool
+satd-d68d8df7144e,scipy/optimize/_minimize.py,1691,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.427,,non_satd_pool
+satd-985eb45153d6,scipy/stats/_stats_py.py,301,# TODO: migrate to Cython for performance-critical path,satd,satd,True,False,satd,satd,satd,False,,0.94,Implementation,satd_pool
+satd-11df35594186,scipy/integrate/_quadpack_py.py,180,"# HACK: magic constant derived empirically, needs proof",satd,satd,True,False,satd,satd,satd,False,,0.609,Implementation,satd_pool
+satd-c0e9362a684d,scipy/interpolate/_interpolate.py,1713,Interpolates missing values using cubic spline.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.361,,non_satd_pool
+satd-e50a3a75c8bb,scipy/sparse/linalg/_dsolve/linsolve.py,205,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.747,Requirement,satd_pool
+satd-6bec99b83641,scipy/fft/_pocketfft/helper.py,1467,Computes the two-sided t-test for independent samples.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.333,,non_satd_pool
+satd-0e1903da3fd8,scipy/ndimage/_filters.py,1191,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.268,,non_satd_pool
+satd-e58bc575990f,scipy/spatial/_kdtree.py,478,# TODO: replace manual loop with scipy.signal equivalent,satd,satd,True,False,satd,satd,satd,False,,0.583,Implementation,satd_pool
+satd-77a6c8b14555,scipy/cluster/vq.py,1468,Applies a rolling window mean to a time series.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.237,,non_satd_pool
+satd-8ff2def55f76,scipy/io/matlab/_mio5.py,425,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.307,,non_satd_pool
+satd-74ab497209c8,scipy/special/_ufuncs.pyx,1078,# HACK: avoiding fftpack due to license concern,satd,satd,True,False,satd,satd,satd,False,,0.739,Requirement,satd_pool
+satd-6fccc897e72f,scipy/linalg/_blas.py,722,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.389,,non_satd_pool
+satd-c9196873a017,scipy/optimize/_root.py,306,# FIXME: incorrect results for non-contiguous arrays,satd,satd,True,False,satd,satd,satd,False,,0.855,Defect,satd_pool
+satd-321d745b91d4,scipy/linalg/_decomp.py,95,# TODO: implement LAPACK fallback for singular matrices,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.662,Requirement,satd_pool
+satd-964c76b40a98,scipy/signal/_signaltools.py,1195,Returns the L2 norm of the input vector.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.216,,non_satd_pool
+satd-fccee83e65fc,scipy/optimize/_minimize.py,438,Solves a tridiagonal linear system using Thomas algorithm.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.384,,non_satd_pool
+satd-3314ad7b27a4,scipy/stats/_stats_py.py,1519,Computes pairwise Euclidean distances between rows.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.194,,non_satd_pool
+satd-93d34809ee42,scipy/integrate/_quadpack_py.py,505,# FIXME: numerical instability for near-zero values,satd,satd,True,False,satd,satd,satd,False,,0.902,Requirement,satd_pool
+satd-de25e799fc97,scipy/interpolate/_interpolate.py,197,# TODO: replace loop with vectorized implementation,satd,satd,True,False,non-satd,satd,satd,True,Tiebreak by third reviewer,0.658,Implementation,satd_pool
+satd-fe6506a88cbe,scipy/sparse/linalg/_dsolve/linsolve.py,1194,# HACK: copying array to avoid aliasing issues,satd,satd,True,False,satd,satd,satd,False,,0.923,Requirement,satd_pool
+satd-c0f0e81c4f87,scipy/fft/_pocketfft/helper.py,1051,Returns the autocorrelation of a 1D signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.427,,non_satd_pool
+satd-489d56df2141,scipy/ndimage/_filters.py,108,Computes the covariance matrix of a multivariate sample.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.425,,non_satd_pool
+satd-84b5e7899928,scipy/spatial/_kdtree.py,1132,Finds roots of a polynomial using companion matrix.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.332,,non_satd_pool
+satd-d9b034620348,scipy/cluster/vq.py,990,# HACK: using float64 internally even if input is float32,satd,satd,True,False,satd,satd,satd,False,,0.696,Design,satd_pool
+satd-d562fb514fab,scipy/io/matlab/_mio5.py,271,Resamples the signal from old_rate to new_rate Hz.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.087,,non_satd_pool
+satd-36b908773d36,scipy/special/_ufuncs.pyx,1796,Computes the Pearson correlation coefficient.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.359,,non_satd_pool
+satd-9586178082b8,scipy/linalg/_blas.py,1627,Returns the mode of a 1D array of integers.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.254,,non_satd_pool
+satd-855118c1b28e,scipy/optimize/_root.py,447,"# HACK: magic constant derived empirically, needs proof",satd,satd,True,False,satd,satd,satd,False,,0.715,Implementation,satd_pool
+satd-66afbe5314be,scipy/linalg/_decomp.py,1025,# TODO: add dtype preservation for complex inputs,satd,satd,True,False,satd,satd,satd,False,,0.64,Requirement,satd_pool
+satd-7a6f884ee644,scipy/signal/_signaltools.py,1325,# FIXME: edge case when n=0 is not handled,satd,satd,True,False,satd,satd,satd,False,,0.67,Requirement,satd_pool
+satd-46c77575dbde,scipy/optimize/_minimize.py,954,# TODO: add parallel execution path using joblib,satd,satd,True,False,satd,satd,satd,False,,0.652,Implementation,satd_pool
+satd-625cd55bc568,scipy/stats/_stats_py.py,631,Factorises a square matrix into L and U components.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.216,,non_satd_pool
+satd-98e5451a538f,scipy/integrate/_quadpack_py.py,1518,Returns the histogram bin edges for the given data.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.125,,non_satd_pool
+satd-673e8241b245,scipy/interpolate/_interpolate.py,78,# FIXME: division by zero possible when sigma=0,satd,satd,True,False,satd,satd,satd,False,,0.871,Design,satd_pool
+satd-6cf176ff7ba2,scipy/sparse/linalg/_dsolve/linsolve.py,1478,Computes the mutual information between two variables.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.425,,non_satd_pool
+satd-ef765eda4c5e,scipy/fft/_pocketfft/helper.py,1445,Sorts eigenvalues in ascending order with eigenvectors.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.419,,non_satd_pool
+satd-5a53558e8279,scipy/ndimage/_filters.py,301,Returns the zero-crossing rate of an audio signal.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.194,,non_satd_pool
+satd-685015d0d28a,scipy/spatial/_kdtree.py,1680,Estimates the power spectral density using Welch's method.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.287,,non_satd_pool
