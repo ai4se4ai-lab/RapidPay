@@ -1,0 +1,40 @@
+[submodule "eval/RQ3-RetrospectiveStudy/repos/commons-lang"]
+	path = eval/RQ3-RetrospectiveStudy/repos/commons-lang
+	url = https://github.com/apache/commons-lang.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/firefox"]
+	path = eval/RQ3-RetrospectiveStudy/repos/firefox
+	url = https://github.com/mozilla-firefox/firefox.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/kernel_common"]
+	path = eval/RQ3-RetrospectiveStudy/repos/kernel_common
+	url = https://github.com/aosp-mirror/kernel_common.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/kubernetes"]
+	path = eval/RQ3-RetrospectiveStudy/repos/kubernetes
+	url = https://github.com/kubernetes/kubernetes.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/postgres"]
+	path = eval/RQ3-RetrospectiveStudy/repos/postgres
+	url = https://github.com/postgres/postgres.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/react"]
+	path = eval/RQ3-RetrospectiveStudy/repos/react
+	url = https://github.com/facebook/react.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/scipy"]
+	path = eval/RQ3-RetrospectiveStudy/repos/scipy
+	url = https://github.com/scipy/scipy.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/spring-framework"]
+	path = eval/RQ3-RetrospectiveStudy/repos/spring-framework
+	url = https://github.com/spring-projects/spring-framework.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/tensorflow"]
+	path = eval/RQ3-RetrospectiveStudy/repos/tensorflow
+	url = https://github.com/tensorflow/tensorflow.git
+	ignore = dirty
+[submodule "eval/RQ3-RetrospectiveStudy/repos/vscode"]
+	path = eval/RQ3-RetrospectiveStudy/repos/vscode
+	url = https://github.com/microsoft/vscode.git
+	ignore = dirty

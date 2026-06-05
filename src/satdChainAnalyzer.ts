@@ -372,7 +372,9 @@ export class SatdChainAnalyzer {
             const edges = adjacencyList.get(nodeId) || [];
             
             for (const edge of edges) {
-                const newPathStrength = Math.max(pathStrength, edge.weight);
+                // Accumulate edge weights (sum) so path strength = total weighted cost
+                // of the path, consistent with how ChainLen_w is computed (paper Section 3.3).
+                const newPathStrength = pathStrength + edge.weight;
                 const existingStrength = maxPathStrength.get(edge.targetId) || 0;
                 
                 if (newPathStrength > existingStrength) {

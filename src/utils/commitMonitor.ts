@@ -2,16 +2,17 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { 
-    TechnicalDebt, 
-    CommitInfo, 
+import {
+    TechnicalDebt,
+    CommitInfo,
     DeveloperInterest,
     FixPotential,
     CAIGWeights,
     DEFAULT_CAIG_WEIGHTS,
     COMMIT_WINDOW_SIZE,
     FIX_POTENTIAL_VALUES,
-    SATDGraph
+    SATDGraph,
+    WeightedEdge
 } from '../models';
 import { 
     assessFixPotential, 
@@ -49,7 +50,12 @@ export class CommitMonitor {
     
     // Effort scorer
     private effortScorer: EffortScorer;
-    
+
+    // SATD graph context — undirected neighbor map used by Criterion 2
+    // Maps debtId → set of adjacent debtIds (both incoming and outgoing edges)
+    private satdNeighborMap: Map<string, Set<string>> = new Map();
+    private debtById: Map<string, TechnicalDebt> = new Map();
+
     constructor(workspaceRoot: string) {
         this.workspaceRoot = workspaceRoot;
         this.effortScorer = new EffortScorer(workspaceRoot);
@@ -67,6 +73,45 @@ export class CommitMonitor {
      */
     public setWindowSize(size: number): void {
         this.windowSize = size;
+    }
+
+    /**
+     * Provide the SATD dependency graph context so that Criterion 2 of commit
+     * relevance ("a neighboring node of t_i in G is modified") can be evaluated
+     * against actual graph neighbors rather than directory proximity.
+     *
+     * Call this after the IRD phase has finished and the adjacency list is available.
+     */
+    public setSATDGraphContext(
+        adjacencyList: Map<string, WeightedEdge[]>,
+        debtItems: TechnicalDebt[]
+    ): void {
+        // Build id → debt lookup
+        this.debtById = new Map(debtItems.map(d => [d.id, d]));
+
+        // Build undirected neighbor map from directed adjacency list
+        this.satdNeighborMap = new Map();
+        for (const [sourceId, edges] of adjacencyList) {
+            if (!this.satdNeighborMap.has(sourceId)) {
+                this.satdNeighborMap.set(sourceId, new Set());
+            }
+            for (const edge of edges) {
+                this.satdNeighborMap.get(sourceId)!.add(edge.targetId);
+                // Reverse direction so the neighbor map is undirected
+                if (!this.satdNeighborMap.has(edge.targetId)) {
+                    this.satdNeighborMap.set(edge.targetId, new Set());
+                }
+                this.satdNeighborMap.get(edge.targetId)!.add(sourceId);
+            }
+        }
+    }
+
+    /**
+     * Returns the set of debt IDs that are direct graph neighbors of the given
+     * node in the undirected SATD dependency graph G.
+     */
+    private getGraphNeighborIds(debtId: string): Set<string> {
+        return this.satdNeighborMap.get(debtId) ?? new Set();
     }
     
     /**
@@ -380,11 +425,12 @@ export class CommitMonitor {
             relevance += 0.5;
         }
         
-        // Same directory modified (neighbor)
-        const debtDir = debt.file.substring(0, debt.file.lastIndexOf('/'));
-        const neighborModified = commit.modifiedFiles.some(f => {
-            const dir = f.substring(0, f.lastIndexOf('/'));
-            return dir === debtDir;
+        // Criterion 2: a neighboring node of t_i in the SATD dependency graph G
+        // is modified in this commit (paper Section 3.4 / Algorithm 4).
+        const neighborIds = this.getGraphNeighborIds(debt.id);
+        const neighborModified = [...neighborIds].some(neighborId => {
+            const neighborDebt = this.debtById.get(neighborId);
+            return neighborDebt !== undefined && commit.modifiedFiles.includes(neighborDebt.file);
         });
         if (neighborModified) {
             relevance += 0.3;

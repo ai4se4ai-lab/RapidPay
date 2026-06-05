@@ -1,0 +1,94 @@
+# RQ3 Evaluation Configuration
+#
+# Each project entry corresponds to a row in the paper's
+# "Subject Systems for Evaluation" table (Table tab:subject-systems-eval).
+#
+# Fields:
+#   project_id        : Short ID used in CSV output (matches paper)
+#   name              : Human-readable project name
+#   repo_path         : Local path to the cloned Git repository
+#   snapshot_commit   : Commit hash to treat as the "deployment point";
+#                       SATD is detected at this commit, and the script
+#                       replays the next `horizon_months` of history.
+#   horizon_months    : Post-snapshot horizon (18 by default, up to 24)
+#   full_dependency   : true  for projects where IRD has full support
+#                              (Python / JavaScript / TypeScript)
+#                       false for projects where only module-level edges
+#                              are inferred (Java / C / C++ / Go / etc.)
+#
+# To select an actual snapshot_commit for your local clone:
+#   $ cd <repo_path>
+#   $ git log --since="2 years ago" --until="18 months ago" --format="%H %s" | head -1
+# and paste the hash below.
+
+projects:
+
+  - project_id: AC
+    name: Apache Commons Lang
+    repo_path: ./repos/commons-lang
+    snapshot_commit: 08d28f59526b058221be974e55dcf24ea0fbe0e7
+    horizon_months: 18
+    full_dependency: false   # Java → module-level only
+
+  - project_id: SF
+    name: Spring Framework
+    repo_path: ./repos/spring-framework
+    snapshot_commit: e57464dac83ed60e3146b3360bb66dc8d29e5551
+    horizon_months: 18
+    full_dependency: false   # Java → module-level only
+
+  - project_id: TF
+    name: TensorFlow
+    repo_path: ./repos/tensorflow
+    snapshot_commit: e4baa4c15cbba0296e09401138cb64d322a29f06
+    horizon_months: 18
+    full_dependency: true    # Python + C++ (Python parts get full deps)
+
+  - project_id: RE
+    name: React
+    repo_path: ./repos/react
+    snapshot_commit: 92c0f5f85fed42024b17bf6595291f9f5d6e8734
+    horizon_months: 18
+    full_dependency: true    # JavaScript / TypeScript
+
+  - project_id: VS
+    name: VS Code
+    repo_path: ./repos/vscode
+    snapshot_commit: e35499613e27748de549fcc8e8bca831b480affc
+    horizon_months: 18
+    full_dependency: true    # TypeScript
+
+  - project_id: AN
+    name: Android (AOSP kernel_common)
+    repo_path: ./repos/kernel_common
+    snapshot_commit: 0b08a5a1f277a61a02d6a19802b0e211de2e437b
+    horizon_months: 18
+    full_dependency: false   # C → module-level only
+
+  - project_id: SC
+    name: SciPy
+    repo_path: ./repos/scipy
+    snapshot_commit: d8212712ff2525a6e418f7656e503724f6e73f24
+    horizon_months: 18
+    full_dependency: true    # Python
+
+  - project_id: PO
+    name: PostgreSQL
+    repo_path: ./repos/postgres
+    snapshot_commit: 7b88529f4363994450bd4cd3c172006a8a77e222
+    horizon_months: 18
+    full_dependency: false   # C → module-level only
+
+  - project_id: KU
+    name: Kubernetes
+    repo_path: ./repos/kubernetes
+    snapshot_commit: cf480a3a1a9cb22f3439c0a7922822d9f67f31b5
+    horizon_months: 18
+    full_dependency: false   # Go → module-level only
+
+  - project_id: FI
+    name: Firefox
+    repo_path: ./repos/firefox
+    snapshot_commit: 9ceeb6b9aea542ed55582638cbe9497a4334db7e
+    horizon_months: 18
+    full_dependency: false   # C/C++/Rust → module-level only

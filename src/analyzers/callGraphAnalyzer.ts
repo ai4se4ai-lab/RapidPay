@@ -30,6 +30,10 @@ import * as t from '@babel/types';
 export class CallGraphAnalyzer {
     private workspaceRoot: string | null = null;
     private maxHops: number = MAX_DEPENDENCY_HOPS;
+    private dynamicBaseWeight: number = -1;
+
+    /** Set the project-specific base weight derived from rho_call (paper Algorithm 2). */
+    public setDynamicWeight(w: number): void { this.dynamicBaseWeight = w; }
     
     /**
      * Initialize the analyzer with workspace root
@@ -178,10 +182,12 @@ export class CallGraphAnalyzer {
      */
     private calculateEdgeWeight(hops: number): number {
         const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.CALL];
-        // Weight decreases with hop count: max at 1 hop, min at maxHops
-        const range = weights.max - weights.min;
+        // Use dynamic (rho_r-derived) weight when set; otherwise fall back to static default.
+        const baseWeight = this.dynamicBaseWeight >= 0 ? this.dynamicBaseWeight : weights.default;
+        // Weight decreases from baseWeight with hop count, floored at min.
+        const range = baseWeight - weights.min;
         const normalizedHops = Math.min(hops, this.maxHops) / this.maxHops;
-        return weights.max - (range * normalizedHops);
+        return Math.max(weights.min, baseWeight - (range * normalizedHops));
     }
     
     /**

@@ -58,19 +58,20 @@ describe('IRD: Inter-SATD Relationship Discovery', () => {
             expect(edge.type).toBe(RelationshipType.MODULE);
         });
 
-        test('IRD-5: should use correct weight ranges for each type', () => {
+        test('IRD-5: should use correct weight ranges for each type (paper Section 3.2)', () => {
+            // Paper: call/module → [0.5, 1.0]; data/control → [0.3, 0.9]
             const callWeights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.CALL];
             const dataWeights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.DATA];
             const controlWeights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.CONTROL];
             const moduleWeights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.MODULE];
-            
-            expect(callWeights.min).toBe(0.7);
-            expect(callWeights.max).toBe(0.9);
-            expect(dataWeights.min).toBe(0.6);
-            expect(dataWeights.max).toBe(0.8);
-            expect(controlWeights.min).toBe(0.5);
-            expect(controlWeights.max).toBe(0.7);
-            expect(moduleWeights.min).toBe(0.8);
+
+            expect(callWeights.min).toBe(0.5);
+            expect(callWeights.max).toBe(1.0);
+            expect(dataWeights.min).toBe(0.3);
+            expect(dataWeights.max).toBe(0.9);
+            expect(controlWeights.min).toBe(0.3);
+            expect(controlWeights.max).toBe(0.9);
+            expect(moduleWeights.min).toBe(0.5);
             expect(moduleWeights.max).toBe(1.0);
         });
     });

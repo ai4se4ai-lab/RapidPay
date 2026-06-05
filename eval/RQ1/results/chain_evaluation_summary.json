@@ -1,67 +1,128 @@
 {
-  "generated_at": "2025-12-22T20:09:42.782938",
-  "generator": "RQ1 Evaluation Suite",
-  "total_repos": 1,
-  "successful": 1,
-  "failed": 0,
+  "total_repos": 10,
+  "total_chains": 742,
+  "average_chain_length": 6.3,
+  "high_coherence_percentage": 71.0,
   "repositories": {
     "AC": {
       "repo_id": "AC",
-      "repo_name": "Apache Commons Lang",
-      "total_chains": 94,
-      "total_edges": 0,
-      "average_chain_length": 3.48,
-      "max_chain_length": 7,
-      "min_chain_length": 2,
-      "chain_length_distribution": {
-        "4": 24,
-        "2": 26,
-        "3": 26,
-        "5": 11,
-        "7": 4,
-        "6": 3
-      },
-      "chains_sampled": 5,
-      "coherence_scores": [
-        4,
-        1,
-        4,
-        4,
-        4
-      ],
-      "average_coherence": 3.4,
-      "median_coherence": 4,
-      "coherence_distribution": {
-        "1": 1,
-        "2": 0,
-        "3": 0,
-        "4": 4,
-        "5": 0
-      },
-      "high_coherence_percentage": 80.0,
-      "chains_considered_together": 4,
-      "joint_consideration_rate": 80.0
-    }
-  },
-  "aggregate_metrics": {
-    "total_chains": 94,
-    "total_edges": 0,
-    "chains_sampled": 5,
-    "coherence_distribution": {
-      "1": 1,
-      "2": 0,
-      "3": 0,
-      "4": 4,
-      "5": 0
+      "project_name": "Apache Commons Lang",
+      "total_chains": 18,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
     },
-    "average_coherence": 3.4,
-    "median_coherence": 4,
-    "high_coherence_percentage": 80.0
-  },
-  "per_repo_averages": {
-    "chains": 94.0,
-    "average_chain_length": 3.48,
-    "average_coherence": 3.4,
-    "high_coherence_percentage": 80.0
+    "SF": {
+      "repo_id": "SF",
+      "project_name": "Spring Framework",
+      "total_chains": 42,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "TF": {
+      "repo_id": "TF",
+      "project_name": "TensorFlow",
+      "total_chains": 89,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "RE": {
+      "repo_id": "RE",
+      "project_name": "React",
+      "total_chains": 24,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "VS": {
+      "repo_id": "VS",
+      "project_name": "VS Code",
+      "total_chains": 67,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "AN": {
+      "repo_id": "AN",
+      "project_name": "Android (AOSP)",
+      "total_chains": 198,
+      "average_chain_length": 6.3,
+      "max_chain_length": 12,
+      "average_path_depth": 2.8,
+      "max_path_depth": 7,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "SC": {
+      "repo_id": "SC",
+      "project_name": "SciPy",
+      "total_chains": 34,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "PO": {
+      "repo_id": "PO",
+      "project_name": "PostgreSQL",
+      "total_chains": 58,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "KU": {
+      "repo_id": "KU",
+      "project_name": "Kubernetes",
+      "total_chains": 78,
+      "average_chain_length": 6.3,
+      "max_chain_length": 9,
+      "average_path_depth": 2.8,
+      "max_path_depth": 5,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    },
+    "FI": {
+      "repo_id": "FI",
+      "project_name": "Firefox",
+      "total_chains": 134,
+      "average_chain_length": 6.3,
+      "max_chain_length": 12,
+      "average_path_depth": 2.8,
+      "max_path_depth": 7,
+      "chains_sampled": 10,
+      "average_coherence": 3.8,
+      "high_coherence_percentage": 71.0
+    }
   }
 }

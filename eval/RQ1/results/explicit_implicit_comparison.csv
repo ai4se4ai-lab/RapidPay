@@ -1,0 +1,6 @@
+method,explicit_satd_f1,implicit_satd_f1,gap
+DebtFree,0.87,0.68,0.19
+GNN-based,0.88,0.69,0.19
+SATDAug,0.89,0.74,0.15
+Fine-tuned Flan-T5,0.90,0.76,0.14
+SID (RapidPay),0.93,0.84,0.09

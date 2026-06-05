@@ -1,0 +1,20 @@
+project,repo_id,debt_type,count,percentage,total_satd_in_project
+Apache Commons Lang,AC,Implementation,85,48.85,174
+Apache Commons Lang,AC,Test,34,19.54,174
+Apache Commons Lang,AC,Requirement,20,11.49,174
+Apache Commons Lang,AC,Design,11,6.32,174
+Apache Commons Lang,AC,(unlabeled),8,4.6,174
+Apache Commons Lang,AC,Documentation,8,4.6,174
+Apache Commons Lang,AC,Defect,8,4.6,174
+React,RE,Implementation,81,45.76,177
+React,RE,Design,35,19.77,177
+React,RE,Test,30,16.95,177
+React,RE,Documentation,14,7.91,177
+React,RE,Requirement,11,6.21,177
+React,RE,Defect,6,3.39,177
+SciPy,SC,Implementation,68,40.48,168
+SciPy,SC,Requirement,35,20.83,168
+SciPy,SC,Test,26,15.48,168
+SciPy,SC,Defect,21,12.5,168
+SciPy,SC,Design,10,5.95,168
+SciPy,SC,Documentation,8,4.76,168

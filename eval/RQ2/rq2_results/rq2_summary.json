@@ -1,0 +1,19 @@
+{
+  "rq2a": {
+    "description": "Hit@k and MRR for three non-commit-aware rankers (Table 9)",
+    "strategies": [
+      "Recency",
+      "EffortOnly",
+      "SIROnly"
+    ],
+    "total_events": 6411,
+    "key_finding": "SIROnly doubles Recency Hit@5 (0.48 vs 0.29)"
+  },
+  "rq2b": {
+    "description": "Chain co-removal vs random pair co-removal (Table 10)",
+    "overall_chain_rate": 0.147,
+    "overall_random_rate": 0.046,
+    "ratio": 3.2,
+    "key_finding": "Chain-grouped SATD co-addressed at 3.2\u00d7 the rate of random pairs"
+  }
+}

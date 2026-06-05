@@ -34,6 +34,10 @@ const execPromise = promisify(exec);
 export class ModuleDependencyAnalyzer {
     private workspaceRoot: string | null = null;
     private maxHops: number = MAX_DEPENDENCY_HOPS;
+    private dynamicBaseWeight: number = -1;
+
+    /** Set the project-specific base weight derived from rho_module (paper Algorithm 2). */
+    public setDynamicWeight(w: number): void { this.dynamicBaseWeight = w; }
     
     /**
      * Initialize the analyzer with workspace root
@@ -136,15 +140,16 @@ export class ModuleDependencyAnalyzer {
      */
     private calculateEdgeWeight(hops: number, isDirect: boolean): number {
         const weights = DEFAULT_RELATIONSHIP_WEIGHTS[RelationshipType.MODULE];
-        
+        // Use dynamic (rho_r-derived) weight when set; otherwise fall back to static default.
+        const baseWeight = this.dynamicBaseWeight >= 0 ? this.dynamicBaseWeight : weights.default;
+
         if (isDirect) {
-            // Direct imports get higher weight
-            return weights.max;
+            return baseWeight;
         }
-        
-        // Weight decreases with hop count
+
+        // Weight decreases with hop count, floored at min.
         const normalizedHops = Math.min(hops, this.maxHops) / this.maxHops;
-        return weights.max - (normalizedHops * (weights.max - weights.min));
+        return Math.max(weights.min, baseWeight - (normalizedHops * (baseWeight - weights.min)));
     }
     
     /**

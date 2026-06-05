@@ -10,3 +10,5 @@ package-lock.json
 eval/results/*.csv
 eval/repos/*
 
+eval/RQ3-RetrospectiveStudy/rq3_results/
+eval/RQ3-RetrospectiveStudy /repos/
