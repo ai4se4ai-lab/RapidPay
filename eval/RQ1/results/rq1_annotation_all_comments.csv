@@ -13,7 +13,7 @@ Apache Commons Lang,AC,satd-2a198d9d6248,src\main\java\org\apache\commons\lang3\
 Apache Commons Lang,AC,satd-3b5c8be0a5d9,src\main\java\org\apache\commons\lang3\math\Fraction.java,477,"*
      * Cached output toProperString (class is immutable).",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.205,,non_satd_pool
 Apache Commons Lang,AC,satd-c6bf8eb46845,src\main\java\org\apache\commons\lang3\time\StopWatch.java,122,"*
-     * Enumeration type which indicates the split status of a StopWatch.",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.235,,non_satd_pool
+     * Enumeration type which indicates the split status of a StopWatch.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.235,,non_satd_pool
 Apache Commons Lang,AC,satd-09195faa8ec8,src\main\java\org\apache\commons\lang3\SystemUtils.java,68,"*
      * A constant for the System Property {@code file.separator}.
      * <p>
@@ -44,7 +44,7 @@ Apache Commons Lang,AC,satd-328a7f875160,src\main\java\org\apache\commons\lang3\
      * TimeZone in effect at the time of loading DateFormatUtils class.
      * </p>
      *
-     * @deprecated - as of 4.0, ISO_TIME_TIME_ZONE_FORMAT will be removed.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.851,Implementation,satd_pool
+     * @deprecated - as of 4.0, ISO_TIME_TIME_ZONE_FORMAT will be removed.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.851,Implementation,satd_pool
 Apache Commons Lang,AC,satd-ab9da69d429e,src\main\java\org\apache\commons\lang3\time\DateParser.java,105,"*
      * Parses text from a string to produce a Date.
      *
@@ -56,7 +56,7 @@ Apache Commons Lang,AC,satd-50d3c1a8f258,src\main\java\org\apache\commons\lang3\
 Apache Commons Lang,AC,satd-e28c66804193,src\main\java\org\apache\commons\lang3\time\FastDateParser.java,249,"*
          * Constructs a Strategy that parses a Number field
          *
-         * @param field The Calendar field",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.208,,non_satd_pool
+         * @param field The Calendar field",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.208,,non_satd_pool
 Apache Commons Lang,AC,satd-f214f9bddd79,src\main\java\org\apache\commons\lang3\CharSet.java,273,"*
      * Gets a string representation of the set.
      *
@@ -165,7 +165,7 @@ Apache Commons Lang,AC,satd-04956190e7d0,src\main\java\org\apache\commons\lang3\
      * @return the random string.
      * @since 3.5
      * @deprecated Use {@link #nextNumeric(int, int)} from {@link #secure()}, {@link #secureStrong()}, or {@link #insecure()}.",satd,satd,True,False,satd,satd,satd,False,,0.85,Implementation,satd_pool
-Apache Commons Lang,AC,satd-c2efdecfa330,src\main\java\org\apache\commons\lang3\BooleanUtils.java,735,"Previously used equalsIgnoreCase, which was fast for interned 'true'.",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.236,,non_satd_pool
+Apache Commons Lang,AC,satd-c2efdecfa330,src\main\java\org\apache\commons\lang3\BooleanUtils.java,735,"Previously used equalsIgnoreCase, which was fast for interned 'true'.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.236,,non_satd_pool
 Apache Commons Lang,AC,satd-63589eb13859,src\main\java\org\apache\commons\lang3\builder\HashCodeBuilder.java,388,"*
      * Uses reflection to build a valid hash code from the fields of {@code object}.
      *
@@ -279,7 +279,7 @@ Apache Commons Lang,AC,satd-252c1435d96e,src\main\java\org\apache\commons\lang3\
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
      * @see SystemProperties#getJavaIoTmpdir()
-     * @since 2.1",satd,non-satd,True,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.815,,satd_pool
+     * @since 2.1",satd,non-satd,True,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.815,,satd_pool
 Apache Commons Lang,AC,satd-108fa99976e6,src\main\java\org\apache\commons\lang3\LocaleUtils.java,439,"*
      * {@link LocaleUtils} instances should NOT be constructed in standard programming. Instead, the class should be used as
      * {@code LocaleUtils.toLocale(""en_GB"");}.
@@ -288,7 +288,7 @@ Apache Commons Lang,AC,satd-108fa99976e6,src\main\java\org\apache\commons\lang3\
      * This constructor is public to permit tools that require a JavaBean instance to operate.
      * </p>
      *
-     * @deprecated TODO Make private in 4.0.",satd,satd,True,True,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.912,Implementation,satd_pool
+     * @deprecated TODO Make private in 4.0.",satd,satd,True,True,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.912,Implementation,satd_pool
 Apache Commons Lang,AC,satd-e5eac5b6b901,src\main\java\org\apache\commons\lang3\ArrayUtils.java,7509,"*
      * Shuffles randomly the elements of the specified array using the <a href=""https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle"">Fisher-Yates shuffle
      * algorithm</a>.
@@ -323,7 +323,7 @@ Apache Commons Lang,AC,satd-ce2cd77526a1,src\main\java\org\apache\commons\lang3\
      * </p>
      *
      * @param str the String to upper case, may be null.
-     * @return the upper-cased String, {@code null} if null String input.",satd,satd,True,True,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.858,Test,satd_pool
+     * @return the upper-cased String, {@code null} if null String input.",satd,satd,True,True,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.858,Test,satd_pool
 Apache Commons Lang,AC,satd-f48a0d75afaf,src\main\java\org\apache\commons\lang3\BooleanUtils.java,587,"*
      * Converts an int to a Boolean specifying the conversion values.
      *
@@ -1055,7 +1055,7 @@ Apache Commons Lang,AC,satd-c7ba01eafe5c,src\main\java\org\apache\commons\lang3\
 Apache Commons Lang,AC,satd-ce11796a071e,src\main\java\org\apache\commons\lang3\StringUtils.java,1427,LATIN SMALL LETTER T WITH STROKE,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.22,,non_satd_pool
 Apache Commons Lang,AC,satd-ad3f578b5ef1,src\main\java\org\apache\commons\lang3\concurrent\AbstractConcurrentInitializer.java,116,"*
      * Constructs a new instance.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.174,,non_satd_pool
-Apache Commons Lang,AC,satd-c8f474f542f1,src\main\java\org\apache\commons\lang3\RandomStringUtils.java,292,"Normally, we would need to pick a 7-bit integer, since gap = 'z' - '0' + 1 = 75 > 64",satd,satd,False,True,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.624,Implementation,satd_pool
+Apache Commons Lang,AC,satd-c8f474f542f1,src\main\java\org\apache\commons\lang3\RandomStringUtils.java,292,"Normally, we would need to pick a 7-bit integer, since gap = 'z' - '0' + 1 = 75 > 64",satd,satd,False,True,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.624,Implementation,satd_pool
 Apache Commons Lang,AC,satd-e45267e9da6b,src\main\java\org\apache\commons\lang3\reflect\TypeUtils.java,443,arguments of the super class,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.168,,non_satd_pool
 Apache Commons Lang,AC,satd-ddc52a0af096,src\main\java\org\apache\commons\lang3\ObjectUtils.java,295,"*
      * Null safe comparison of Comparables.
@@ -1139,7 +1139,7 @@ Apache Commons Lang,AC,satd-60065c8ebb15,src\main\java\org\apache\commons\lang3\
 Apache Commons Lang,AC,satd-d07ee8df9c38,src\main\java\org\apache\commons\lang3\function\Suppliers.java,64,"*
      * Make private in 4.0.
      *
-     * @deprecated TODO Make private in 4.0.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.898,Implementation,satd_pool
+     * @deprecated TODO Make private in 4.0.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.898,Implementation,satd_pool
 Apache Commons Lang,AC,satd-e712feef9ea4,src\main\java\org\apache\commons\lang3\time\FastDateFormat.java,501,"*
      * Formats a millisecond {@code long} value into the supplied {@link StringBuffer}.
      *
@@ -1185,7 +1185,7 @@ Apache Commons Lang,AC,satd-9e8c6aef0dce,src\main\java\org\apache\commons\lang3\
      * @param className the className to get the short name for. It has to be formatted as returned by
      *        {@code Class.getName()} and not {@code Class.getCanonicalName()}.
      * @return the class name of the class without the package name or an empty string. If the class is an inner class then
-     *         value contains the outer class or classes and the separator is replaced to be {@code .} (dot) character.",satd,non-satd,True,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.841,,satd_pool
+     *         value contains the outer class or classes and the separator is replaced to be {@code .} (dot) character.",satd,non-satd,True,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.841,,satd_pool
 Apache Commons Lang,AC,satd-bca5ed973286,src\main\java\org\apache\commons\lang3\time\FastDateFormat.java,462,"*
      * Formats a {@link Date} object into the supplied {@link StringBuffer} using a {@link GregorianCalendar}.
      *
@@ -1378,11 +1378,11 @@ Apache Commons Lang,AC,satd-912e64748772,src\main\java\org\apache\commons\lang3\
      * @see SystemProperties#getJavaIoTmpdir()
      * @since Java 1.2",satd,non-satd,True,False,non-satd,non-satd,non-satd,False,,0.883,Implementation,satd_pool
 Apache Commons Lang,AC,satd-7251634a1653,src\main\java\org\apache\commons\lang3\BitField.java,9,www.apache.org/licenses/LICENSE-2.0,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.165,,non_satd_pool
-Apache Commons Lang,AC,satd-9fc52116ad56,src\main\java\org\apache\commons\lang3\math\NumberUtils.java,582,"leading 0, but not hex, must be octal",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.161,,non_satd_pool
+Apache Commons Lang,AC,satd-9fc52116ad56,src\main\java\org\apache\commons\lang3\math\NumberUtils.java,582,"leading 0, but not hex, must be octal",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.161,,non_satd_pool
 Apache Commons Lang,AC,satd-71de4d7e732b,src\main\java\org\apache\commons\lang3\math\NumberUtils.java,1104,Validates input,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.213,,non_satd_pool
 Apache Commons Lang,AC,satd-d952031a4c68,src\main\java\org\apache\commons\lang3\time\DateFormatUtils.java,41,"*
      * The UTC time zone (often referred to as GMT).
-     * This is private as it is mutable.",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.202,,non_satd_pool
+     * This is private as it is mutable.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.202,,non_satd_pool
 Apache Commons Lang,AC,satd-1aba39375310,src\main\java\org\apache\commons\lang3\math\NumberUtils.java,1633,"*
      * Converts a {@link BigDecimal} to a {@link BigDecimal} whose scale is the specified value with a {@link RoundingMode} applied. If the input {@code value}
      * is {@code null}, we simply return {@code BigDecimal.ZERO}.
@@ -1391,7 +1391,7 @@ Apache Commons Lang,AC,satd-1aba39375310,src\main\java\org\apache\commons\lang3\
      * @param scale        the number of digits to the right of the decimal point.
      * @param roundingMode a rounding behavior for numerical operations capable of discarding precision.
      * @return the scaled, with appropriate rounding, {@link BigDecimal}.
-     * @since 3.8",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.181,,non_satd_pool
+     * @since 3.8",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.181,,non_satd_pool
 Apache Commons Lang,AC,satd-901dd26998ed,src\main\java\org\apache\commons\lang3\text\WordUtils.java,705,"*
      * {@link WordUtils} instances should NOT be constructed in
      * standard programming. Instead, the class should be used as
@@ -1461,7 +1461,7 @@ Apache Commons Lang,AC,satd-94c95ec1c441,src\main\java\org\apache\commons\lang3\
      *              {@code null} if null String input.
      * @see java.util.regex.Matcher#replaceFirst(String)
      * @see java.util.regex.Pattern
-     * @deprecated Use {@link #replaceFirst(CharSequence, Pattern, String)}.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.83,Design,satd_pool
+     * @deprecated Use {@link #replaceFirst(CharSequence, Pattern, String)}.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.83,Design,satd_pool
 Apache Commons Lang,AC,satd-cbaa254a46d1,src\main\java\org\apache\commons\lang3\CharUtils.java,538,"*
      * {@link CharUtils} instances should NOT be constructed in standard programming.
      * Instead, the class should be used as {@code CharUtils.toString('c');}.
@@ -1489,11 +1489,11 @@ Apache Commons Lang,AC,satd-fac6d0d8d9c3,src\main\java\org\apache\commons\lang3\
      * @param objects the objects to obtain the hash code of, may be {@code null}.
      * @return the hash code of the objects, or zero if null.
      * @since 3.0
-     * @deprecated this method has been replaced by {@code java.util.Objects.hash(Object...)} in Java 7 and will be removed in future releases.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.835,Test,satd_pool
+     * @deprecated this method has been replaced by {@code java.util.Objects.hash(Object...)} in Java 7 and will be removed in future releases.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.835,Test,satd_pool
 Apache Commons Lang,AC,satd-699eac70a42b,src\main\java\org\apache\commons\lang3\ThreadUtils.java,44,"*
      * A predicate implementation which always returns true.
      *
-     * @deprecated Use a {@link Predicate}.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.833,Requirement,satd_pool
+     * @deprecated Use a {@link Predicate}.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.833,Requirement,satd_pool
 Apache Commons Lang,AC,satd-24e21a03309a,src\main\java\org\apache\commons\lang3\LocaleUtils.java,63,"*
      * The underscore character {@code '}{@value}{@code '}.",non-satd,satd,False,False,satd,satd,satd,False,,0.186,Implementation,non_satd_pool
 Apache Commons Lang,AC,satd-21504acf8f9f,src\main\java\org\apache\commons\lang3\SystemProperties.java,4251,"*
@@ -1694,7 +1694,7 @@ Apache Commons Lang,AC,satd-c4732d3bc3cd,src\main\java\org\apache\commons\lang3\
      * @see #applyNonNull(Object, FailableFunction, FailableFunction, FailableFunction)
      * @since 3.19.0",satd,satd,True,False,satd,satd,satd,False,,0.838,Defect,satd_pool
 Apache Commons Lang,AC,satd-5f7f2a6281b7,src\main\java\org\apache\commons\lang3\SystemProperties.java,1458,"docs.oracle.com/en/java/javase/25/docs/api/system-properties.html"">System Properties</a>",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.232,,non_satd_pool
-Apache Commons Lang,AC,satd-ef2bd84c5276,src\main\java\org\apache\commons\lang3\time\DurationFormatUtils.java,536,TODO: Compare performance to see if anything was lost by,satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.845,Implementation,satd_pool
+Apache Commons Lang,AC,satd-ef2bd84c5276,src\main\java\org\apache\commons\lang3\time\DurationFormatUtils.java,536,TODO: Compare performance to see if anything was lost by,satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.845,Implementation,satd_pool
 Apache Commons Lang,AC,satd-3962abd06a8e,src\main\java\org\apache\commons\lang3\builder\ToStringStyle.java,2019,"*
      * Sets the array end text.
      *
@@ -1731,7 +1731,7 @@ Apache Commons Lang,AC,satd-d9c77f6d4c4d,src\main\java\org\apache\commons\lang3\
              * Supplies the read lock.
              *
              * @param readLockSupplier Supplies the read lock.
-             * @return {@code this} instance.",non-satd,non-satd,False,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.185,,non_satd_pool
+             * @return {@code this} instance.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.185,,non_satd_pool
 Apache Commons Lang,AC,satd-e9bb893d9ea0,src\main\java\org\apache\commons\lang3\ClassUtils.java,184,"*
      * Gets the class comparator, comparing by class name.
      *
@@ -1904,7 +1904,7 @@ Apache Commons Lang,AC,satd-90d7abef4d11,src\main\java\org\apache\commons\lang3\
      * @see Pattern#DOTALL
      * @since 3.2
      * @since 3.5 Changed {@code null} reference passed to this method is a no-op.
-     * @deprecated Use {@link RegExUtils#removePattern(CharSequence, String)}.",satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.863,Design,satd_pool
+     * @deprecated Use {@link RegExUtils#removePattern(CharSequence, String)}.",satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.863,Design,satd_pool
 Apache Commons Lang,AC,satd-4c7ad15d7c20,src\main\java\org\apache\commons\lang3\BitField.java,67,Prints true if isMetallic was set,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.182,,non_satd_pool
 Apache Commons Lang,AC,satd-494802f7bd32,src\main\java\org\apache\commons\lang3\StringUtils.java,5472,"*
      * Finds the n-th index within a String, handling {@code null}. This method uses {@link String#indexOf(String)} if possible.
@@ -2276,7 +2276,7 @@ Apache Commons Lang,AC,satd-459a41414144,src\main\java\org\apache\commons\lang3\
 Apache Commons Lang,AC,satd-df6b1853829f,src\main\java\org\apache\commons\lang3\math\IEEE754rUtils.java,252,"*
      * Make private in 4.0.
      *
-     * @deprecated TODO Make private in 4.0.",satd,non-satd,True,False,non-satd,satd,non-satd,True,Disagreement resolved through consensus discussion,0.895,,satd_pool
+     * @deprecated TODO Make private in 4.0.",satd,non-satd,True,False,non-satd,non-satd,non-satd,False,Disagreement resolved through consensus discussion,0.895,,satd_pool
 Apache Commons Lang,AC,satd-c49ea56242c8,src\main\java\org\apache\commons\lang3\builder\ToStringStyle.java,1902,"*
      * Gets whether the field separator should be added at the end of each buffer.
      *
@@ -2295,7 +2295,7 @@ Apache Commons Lang,AC,satd-2bd761818eae,src\main\java\org\apache\commons\lang3\
      * @param offset  the start offset within the array, must be valid.
      * @param length  the length within the array to be processed, must be valid.
      * @return the result of the replace operation.",non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.173,,non_satd_pool
-Apache Commons Lang,AC,satd-d5c8504ec0be,src\main\java\org\apache\commons\lang3\builder\HashCodeBuilder.java,731,NOTE: This method uses >> and not >>> as Effective Java and,satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.841,Implementation,satd_pool
+Apache Commons Lang,AC,satd-d5c8504ec0be,src\main\java\org\apache\commons\lang3\builder\HashCodeBuilder.java,731,NOTE: This method uses >> and not >>> as Effective Java and,satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.841,Implementation,satd_pool
 Apache Commons Lang,AC,satd-81c6e7413cfe,src\main\java\org\apache\commons\lang3\text\StrSubstitutor.java,428,"*
      * Gets the variable default value delimiter matcher currently in use.
      * <p>
@@ -2561,7 +2561,7 @@ Apache Commons Lang,AC,satd-4d2127910ce2,src\main\java\org\apache\commons\lang3\
      * </p>
      *
      * @deprecated TODO Make private in 4.0.",satd,non-satd,True,False,non-satd,non-satd,non-satd,False,,0.934,Implementation,satd_pool
-Apache Commons Lang,AC,satd-03f37789bf41,src\main\java\org\apache\commons\lang3\CharSequenceUtils.java,265,NOTE - we must do a forward traversal for this to avoid duplicating code points,satd,satd,True,False,satd,non-satd,satd,True,Disagreement resolved through consensus discussion,0.858,Implementation,satd_pool
+Apache Commons Lang,AC,satd-03f37789bf41,src\main\java\org\apache\commons\lang3\CharSequenceUtils.java,265,NOTE - we must do a forward traversal for this to avoid duplicating code points,satd,satd,True,False,satd,satd,satd,False,Disagreement resolved through consensus discussion,0.858,Implementation,satd_pool
 Apache Commons Lang,AC,satd-513dd448da96,src\main\java\org\apache\commons\lang3\concurrent\TimedSemaphore.java,65,fall through,non-satd,satd,False,False,satd,satd,satd,False,,0.18,Implementation,non_satd_pool
 Apache Commons Lang,AC,satd-bc11b6312a2c,src\main\java\org\apache\commons\lang3\time\DateUtils.java,511,"*
      * Gets the number of days within the
@@ -4710,7 +4710,7 @@ React,RE,satd-743165295d60,packages/react-reconciler/src/ReactFiberHooks.js,1677
 React,RE,satd-9f020f1d7b21,packages/react-reconciler/src/ReactFiberCommitWork.js,1844,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.292,,non_satd_pool
 React,RE,satd-ec0f435ab89d,packages/react-dom/src/client/ReactDOMComponent.js,1572,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.875,Design,satd_pool
 React,RE,satd-dc22f4e8d31b,packages/shared/ReactSharedInternals.js,1965,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.26,,non_satd_pool
-React,RE,satd-341d71e967b6,packages/react/src/ReactContext.js,512,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.431,,non_satd_pool
+React,RE,satd-341d71e967b6,packages/react/src/ReactContext.js,512,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,satd,non-satd,non-satd,False,Tiebreak by third reviewer,0.431,,non_satd_pool
 React,RE,satd-827cc34971b4,packages/react-reconciler/src/ReactFiberScheduler.js,1956,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.157,,non_satd_pool
 React,RE,satd-2bb5339c9db0,packages/react-dom/src/server/ReactPartialRenderer.js,879,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.248,,non_satd_pool
 React,RE,satd-c392f75bb111,packages/react-test-renderer/src/ReactTestRenderer.js,1840,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.448,,non_satd_pool

@@ -1,5 +1,5 @@
 repo_id,project_name,total_examined,annotated_sample_size,satd_count,non_satd_count,satd_prevalence,agreements,disagreements,agreement_rate,disagreement_rate,cohen_kappa,kappa_ci_lower_95,kappa_ci_upper_95,kappa_interpretation,paper_target_kappa,explicit_satd_count,implicit_satd_count,top_debt_type
-AC,Apache Commons Lang,1914,400,174,226,0.435,347,53,0.8675,0.1325,0.7317,0.6638,0.7954,Substantial (0.61--0.80),0.84,178,44,Implementation
-RE,React,2100,400,177,223,0.4425,362,38,0.905,0.095,0.8083,0.7499,0.8646,Almost Perfect (0.81--1.00),0.81,177,0,Implementation
-SC,SciPy,1728,400,168,232,0.42,361,39,0.9025,0.0975,0.8004,0.7375,0.8598,Almost Perfect (0.81--1.00),0.8,168,0,Implementation
-ALL,Overall (3 projects),5742,1200,519,681,0.4325,1070,130,0.8917,0.1083,0.7802,,,Substantial (0.61--0.80),0.82,523,44,
+AC,Apache Commons Lang,1914,400,174,226,0.435,369,31,0.9225,0.0775,0.8433,0.7895,0.8935,Almost Perfect (0.81--1.00),0.84,178,44,Implementation
+RE,React,2100,400,177,223,0.4425,362,38,0.905,0.095,0.8083,0.7485,0.8641,Almost Perfect (0.81--1.00),0.81,177,0,Implementation
+SC,SciPy,1728,400,168,232,0.42,361,39,0.9025,0.0975,0.8004,0.7373,0.858,Almost Perfect (0.81--1.00),0.8,168,0,Implementation
+ALL,Overall (3 projects),5742,1200,519,681,0.4325,1092,108,0.91,0.09,0.8174,,,Almost Perfect (0.81--1.00),0.82,523,44,

@@ -1,5 +1,5 @@
 project,repo_id,n,cohen_kappa,ci_lower_95,ci_upper_95,ci_width,bootstrap_samples,interpretation
-Apache Commons Lang,AC,400,0.7317,0.662,0.7952,0.1333,2000,Substantial (0.61--0.80)
+Apache Commons Lang,AC,400,0.8433,0.7865,0.8942,0.1077,2000,Almost Perfect (0.81--1.00)
 React,RE,400,0.8083,0.7481,0.8648,0.1167,2000,Almost Perfect (0.81--1.00)
 SciPy,SC,400,0.8004,0.7372,0.857,0.1197,2000,Almost Perfect (0.81--1.00)
-Overall,ALL,1200,0.7802,0.7416,0.8156,0.074,2000,Substantial (0.61--0.80)
+Overall,ALL,1200,0.8174,0.7835,0.8497,0.0662,2000,Almost Perfect (0.81--1.00)

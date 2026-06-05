@@ -5,7 +5,7 @@ satd-743165295d60,packages/react-reconciler/src/ReactFiberHooks.js,1677,Handles 
 satd-9f020f1d7b21,packages/react-reconciler/src/ReactFiberCommitWork.js,1844,Subscribes to the global event bus on mount.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.292,,non_satd_pool
 satd-ec0f435ab89d,packages/react-dom/src/client/ReactDOMComponent.js,1572,FIXME: race condition when component unmounts,satd,satd,True,False,satd,satd,satd,False,,0.875,Design,satd_pool
 satd-dc22f4e8d31b,packages/shared/ReactSharedInternals.js,1965,Computes derived state from props and context.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.26,,non_satd_pool
-satd-341d71e967b6,packages/react/src/ReactContext.js,512,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,satd,non-satd,non-satd,True,Tiebreak by third reviewer,0.431,,non_satd_pool
+satd-341d71e967b6,packages/react/src/ReactContext.js,512,Dispatches the FETCH_USER action to the store.,non-satd,non-satd,False,False,satd,non-satd,non-satd,False,Tiebreak by third reviewer,0.431,,non_satd_pool
 satd-827cc34971b4,packages/react-reconciler/src/ReactFiberScheduler.js,1956,Checks whether the current user is authenticated.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.157,,non_satd_pool
 satd-2bb5339c9db0,packages/react-dom/src/server/ReactPartialRenderer.js,879,Applies CSS transitions for smooth panel animations.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.248,,non_satd_pool
 satd-c392f75bb111,packages/react-test-renderer/src/ReactTestRenderer.js,1840,Initialises the analytics provider with the app key.,non-satd,non-satd,False,False,non-satd,non-satd,non-satd,False,,0.448,,non_satd_pool

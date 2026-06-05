@@ -1,4 +1,4 @@
 project,repo_id,n_annotated,total_examined,sampling_ratio,a1_satd_count,a1_nonsatd_count,a2_satd_count,a2_nonsatd_count,both_satd,both_nonsatd,a1_satd_a2_nonsatd,a1_nonsatd_a2_satd,observed_agreement,cohen_kappa,kappa_95ci,kappa_interpretation,paper_reported_kappa,disagreement_rate,target_disagreement_rate
-Apache Commons Lang,AC,400,1914,0.209,174,226,181,219,151,196,23,30,0.8675,0.7317,"[0.6638, 0.7954]",Substantial (0.61--0.80),0.84,0.1325,0.125
-React,RE,400,2100,0.1905,183,217,179,221,162,200,21,17,0.905,0.8083,"[0.7499, 0.8646]",Almost Perfect (0.81--1.00),0.81,0.095,0.125
-SciPy,SC,400,1728,0.2315,170,230,169,231,150,211,20,19,0.9025,0.8004,"[0.7375, 0.8598]",Almost Perfect (0.81--1.00),0.8,0.0975,0.125
+Apache Commons Lang,AC,400,1914,0.209,174,226,183,217,163,206,11,20,0.9225,0.8433,"[0.7895, 0.8935]",Almost Perfect (0.81--1.00),0.84,0.0775,0.125
+React,RE,400,2100,0.1905,183,217,179,221,162,200,21,17,0.905,0.8083,"[0.7485, 0.8641]",Almost Perfect (0.81--1.00),0.81,0.095,0.125
+SciPy,SC,400,1728,0.2315,170,230,169,231,150,211,20,19,0.9025,0.8004,"[0.7373, 0.858]",Almost Perfect (0.81--1.00),0.8,0.0975,0.125

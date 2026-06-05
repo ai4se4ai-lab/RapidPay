@@ -3,12 +3,12 @@ Apache Commons Lang,AC,satd-2bbdcdfc8a16,non-satd,non-satd,True,non-satd,non-sat
 Apache Commons Lang,AC,satd-69e6470603dd,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-2a198d9d6248,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-3b5c8be0a5d9,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-c6bf8eb46845,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-c6bf8eb46845,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-09195faa8ec8,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-328a7f875160,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-328a7f875160,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-ab9da69d429e,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-50d3c1a8f258,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-e28c66804193,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-e28c66804193,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-f214f9bddd79,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-37b15cfe592b,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-e9cb5049a2f4,satd,non-satd,False,non-satd,non-satd,False,
@@ -21,7 +21,7 @@ Apache Commons Lang,AC,satd-4f693341837c,satd,satd,True,satd,satd,False,
 Apache Commons Lang,AC,satd-3f68d913b190,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-3e66fb0a0b1e,satd,satd,True,satd,satd,False,Documentation
 Apache Commons Lang,AC,satd-04956190e7d0,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-c2efdecfa330,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-c2efdecfa330,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-63589eb13859,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-d2492c1e324e,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-ef2c537b39ec,non-satd,non-satd,True,non-satd,non-satd,False,
@@ -31,10 +31,10 @@ Apache Commons Lang,AC,satd-ce2297a7aab1,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-2bd91ca9e8b8,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-2e63e9f83172,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-ba007575b3fc,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-252c1435d96e,satd,non-satd,False,non-satd,satd,True,
-Apache Commons Lang,AC,satd-108fa99976e6,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-252c1435d96e,satd,non-satd,False,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-108fa99976e6,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-e5eac5b6b901,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-ce2cd77526a1,satd,satd,True,satd,non-satd,True,Test
+Apache Commons Lang,AC,satd-ce2cd77526a1,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-f48a0d75afaf,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-96d5d61047b0,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-d2fca2d00e74,non-satd,non-satd,True,non-satd,non-satd,False,
@@ -50,7 +50,7 @@ Apache Commons Lang,AC,satd-f5ad1431226e,satd,satd,True,satd,satd,False,Implemen
 Apache Commons Lang,AC,satd-c7ba01eafe5c,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-ce11796a071e,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-ad3f578b5ef1,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-c8f474f542f1,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-c8f474f542f1,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-e45267e9da6b,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-ddc52a0af096,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-cb3a85237d9c,non-satd,non-satd,True,non-satd,non-satd,False,
@@ -61,10 +61,10 @@ Apache Commons Lang,AC,satd-951a81ee655e,non-satd,non-satd,True,non-satd,non-sat
 Apache Commons Lang,AC,satd-15cc95b76e84,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-c846602d1376,satd,satd,True,satd,satd,False,Documentation
 Apache Commons Lang,AC,satd-60065c8ebb15,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-d07ee8df9c38,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-d07ee8df9c38,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-e712feef9ea4,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-fef72d3b21e4,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-9e8c6aef0dce,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-9e8c6aef0dce,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-bca5ed973286,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-bd384577ecfb,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-09ecb0dfd290,satd,satd,True,satd,satd,False,Test
@@ -74,20 +74,20 @@ Apache Commons Lang,AC,satd-b64d778f499a,satd,satd,True,satd,satd,False,Implemen
 Apache Commons Lang,AC,satd-5fd1b50c7507,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-912e64748772,satd,non-satd,False,non-satd,non-satd,False,Implementation
 Apache Commons Lang,AC,satd-7251634a1653,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-9fc52116ad56,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-9fc52116ad56,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-71de4d7e732b,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-d952031a4c68,non-satd,non-satd,True,non-satd,satd,True,
-Apache Commons Lang,AC,satd-1aba39375310,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-d952031a4c68,non-satd,non-satd,True,non-satd,non-satd,False,
+Apache Commons Lang,AC,satd-1aba39375310,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-901dd26998ed,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-42dbf87dc305,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-a3dbac99616b,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-8137d5ccb27a,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-d715421134c4,satd,satd,True,satd,satd,False,Requirement
 Apache Commons Lang,AC,satd-028996f2a288,satd,satd,True,satd,satd,False,Requirement
-Apache Commons Lang,AC,satd-94c95ec1c441,satd,satd,True,satd,non-satd,True,Design
+Apache Commons Lang,AC,satd-94c95ec1c441,satd,satd,True,satd,satd,False,Design
 Apache Commons Lang,AC,satd-cbaa254a46d1,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-fac6d0d8d9c3,satd,satd,True,satd,non-satd,True,Test
-Apache Commons Lang,AC,satd-699eac70a42b,satd,satd,True,satd,non-satd,True,Requirement
+Apache Commons Lang,AC,satd-fac6d0d8d9c3,satd,satd,True,satd,satd,False,Test
+Apache Commons Lang,AC,satd-699eac70a42b,satd,satd,True,satd,satd,False,Requirement
 Apache Commons Lang,AC,satd-24e21a03309a,non-satd,satd,False,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-21504acf8f9f,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-d7c0220281f1,satd,satd,True,satd,satd,False,Implementation
@@ -105,17 +105,17 @@ Apache Commons Lang,AC,satd-2e39277cb787,non-satd,non-satd,True,non-satd,non-sat
 Apache Commons Lang,AC,satd-0a609f885ee6,satd,non-satd,False,non-satd,non-satd,False,Implementation
 Apache Commons Lang,AC,satd-c4732d3bc3cd,satd,satd,True,satd,satd,False,Defect
 Apache Commons Lang,AC,satd-5f7f2a6281b7,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-ef2bd84c5276,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-ef2bd84c5276,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-3962abd06a8e,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-8c4b8444d78b,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-655d49fc99d5,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-67ea9b996e73,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-d9c77f6d4c4d,non-satd,non-satd,True,non-satd,satd,True,
+Apache Commons Lang,AC,satd-d9c77f6d4c4d,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-e9bb893d9ea0,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-89e29b494510,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-e34de590a86d,satd,satd,True,satd,satd,False,Design
 Apache Commons Lang,AC,satd-916e231cc6e0,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-90d7abef4d11,satd,satd,True,satd,non-satd,True,Design
+Apache Commons Lang,AC,satd-90d7abef4d11,satd,satd,True,satd,satd,False,Design
 Apache Commons Lang,AC,satd-4c7ad15d7c20,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-494802f7bd32,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-2f23a558f63a,satd,non-satd,False,non-satd,non-satd,False,Implementation
@@ -147,10 +147,10 @@ Apache Commons Lang,AC,satd-b439b3150d60,satd,satd,True,satd,satd,False,Implemen
 Apache Commons Lang,AC,satd-e5f85cee627b,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-fd3763ae53c3,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-459a41414144,satd,satd,True,satd,satd,False,Implementation
-Apache Commons Lang,AC,satd-df6b1853829f,satd,non-satd,False,non-satd,satd,True,
+Apache Commons Lang,AC,satd-df6b1853829f,satd,non-satd,False,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-c49ea56242c8,satd,satd,True,satd,satd,False,Requirement
 Apache Commons Lang,AC,satd-2bd761818eae,non-satd,non-satd,True,non-satd,non-satd,False,
-Apache Commons Lang,AC,satd-d5c8504ec0be,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-d5c8504ec0be,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-81c6e7413cfe,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-d97bae060512,satd,satd,True,satd,satd,False,Test
 Apache Commons Lang,AC,satd-15923fb43392,non-satd,non-satd,True,non-satd,non-satd,False,
@@ -176,7 +176,7 @@ Apache Commons Lang,AC,satd-edc89b86b0ce,satd,non-satd,False,non-satd,non-satd,F
 Apache Commons Lang,AC,satd-f64be6d75576,satd,satd,True,satd,satd,False,Requirement
 Apache Commons Lang,AC,satd-ee9eb13739d5,non-satd,non-satd,True,non-satd,non-satd,False,
 Apache Commons Lang,AC,satd-4d2127910ce2,satd,non-satd,False,non-satd,non-satd,False,Implementation
-Apache Commons Lang,AC,satd-03f37789bf41,satd,satd,True,satd,non-satd,True,Implementation
+Apache Commons Lang,AC,satd-03f37789bf41,satd,satd,True,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-513dd448da96,non-satd,satd,False,satd,satd,False,Implementation
 Apache Commons Lang,AC,satd-bc11b6312a2c,satd,satd,True,satd,satd,False,Requirement
 Apache Commons Lang,AC,satd-53f17c0cea0e,satd,satd,True,satd,non-satd,True,Design
@@ -405,7 +405,7 @@ React,RE,satd-743165295d60,non-satd,non-satd,True,non-satd,non-satd,False,
 React,RE,satd-9f020f1d7b21,non-satd,non-satd,True,non-satd,non-satd,False,
 React,RE,satd-ec0f435ab89d,satd,satd,True,satd,satd,False,Design
 React,RE,satd-dc22f4e8d31b,non-satd,non-satd,True,non-satd,non-satd,False,
-React,RE,satd-341d71e967b6,non-satd,non-satd,True,satd,non-satd,True,
+React,RE,satd-341d71e967b6,non-satd,non-satd,True,satd,non-satd,False,
 React,RE,satd-827cc34971b4,non-satd,non-satd,True,non-satd,non-satd,False,
 React,RE,satd-2bb5339c9db0,non-satd,non-satd,True,non-satd,non-satd,False,
 React,RE,satd-c392f75bb111,non-satd,non-satd,True,non-satd,non-satd,False,
