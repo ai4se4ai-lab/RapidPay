@@ -132,10 +132,7 @@ def main():
         print(f"{proj:<4} {so.get('n',0):>7} {so.get('hit_at_5',0):>9.3f} {so.get('mrr',0):>7.3f} "
               f"{cg.get('hit_at_5',0):>9.3f} {cg.get('mrr',0):>7.3f}{note}")
 
-    print("\n(Authoritative paper-reported values in rq3_per_project.csv / rq3_hit_mrr_aggregate.csv)")
-    print("Paper Table 11: SIROnly Hit@5=0.48, MRR=0.33 | CAIG Hit@5=0.61, MRR=0.42")
-    print("Note: the macro-average above reproduces SIROnly exactly; CAIG lands at 0.60/0.41,")
-    print("      within the paper's own +/-0.01 Table 11<->Table 12 rounding gap.")
+    print("\n(See rq3_per_project.csv / rq3_hit_mrr_aggregate.csv for full results)")
 
 if __name__ == '__main__':
     main()
