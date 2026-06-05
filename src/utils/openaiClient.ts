@@ -19,7 +19,7 @@ import {
 } from '../models';
 
 let openaiClient: OpenAI | null = null;
-let modelName: string = 'gpt-4o';
+let modelName: string = 'gpt-4o-2024-05-13';
 
 /**
  * Initialize the OpenAI client with API key from VS Code settings or environment
@@ -33,7 +33,7 @@ export function initializeOpenAI(): boolean {
     if (vscode) {
       const config = vscode.workspace.getConfiguration('RapidPay');
       apiKey = config.get<string>('openaiApiKey');
-      modelName = config.get<string>('modelName') || 'gpt-4o';
+      modelName = config.get<string>('modelName') || 'gpt-4o-2024-05-13';
     }
     
     // If no API key in settings, check for environment variable
@@ -78,7 +78,7 @@ export function initializeOpenAI(): boolean {
  * @param apiKey OpenAI API key
  * @param model Model name (default: gpt-4o)
  */
-export function initializeOpenAICLI(apiKey: string, model: string = 'gpt-4o'): boolean {
+export function initializeOpenAICLI(apiKey: string, model: string = 'gpt-4o-2024-05-13'): boolean {
   try {
     openaiClient = new OpenAI({ apiKey });
     modelName = model;
@@ -274,7 +274,7 @@ JUSTIFICATION: <brief explanation>`;
         }
       ],
       max_tokens: 200,
-      temperature: 0.1
+      temperature: 0   // paper Section 4.1: temperature=0 for all prompts
     });
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
@@ -367,11 +367,11 @@ PRIORITY: HIGH, MEDIUM, or LOW`;
         }
       ],
       max_tokens: 800,
-      temperature: 0.3
+      temperature: 0   // paper Section 4.1: temperature=0 for all prompts
     });
 
     const responseText = response.choices[0]?.message.content?.trim() || '';
-    
+
     // Parse structured response
     const whyNowMatch = responseText.match(/WHY_NOW:\s*(.+?)(?=STEPS:|$)/is);
     const stepsMatch = responseText.match(/STEPS:\s*([\s\S]+?)(?=BENEFITS:|$)/i);
@@ -618,7 +618,7 @@ import {
   summarizeChangesDiff,
 } from './llmProvider';
 
-const DEFAULT_OPENAI_MODEL = 'gpt-4o';
+const DEFAULT_OPENAI_MODEL = 'gpt-4o-2024-05-13';
 
 /**
  * OpenAI backend implementation of LLMProvider.
@@ -699,7 +699,7 @@ export class OpenAIProvider implements LLMProvider {
           },
         ],
         max_tokens: 800,
-        temperature: 0.3,
+        temperature: 0,   // paper Section 4.1: temperature=0 for all prompts
       });
       const text = response.choices[0]?.message.content?.trim() ?? '';
       return parseRemediationResponse(text);
