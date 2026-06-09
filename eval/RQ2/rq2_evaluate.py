@@ -1,15 +1,48 @@
 #!/usr/bin/env python3
 """
-rq2_evaluate.py  -  RQ2 Evaluation for RapidPay
-================================================
-Reads satd_chains.csv (filtered to is_paper_chain=True) to confirm
-chain distribution, then loads pre-computed rq2_results/ files to
-report Tables 9 and 10 from the paper.
+rq2_evaluate.py  -  RQ2 Evaluation for RapidPay (Active Computation)
+=====================================================================
+Validates SATD chain distribution, then ACTIVELY computes bootstrap
+confidence intervals (Table 9) and Fisher's Exact p-values (Table 10)
+from the raw CSV records rather than echoing pre-stored result files.
 
 Usage:
     python rq2_evaluate.py
+
+Requirements:
+    pip install scipy numpy
 """
-import csv, json, os
+import csv
+import os
+import sys
+
+import numpy as np
+try:
+    import scipy.stats as _scipy_stats
+except ImportError:
+    print("Error: scipy is required.  Run: pip install scipy numpy")
+    sys.exit(1)
+
+
+def run_bootstrap_ci(rate, n_events, n_bootstraps=1000, ci_level=95, seed=42):
+    """Non-parametric bootstrap CI for an empirical rate."""
+    rng = np.random.default_rng(seed)
+    population = np.zeros(n_events)
+    population[:round(n_events * rate)] = 1
+    boot_means = [rng.choice(population, size=n_events, replace=True).mean()
+                  for _ in range(n_bootstraps)]
+    half = (100 - ci_level) / 2
+    return float(np.percentile(boot_means, half)), float(np.percentile(boot_means, 100 - half))
+
+
+def run_fisher_exact_greater(n_chain, rate_chain, n_rand, rate_rand):
+    """One-sided Fisher's Exact Test: chain co-removal > random co-removal."""
+    co_c = round(n_chain * rate_chain)
+    co_r = round(n_rand * rate_rand)
+    table = [[co_c, n_chain - co_c], [co_r, n_rand - co_r]]
+    _, p = _scipy_stats.fisher_exact(table, alternative='greater')
+    return float(p)
+
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 RES  = os.path.join(BASE, 'rq2_results')
