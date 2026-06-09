@@ -78,15 +78,41 @@ def main():
         print(f"{s['strategy']:<12} {s['hit_at_1']:>6} {s['hit_at_3']:>6} {s['hit_at_5']:>6} "
               f"{s['hit_at_10']:>7} {s['mrr']:>6}  [{ci_lo:.2f}, {ci_hi:.2f}]")
 
-    # 3. Table 10 - RQ2b: Chain co-removal vs random
+    # 3. Table 10 - RQ2b: Chain co-removal vs random (p-values computed live)
     print("\nTable 10 - RQ2b: Chain co-removal vs random-pair co-removal (30-day window)")
-    print(f"{'ID':<6} {'Chain n':>8} {'Chain rate':>11} {'Rand n':>7} {'Rand rate':>10} {'Ratio':>6} {'p-value':>10}")
-    corows = csv_read(os.path.join(RES,'rq2b_co_removal.csv'))
-    for r in corows:
-        print(f"{r['project_id']:<6} {r['chain_pairs_n']:>8} {r['chain_co_removal_rate']:>11} "
-              f"{r['random_pairs_n']:>7} {r['random_co_removal_rate']:>10} {r['ratio']:>6} {r['p_value']:>10}")
+    print(f"{'ID':<6} {'Chain n':>8} {'Chain rate':>11} {'Rand n':>7} {'Rand rate':>10} {'Ratio':>6} {'p-val (live)':>13}")
+    print("-" * 70)
+    corows = csv_read(os.path.join(RES, 'rq2b_co_removal.csv'))
 
-    print("\nKey finding: SATD chain pairs co-addressed at 3.2x rate of random non-chain pairs")
+    total_nc, total_co_c, total_nr, total_co_r = 0, 0, 0, 0
+    for r in corows:
+        if r['project_id'] == 'TOTAL':
+            continue
+        n_c = int(r['chain_pairs_n'])
+        r_c = float(r['chain_co_removal_rate'])
+        n_r = int(r['random_pairs_n'])
+        r_r = float(r['random_co_removal_rate'])
+
+        p = run_fisher_exact_greater(n_c, r_c, n_r, r_r)
+        p_str = f"{p:.3e}" if p < 0.001 else f"{p:.4f}"
+
+        total_nc += n_c;  total_co_c += round(n_c * r_c)
+        total_nr += n_r;  total_co_r += round(n_r * r_r)
+
+        print(f"{r['project_id']:<6} {n_c:>8} {r_c:>11.3f} {n_r:>7} {r_r:>10.3f} "
+              f"{r['ratio']:>6} {p_str:>13}")
+
+    # Dynamically compute aggregate row
+    agg_rc = total_co_c / total_nc
+    agg_rr = total_co_r / total_nr
+    agg_ratio = agg_rc / agg_rr
+    agg_p = run_fisher_exact_greater(total_nc, agg_rc, total_nr, agg_rr)
+    print("-" * 70)
+    print(f"{'TOTAL':<6} {total_nc:>8} {agg_rc:>11.3f} {total_nr:>7} {agg_rr:>10.3f} "
+          f"{agg_ratio:>6.1f} {agg_p:.3e}")
+
+    print(f"\nKey finding: SATD chain pairs co-addressed at {agg_ratio:.1f}x "
+          f"the rate of random non-chain pairs (p={agg_p:.2e})")
 
 if __name__ == '__main__':
     main()
