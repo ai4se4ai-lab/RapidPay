@@ -67,12 +67,16 @@ def main():
         ok = "OK" if actual == target else f"MISMATCH (expected {target})"
         print(f"    {code}: {actual} {ok}")
 
-    # 2. Table 9 - RQ2a: Hit@k and MRR per strategy
+    # 2. Table 9 - RQ2a: Hit@k and MRR per strategy (CIs computed live)
     print("\nTable 9 - RQ2a: Aggregate Hit@k and MRR (n=6411 addressed-SATD events)")
-    print(f"{'Strategy':<12} {'Hit@1':>6} {'Hit@3':>6} {'Hit@5':>6} {'Hit@10':>7} {'MRR':>6}")
-    strats = csv_read(os.path.join(RES,'rq2a_strategies.csv'))
+    print(f"{'Strategy':<12} {'Hit@1':>6} {'Hit@3':>6} {'Hit@5':>6} {'Hit@10':>7} {'MRR':>6}  {'95% CI (Hit@5)'}")
+    print("-" * 72)
+    strats = csv_read(os.path.join(RES, 'rq2a_strategies.csv'))
     for s in strats:
-        print(f"{s['strategy']:<12} {s['hit_at_1']:>6} {s['hit_at_3']:>6} {s['hit_at_5']:>6} {s['hit_at_10']:>7} {s['mrr']:>6}")
+        n_ev = int(s.get('n_events', 6411))
+        ci_lo, ci_hi = run_bootstrap_ci(float(s['hit_at_5']), n_ev)
+        print(f"{s['strategy']:<12} {s['hit_at_1']:>6} {s['hit_at_3']:>6} {s['hit_at_5']:>6} "
+              f"{s['hit_at_10']:>7} {s['mrr']:>6}  [{ci_lo:.2f}, {ci_hi:.2f}]")
 
     # 3. Table 10 - RQ2b: Chain co-removal vs random
     print("\nTable 10 - RQ2b: Chain co-removal vs random-pair co-removal (30-day window)")
